@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nen Admin Panel</title>
+<title>Nen Admin Panel | لوحة التحكم</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+Arabic:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -263,6 +263,21 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
   .stats-row{grid-template-columns:1fr 1fr}
   .admin-header{flex-wrap:wrap;gap:.8rem}
 }
+
+  /* ─── ADMIN LANG TOGGLE ─── */
+  .admin-lang-toggle{display:flex;gap:.3rem;background:rgba(255,255,255,.05);border-radius:20px;padding:.2rem}
+  .admin-lang-btn{border:none;cursor:pointer;padding:.28rem .7rem;border-radius:16px;font-size:.72rem;font-weight:700;transition:all .3s;background:transparent;color:var(--muted);font-family:'Cinzel',serif}
+  .admin-lang-btn.active{background:var(--aura);color:#000}
+  body.admin-ar{direction:rtl;font-family:'Noto Sans Arabic','Cinzel',serif}
+  body.admin-ar .field-label{text-align:right}
+  body.admin-ar .admin-brand{font-family:'Noto Sans Arabic',serif}
+  body.admin-ar .login-sub{font-family:'Noto Sans Arabic',serif}
+  .en-a{display:inline}.ar-a{display:none}
+  body.admin-ar .en-a{display:none}
+  body.admin-ar .ar-a{display:inline}
+  .en-ablock{display:block}.ar-ablock{display:none}
+  body.admin-ar .en-ablock{display:none}
+  body.admin-ar .ar-ablock{display:block}
 </style>
 </head>
 <body>
@@ -271,16 +286,16 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-icon">⚙️</div>
-    <div class="login-title">ADMIN PANEL</div>
+    <div class="login-title"><span class="en-a">ADMIN PANEL</span><span class="ar-a">لوحة التحكم</span></div>
     <div class="login-sub">عالم النين — World of Nen</div>
-    <input type="password" class="login-field" id="pwInput" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')login()">
-    <button class="login-btn" onclick="login()">ACCESS CONTROL ROOM</button>
+    <input type="password" class="login-field" id="pwInput" placeholder="Enter admin password / أدخل كلمة المرور" onkeydown="if(event.key==='Enter')login()">
+    <button class="login-btn" onclick="login()"><span class="en-a">ACCESS CONTROL ROOM</span><span class="ar-a">دخول لوحة التحكم</span></button>
     <div class="login-error" id="loginError"></div>
     <div class="login-hint">
-      🔒 This panel is password protected.<br>
-      Only the site owner can access this page.<br>
-      Default password: <b style="color:var(--aura)">nen-admin-2025</b><br>
-      <span style="color:var(--orange)">⚠ Change your password after first login!</span>
+      🔒 <span class="en-a">This panel is password protected.</span><span class="ar-a">هذه اللوحة محمية بكلمة مرور.</span><br>
+      <span class="en-a">Only the site owner can access this page.</span><span class="ar-a">فقط مالك الموقع يستطيع الدخول.</span><br>
+      <span class="en-a">Default password:</span><span class="ar-a">كلمة المرور الافتراضية:</span> <b style="color:var(--aura)">nen-admin-2025</b><br>
+      <span style="color:var(--orange)">⚠ <span class="en-a">Change your password after first login!</span><span class="ar-a">غيّر كلمة مرورك بعد أول تسجيل دخول!</span></span>
     </div>
   </div>
 </div>
@@ -290,18 +305,41 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
 
   <!-- Header -->
   <div class="admin-header">
-    <div class="admin-brand">⚙ NEN WORLD — ADMIN</div>
+    <div class="admin-brand">
+      <span class="en-a">⚙ NEN WORLD — ADMIN</span>
+      <span class="ar-a">⚙ عالم النين — لوحة التحكم</span>
+    </div>
     <div class="admin-nav-tabs">
-      <button class="tab-btn active" onclick="switchTab('dashboard')">📊 Dashboard</button>
-      <button class="tab-btn" onclick="switchTab('hero')">🏠 Hero</button>
-      <button class="tab-btn" onclick="switchTab('sections')">📄 Sections</button>
-      <button class="tab-btn" onclick="switchTab('types')">🔷 Nen Types</button>
-      <button class="tab-btn" onclick="switchTab('footer')">🔗 Footer</button>
-      <button class="tab-btn" onclick="switchTab('settings')">⚙ Settings</button>
+      <button class="tab-btn active" onclick="switchTab('dashboard')">
+        <span class="en-a">📊 Dashboard</span><span class="ar-a">📊 لوحة الرئيسية</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('hero')">
+        <span class="en-a">🏠 Hero</span><span class="ar-a">🏠 الهيرو</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('sections')">
+        <span class="en-a">📄 Sections</span><span class="ar-a">📄 الأقسام</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('types')">
+        <span class="en-a">🔷 Nen Types</span><span class="ar-a">🔷 أنواع النين</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('footer')">
+        <span class="en-a">🔗 Footer</span><span class="ar-a">🔗 الفوتر</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('settings')">
+        <span class="en-a">⚙ Settings</span><span class="ar-a">⚙ الإعدادات</span>
+      </button>
     </div>
     <div class="admin-actions">
-      <button class="btn-save" onclick="saveAll()">💾 SAVE ALL</button>
-      <button class="btn-logout" onclick="logout()">Exit</button>
+      <div class="admin-lang-toggle">
+        <button class="admin-lang-btn active" id="aBtn-en" onclick="setAdminLang('en')">EN</button>
+        <button class="admin-lang-btn" id="aBtn-ar" onclick="setAdminLang('ar')">عر</button>
+      </div>
+      <button class="btn-save" onclick="saveAll()">
+        <span class="en-a">💾 SAVE ALL</span><span class="ar-a">💾 حفظ الكل</span>
+      </button>
+      <button class="btn-logout" onclick="logout()">
+        <span class="en-a">Exit</span><span class="ar-a">خروج</span>
+      </button>
     </div>
   </div>
 
@@ -311,9 +349,9 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
     <!-- DASHBOARD TAB -->
     <div class="tab-content active" id="tab-dashboard">
       <div class="stats-row">
-        <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Nen Types</div></div>
-        <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Techniques</div></div>
-        <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Quiz Questions</div></div>
+        <div class="stat-card"><div class="stat-num">6</div><div class="stat-label"><span class="en-a">Nen Types</span><span class="ar-a">أنواع النين</span></div></div>
+        <div class="stat-card"><div class="stat-num">10</div><div class="stat-label"><span class="en-a">Techniques</span><span class="ar-a">التقنيات</span></div></div>
+        <div class="stat-card"><div class="stat-num">8</div><div class="stat-label"><span class="en-a">Quiz Questions</span><span class="ar-a">أسئلة الاختبار</span></div></div>
         <div class="stat-card"><div class="stat-num" id="linksCount">0</div><div class="stat-label">Footer Links</div></div>
       </div>
       <div class="preview-bar">
@@ -323,12 +361,18 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
       <div class="admin-card">
         <div class="admin-card-title">📋 Quick Guide</div>
         <div style="color:var(--muted);font-size:.88rem;line-height:2;font-family:JetBrains Mono,monospace">
-          <p>1. <span style="color:var(--aura)">Hero Tab</span> → Edit page title, subtitle, badge text</p>
-          <p>2. <span style="color:var(--aura)">Sections Tab</span> → Edit section headings and descriptions</p>
-          <p>3. <span style="color:var(--aura)">Nen Types Tab</span> → Edit names, descriptions, character abilities for each type</p>
-          <p>4. <span style="color:var(--aura)">Footer Tab</span> → Add/remove your social links, portfolio, etc.</p>
-          <p>5. <span style="color:var(--aura)">Settings Tab</span> → Change admin password, site colors</p>
-          <p>6. Click <span style="color:var(--green)">💾 SAVE ALL</span> → Download updated <b>index.html</b> to replace on your host</p>
+          <p class="en-ablock">1. <span style="color:var(--aura)">Hero Tab</span> → Edit page title, subtitle, badge text</p>
+          <p class="ar-ablock" dir="rtl">١. تبويب <span style="color:var(--aura)">الهيرو</span> ← تعديل العنوان والوصف</p>
+          <p class="en-ablock">2. <span style="color:var(--aura)">Sections Tab</span> → Edit section headings and descriptions</p>
+          <p class="ar-ablock" dir="rtl">٢. تبويب <span style="color:var(--aura)">الأقسام</span> ← تعديل عناوين الأقسام</p>
+          <p class="en-ablock">3. <span style="color:var(--aura)">Nen Types Tab</span> → Edit names, descriptions, character abilities for each type</p>
+          <p class="ar-ablock" dir="rtl">٣. تبويب <span style="color:var(--aura)">أنواع النين</span> ← تعديل الأسماء والأوصاف والشخصيات</p>
+          <p class="en-ablock">4. <span style="color:var(--aura)">Footer Tab</span> → Add/remove your social links, portfolio, etc.</p>
+          <p class="ar-ablock" dir="rtl">٤. تبويب <span style="color:var(--aura)">الفوتر</span> ← إضافة روابطك الشخصية</p>
+          <p class="en-ablock">5. <span style="color:var(--aura)">Settings Tab</span> → Change admin password, site colors</p>
+          <p class="ar-ablock" dir="rtl">٥. تبويب <span style="color:var(--aura)">الإعدادات</span> ← تغيير كلمة المرور والألوان</p>
+          <p class="en-ablock">6. Click <span style="color:var(--green)">💾 SAVE ALL</span> → Download updated <b>index.html</b> to replace on your host</p>
+          <p class="ar-ablock" dir="rtl">٦. اضغط <span style="color:var(--green)">💾 حفظ الكل</span> ← حمّل ملف <b>nen-config.js</b> وارفعه</p>
         </div>
       </div>
       <div class="admin-card">
@@ -350,7 +394,7 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
     <!-- HERO TAB -->
     <div class="tab-content" id="tab-hero">
       <div class="admin-card">
-        <div class="admin-card-title">🏠 Hero Section</div>
+        <div class="admin-card-title">🏠 <span class="en-a">Hero Section</span><span class="ar-a">قسم الهيرو</span></div>
         <div class="field-row">
           <div class="field-label">Badge (EN)</div>
           <input class="field-input" id="hero_badge_en" value="World of Nen — Interactive Guide">
@@ -386,7 +430,7 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
       </div>
 
       <div class="admin-card">
-        <div class="admin-card-title">🖼 Logo Settings</div>
+        <div class="admin-card-title">🖼 <span class="en-a">Logo Settings</span><span class="ar-a">إعدادات الشعار</span></div>
         <div class="field-row">
           <div class="field-label">Logo Image</div>
           <div>
@@ -476,7 +520,7 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
       </div>
 
       <div class="admin-card">
-        <div class="admin-card-title">✏️ Custom Announcement Banner</div>
+        <div class="admin-card-title">✏️ <span class="en-a">Custom Announcement Banner</span><span class="ar-a">بانر الإعلانات</span></div>
         <div class="field-row">
           <div class="field-label">Enable Banner</div>
           <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer">
@@ -510,7 +554,7 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
     <!-- NEN TYPES TAB -->
     <div class="tab-content" id="tab-types">
       <div class="admin-card">
-        <div class="admin-card-title">🔷 Edit Nen Type Cards</div>
+        <div class="admin-card-title">🔷 <span class="en-a">Edit Nen Type Cards</span><span class="ar-a">تعديل بطاقات أنواع النين</span></div>
         <div class="type-editor-grid" id="typeEditorGrid">
           <!-- Generated by JS -->
         </div>
@@ -520,14 +564,14 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
     <!-- FOOTER TAB -->
     <div class="tab-content" id="tab-footer">
       <div class="admin-card">
-        <div class="admin-card-title">🔗 Footer Links</div>
+        <div class="admin-card-title">🔗 <span class="en-a">Footer Links</span><span class="ar-a">روابط الفوتر</span></div>
         <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.2rem">Add your social media links, portfolio, or other pages. These appear in the footer of the site.</p>
         <div class="links-list" id="linksList"></div>
-        <button class="btn-add" onclick="addLink()">+ Add Link</button>
+        <button class="btn-add" onclick="addLink()"><span class="en-a">+ Add Link</span><span class="ar-a">+ إضافة رابط</span></button>
       </div>
 
       <div class="admin-card">
-        <div class="admin-card-title">📝 Footer Text</div>
+        <div class="admin-card-title">📝 <span class="en-a">Footer Text</span><span class="ar-a">نصوص الفوتر</span></div>
         <div class="field-row">
           <div class="field-label">Site Name (EN)</div>
           <input class="field-input" id="footer_name_en" value="World of Nen">
@@ -558,7 +602,7 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
     <!-- SETTINGS TAB -->
     <div class="tab-content" id="tab-settings">
       <div class="admin-card">
-        <div class="admin-card-title">🔐 Change Admin Password</div>
+        <div class="admin-card-title">🔐 <span class="en-a">Change Admin Password</span><span class="ar-a">تغيير كلمة المرور</span></div>
         <p style="color:var(--orange);font-size:.82rem;margin-bottom:1.2rem;font-family:JetBrains Mono,monospace">⚠ Change the default password immediately for security</p>
         <div class="field-row">
           <div class="field-label">Current Password</div>
@@ -576,7 +620,7 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
       </div>
 
       <div class="admin-card">
-        <div class="admin-card-title">🎨 Site Colors</div>
+        <div class="admin-card-title">🎨 <span class="en-a">Site Colors</span><span class="ar-a">ألوان الموقع</span></div>
         <p style="color:var(--muted);font-size:.82rem;margin-bottom:1.2rem">Customize the primary accent colors of the site.</p>
         <div class="field-row">
           <div class="field-label">Aura Blue</div>
@@ -605,7 +649,7 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
       </div>
 
       <div class="admin-card">
-        <div class="admin-card-title">🗑 Danger Zone</div>
+        <div class="admin-card-title">🗑 <span class="en-a">Danger Zone</span><span class="ar-a">منطقة الخطر</span></div>
         <p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem">Reset all admin panel settings to defaults. The main site content will not be affected.</p>
         <button onclick="resetSettings()" style="padding:.7rem 1.4rem;border-radius:10px;border:1px solid var(--red);background:rgba(239,68,68,.08);color:var(--red);cursor:pointer;font-family:'Cinzel',serif;font-size:.82rem;transition:all .3s" onmouseover="this.style.background='rgba(239,68,68,.2)'" onmouseout="this.style.background='rgba(239,68,68,.08)'">⚠ Reset Admin Settings</button>
       </div>
@@ -965,6 +1009,28 @@ window.addEventListener('DOMContentLoaded', () => {
 document.getElementById('pwInput').addEventListener('keydown', e => {
   if(e.key === 'Enter') login();
 });
+
+// ─── ADMIN LANGUAGE ───
+function setAdminLang(lang) {
+  const body = document.body;
+  if(lang === 'ar') {
+    body.classList.add('admin-ar');
+    body.setAttribute('dir','rtl');
+  } else {
+    body.classList.remove('admin-ar');
+    body.setAttribute('dir','ltr');
+  }
+  document.getElementById('aBtn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('aBtn-ar').classList.toggle('active', lang === 'ar');
+  localStorage.setItem('nen_admin_lang', lang);
+}
+
+// Restore saved lang preference
+(function(){
+  const savedLang = localStorage.getItem('nen_admin_lang');
+  if(savedLang === 'ar') setAdminLang('ar');
+})();
+
 </script>
 </body>
 </html>

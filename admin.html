@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nen Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+Arabic:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05070f;--bg2:#080c18;--surface:rgba(255,255,255,0.04);
+  --border:rgba(100,180,255,0.15);--aura:#4db8ff;--aura2:#a78bfa;
+  --gold:#f0c060;--text:#e8f0ff;--muted:#7a8fa8;
+  --green:#22c55e;--red:#ef4444;--orange:#f59e0b;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Cinzel',serif;min-height:100vh;
+  display:flex;flex-direction:column;
+}
+
+/* ─── LOGIN SCREEN ─── */
+#loginScreen{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:2rem;
+}
+.login-box{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:24px;padding:3rem;
+  width:min(420px,90vw);text-align:center;
+}
+.login-icon{font-size:3rem;margin-bottom:1rem}
+.login-title{
+  font-size:1.4rem;letter-spacing:.1em;
+  background:linear-gradient(135deg,var(--aura),var(--aura2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;margin-bottom:.5rem;
+}
+.login-sub{color:var(--muted);font-size:.8rem;letter-spacing:.12em;margin-bottom:2rem;font-family:JetBrains Mono,monospace}
+.login-field{
+  width:100%;padding:1rem 1.2rem;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);border-radius:12px;
+  color:var(--text);font-size:1rem;margin-bottom:1rem;
+  font-family:JetBrains Mono,monospace;letter-spacing:.15em;
+  transition:border-color .3s;
+}
+.login-field:focus{outline:none;border-color:var(--aura)}
+.login-btn{
+  width:100%;padding:1rem;border-radius:12px;border:none;
+  background:linear-gradient(135deg,var(--aura),var(--aura2));
+  color:#000;font-family:'Cinzel',serif;font-size:.95rem;
+  font-weight:700;letter-spacing:.1em;cursor:pointer;
+  transition:all .3s;
+}
+.login-btn:hover{transform:scale(1.03);box-shadow:0 8px 24px rgba(77,184,255,.3)}
+.login-error{
+  color:var(--red);font-size:.8rem;margin-top:.8rem;
+  min-height:1.2em;font-family:JetBrains Mono,monospace;
+}
+.login-hint{
+  margin-top:2rem;padding:1rem;
+  background:rgba(77,184,255,.04);border:1px solid rgba(77,184,255,.1);
+  border-radius:10px;font-size:.78rem;color:var(--muted);
+  font-family:JetBrains Mono,monospace;line-height:1.7;text-align:left;
+}
+
+/* ─── ADMIN LAYOUT ─── */
+#adminPanel{display:none}
+#adminPanel.visible{display:flex;flex-direction:column;min-height:100vh}
+.admin-header{
+  background:rgba(8,12,24,.95);
+  border-bottom:1px solid var(--border);
+  padding:1rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+  backdrop-filter:blur(10px);
+}
+.admin-brand{
+  font-size:1rem;letter-spacing:.12em;
+  background:linear-gradient(135deg,var(--aura),var(--aura2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.admin-nav-tabs{display:flex;gap:.3rem}
+.tab-btn{
+  padding:.5rem 1.2rem;border-radius:8px;border:1px solid transparent;
+  background:transparent;color:var(--muted);cursor:pointer;
+  font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.1em;
+  transition:all .3s;
+}
+.tab-btn:hover{color:var(--text);border-color:var(--border)}
+.tab-btn.active{background:rgba(77,184,255,.1);border-color:var(--aura);color:var(--aura)}
+.admin-actions{display:flex;gap:.8rem;align-items:center}
+.btn-save{
+  padding:.5rem 1.5rem;border-radius:8px;border:none;
+  background:var(--green);color:#000;
+  font-family:'Cinzel',serif;font-size:.8rem;font-weight:700;
+  cursor:pointer;transition:all .3s;letter-spacing:.08em;
+}
+.btn-save:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(34,197,94,.4)}
+.btn-logout{
+  padding:.5rem 1rem;border-radius:8px;
+  border:1px solid rgba(239,68,68,.3);
+  background:rgba(239,68,68,.08);
+  color:var(--red);cursor:pointer;font-family:'Cinzel',serif;
+  font-size:.75rem;transition:all .3s;
+}
+.btn-logout:hover{background:rgba(239,68,68,.15)}
+
+/* ─── ADMIN BODY ─── */
+.admin-body{
+  display:flex;flex:1;
+  max-width:1400px;margin:0 auto;width:100%;
+  padding:2rem;gap:2rem;
+}
+.tab-content{display:none;width:100%}
+.tab-content.active{display:block}
+
+/* ─── CARDS ─── */
+.admin-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:1.8rem;margin-bottom:1.5rem;
+}
+.admin-card-title{
+  font-size:.85rem;letter-spacing:.15em;color:var(--aura);
+  text-transform:uppercase;margin-bottom:1.5rem;
+  padding-bottom:.8rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:.6rem;
+}
+.field-row{
+  display:grid;grid-template-columns:160px 1fr;gap:1rem;
+  align-items:start;margin-bottom:1rem;
+}
+.field-label{
+  font-size:.78rem;color:var(--muted);letter-spacing:.1em;
+  text-transform:uppercase;padding-top:.7rem;
+}
+.field-input,.field-textarea{
+  width:100%;padding:.7rem 1rem;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);border-radius:10px;
+  color:var(--text);font-family:JetBrains Mono,monospace;
+  font-size:.9rem;transition:border-color .3s;
+  resize:vertical;
+}
+.field-input:focus,.field-textarea:focus{outline:none;border-color:var(--aura)}
+.field-textarea{min-height:80px}
+.emoji-picker{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}
+.emoji-opt{
+  width:36px;height:36px;border-radius:8px;border:1px solid var(--border);
+  background:rgba(255,255,255,.03);cursor:pointer;font-size:1.1rem;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
+.emoji-opt:hover,.emoji-opt.selected{border-color:var(--aura);background:rgba(77,184,255,.1)}
+
+/* ─── NEN TYPES EDITOR ─── */
+.type-editor-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;
+}
+.type-edit-card{
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;
+}
+.type-edit-header{
+  padding:.8rem 1rem;
+  font-size:.8rem;font-weight:700;letter-spacing:.1em;
+  display:flex;align-items:center;gap:.5rem;
+}
+.type-edit-body{padding:1rem}
+.mini-field{
+  width:100%;padding:.5rem .7rem;margin-bottom:.6rem;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);border-radius:8px;
+  color:var(--text);font-size:.82rem;font-family:JetBrains Mono,monospace;
+  transition:border-color .3s;
+}
+.mini-field:focus{outline:none;border-color:var(--aura)}
+.mini-label{font-size:.68rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem}
+
+/* ─── FOOTER LINKS EDITOR ─── */
+.links-list{display:flex;flex-direction:column;gap:.8rem}
+.link-row{
+  display:flex;gap:.8rem;align-items:center;
+  background:rgba(255,255,255,.02);padding:.8rem;
+  border-radius:10px;border:1px solid var(--border);
+}
+.link-row input{flex:1}
+.btn-del{
+  padding:.4rem .8rem;border-radius:8px;border:1px solid rgba(239,68,68,.3);
+  background:rgba(239,68,68,.08);color:var(--red);cursor:pointer;
+  font-size:.8rem;transition:all .2s;white-space:nowrap;
+}
+.btn-del:hover{background:rgba(239,68,68,.2)}
+.btn-add{
+  padding:.6rem 1.2rem;border-radius:8px;
+  border:1px solid rgba(34,197,94,.3);
+  background:rgba(34,197,94,.08);color:var(--green);
+  cursor:pointer;font-family:'Cinzel',serif;font-size:.8rem;
+  transition:all .2s;margin-top:.5rem;
+}
+.btn-add:hover{background:rgba(34,197,94,.15)}
+
+/* ─── PREVIEW PANEL ─── */
+.preview-bar{
+  background:rgba(240,192,96,.06);
+  border:1px solid rgba(240,192,96,.2);
+  border-radius:12px;padding:1rem 1.5rem;
+  margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:1rem;
+  font-size:.85rem;color:var(--gold);
+}
+.preview-btn{
+  padding:.5rem 1.2rem;border-radius:8px;border:1px solid var(--gold);
+  background:transparent;color:var(--gold);cursor:pointer;
+  font-family:'Cinzel',serif;font-size:.8rem;transition:all .3s;
+  margin-left:auto;
+}
+.preview-btn:hover{background:rgba(240,192,96,.1)}
+
+/* ─── STATUS TOAST ─── */
+#toast{
+  position:fixed;bottom:2rem;right:2rem;
+  background:var(--green);color:#000;
+  padding:.8rem 1.5rem;border-radius:10px;
+  font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;
+  transform:translateY(100px);opacity:0;
+  transition:all .4s;z-index:9999;
+}
+#toast.show{transform:translateY(0);opacity:1}
+#toast.error{background:var(--red);color:#fff}
+
+/* ─── STATS ─── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.stat-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:1.2rem;text-align:center;
+}
+.stat-num{font-size:2rem;font-weight:700;color:var(--aura)}
+.stat-label{font-size:.72rem;color:var(--muted);letter-spacing:.1em;margin-top:.3rem}
+
+/* ─── COLOR PICKER ─── */
+.color-swatch{
+  display:inline-block;width:24px;height:24px;border-radius:50%;
+  border:2px solid var(--border);cursor:pointer;vertical-align:middle;
+  margin-right:.5rem;
+}
+input[type=color]{opacity:0;position:absolute;pointer-events:none}
+
+@media(max-width:900px){
+  .admin-body{flex-direction:column;padding:1rem}
+  .type-editor-grid{grid-template-columns:1fr 1fr}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .field-row{grid-template-columns:1fr}
+  .admin-nav-tabs{flex-wrap:wrap;gap:.3rem}
+}
+@media(max-width:600px){
+  .type-editor-grid{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .admin-header{flex-wrap:wrap;gap:.8rem}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-icon">⚙️</div>
+    <div class="login-title">ADMIN PANEL</div>
+    <div class="login-sub">عالم النين — World of Nen</div>
+    <input type="password" class="login-field" id="pwInput" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')login()">
+    <button class="login-btn" onclick="login()">ACCESS CONTROL ROOM</button>
+    <div class="login-error" id="loginError"></div>
+    <div class="login-hint">
+      🔒 This panel is password protected.<br>
+      Only the site owner can access this page.<br>
+      Default password: <b style="color:var(--aura)">nen-admin-2025</b><br>
+      <span style="color:var(--orange)">⚠ Change your password after first login!</span>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel">
+
+  <!-- Header -->
+  <div class="admin-header">
+    <div class="admin-brand">⚙ NEN WORLD — ADMIN</div>
+    <div class="admin-nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+      <button class="tab-btn" onclick="switchTab('hero')">🏠 Hero</button>
+      <button class="tab-btn" onclick="switchTab('sections')">📄 Sections</button>
+      <button class="tab-btn" onclick="switchTab('types')">🔷 Nen Types</button>
+      <button class="tab-btn" onclick="switchTab('footer')">🔗 Footer</button>
+      <button class="tab-btn" onclick="switchTab('settings')">⚙ Settings</button>
+    </div>
+    <div class="admin-actions">
+      <button class="btn-save" onclick="saveAll()">💾 SAVE ALL</button>
+      <button class="btn-logout" onclick="logout()">Exit</button>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="admin-body">
+
+    <!-- DASHBOARD TAB -->
+    <div class="tab-content active" id="tab-dashboard">
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Nen Types</div></div>
+        <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Techniques</div></div>
+        <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Quiz Questions</div></div>
+        <div class="stat-card"><div class="stat-num" id="linksCount">0</div><div class="stat-label">Footer Links</div></div>
+      </div>
+      <div class="preview-bar">
+        🌟 Your changes are saved locally and will apply when you click "Save All"
+        <a href="index.html" target="_blank"><button class="preview-btn">👁 Preview Site</button></a>
+      </div>
+      <div class="admin-card">
+        <div class="admin-card-title">📋 Quick Guide</div>
+        <div style="color:var(--muted);font-size:.88rem;line-height:2;font-family:JetBrains Mono,monospace">
+          <p>1. <span style="color:var(--aura)">Hero Tab</span> → Edit page title, subtitle, badge text</p>
+          <p>2. <span style="color:var(--aura)">Sections Tab</span> → Edit section headings and descriptions</p>
+          <p>3. <span style="color:var(--aura)">Nen Types Tab</span> → Edit names, descriptions, character abilities for each type</p>
+          <p>4. <span style="color:var(--aura)">Footer Tab</span> → Add/remove your social links, portfolio, etc.</p>
+          <p>5. <span style="color:var(--aura)">Settings Tab</span> → Change admin password, site colors</p>
+          <p>6. Click <span style="color:var(--green)">💾 SAVE ALL</span> → Download updated <b>index.html</b> to replace on your host</p>
+        </div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-card-title">🚀 Deployment Guide</div>
+        <div style="color:var(--muted);font-size:.85rem;line-height:2;font-family:JetBrains Mono,monospace">
+          <p><b style="color:var(--gold)">GitHub + Vercel:</b></p>
+          <p>1. Create a GitHub repo (e.g. <span style="color:var(--aura)">nen-world</span>)</p>
+          <p>2. Upload both <b>index.html</b> and <b>admin.html</b></p>
+          <p>3. Go to <a href="https://vercel.com" target="_blank" style="color:var(--aura)">vercel.com</a> → Import your repo</p>
+          <p>4. Deploy — your site will be live in seconds!</p>
+          <p style="margin-top:.5rem"><b style="color:var(--gold)">Security:</b></p>
+          <p>• <b>admin.html</b> is only accessible if someone knows the URL</p>
+          <p>• Password is checked client-side — ideal for personal projects</p>
+          <p>• For higher security: add Vercel Password Protection (Pro plan) or rename admin.html</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO TAB -->
+    <div class="tab-content" id="tab-hero">
+      <div class="admin-card">
+        <div class="admin-card-title">🏠 Hero Section</div>
+        <div class="field-row">
+          <div class="field-label">Badge (EN)</div>
+          <input class="field-input" id="hero_badge_en" value="World of Nen — Interactive Guide">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Badge (AR)</div>
+          <input class="field-input" id="hero_badge_ar" value="عالم النين — دليل تفاعلي">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Title (EN)</div>
+          <input class="field-input" id="hero_title_en" value="World of Nen">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Title (AR)</div>
+          <input class="field-input" id="hero_title_ar" value="عالم النين">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Subtitle (EN)</div>
+          <textarea class="field-textarea" id="hero_sub_en">The art of manipulating life energy — aura — to transcend human limits. Discover the most complex power system in anime.</textarea>
+        </div>
+        <div class="field-row">
+          <div class="field-label">Subtitle (AR)</div>
+          <textarea class="field-textarea" id="hero_sub_ar">فن التحكم في طاقة الحياة — الأورا — لتجاوز الحدود البشرية. اكتشف أعقد نظام قوى في عالم الأنمي.</textarea>
+        </div>
+        <div class="field-row">
+          <div class="field-label">Scroll Hint (EN)</div>
+          <input class="field-input" id="hero_scroll_en" value="↓ Scroll to explore ↓">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Scroll Hint (AR)</div>
+          <input class="field-input" id="hero_scroll_ar" value="↓ اسحب لاستكشاف ↓">
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-title">🖼 Logo Settings</div>
+        <div class="field-row">
+          <div class="field-label">Logo Image</div>
+          <div>
+            <input type="file" id="logoUpload" accept="image/*" onchange="handleLogoUpload(this)" style="color:var(--muted);font-size:.85rem">
+            <p style="color:var(--muted);font-size:.78rem;margin-top:.4rem">Upload a new logo (PNG with transparent background recommended)</p>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">Logo Width</div>
+          <input class="field-input" id="logo_width" value="clamp(240px,45vw,520px)" placeholder="e.g. 400px or clamp(240px,40vw,480px)">
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTIONS TAB -->
+    <div class="tab-content" id="tab-sections">
+      <div class="admin-card">
+        <div class="admin-card-title">📄 Section Titles & Intros</div>
+
+        <div style="margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border)">
+          <p style="color:var(--aura);font-size:.8rem;letter-spacing:.1em;margin-bottom:.8rem">WHAT IS NEN?</p>
+          <div class="field-row">
+            <div class="field-label">Title (EN)</div>
+            <input class="field-input" id="s_whatnen_en" value="What is Nen?">
+          </div>
+          <div class="field-row">
+            <div class="field-label">Title (AR)</div>
+            <input class="field-input" id="s_whatnen_ar" value="ما هو النين؟">
+          </div>
+          <div class="field-row">
+            <div class="field-label">Subtitle (EN)</div>
+            <input class="field-input" id="s_whatnen_sub_en" value="念 — The Art of Aura">
+          </div>
+          <div class="field-row">
+            <div class="field-label">Subtitle (AR)</div>
+            <input class="field-input" id="s_whatnen_sub_ar" value="念 — فن الأورا">
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border)">
+          <p style="color:var(--aura);font-size:.8rem;letter-spacing:.1em;margin-bottom:.8rem">FOUR PRINCIPLES</p>
+          <div class="field-row">
+            <div class="field-label">Title (EN)</div>
+            <input class="field-input" id="s_principles_en" value="The Four Major Principles">
+          </div>
+          <div class="field-row">
+            <div class="field-label">Title (AR)</div>
+            <input class="field-input" id="s_principles_ar" value="المبادئ الأربعة الرئيسية">
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border)">
+          <p style="color:var(--aura);font-size:.8rem;letter-spacing:.1em;margin-bottom:.8rem">BODY TECHNIQUES</p>
+          <div class="field-row">
+            <div class="field-label">Title (EN)</div>
+            <input class="field-input" id="s_body_en" value="Techniques Visualized on the Body">
+          </div>
+          <div class="field-row">
+            <div class="field-label">Title (AR)</div>
+            <input class="field-input" id="s_body_ar" value="التقنيات مُجسَّدة على الجسم">
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border)">
+          <p style="color:var(--aura);font-size:.8rem;letter-spacing:.1em;margin-bottom:.8rem">NEN TYPES</p>
+          <div class="field-row">
+            <div class="field-label">Title (EN)</div>
+            <input class="field-input" id="s_types_en" value="The Six Nen Types">
+          </div>
+          <div class="field-row">
+            <div class="field-label">Title (AR)</div>
+            <input class="field-input" id="s_types_ar" value="أنواع النين الستة">
+          </div>
+        </div>
+
+        <div>
+          <p style="color:var(--aura);font-size:.8rem;letter-spacing:.1em;margin-bottom:.8rem">RESTRICTIONS & VOWS</p>
+          <div class="field-row">
+            <div class="field-label">Title (EN)</div>
+            <input class="field-input" id="s_restrict_en" value="Restrictions & Vows">
+          </div>
+          <div class="field-row">
+            <div class="field-label">Title (AR)</div>
+            <input class="field-input" id="s_restrict_ar" value="القيود والنذور">
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-title">✏️ Custom Announcement Banner</div>
+        <div class="field-row">
+          <div class="field-label">Enable Banner</div>
+          <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer">
+            <input type="checkbox" id="bannerEnabled" style="width:16px;height:16px">
+            <span style="color:var(--muted);font-size:.85rem">Show announcement banner at top of site</span>
+          </label>
+        </div>
+        <div class="field-row">
+          <div class="field-label">Banner Text (EN)</div>
+          <input class="field-input" id="bannerTextEn" placeholder="e.g. New section added! Check out the Chimera Ant arc guide">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Banner Text (AR)</div>
+          <input class="field-input" id="bannerTextAr" placeholder="مثال: تم إضافة قسم جديد!">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Banner Color</div>
+          <div>
+            <div class="emoji-picker" id="bannerColorPicker">
+              <div class="emoji-opt selected" style="background:rgba(77,184,255,.15);border-color:var(--aura)" onclick="selectBannerColor('#4db8ff',this)">🔵</div>
+              <div class="emoji-opt" style="background:rgba(240,192,96,.1)" onclick="selectBannerColor('#f0c060',this)">🟡</div>
+              <div class="emoji-opt" style="background:rgba(34,197,94,.1)" onclick="selectBannerColor('#22c55e',this)">🟢</div>
+              <div class="emoji-opt" style="background:rgba(239,68,68,.1)" onclick="selectBannerColor('#ef4444',this)">🔴</div>
+              <div class="emoji-opt" style="background:rgba(167,139,250,.1)" onclick="selectBannerColor('#a78bfa',this)">🟣</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEN TYPES TAB -->
+    <div class="tab-content" id="tab-types">
+      <div class="admin-card">
+        <div class="admin-card-title">🔷 Edit Nen Type Cards</div>
+        <div class="type-editor-grid" id="typeEditorGrid">
+          <!-- Generated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER TAB -->
+    <div class="tab-content" id="tab-footer">
+      <div class="admin-card">
+        <div class="admin-card-title">🔗 Footer Links</div>
+        <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.2rem">Add your social media links, portfolio, or other pages. These appear in the footer of the site.</p>
+        <div class="links-list" id="linksList"></div>
+        <button class="btn-add" onclick="addLink()">+ Add Link</button>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-title">📝 Footer Text</div>
+        <div class="field-row">
+          <div class="field-label">Site Name (EN)</div>
+          <input class="field-input" id="footer_name_en" value="World of Nen">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Site Name (AR)</div>
+          <input class="field-input" id="footer_name_ar" value="عالم النين">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Tagline (EN)</div>
+          <input class="field-input" id="footer_tag_en" value="Hunter × Hunter Interactive Guide">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Tagline (AR)</div>
+          <input class="field-input" id="footer_tag_ar" value="دليل هنتر × هنتر التفاعلي">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Credit Line (EN)</div>
+          <input class="field-input" id="footer_credit_en" value="Based on Hunter × Hunter by Yoshihiro Togashi">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Credit Line (AR)</div>
+          <input class="field-input" id="footer_credit_ar" value="مستند إلى هنتر × هنتر بقلم يوشيهيرو توغاشي">
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS TAB -->
+    <div class="tab-content" id="tab-settings">
+      <div class="admin-card">
+        <div class="admin-card-title">🔐 Change Admin Password</div>
+        <p style="color:var(--orange);font-size:.82rem;margin-bottom:1.2rem;font-family:JetBrains Mono,monospace">⚠ Change the default password immediately for security</p>
+        <div class="field-row">
+          <div class="field-label">Current Password</div>
+          <input type="password" class="field-input" id="pwCurrent" placeholder="Current password">
+        </div>
+        <div class="field-row">
+          <div class="field-label">New Password</div>
+          <input type="password" class="field-input" id="pwNew" placeholder="New password (min 8 chars)">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Confirm Password</div>
+          <input type="password" class="field-input" id="pwConfirm" placeholder="Repeat new password">
+        </div>
+        <button class="btn-save" style="margin-top:.5rem" onclick="changePassword()">🔐 Update Password</button>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-title">🎨 Site Colors</div>
+        <p style="color:var(--muted);font-size:.82rem;margin-bottom:1.2rem">Customize the primary accent colors of the site.</p>
+        <div class="field-row">
+          <div class="field-label">Aura Blue</div>
+          <div style="display:flex;align-items:center;gap:.8rem">
+            <input type="color" id="color_aura" value="#4db8ff" onchange="previewColor('aura',this.value)">
+            <div class="color-swatch" id="swatch_aura" style="background:#4db8ff" onclick="document.getElementById('color_aura').click()"></div>
+            <input class="field-input" id="color_aura_text" value="#4db8ff" style="max-width:120px" oninput="previewColor('aura',this.value)">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">Aura Purple</div>
+          <div style="display:flex;align-items:center;gap:.8rem">
+            <input type="color" id="color_aura2" value="#a78bfa" onchange="previewColor('aura2',this.value)">
+            <div class="color-swatch" id="swatch_aura2" style="background:#a78bfa" onclick="document.getElementById('color_aura2').click()"></div>
+            <input class="field-input" id="color_aura2_text" value="#a78bfa" style="max-width:120px" oninput="previewColor('aura2',this.value)">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">Gold Accent</div>
+          <div style="display:flex;align-items:center;gap:.8rem">
+            <input type="color" id="color_gold" value="#f0c060" onchange="previewColor('gold',this.value)">
+            <div class="color-swatch" id="swatch_gold" style="background:#f0c060" onclick="document.getElementById('color_gold').click()"></div>
+            <input class="field-input" id="color_gold_text" value="#f0c060" style="max-width:120px" oninput="previewColor('gold',this.value)">
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-title">🗑 Danger Zone</div>
+        <p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem">Reset all admin panel settings to defaults. The main site content will not be affected.</p>
+        <button onclick="resetSettings()" style="padding:.7rem 1.4rem;border-radius:10px;border:1px solid var(--red);background:rgba(239,68,68,.08);color:var(--red);cursor:pointer;font-family:'Cinzel',serif;font-size:.82rem;transition:all .3s" onmouseover="this.style.background='rgba(239,68,68,.2)'" onmouseout="this.style.background='rgba(239,68,68,.08)'">⚠ Reset Admin Settings</button>
+      </div>
+    </div>
+
+  </div><!-- admin-body -->
+</div><!-- adminPanel -->
+
+<div id="toast">✅ Saved!</div>
+
+<script>
+// ─── CONSTANTS ───
+const DEFAULT_PASSWORD = 'nen-admin-2025';
+const STORAGE_KEY = 'nen_admin_data';
+const PW_KEY = 'nen_admin_pw';
+
+// ─── AUTH ───
+function getPassword() {
+  return localStorage.getItem(PW_KEY) || DEFAULT_PASSWORD;
+}
+
+function login() {
+  const pw = document.getElementById('pwInput').value;
+  const err = document.getElementById('loginError');
+  if(pw === getPassword()) {
+    document.getElementById('loginScreen').style.display = 'none';
+    const panel = document.getElementById('adminPanel');
+    panel.classList.add('visible');
+    initAdmin();
+  } else {
+    err.textContent = '❌ Wrong password. Try again.';
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwInput').focus();
+    setTimeout(() => err.textContent = '', 3000);
+  }
+}
+
+function logout() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('adminPanel').classList.remove('visible');
+  document.getElementById('pwInput').value = '';
+}
+
+document.getElementById('pwInput').addEventListener('keydown', e => {
+  if(e.key === 'Enter') login();
+});
+
+// ─── TAB SWITCHING ───
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.tab-btn[onclick="switchTab('${name}')"]`).classList.add('active');
+  document.getElementById(`tab-${name}`).classList.add('active');
+}
+
+// ─── TOAST ───
+function showToast(msg, isError=false) {
+  const t = document.getElementById('toast');
+  t.textContent = (isError ? '❌ ' : '✅ ') + msg;
+  t.className = 'show' + (isError ? ' error' : '');
+  setTimeout(() => t.className = '', 2800);
+}
+
+// ─── DATA ───
+const nenTypes = [
+  { id:'enhancer', nameEn:'Enhancer', nameAr:'المعزز', color:'#22c55e',
+    descEn:'The most straightforward and powerful type. Enhancers boost their own physical capabilities to superhuman levels.',
+    descAr:'النوع الأكثر مباشرةً وقوةً. يعززون قدراتهم الجسدية إلى مستويات فوق بشرية.',
+    waterEn:'Water volume increases', waterAr:'يزداد حجم الماء',
+    personEn:'Simple, determined, and focused on their goals', personAr:'بسيطون، عزيمة قوية، مركزون على أهدافهم',
+    char1:'Gon Freecss', char1En:'Jajanken (Rock-Paper-Scissors)', char1Ar:'جاجانكين (حجر ورق مقص)',
+    char2:'Uvogin', char2En:'Enhanced physical destruction', char2Ar:'تدمير جسدي معزز' },
+  { id:'transmuter', nameEn:'Transmuter', nameAr:'المحول', color:'#a855f7',
+    descEn:'Transmuters alter the properties of their aura to mimic other substances — electricity, fire, or water.',
+    descAr:'يغيرون خصائص أوراهم ليحاكوا مواد أخرى — كهرباء، نار، أو ماء.',
+    waterEn:'Water changes taste', waterAr:'يتغير طعم الماء',
+    personEn:'Whimsical, unpredictable, prone to deception', personAr:'متقلبون، غير متوقعين، يميلون للخداع',
+    char1:'Killua Zoldyck', char1En:'Godspeed — lightning electricity', char1Ar:'سرعة الإله — كهرباء',
+    char2:'Hisoka', char2En:'Bungee Gum — elastic sticky aura', char2Ar:'بنجي غام — أورا مرنة ولزجة' },
+  { id:'emitter', nameEn:'Emitter', nameAr:'الباعث', color:'#f59e0b',
+    descEn:'Emitters project their aura beyond their body, launching it as projectiles or maintaining it at a distance.',
+    descAr:'يطلقون أوراهم خارج أجسامهم ويحافظون عليها عن بُعد.',
+    waterEn:'Water changes color', waterAr:'يتغير لون الماء',
+    personEn:'Impatient, hot-headed, volatile and impulsive', personAr:'غير صبورين، متهورون، متفجرون وانفعاليون',
+    char1:'Leorio Paradinight', char1En:'Long-range aura punch', char1Ar:'لكمة أورا بعيدة المدى',
+    char2:'Franklin Bordeau', char2En:'Double Machine Gun — aura bullets', char2Ar:'رشاش مزدوج — رصاصات أورا' },
+  { id:'conjurer', nameEn:'Conjurer', nameAr:'المجسد', color:'#ef4444',
+    descEn:'Conjurers materialize physical objects from their aura. These objects are real and can interact with the world.',
+    descAr:'يجسدون أشياء مادية من أوراهم. هذه الأشياء حقيقية وتتفاعل مع العالم.',
+    waterEn:'Impurities appear in water', waterAr:'تظهر شوائب في الماء',
+    personEn:'High-strung, overly cautious, stoic, analytical', personAr:'متوترون، حذرون جداً، متزنون، تحليليون',
+    char1:'Kurapika', char1En:'Emperor Time — holy chains', char1Ar:'وقت الإمبراطور — سلاسل مقدسة',
+    char2:'Kortopi', char2En:'Gallery Fake — perfect object copies', char2Ar:'معرض المزيف — نسخ مثالية من الأشياء' },
+  { id:'manipulator', nameEn:'Manipulator', nameAr:'المتلاعب', color:'#64748b',
+    descEn:'Manipulators control living beings or objects with their aura. The harder the condition, the greater the control.',
+    descAr:'يتلاعبون بالكائنات الحية أو الأشياء بأوراهم. كلما صعب الشرط، كانت درجة السيطرة أكبر.',
+    waterEn:'Leaf moves on the water', waterAr:'تتحرك الورقة على الماء',
+    personEn:'Argumentative, logical, and calculative', personAr:'جدليون، منطقيون، حسابيون',
+    char1:'Illumi Zoldyck', char1En:'Control via needles in others', char1Ar:'التحكم عبر إبر في الآخرين',
+    char2:'Neferpitou', char2En:'Doctor Blythe — puppet surgery', char2Ar:'طبيب بلايس — جراحة الدمى' },
+  { id:'specialist', nameEn:'Specialist', nameAr:'المتخصص', color:'#3b82f6',
+    descEn:'The rarest and most mysterious type. Specialists have abilities that don\'t fit any other category.',
+    descAr:'النوع الأنادر والأكثر غموضاً. للمتخصصين قدرات لا تنتمي لأي فئة أخرى.',
+    waterEn:'A completely unique reaction', waterAr:'رد فعل مختلف تماماً وفريد',
+    personEn:'Independent, charismatic, and unconventional', personAr:'مستقلون، كاريزماتيون، غير تقليديين',
+    char1:'Chrollo Lucilfer', char1En:'Skill Hunter — steals others\' abilities', char1Ar:'صائد المهارات — يسرق قدرات الآخرين',
+    char2:'Neon Nostrade', char2En:'Lovely Ghost Writer — future prophecy', char2Ar:'كاتبة الأشباح — التنبؤ بالمستقبل' },
+];
+
+let footerLinks = [];
+let bannerColor = '#4db8ff';
+
+function initAdmin() {
+  loadData();
+  renderTypeEditors();
+  renderLinks();
+  updateLinksCount();
+}
+
+function loadData() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if(saved) {
+    try {
+      const d = JSON.parse(saved);
+      footerLinks = d.footerLinks || [];
+      // Restore form values
+      Object.keys(d.fields || {}).forEach(k => {
+        const el = document.getElementById(k);
+        if(el) {
+          if(el.type === 'checkbox') el.checked = d.fields[k];
+          else el.value = d.fields[k];
+        }
+      });
+    } catch(e) {}
+  }
+}
+
+// ─── TYPE EDITORS ───
+function renderTypeEditors() {
+  const grid = document.getElementById('typeEditorGrid');
+  grid.innerHTML = nenTypes.map((t,i) => `
+    <div class="type-edit-card">
+      <div class="type-edit-header" style="background:${t.color}22;border-bottom:2px solid ${t.color}44;color:${t.color}">
+        <div style="width:12px;height:12px;border-radius:50%;background:${t.color}"></div>
+        ${t.nameEn}
+      </div>
+      <div class="type-edit-body">
+        <div class="mini-label">Name (EN)</div>
+        <input class="mini-field" id="type_${t.id}_nameEn" value="${t.nameEn}">
+        <div class="mini-label">Name (AR)</div>
+        <input class="mini-field" id="type_${t.id}_nameAr" value="${t.nameAr}">
+        <div class="mini-label">Description (EN)</div>
+        <textarea class="mini-field" id="type_${t.id}_descEn" style="min-height:70px">${t.descEn}</textarea>
+        <div class="mini-label">Description (AR)</div>
+        <textarea class="mini-field" id="type_${t.id}_descAr" style="min-height:70px">${t.descAr}</textarea>
+        <div class="mini-label">Water Test (EN)</div>
+        <input class="mini-field" id="type_${t.id}_waterEn" value="${t.waterEn}">
+        <div class="mini-label">Water Test (AR)</div>
+        <input class="mini-field" id="type_${t.id}_waterAr" value="${t.waterAr}">
+        <div class="mini-label">Personality (EN)</div>
+        <input class="mini-field" id="type_${t.id}_personEn" value="${t.personEn}">
+        <div class="mini-label">Personality (AR)</div>
+        <input class="mini-field" id="type_${t.id}_personAr" value="${t.personAr}">
+        <div style="border-top:1px solid rgba(255,255,255,.06);margin:.5rem 0;padding-top:.5rem">
+          <div class="mini-label">Character 1 Name</div>
+          <input class="mini-field" id="type_${t.id}_char1" value="${t.char1}">
+          <div class="mini-label">Ability (EN)</div>
+          <input class="mini-field" id="type_${t.id}_char1En" value="${t.char1En}">
+          <div class="mini-label">Ability (AR)</div>
+          <input class="mini-field" id="type_${t.id}_char1Ar" value="${t.char1Ar}">
+          <div class="mini-label">Character 2 Name</div>
+          <input class="mini-field" id="type_${t.id}_char2" value="${t.char2}">
+          <div class="mini-label">Ability (EN)</div>
+          <input class="mini-field" id="type_${t.id}_char2En" value="${t.char2En}">
+          <div class="mini-label">Ability (AR)</div>
+          <input class="mini-field" id="type_${t.id}_char2Ar" value="${t.char2Ar}">
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── FOOTER LINKS ───
+function renderLinks() {
+  const list = document.getElementById('linksList');
+  if(footerLinks.length === 0) {
+    list.innerHTML = '<p style="color:var(--muted);font-size:.85rem;font-style:italic">No links yet. Click "+ Add Link" to add one.</p>';
+    return;
+  }
+  list.innerHTML = footerLinks.map((l,i) => `
+    <div class="link-row">
+      <span style="font-size:1.2rem;cursor:pointer" onclick="pickEmoji(${i})" title="Click to change icon">${l.icon || '🔗'}</span>
+      <input class="field-input mini-field" value="${l.label}" placeholder="Label (e.g. Twitter)" oninput="footerLinks[${i}].label=this.value" style="flex:.6">
+      <input class="field-input mini-field" value="${l.url}" placeholder="https://..." oninput="footerLinks[${i}].url=this.value" style="flex:1">
+      <button class="btn-del" onclick="removeLink(${i})">✕ Remove</button>
+    </div>
+  `).join('');
+  updateLinksCount();
+}
+
+function addLink() {
+  footerLinks.push({ icon:'🔗', label:'', url:'' });
+  renderLinks();
+}
+
+function removeLink(i) {
+  footerLinks.splice(i, 1);
+  renderLinks();
+}
+
+function updateLinksCount() {
+  const el = document.getElementById('linksCount');
+  if(el) el.textContent = footerLinks.length;
+}
+
+const EMOJIS = ['🔗','🐦','📷','💼','🌐','📺','📘','📧','💬','🎮','🎨','📝','⭐','🏠','🌟','📱'];
+function pickEmoji(i) {
+  const icon = prompt('Pick an icon (paste emoji):\n' + EMOJIS.join(' '), footerLinks[i].icon || '🔗');
+  if(icon) { footerLinks[i].icon = icon; renderLinks(); }
+}
+
+// ─── BANNER COLOR ───
+function selectBannerColor(color, el) {
+  bannerColor = color;
+  document.querySelectorAll('#bannerColorPicker .emoji-opt').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// ─── PASSWORD ───
+function changePassword() {
+  const cur = document.getElementById('pwCurrent').value;
+  const nw = document.getElementById('pwNew').value;
+  const cf = document.getElementById('pwConfirm').value;
+  if(cur !== getPassword()) { showToast('Wrong current password', true); return; }
+  if(nw.length < 8) { showToast('New password must be at least 8 characters', true); return; }
+  if(nw !== cf) { showToast('Passwords do not match', true); return; }
+  localStorage.setItem(PW_KEY, nw);
+  showToast('Password updated successfully!');
+  ['pwCurrent','pwNew','pwConfirm'].forEach(id => document.getElementById(id).value = '');
+}
+
+// ─── COLORS ───
+function previewColor(key, val) {
+  document.getElementById(`swatch_${key}`).style.background = val;
+  document.getElementById(`color_${key}_text`).value = val;
+}
+
+// ─── LOGO UPLOAD ───
+function handleLogoUpload(input) {
+  const file = input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    localStorage.setItem('nen_logo_b64', e.target.result);
+    showToast('Logo uploaded! Click Save All to apply.');
+  };
+  reader.readAsDataURL(file);
+}
+
+// ─── RESET ───
+function resetSettings() {
+  if(!confirm('Reset all admin panel settings? The site content will not change.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(PW_KEY);
+  showToast('Settings reset. Reloading...');
+  setTimeout(() => location.reload(), 1500);
+}
+
+// ─── COLLECT ALL FIELD VALUES ───
+function collectFields() {
+  const fields = {};
+  const ids = [
+    'hero_badge_en','hero_badge_ar','hero_title_en','hero_title_ar',
+    'hero_sub_en','hero_sub_ar','hero_scroll_en','hero_scroll_ar',
+    'logo_width',
+    's_whatnen_en','s_whatnen_ar','s_whatnen_sub_en','s_whatnen_sub_ar',
+    's_principles_en','s_principles_ar',
+    's_body_en','s_body_ar',
+    's_types_en','s_types_ar',
+    's_restrict_en','s_restrict_ar',
+    'bannerEnabled','bannerTextEn','bannerTextAr',
+    'footer_name_en','footer_name_ar','footer_tag_en','footer_tag_ar',
+    'footer_credit_en','footer_credit_ar',
+  ];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) fields[id] = el.type === 'checkbox' ? el.checked : el.value;
+  });
+  // Type editors
+  nenTypes.forEach(t => {
+    const typeFields = ['nameEn','nameAr','descEn','descAr','waterEn','waterAr','personEn','personAr','char1','char1En','char1Ar','char2','char2En','char2Ar'];
+    typeFields.forEach(f => {
+      const el = document.getElementById(`type_${t.id}_${f}`);
+      if(el) fields[`type_${t.id}_${f}`] = el.value;
+    });
+  });
+  return fields;
+}
+
+// ─── GENERATE UPDATED INDEX.HTML ───
+async function generateHTML() {
+  // We can't directly fetch index.html cross-origin in some environments
+  // So we use the injection approach: save a JSON config and apply via injected script
+  return null;
+}
+
+// ─── SAVE ALL ───
+function saveAll() {
+  const fields = collectFields();
+  const data = { fields, footerLinks, bannerColor, savedAt: new Date().toISOString() };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+
+  // Build footer links HTML to inject
+  const linksHtml = footerLinks.length > 0
+    ? `<div class="footer-links-title en-only">Links</div><div class="footer-links-title ar-only">روابط</div>` +
+      footerLinks.map(l => `<div class="footer-link-item"><span>${l.icon}</span><a href="${l.url}" target="_blank" rel="noopener">${l.label}</a></div>`).join('')
+    : '';
+
+  // Banner HTML
+  const bannerHtml = fields.bannerEnabled
+    ? `<div id="siteBanner" style="background:${bannerColor}18;border-bottom:1px solid ${bannerColor}44;padding:.6rem 2rem;text-align:center;font-size:.88rem;color:${bannerColor}">
+        <span class="en-only">${fields.bannerTextEn || ''}</span>
+        <span class="ar-only">${fields.bannerTextAr || ''}</span>
+      </div>`
+    : '';
+
+  // Create a downloadable config
+  const config = {
+    fields, footerLinks, bannerColor,
+    linksHtml, bannerHtml,
+    logoB64: localStorage.getItem('nen_logo_b64') || null,
+  };
+
+  // Create config.js that index.html will load
+  const configJs = `/* NEN ADMIN CONFIG — auto-generated */
+window.NEN_CONFIG = ${JSON.stringify(config, null, 2)};`;
+
+  const blob = new Blob([configJs], { type: 'application/javascript' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'nen-config.js';
+  a.click();
+
+  showToast('Config saved! Download nen-config.js and place it next to index.html');
+}
+
+// Show save hint on load
+window.addEventListener('DOMContentLoaded', () => {
+  // Auto-check if already logged in this session
+  if(sessionStorage.getItem('nen_admin_auth') === '1') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminPanel').classList.add('visible');
+    initAdmin();
+  }
+});
+
+document.getElementById('pwInput').addEventListener('keydown', e => {
+  if(e.key === 'Enter') login();
+});
+</script>
+</body>
+</html>

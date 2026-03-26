@@ -655,24 +655,76 @@
   .fade-in.visible{opacity:1;transform:translateY(0)}
 
   /* ─── RESPONSIVE ─── */
+  @media(max-width:1100px){
+    .body-tech-wrapper{grid-template-columns:1fr}
+    .body-figure-area{position:relative;top:0}
+    .compat-wrapper{grid-template-columns:1fr}
+    .hex-compat-svg{max-width:400px;margin:0 auto}
+    .footer-inner{grid-template-columns:1fr 1fr}
+  }
   @media(max-width:900px){
     nav{padding:1rem 1.5rem}
     .aura-intro,.divination-container{grid-template-columns:1fr}
     .principles-grid{grid-template-columns:1fr 1fr}
     .type-cards{grid-template-columns:1fr 1fr}
-    .restrictions-grid{grid-template-columns:1fr}
+    .restrictions-grid{grid-template-columns:1fr 1fr}
     .advanced-grid{grid-template-columns:1fr 1fr}
     .hex-wheel{display:none}
     .nav-links{gap:1rem}
+    .type-editor-grid{grid-template-columns:1fr 1fr}
+    .divination-container{gap:2rem}
+    .body-tech-list{gap:.8rem}
+    section{padding:4rem 1.5rem}
   }
   @media(max-width:600px){
+    nav{padding:.8rem 1rem}
+    .nav-logo{font-size:.9rem}
     .principles-grid{grid-template-columns:1fr}
     .type-cards{grid-template-columns:1fr}
     .advanced-grid{grid-template-columns:1fr}
+    .restrictions-grid{grid-template-columns:1fr}
     .quiz-options{grid-template-columns:1fr}
     .results-grid{grid-template-columns:1fr}
-    nav{flex-wrap:wrap;gap:1rem}
+    .footer-inner{grid-template-columns:1fr}
+    .footer-credit{text-align:left}
+    .compat-type-btns{grid-template-columns:1fr 1fr}
+    nav{flex-wrap:wrap;gap:.5rem}
     .nav-links{display:none}
+    .hero h1{font-size:clamp(1.8rem,10vw,4rem)}
+    .hero-logo{width:min(280px,85vw) !important}
+    .section-title{font-size:clamp(1.2rem,5vw,2.5rem)}
+    .quiz-box{padding:1.5rem}
+    .body-tech-wrapper{gap:1.5rem}
+    .type-editor-grid{grid-template-columns:1fr}
+    .btech-item{padding:1rem}
+    section{padding:3rem 1rem}
+    .aura-text h3{font-size:1.1rem}
+    .admin-nav-tabs{flex-wrap:wrap}
+    .field-row{grid-template-columns:1fr}
+    .hex-compat-svg{max-width:100%}
+    .cbar-label{width:80px;font-size:.68rem}
+    /* Touch-friendly targets */
+    .step{padding:1.2rem}
+    .quiz-opt{padding:1rem .8rem;font-size:.9rem}
+    .result-item{padding:1rem}
+    .btech-item,.adv-card,.principle-card{min-height:auto}
+    .compat-type-btns{gap:.5rem}
+    .ctype-btn{padding:.7rem .8rem;font-size:.78rem}
+    .char-tag{padding:.35rem .8rem;font-size:.82rem}
+  }
+  @media(max-width:380px){
+    .nav-logo{font-size:.78rem}
+    .hero-logo{width:90vw !important}
+    .lang-toggle{margin-left:auto}
+  }
+  /* Touch/tap improvements for all mobile */
+  @media(hover:none){
+    .principle-card:hover,.type-card:hover,.adv-card:hover,.btech-item:hover,
+    .restriction-card:hover{transform:none}
+    .step,.quiz-opt,.result-item,.ctype-btn,.btech-item{
+      -webkit-tap-highlight-color:rgba(77,184,255,.15);
+      cursor:pointer;
+    }
   }
 
   /* ─── HERO LOGO ─── */
@@ -745,6 +797,149 @@
     .footer-credit{text-align:left}
   }
 
+
+  /* ─── GROUPS / FACTIONS ─── */
+  #groups{background:var(--bg)}
+  .groups-tabs{
+    display:flex;gap:.5rem;justify-content:center;
+    flex-wrap:wrap;margin-bottom:3rem;
+  }
+  .gtab-btn{
+    padding:.6rem 1.4rem;border-radius:20px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.03);
+    color:var(--muted);cursor:pointer;
+    font-family:'Cinzel',serif;font-size:.78rem;
+    letter-spacing:.1em;transition:all .3s;white-space:nowrap;
+  }
+  .gtab-btn:hover{color:var(--text);border-color:rgba(77,184,255,.3)}
+  .gtab-btn.active{background:rgba(77,184,255,.12);border-color:var(--aura);color:var(--aura)}
+  .group-panel{display:none}
+  .group-panel.active{display:block}
+  /* Family tree for Zoldyck */
+  .family-tree{
+    display:flex;flex-direction:column;align-items:center;
+    gap:0;max-width:1100px;margin:0 auto;
+  }
+  .tree-gen{
+    display:flex;justify-content:center;gap:1.5rem;
+    flex-wrap:wrap;position:relative;padding:1.5rem 0;
+    width:100%;
+  }
+  .tree-gen::before{
+    content:'';position:absolute;top:0;left:50%;
+    width:1px;height:1.5rem;
+    background:linear-gradient(to bottom,transparent,rgba(77,184,255,.3));
+  }
+  .tree-gen:first-child::before{display:none}
+  .tree-connector{
+    width:100%;height:1px;
+    background:rgba(77,184,255,.2);
+    margin:0 auto;max-width:600px;
+    position:relative;
+  }
+  .member-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;padding:1.2rem;
+    width:180px;flex-shrink:0;
+    transition:all .35s;cursor:default;
+    position:relative;overflow:hidden;
+    text-align:center;
+  }
+  .member-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(to right,var(--aura),var(--aura2));
+    opacity:0;transition:opacity .3s;
+  }
+  .member-card:hover{border-color:rgba(77,184,255,.35);transform:translateY(-4px)}
+  .member-card:hover::before{opacity:1}
+  .member-avatar{
+    width:70px;height:70px;border-radius:50%;
+    margin:0 auto .8rem;
+    background:rgba(77,184,255,.1);
+    border:2px solid rgba(77,184,255,.25);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.8rem;overflow:hidden;
+    position:relative;
+  }
+  .member-avatar img{
+    width:100%;height:100%;object-fit:cover;
+    border-radius:50%;
+  }
+  .member-avatar .avatar-placeholder{
+    font-size:1.8rem;
+    line-height:1;
+  }
+  .member-name{
+    font-family:'Cinzel',serif;font-size:.85rem;
+    color:var(--text);margin-bottom:.3rem;letter-spacing:.05em;
+  }
+  .member-role{
+    font-size:.72rem;color:var(--aura);
+    font-family:'Cinzel',serif;letter-spacing:.08em;
+    margin-bottom:.5rem;text-transform:uppercase;
+  }
+  .member-nen{
+    display:inline-block;padding:.15rem .5rem;
+    border-radius:8px;font-size:.68rem;
+    font-family:'Cinzel',serif;margin-bottom:.5rem;
+  }
+  .member-desc{
+    font-size:.75rem;color:var(--muted);
+    line-height:1.5;
+  }
+  .member-ability{
+    margin-top:.5rem;padding:.4rem .5rem;
+    background:rgba(77,184,255,.05);
+    border:1px solid rgba(77,184,255,.1);
+    border-radius:6px;font-size:.7rem;
+    color:rgba(77,184,255,.8);font-style:italic;
+  }
+  /* Grid layout for non-tree groups */
+  .members-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));
+    gap:1.2rem;max-width:1100px;margin:0 auto;
+  }
+  .members-grid .member-card{width:auto}
+  /* Group intro */
+  .group-intro-bar{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:16px;padding:1.5rem 2rem;
+    max-width:1100px;margin:0 auto 2.5rem;
+    display:flex;align-items:flex-start;gap:1.5rem;
+  }
+  .group-icon{font-size:2.5rem;flex-shrink:0}
+  .group-intro-text h3{
+    font-family:'Cinzel',serif;font-size:1.1rem;
+    color:var(--aura);margin-bottom:.5rem;
+  }
+  .group-intro-text p{color:var(--muted);font-size:.9rem;line-height:1.7}
+  /* Spider number badge */
+  .spider-num{
+    position:absolute;top:.5rem;right:.5rem;
+    width:22px;height:22px;border-radius:50%;
+    background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.4);
+    font-size:.7rem;color:#f87171;font-family:'Cinzel',serif;
+    display:flex;align-items:center;justify-content:center;font-weight:700;
+  }
+  .status-badge{
+    display:inline-block;font-size:.65rem;padding:.1rem .4rem;
+    border-radius:6px;margin-left:.3rem;vertical-align:middle;
+  }
+  .status-alive{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
+  .status-dead{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.25)}
+  .status-unknown{background:rgba(100,116,139,.15);color:#94a3b8;border:1px solid rgba(100,116,139,.25)}
+  @media(max-width:600px){
+    .members-grid{grid-template-columns:repeat(2,1fr);gap:.8rem}
+    .member-card{padding:.9rem .7rem}
+    .family-tree .tree-gen{gap:.8rem}
+    .member-card{width:150px}
+    .group-intro-bar{flex-direction:column;gap:.8rem;padding:1rem}
+    .groups-tabs{gap:.4rem}
+    .gtab-btn{padding:.5rem 1rem;font-size:.72rem}
+  }
+
 </style>
 </head>
 <body>
@@ -765,6 +960,8 @@
     <a href="#nen-types" class="ar-only">الأنواع</a>
     <a href="#water-test" class="en-only">Water Test</a>
     <a href="#water-test" class="ar-only">اختبار الماء</a>
+    <a href="#groups" class="en-only">Groups</a>
+    <a href="#groups" class="ar-only">المجموعات</a>
     <a href="#quiz" class="en-only">Quiz</a>
     <a href="#quiz" class="ar-only">اختبار</a>
   </div>
@@ -1669,6 +1866,425 @@
 </section>
 
 <!-- Quiz -->
+
+<!-- GROUPS & FACTIONS -->
+<section id="groups">
+  <div class="container">
+    <h2 class="section-title fade-in">
+      <span class="en-only">Groups & Factions</span>
+      <span class="ar-only">المجموعات والفصائل</span>
+    </h2>
+    <div class="section-divider"></div>
+    <div class="groups-tabs fade-in">
+      <button class="gtab-btn active" onclick="switchGroup('zoldyck',this)">🏔 <span class="en-only">Zoldyck Family</span><span class="ar-only">عائلة زولديك</span></button>
+      <button class="gtab-btn" onclick="switchGroup('troupe',this)">🕷 <span class="en-only">Phantom Troupe</span><span class="ar-only">فرقة الوهم</span></button>
+      <button class="gtab-btn" onclick="switchGroup('zodiacs',this)">⭕ <span class="en-only">Zodiacs</span><span class="ar-only">الأبراج</span></button>
+      <button class="gtab-btn" onclick="switchGroup('chimera',this)">🐜 <span class="en-only">Chimera Ants</span><span class="ar-only">نمل الكيميرا</span></button>
+      <button class="gtab-btn" onclick="switchGroup('heroes',this)">⭐ <span class="en-only">Heroes</span><span class="ar-only">الأبطال</span></button>
+    </div>
+
+    <!-- ZOLDYCK FAMILY -->
+    <div class="group-panel active" id="gp-zoldyck">
+      <div class="group-intro-bar fade-in">
+        <div class="group-icon">🏔</div>
+        <div class="group-intro-text">
+          <h3><span class="en-only">Zoldyck Family — World's Greatest Assassins</span><span class="ar-only">عائلة زولديك — أعظم قتلة في العالم</span></h3>
+          <p class="en-only">Residing on Kukuroo Mountain, the Zoldycks are a legendary family of assassins feared by everyone — including the Hunter Association itself. Their testing gate alone weighs 64 tons. Each member is trained from birth in assassination arts and Nen.</p>
+          <p class="ar-only">يقطنون جبل كوكورو، عائلة زولديك هي أسطورة بين القتلة يخشاها الجميع — بما فيهم جمعية الصيادين. بوابة اختبارهم وحدها تزن 64 طناً. كل عضو مدرب منذ الولادة على فنون الاغتيال والنين.</p>
+        </div>
+      </div>
+      <div class="family-tree fade-in">
+        <!-- Gen 0: Oldest -->
+        <div class="tree-gen">
+          <div class="member-card" id="mc-maha">
+            <div class="member-avatar"><span class="avatar-placeholder">👴</span></div>
+            <div class="member-name">Maha Zoldyck</div>
+            <div class="member-role"><span class="en-only">Great-Great-Grandfather</span><span class="ar-only">الجد الأكبر</span></div>
+            <span class="member-nen" style="background:rgba(77,184,255,.1);color:var(--aura)">Unknown</span>
+            <div class="member-desc"><span class="en-only">Oldest living Zoldyck. Netero was the only one to fight him and survive. His Nen is described as "very quiet."</span><span class="ar-only">أكبر زولديك على قيد الحياة. نيتيرو هو الوحيد الذي حارب ماها ونجا. يُوصف نينه بـ"الصامت جداً".</span></div>
+          </div>
+        </div>
+        <div class="tree-connector"></div>
+        <!-- Gen 1: Zeno -->
+        <div class="tree-gen">
+          <div class="member-card" id="mc-zeno">
+            <div class="member-avatar"><span class="avatar-placeholder">🐉</span></div>
+            <div class="member-name">Zeno Zoldyck</div>
+            <div class="member-role"><span class="en-only">Grandfather / Former Head</span><span class="ar-only">الجد / الرئيس السابق</span></div>
+            <span class="member-nen" style="background:rgba(245,158,11,.1);color:#fbbf24">Emitter</span>
+            <div class="member-desc"><span class="en-only">Legendary assassin & Nen master. Former peer of Netero. Wise and patient compared to Silva.</span><span class="ar-only">قاتل أسطوري وعارف نين. رفيق سابق لنيتيرو. حكيم وصبور مقارنةً بسيلفا.</span></div>
+            <div class="member-ability">Dragon Head / Dragon Dive / Dragon Lance</div>
+          </div>
+        </div>
+        <div class="tree-connector"></div>
+        <!-- Gen 2: Silva + Kikyo -->
+        <div class="tree-gen">
+          <div class="member-card" id="mc-silva">
+            <div class="member-avatar"><span class="avatar-placeholder">⚔️</span></div>
+            <div class="member-name">Silva Zoldyck</div>
+            <div class="member-role"><span class="en-only">Current Head</span><span class="ar-only">الرئيس الحالي</span></div>
+            <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+            <div class="member-desc"><span class="en-only">Current head of the family. Immensely powerful — killed a Chimera Ant with one blow. Stoic and ruthless.</span><span class="ar-only">الرأس الحالي للعائلة. بالغ القوة — قتل نمل كيميرا بضربة واحدة. بارد الأعصاب وقاسٍ.</span></div>
+            <div class="member-ability">Explosive Orbs (Silver Orbs)</div>
+          </div>
+          <div class="member-card" id="mc-kikyo">
+            <div class="member-avatar"><span class="avatar-placeholder">🌸</span></div>
+            <div class="member-name">Kikyo Zoldyck</div>
+            <div class="member-role"><span class="en-only">Mother</span><span class="ar-only">الأم</span></div>
+            <span class="member-nen" style="background:rgba(100,116,139,.1);color:#94a3b8">Manipulator</span>
+            <div class="member-desc"><span class="en-only">Overprotective mother from Meteor City. Wears a mask and bionic eye. Deeply controlling over her children.</span><span class="ar-only">أم حمائية من مدينة نيزك. ترتدي قناعاً وعيناً بيونية. مسيطرة على أطفالها.</span></div>
+            <div class="member-ability">Fan & projectile combat</div>
+          </div>
+        </div>
+        <div class="tree-connector"></div>
+        <!-- Gen 3: Children -->
+        <div class="tree-gen">
+          <div class="member-card" id="mc-illumi">
+            <div class="member-avatar"><span class="avatar-placeholder">🪡</span></div>
+            <div class="member-name">Illumi Zoldyck</div>
+            <div class="member-role"><span class="en-only">Eldest Son — #1</span><span class="ar-only">الابن الأكبر</span></div>
+            <span class="member-nen" style="background:rgba(100,116,139,.1);color:#94a3b8">Manipulator</span>
+            <div class="member-desc"><span class="en-only">Cold & calculating. Master of needle manipulation. Friend/ally of Hisoka. Phantom Troupe #11.</span><span class="ar-only">بارد وحسابي. خبير التلاعب بالإبر. حليف هيسوكا. رقم 11 في فرقة الوهم.</span></div>
+            <div class="member-ability">Needle Manipulation / Body Alteration</div>
+          </div>
+          <div class="member-card" id="mc-milluki">
+            <div class="member-avatar"><span class="avatar-placeholder">💻</span></div>
+            <div class="member-name">Milluki Zoldyck</div>
+            <div class="member-role"><span class="en-only">Second Son</span><span class="ar-only">الابن الثاني</span></div>
+            <span class="member-nen" style="background:rgba(77,184,255,.1);color:var(--aura)">Unknown</span>
+            <div class="member-desc"><span class="en-only">Tech genius. Hacker and inventor — cracked the Hunter Website. Not a physical fighter like his siblings.</span><span class="ar-only">عبقري تقني. هاكر ومخترع — اخترق موقع الصيادين. ليس مقاتلاً جسدياً كإخوته.</span></div>
+            <div class="member-ability">Whip combat & technology</div>
+          </div>
+          <div class="member-card" id="mc-killua">
+            <div class="member-avatar"><span class="avatar-placeholder">⚡</span></div>
+            <div class="member-name">Killua Zoldyck</div>
+            <div class="member-role"><span class="en-only">Third Son — Prodigy</span><span class="ar-only">الابن الثالث — النابغة</span></div>
+            <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+            <div class="member-desc"><span class="en-only">Greatest prodigy in Zoldyck history. Left the family to travel with Gon. Hero of the series.</span><span class="ar-only">أعظم نابغة في تاريخ زولديك. غادر العائلة للسفر مع غون. بطل الأنمي.</span></div>
+            <div class="member-ability">Godspeed / Lightning Palm / Thunderbolt</div>
+          </div>
+          <div class="member-card" id="mc-alluka">
+            <div class="member-avatar"><span class="avatar-placeholder">🌙</span></div>
+            <div class="member-name">Alluka Zoldyck</div>
+            <div class="member-role"><span class="en-only">Daughter / Nanika's Host</span><span class="ar-only">الابنة / حاضنة نانيكا</span></div>
+            <span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Specialist</span>
+            <div class="member-desc"><span class="en-only">Hosts the entity "Nanika" who can grant any wish — at a devastating cost. Loves only Killua.</span><span class="ar-only">تحتضن الكائن "نانيكا" الذي يمنح أي أمنية — بثمن باهظ. تحب كيلوا فقط.</span></div>
+            <div class="member-ability">Nanika — Wish Granting (Dark Continent calamity)</div>
+          </div>
+          <div class="member-card" id="mc-kalluto">
+            <div class="member-avatar"><span class="avatar-placeholder">🌸</span></div>
+            <div class="member-name">Kalluto Zoldyck</div>
+            <div class="member-role"><span class="en-only">Youngest Son — Troupe #4</span><span class="ar-only">الابن الأصغر — فرقة الوهم</span></div>
+            <span class="member-nen" style="background:rgba(100,116,139,.1);color:#94a3b8">Manipulator</span>
+            <div class="member-desc"><span class="en-only">Youngest and extremely talented. Joined the Phantom Troupe seeking to prove himself. Uses paper as a weapon.</span><span class="ar-only">الأصغر وموهوب للغاية. انضم لفرقة الوهم لإثبات نفسه. يستخدم الورق سلاحاً.</span></div>
+            <div class="member-ability">Dance of the Serpent's Bite (paper control)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHANTOM TROUPE -->
+    <div class="group-panel" id="gp-troupe">
+      <div class="group-intro-bar fade-in">
+        <div class="group-icon">🕷</div>
+        <div class="group-intro-text">
+          <h3><span class="en-only">Phantom Troupe — 幻影旅団 — Gen'ei Ryodan</span><span class="ar-only">فرقة الوهم — 幻影旅団</span></h3>
+          <p class="en-only">A notorious gang of 13 thieves and killers from Meteor City. Every member carries a spider tattoo with their number. All are Class-A wanted criminals and elite Nen users. Founded by Chrollo Lucilfer.</p>
+          <p class="ar-only">عصابة شريرة من 13 لصاً وقاتلاً من مدينة نيزك. كل عضو يحمل وشم عنكبوت برقمه. جميعهم مجرمون مطلوبون من الفئة أ ومستخدمو نين نخبة. أسسها كرولو لوسيلفر.</p>
+        </div>
+      </div>
+      <div class="members-grid fade-in">
+        <div class="member-card">
+          <div class="spider-num">0</div>
+          <div class="member-avatar"><span class="avatar-placeholder">📖</span></div>
+          <div class="member-name">Chrollo Lucilfer <span class="status-badge status-alive">alive</span></div>
+          <div class="member-role"><span class="en-only">Leader / Founder</span><span class="ar-only">الزعيم / المؤسس</span></div>
+          <span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Specialist</span>
+          <div class="member-ability">Skill Hunter — steals & uses others' Nen abilities</div>
+        </div>
+        <div class="member-card">
+          <div class="spider-num">1</div>
+          <div class="member-avatar"><span class="avatar-placeholder">⚡</span></div>
+          <div class="member-name">Feitan Portor <span class="status-badge status-alive">alive</span></div>
+          <div class="member-role"><span class="en-only">Interrogator</span><span class="ar-only">المحقق</span></div>
+          <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+          <div class="member-ability">Rising Sun — incinerates with solar-heat aura</div>
+        </div>
+        <div class="member-card">
+          <div class="spider-num">2</div>
+          <div class="member-avatar"><span class="avatar-placeholder">💪</span></div>
+          <div class="member-name">Phinks Magcub <span class="status-badge status-alive">alive</span></div>
+          <div class="member-role"><span class="en-only">Fighter #2 Strength</span><span class="ar-only">المقاتل</span></div>
+          <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span>
+          <div class="member-ability">Ripper Cyclotron — power multiplies with arm rotations</div>
+        </div>
+        <div class="member-card">
+          <div class="spider-num">3</div>
+          <div class="member-avatar"><span class="avatar-placeholder">🧵</span></div>
+          <div class="member-name">Machi Komacine <span class="status-badge status-alive">alive</span></div>
+          <div class="member-role"><span class="en-only">Medic / Fighter</span><span class="ar-only">الطبيبة والمقاتلة</span></div>
+          <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+          <div class="member-ability">Nen Threads — stitching wounds & binding enemies</div>
+        </div>
+        <div class="member-card">
+          <div class="spider-num">4</div>
+          <div class="member-avatar"><span class="avatar-placeholder">🃏</span></div>
+          <div class="member-name">Hisoka Morow <span class="status-badge status-unknown">ex-member</span></div>
+          <div class="member-role"><span class="en-only">Former Member</span><span class="ar-only">عضو سابق</span></div>
+          <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+          <div class="member-ability">Bungee Gum — elastic & sticky aura (rubber + gum)</div>
+        </div>
+        <div class="member-card">
+          <div class="spider-num">5</div>
+          <div class="member-avatar"><span class="avatar-placeholder">🎺</span></div>
+          <div class="member-name">Bonolenov Ndongo <span class="status-badge status-alive">alive</span></div>
+          <div class="member-role"><span class="en-only">Fighter</span><span class="ar-only">المقاتل</span></div>
+          <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+          <div class="member-ability">Battle Cantabile — music through body holes summons abilities</div>
+        </div>
+        <div class="member-card">
+          <div class="spider-num">6</div>
+          <div class="member-avatar"><span class="avatar-placeholder">🧠</span></div>
+          <div class="member-name">Shalnark <span class="status-badge status-dead">deceased</span></div>
+          <div class="member-role"><span class="en-only">Strategist / Hunter</span><span class="ar-only">الاستراتيجي</span></div>
+          <span class="member-nen" style="background:rgba(100,116,139,.1);color:#94a3b8">Manipulator</span>
+          <div class="member-ability">Black Voice — controls people via antenna implants</div>
+        </div>
+        <div class="member-card">
+          <div class="spider-num">7</div>
+          <div class="member-avatar"><span class="avatar-placeholder">🔫</span></div>
+          <div class="member-name">Franklin Bordeau <span class="status-badge status-alive">alive</span></div>
+          <div class="member-role"><span class="en-only">#4 Strength</span><span class="ar-only">القوة الرابعة</span></div>
+          <span class="member-nen" style="background:rgba(245,158,11,.1);color:#fbbf24">Emitter</span>
+          <div class="member-ability">Double Machine Gun — Nen bullets from fingertips</div>
+        </div>
+        <div class="member-card">
+          <div class="spider-num">8</div>
+          <div class="member-avatar"><span class="avatar-placeholder">🗡️</span></div>
+          <div class="member-name">Nobunaga Hazama <span class="status-badge status-alive">alive</span></div>
+          <div class="member-role"><span class="en-only">Swordsman</span><span class="ar-only">المحارب</span></div>
+          <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span>
+          <div class="member-ability">En — giant range detection; iaido master swordsman</div>
+        </div>
+        <div class="member-card">
+          <div class="spider-num">9</div>
+          <div class="member-avatar"><span class="avatar-placeholder">🔮</span></div>
+          <div class="member-name">Pakunoda <span class="status-badge status-dead">deceased</span></div>
+          <div class="member-role"><span class="en-only">Memory Reader</span><span class="ar-only">قارئة الذاكرة</span></div>
+          <span class="member-nen" style="background:rgba(239,68,68,.1);color:#f87171">Conjurer</span>
+          <div class="member-ability">Psychometry — reads & implants memories via Nen bullets</div>
+        </div>
+        <div class="member-card">
+          <div class="spider-num">10</div>
+          <div class="member-avatar"><span class="avatar-placeholder">🌀</span></div>
+          <div class="member-name">Shizuku Murasaki <span class="status-badge status-alive">alive</span></div>
+          <div class="member-role"><span class="en-only">#12 Strength</span><span class="ar-only">القوة 12</span></div>
+          <span class="member-nen" style="background:rgba(245,158,11,.1);color:#fbbf24">Emitter</span>
+          <div class="member-ability">Blinky — vacuum demon that sucks anything not alive</div>
+        </div>
+        <div class="member-card">
+          <div class="spider-num">11</div>
+          <div class="member-avatar"><span class="avatar-placeholder">🪡</span></div>
+          <div class="member-name">Illumi Zoldyck <span class="status-badge status-alive">current</span></div>
+          <div class="member-role"><span class="en-only">Zoldyck Rep</span><span class="ar-only">ممثل زولديك</span></div>
+          <span class="member-nen" style="background:rgba(100,116,139,.1);color:#94a3b8">Manipulator</span>
+          <div class="member-ability">Needle manipulation — puppet control & body alteration</div>
+        </div>
+        <div class="member-card">
+          <div class="spider-num">12</div>
+          <div class="member-avatar"><span class="avatar-placeholder">👁️</span></div>
+          <div class="member-name">Kortopi <span class="status-badge status-dead">deceased</span></div>
+          <div class="member-role"><span class="en-only">#13 Strength</span><span class="ar-only">القوة 13</span></div>
+          <span class="member-nen" style="background:rgba(239,68,68,.1);color:#f87171">Conjurer</span>
+          <div class="member-ability">Gallery Fake — perfect copies of non-living objects</div>
+        </div>
+        <div class="member-card">
+          <div class="spider-num">4</div>
+          <div class="member-avatar"><span class="avatar-placeholder">🌸</span></div>
+          <div class="member-name">Kalluto Zoldyck <span class="status-badge status-alive">current</span></div>
+          <div class="member-role"><span class="en-only">Replaced Hisoka</span><span class="ar-only">حل محل هيسوكا</span></div>
+          <span class="member-nen" style="background:rgba(100,116,139,.1);color:#94a3b8">Manipulator</span>
+          <div class="member-ability">Dance of the Serpent's Bite — paper manipulation</div>
+        </div>
+        <div class="member-card">
+          <div class="spider-num">⚰</div>
+          <div class="member-avatar"><span class="avatar-placeholder">🦁</span></div>
+          <div class="member-name">Uvogin <span class="status-badge status-dead">deceased</span></div>
+          <div class="member-role"><span class="en-only">#1 Strength (Original)</span><span class="ar-only">القوة الأولى (أصلي)</span></div>
+          <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span>
+          <div class="member-ability">Big Bang Impact — explosive punch of pure aura force</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZODIACS -->
+    <div class="group-panel" id="gp-zodiacs">
+      <div class="group-intro-bar fade-in">
+        <div class="group-icon">⭕</div>
+        <div class="group-intro-text">
+          <h3><span class="en-only">Zodiacs — Netero's Elite Council</span><span class="ar-only">الأبراج — مجلس نيتيرو النخبوي</span></h3>
+          <p class="en-only">12 elite Hunters hand-picked by Chairman Netero to serve as his advisors and sparring partners. Each is assigned a Chinese Zodiac codename. They are the highest authority in the Hunter Association after the Chairman.</p>
+          <p class="ar-only">12 صياداً نخبةً اختارهم الرئيس نيتيرو ليكونوا مستشاريه وشركاءه في التدريب. كل واحد له اسم رمزي من الأبراج الصينية. أعلى سلطة في جمعية الصيادين بعد الرئيس.</p>
+        </div>
+      </div>
+      <div class="members-grid fade-in">
+        <div class="member-card"><div class="member-avatar"><span class="avatar-placeholder">🐀</span></div><div class="member-name">Pariston Hill</div><div class="member-role"><span class="en-only">Rat — Former Vice-Chair</span><span class="ar-only">الفأر — نائب رئيس سابق</span></div><span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Specialist</span><div class="member-desc"><span class="en-only">Master manipulator & politician. Genius-level strategist. Resigned immediately after becoming Chairman.</span><span class="ar-only">سياسي متلاعب بارع. استراتيجي عبقري. استقال فور تعيينه رئيساً.</span></div></div>
+        <div class="member-card"><div class="member-avatar"><span class="avatar-placeholder">🐂</span></div><div class="member-name">Mizaistom Nana</div><div class="member-role"><span class="en-only">Ox — Crime Hunter</span><span class="ar-only">الثور — صائد الجرائم</span></div><span class="member-nen" style="background:rgba(239,68,68,.1);color:#f87171">Conjurer</span><div class="member-desc"><span class="en-only">Analytical investigator. Uses traffic-light Nen to capture targets in spectral cages.</span><span class="ar-only">محقق تحليلي. يستخدم نين إشارات المرور لحبس الأهداف في أقفاص طيفية.</span></div></div>
+        <div class="member-card"><div class="member-avatar"><span class="avatar-placeholder">🐯</span></div><div class="member-name">Kanzai</div><div class="member-role"><span class="en-only">Tiger — Defense Team</span><span class="ar-only">النمر — فريق الدفاع</span></div><span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span><div class="member-desc"><span class="en-only">Temperamental and impulsive. Quick to argue. Strong combatant assigned to the Defense Team.</span><span class="ar-only">متقلب وانفعالي. سريع الجدل. مقاتل قوي في فريق الدفاع.</span></div></div>
+        <div class="member-card"><div class="member-avatar"><span class="avatar-placeholder">🐰</span></div><div class="member-name">Pyon</div><div class="member-role"><span class="en-only">Rabbit — Intel Team</span><span class="ar-only">الأرنب — فريق الاستخبارات</span></div><span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span><div class="member-desc"><span class="en-only">Multilingual programmer and Paleograph Hunter. Hosted election proceedings. Intel Team leader.</span><span class="ar-only">مبرمجة متعددة اللغات وصائدة كتابة قديمة. أدارت انتخابات الرئاسة. قائدة فريق الاستخبارات.</span></div></div>
+        <div class="member-card"><div class="member-avatar"><span class="avatar-placeholder">🐲</span></div><div class="member-name">Botobai Gigante</div><div class="member-role"><span class="en-only">Dragon — Terrorist Hunter</span><span class="ar-only">التنين — صائد الإرهابيين</span></div><span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span><div class="member-desc"><span class="en-only">Triple Star Hunter. Most experienced Zodiac. His Nen is said to be the strongest in the group.</span><span class="ar-only">صياد ثلاثي النجوم. أكثر البروج خبرةً. يُقال إن نينه الأقوى في المجموعة.</span></div></div>
+        <div class="member-card"><div class="member-avatar"><span class="avatar-placeholder">🐍</span></div><div class="member-name">Gel</div><div class="member-role"><span class="en-only">Cobra — Poison Hunter</span><span class="ar-only">الكوبرا — صائدة السموم</span></div><span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span><div class="member-desc"><span class="en-only">Poison specialist. Can transform her arm into a snake. Part of the Science Team for the Dark Continent.</span><span class="ar-only">متخصصة في السموم. تستطيع تحويل ذراعها لثعبان. جزء من فريق العلوم للقارة المظلمة.</span></div></div>
+        <div class="member-card"><div class="member-avatar"><span class="avatar-placeholder">🐴</span></div><div class="member-name">Saccho Kobayakawa</div><div class="member-role"><span class="en-only">Horse — Intel Team</span><span class="ar-only">الحصان — فريق الاستخبارات</span></div><span class="member-nen" style="background:rgba(245,158,11,.1);color:#fbbf24">Emitter</span><div class="member-desc"><span class="en-only">Works behind the scenes. Methodical and observant. 2-Star Hunter and Intel Team member.</span><span class="ar-only">يعمل خلف الكواليس. منهجي ومراقب. صياد ذو نجمتين وعضو فريق الاستخبارات.</span></div></div>
+        <div class="member-card"><div class="member-avatar"><span class="avatar-placeholder">🐏</span></div><div class="member-name">Ginta</div><div class="member-role"><span class="en-only">Goat — Flora/Fauna</span><span class="ar-only">الماعز — فريق الأحياء</span></div><span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span><div class="member-desc"><span class="en-only">Most emotional Zodiac. Speed-based abilities. Was a sparring partner for Netero. Hisoka rated him 90/100.</span><span class="ar-only">أكثر البروج عاطفيةً. قدراته قائمة على السرعة. كان شريك تدريب لنيتيرو.</span></div></div>
+        <div class="member-card"><div class="member-avatar"><span class="avatar-placeholder">🐒</span></div><div class="member-name">Saiyu</div><div class="member-role"><span class="en-only">Monkey — Traitor</span><span class="ar-only">القرد — الخائن</span></div><span class="member-nen" style="background:rgba(100,116,139,.1);color:#94a3b8">Manipulator</span><div class="member-desc"><span class="en-only">Secret ally of Beyond Netero. Concealed traitor within the Zodiacs. Defense Team member.</span><span class="ar-only">حليف سري لـ Beyond نيتيرو. الخائن المخفي داخل الأبراج. عضو فريق الدفاع.</span></div></div>
+        <div class="member-card"><div class="member-avatar"><span class="avatar-placeholder">🐓</span></div><div class="member-name">Cluck</div><div class="member-role"><span class="en-only">Rooster — Flora/Fauna</span><span class="ar-only">الديك — فريق الأحياء</span></div><span class="member-nen" style="background:rgba(100,116,139,.1);color:#94a3b8">Manipulator</span><div class="member-desc"><span class="en-only">Controls hundreds of birds simultaneously. Sent election notices via 600+ pigeons to all Hunters worldwide.</span><span class="ar-only">تتحكم بمئات الطيور في وقت واحد. أرسلت إشعارات الانتخابات بأكثر من 600 حمامة.</span></div></div>
+        <div class="member-card"><div class="member-avatar"><span class="avatar-placeholder">🐶</span></div><div class="member-name">Cheadle Yorkshire</div><div class="member-role"><span class="en-only">Dog — Current Chairman</span><span class="ar-only">الكلب — الرئيسة الحالية</span></div><span class="member-nen" style="background:rgba(239,68,68,.1);color:#f87171">Conjurer</span><div class="member-desc"><span class="en-only">Current Chairman of the Hunter Association. Triple Star Disease Hunter. Sharp intellect and administrator.</span><span class="ar-only">الرئيسة الحالية لجمعية الصيادين. صائدة أمراض ثلاثية النجوم. ذكاء حاد وإدارية بارعة.</span></div></div>
+        <div class="member-card"><div class="member-avatar"><span class="avatar-placeholder">🐗</span></div><div class="member-name">Ging Freecss</div><div class="member-role"><span class="en-only">Boar — Gon's Father</span><span class="ar-only">الخنزير — والد غون</span></div><span class="member-nen" style="background:rgba(245,158,11,.1);color:#fbbf24">Emitter</span><div class="member-desc"><span class="en-only">Top 5 Nen users globally. Created Greed Island. Double Star Ruins Hunter. Abandoned Gon at birth.</span><span class="ar-only">من أفضل 5 مستخدمي نين عالمياً. ابتكر جزيرة الجشع. صياد آثار مزدوج النجوم. هجر غون عند الولادة.</span></div><div class="member-ability">Copies any attack used against him</div></div>
+      </div>
+    </div>
+
+    <!-- CHIMERA ANTS -->
+    <div class="group-panel" id="gp-chimera">
+      <div class="group-intro-bar fade-in">
+        <div class="group-icon">🐜</div>
+        <div class="group-intro-text">
+          <h3><span class="en-only">Chimera Ants — The Ultimate Predators</span><span class="ar-only">نمل الكيميرا — المفترسون النهائيون</span></h3>
+          <p class="en-only">Hybrid creatures born from the Chimera Ant Queen who can consume and inherit the genetic traits of any species. Through "Phagogenesis" they absorbed human DNA and gained the ability to use Nen — creating beings that surpass even elite Hunters.</p>
+          <p class="ar-only">مخلوقات هجينة وُلدت من ملكة نمل الكيميرا التي تستطيع استهلاك وتوريث صفات أي كائن. عبر "الفاغوجينيسيس" امتصوا الحمض النووي البشري واكتسبوا القدرة على استخدام النين — مما خلق كائنات تتجاوز حتى الصيادين النخبة.</p>
+        </div>
+      </div>
+      <div class="members-grid fade-in">
+        <div class="member-card" style="border-color:rgba(239,68,68,.25)">
+          <div class="member-avatar"><span class="avatar-placeholder">👑</span></div>
+          <div class="member-name">Meruem <span class="status-badge status-dead">deceased</span></div>
+          <div class="member-role"><span class="en-only">King — Chimera Ant</span><span class="ar-only">الملك</span></div>
+          <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer+</span>
+          <div class="member-desc"><span class="en-only">The most powerful being introduced in the series. Born already surpassing elite Hunters. Absorbs Nen abilities by consuming others.</span><span class="ar-only">أقوى كائن مُقدَّم في السلسلة. وُلد وهو يتجاوز الصيادين النخبة. يمتص قدرات النين بابتلاع الآخرين.</span></div>
+          <div class="member-ability">Aura Synthesis — absorbs & amplifies stolen Nen</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar"><span class="avatar-placeholder">🐱</span></div>
+          <div class="member-name">Neferpitou <span class="status-badge status-dead">deceased</span></div>
+          <div class="member-role"><span class="en-only">Royal Guard — #1</span><span class="ar-only">الحارس الملكي #1</span></div>
+          <span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Specialist</span>
+          <div class="member-desc"><span class="en-only">Most powerful Royal Guard. Cat-like. En detects kilometers. Expert puppet surgeon and healer.</span><span class="ar-only">أقوى حارس ملكي. شبيه بالقطط. إن يكشف كيلومترات. جراح دمى وطبيب خبير.</span></div>
+          <div class="member-ability">Doctor Blythe — puppet healing/control</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar"><span class="avatar-placeholder">🦋</span></div>
+          <div class="member-name">Shaiapouf <span class="status-badge status-dead">deceased</span></div>
+          <div class="member-role"><span class="en-only">Royal Guard — #2</span><span class="ar-only">الحارس الملكي #2</span></div>
+          <span class="member-nen" style="background:rgba(100,116,139,.1);color:#94a3b8">Manipulator</span>
+          <div class="member-desc"><span class="en-only">Butterfly-type. Devoted to Meruem. Splits into tiny clones. Manipulates via scales that induce illusions.</span><span class="ar-only">من نوع الفراشة. مخلص لميروم. يتقسم لنسخ صغيرة. يتلاعب بمقاييس تُحدث أوهاماً.</span></div>
+          <div class="member-ability">Beezlebubb — splits into mini-clones</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar"><span class="avatar-placeholder">🦏</span></div>
+          <div class="member-name">Menthuthuyoupi <span class="status-badge status-dead">deceased</span></div>
+          <div class="member-role"><span class="en-only">Royal Guard — #3</span><span class="ar-only">الحارس الملكي #3</span></div>
+          <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+          <div class="member-desc"><span class="en-only">Oni-like power. Can reshape his body into any form. Unstable but overwhelmingly powerful in combat.</span><span class="ar-only">قوة شيطانية. يعيد تشكيل جسمه لأي صورة. غير مستقر لكن ساحق القوة في القتال.</span></div>
+          <div class="member-ability">Rage Blast — explosive Nen discharge</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar"><span class="avatar-placeholder">🐜</span></div>
+          <div class="member-name">Chimera Ant Queen <span class="status-badge status-dead">deceased</span></div>
+          <div class="member-role"><span class="en-only">Queen / Origin</span><span class="ar-only">الملكة / الأصل</span></div>
+          <span class="member-nen" style="background:rgba(77,184,255,.1);color:var(--aura)">None</span>
+          <div class="member-desc"><span class="en-only">Origin of all Chimera Ants. Used Phagogenesis to merge human & animal DNA, creating Nen-capable hybrids. Died giving birth to Meruem.</span><span class="ar-only">أصل كل نمل الكيميرا. استخدمت الفاغوجينيسيس لدمج الحمض البشري والحيواني. ماتت أثناء ولادة ميروم.</span></div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar"><span class="avatar-placeholder">🐆</span></div>
+          <div class="member-name">Cheetu <span class="status-badge status-dead">deceased</span></div>
+          <div class="member-role"><span class="en-only">Squadron Leader</span><span class="ar-only">قائد سرب</span></div>
+          <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span>
+          <div class="member-desc"><span class="en-only">Cheetah-type. Fastest Chimera Ant. Arrogant — killed by Silva Zoldyck with one blow before he could show his new ability.</span><span class="ar-only">من نوع الفهد. أسرع نمل كيميرا. متغطرس — قُتل بيد سيلفا زولديك بضربة واحدة.</span></div>
+          <div class="member-ability">Set & Point — creates inescapable arena</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEROES -->
+    <div class="group-panel" id="gp-heroes">
+      <div class="group-intro-bar fade-in">
+        <div class="group-icon">⭐</div>
+        <div class="group-intro-text">
+          <h3><span class="en-only">Main Heroes & Key Characters</span><span class="ar-only">الأبطال الرئيسيون والشخصيات الأساسية</span></h3>
+          <p class="en-only">The central characters of Hunter × Hunter — protagonists, key allies, and pivotal figures who drive the story forward across every arc.</p>
+          <p class="ar-only">الشخصيات المحورية في هنتر × هنتر — الأبطال والحلفاء الأساسيون والشخصيات المحورية التي تدفع القصة للأمام في كل قوس.</p>
+        </div>
+      </div>
+      <div class="members-grid fade-in">
+        <div class="member-card" style="border-color:rgba(34,197,94,.3)">
+          <div class="member-avatar"><span class="avatar-placeholder">🌿</span></div>
+          <div class="member-name">Gon Freecss</div>
+          <div class="member-role"><span class="en-only">Main Protagonist</span><span class="ar-only">البطل الرئيسي</span></div>
+          <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span>
+          <div class="member-desc"><span class="en-only">Pure-hearted boy seeking his father Ging. Incredible potential — briefly transformed into an adult form that terrified even Royal Guards.</span><span class="ar-only">فتى طاهر القلب يبحث عن والده غينغ. إمكانيات هائلة — تحول لهيئة بالغة أرعبت حتى الحراس الملكيين.</span></div>
+          <div class="member-ability">Jajanken — Rock (Ko), Scissors (En), Paper (Emission)</div>
+        </div>
+        <div class="member-card" style="border-color:rgba(168,85,247,.3)">
+          <div class="member-avatar"><span class="avatar-placeholder">⚡</span></div>
+          <div class="member-name">Killua Zoldyck</div>
+          <div class="member-role"><span class="en-only">Protagonist / Best Friend</span><span class="ar-only">البطل / أفضل صديق</span></div>
+          <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+          <div class="member-desc"><span class="en-only">Former assassin heir. Gon's closest friend. Genius prodigy who mastered lightning-speed Nen at a young age.</span><span class="ar-only">وريث قاتل سابق. أفضل أصدقاء غون. نابغة أتقن نين السرعة البرقية في سنٍّ صغيرة.</span></div>
+          <div class="member-ability">Godspeed / Lightning Palm / Thunderbolt / Whirlwind</div>
+        </div>
+        <div class="member-card" style="border-color:rgba(239,68,68,.3)">
+          <div class="member-avatar"><span class="avatar-placeholder">⛓️</span></div>
+          <div class="member-name">Kurapika</div>
+          <div class="member-role"><span class="en-only">Protagonist / Last Kurta</span><span class="ar-only">البطل / آخر الكورتا</span></div>
+          <span class="member-nen" style="background:rgba(239,68,68,.1);color:#f87171">Conjurer</span>
+          <div class="member-desc"><span class="en-only">Sole survivor of the Kurta Clan massacre. Becomes Specialist (Emperor Time) when his eyes turn Scarlet, giving 100% efficiency in all Nen types.</span><span class="ar-only">الناجي الوحيد من مذبحة عشيرة الكورتا. يصبح متخصصاً (وقت الإمبراطور) حين تتحول عيناه للقرمزي.</span></div>
+          <div class="member-ability">5-chain system — Chain Jail / Judgment Chain / Emperor Time</div>
+        </div>
+        <div class="member-card" style="border-color:rgba(245,158,11,.3)">
+          <div class="member-avatar"><span class="avatar-placeholder">🩺</span></div>
+          <div class="member-name">Leorio Paradinight</div>
+          <div class="member-role"><span class="en-only">Protagonist / Future Doctor</span><span class="ar-only">البطل / الطبيب المستقبلي</span></div>
+          <span class="member-nen" style="background:rgba(245,158,11,.1);color:#fbbf24">Emitter</span>
+          <div class="member-desc"><span class="en-only">Aspiring doctor. Fights for the poor. His raw determination earned him a seat in the Zodiac council. Punched Ging live on TV.</span><span class="ar-only">طبيب طموح. يناضل من أجل الفقراء. إصراره الخام منحه مقعداً في مجلس الأبراج. لكم غينغ على الهواء مباشرة.</span></div>
+          <div class="member-ability">Remote Punch — Nen wormhole long-range strike</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar"><span class="avatar-placeholder">🏆</span></div>
+          <div class="member-name">Isaac Netero <span class="status-badge status-dead">deceased</span></div>
+          <div class="member-role"><span class="en-only">12th Chairman — Legend</span><span class="ar-only">الرئيس الثاني عشر — أسطورة</span></div>
+          <span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Specialist</span>
+          <div class="member-desc"><span class="en-only">Considered the world's strongest Nen user in his prime. Fought Meruem alone. Self-detonated the Poor Man's Rose as a final act.</span><span class="ar-only">يُعتبر أقوى مستخدم نين في العالم في عز شبابه. حارب ميروم وحيداً. فجّر نفسه بـ"وردة الفقير" كعمله الأخير.</span></div>
+          <div class="member-ability">100-Type Guanyin Bodhisattva — infinite hands of aura</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar"><span class="avatar-placeholder">🎩</span></div>
+          <div class="member-name">Hisoka Morow</div>
+          <div class="member-role"><span class="en-only">Anti-hero / Wild Card</span><span class="ar-only">البطل المضاد / الورقة العشوائية</span></div>
+          <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+          <div class="member-desc"><span class="en-only">Enigmatic magician obsessed with fighting strong opponents. Ally when convenient, predator at heart.</span><span class="ar-only">ساحر غامض مهووس بمحاربة الخصوم الأقوياء. حليف عند الحاجة، مفترس في جوهره.</span></div>
+          <div class="member-ability">Bungee Gum + Texture Surprise</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar"><span class="avatar-placeholder">🪶</span></div>
+          <div class="member-name">Kite</div>
+          <div class="member-role"><span class="en-only">Ging's Student</span><span class="ar-only">تلميذ غينغ</span></div>
+          <span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Conjurer</span>
+          <div class="member-desc"><span class="en-only">Ging's first student. Inspired Gon to become a Hunter. Expert field researcher. Reborn as a Chimera Ant after death.</span><span class="ar-only">أول تلميذ لغينغ. ألهم غون ليصبح صياداً. باحث ميداني خبير. وُلد من جديد كنملة كيميرا بعد وفاته.</span></div>
+          <div class="member-ability">Crazy Slots — random weapon conjuration (can't be discarded)</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar"><span class="avatar-placeholder">🌑</span></div>
+          <div class="member-name">Alluka / Nanika</div>
+          <div class="member-role"><span class="en-only">Zoldyck — Wish Granter</span><span class="ar-only">زولديك — مانحة الأمنيات</span></div>
+          <span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Specialist</span>
+          <div class="member-desc"><span class="en-only">Theorized to be one of the 5 Dark Continent calamities (Ai). Can grant any wish — but refusing requests causes escalating deaths.</span><span class="ar-only">يُعتقد أنها إحدى الكوارث الخمس للقارة المظلمة (آي). تمنح أي أمنية — لكن رفض الطلبات يتسبب بوفيات متصاعدة.</span></div>
+          <div class="member-ability">Nanika — infinite wish granting</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <section id="quiz">
   <div class="container">
     <h2 class="section-title fade-in">
@@ -1794,27 +2410,62 @@ function showResult(type){
 }
 
 // ──── QUIZ ────
-const quizData={
+// Full question bank — 20 questions, 8 random per session
+const quizBank={
   en:[
-    {q:"What does 'Nen' literally translate to?",opts:["Power","Sense / Mind Force","Aura","Life Energy"],ans:1,exp:"Nen (念) literally means 'Sense' or 'Mind Force' in Japanese."},
-    {q:"Which technique completely stops the flow of aura, making you undetectable?",opts:["Ten","Ren","Zetsu","In"],ans:2,exp:"Zetsu completely suppresses aura flow, hiding your presence from other Nen users."},
-    {q:"Gon Freecss is which type of Nen user?",opts:["Transmuter","Emitter","Specialist","Enhancer"],ans:3,exp:"Gon is an Enhancer — his Jajanken ability amplifies his physical strength to devastating levels."},
-    {q:"What happens to the water during Water Divination if you're an Emitter?",opts:["Volume increases","Color changes","Taste changes","Leaf moves"],ans:1,exp:"Emitters cause the water to change color during the divination test."},
-    {q:"Killua's 'Godspeed' ability transforms his aura into what?",opts:["Fire","Electricity","Darkness","Wind"],ans:1,exp:"Killua is a Transmuter who changes his aura into electricity, enabling superhuman speed."},
-    {q:"Which technique concentrates ALL aura into ONE body part for maximum offense?",opts:["Ken","Ko","Gyo","En"],ans:1,exp:"Ko concentrates 100% of the user's aura into one body part — devastating power but leaves the rest of the body defenseless."},
-    {q:"Chrollo Lucilfer's 'Skill Hunter' ability belongs to which Nen type?",opts:["Conjuration","Manipulation","Specialization","Emission"],ans:2,exp:"Chrollo is a Specialist — his ability to steal other Nen users' abilities doesn't fit any standard category."},
-    {q:"What is a 'Vow' in Nen?",opts:["A promise to train harder","A restriction that boosts power at personal risk","A technique to hide aura","A way to detect enemies"],ans:1,exp:"Vows are the most powerful restrictions — breaking them has lethal or catastrophic consequences for the user."},
+    {q:"What does 'Nen' literally translate to?",opts:["Power","Sense / Mind Force","Aura","Life Energy"],ans:1,exp:"Nen (念) means 'Sense' or 'Mind Force' in Japanese."},
+    {q:"Which technique completely stops aura flow, making you undetectable?",opts:["Ten","Ren","Zetsu","In"],ans:2,exp:"Zetsu suppresses aura completely, hiding you from other Nen users."},
+    {q:"Gon Freecss is which type of Nen user?",opts:["Transmuter","Emitter","Specialist","Enhancer"],ans:3,exp:"Gon is an Enhancer — Jajanken amplifies his physical power."},
+    {q:"Water Divination: what happens if you are an Emitter?",opts:["Volume increases","Color changes","Taste changes","Leaf moves"],ans:1,exp:"Emitters cause the water to change color during divination."},
+    {q:"Killua's 'Godspeed' transmutes his aura into what?",opts:["Fire","Electricity","Darkness","Wind"],ans:1,exp:"Killua is a Transmuter who converts his aura into electricity."},
+    {q:"Which technique concentrates ALL aura into ONE body part?",opts:["Ken","Ko","Gyo","En"],ans:1,exp:"Ko puts 100% of aura into one part — devastating but leaves the rest unprotected."},
+    {q:"Chrollo's 'Skill Hunter' belongs to which Nen type?",opts:["Conjuration","Manipulation","Specialization","Emission"],ans:2,exp:"Chrollo is a Specialist — stealing others' Nen fits no standard category."},
+    {q:"What is a 'Vow' in Nen?",opts:["A training promise","A restriction that boosts power at personal risk","A stealth technique","Enemy detection"],ans:1,exp:"Vows are the most powerful restrictions — breaking them has lethal consequences."},
+    {q:"What is the Phantom Troupe also known as?",opts:["The Eagles","The Spiders","The Wolves","The Dragons"],ans:1,exp:"The Phantom Troupe is called 'the Spiders' — each member bears a numbered spider tattoo."},
+    {q:"Which Zoldyck is considered the greatest prodigy in family history?",opts:["Illumi","Silva","Killua","Zeno"],ans:2,exp:"Killua is the greatest Zoldyck prodigy, despite being only the third oldest sibling."},
+    {q:"What is Kurapika's vow that makes Chain Jail so powerful?",opts:["Use only at night","Use on Troupe only or he dies","Must be crying","Loses his eyes"],ans:1,exp:"Using Chain Jail on a non-Troupe member kills Kurapika — the vow makes it one of the strongest abilities."},
+    {q:"Which technique creates a detection sphere around the body?",opts:["Ko","In","En","Shu"],ans:2,exp:"En releases aura in a large sphere, sensing anyone who enters the radius."},
+    {q:"What makes Meruem grow stronger continuously?",opts:["Steals Nen from books","Absorbs Nen by consuming others","Copies attacks","Uses all 6 Nen types"],ans:1,exp:"Meruem's Aura Synthesis absorbs and amplifies Nen abilities from those he eats."},
+    {q:"Which Zodiac has the most powerful Nen in the group?",opts:["Ging Freecss","Pariston Hill","Botobai Gigante","Cheadle Yorkshire"],ans:2,exp:"Botobai Gigante (Dragon) is stated to have the most powerful Nen ability among the Zodiacs."},
+    {q:"Hisoka's Bungee Gum gives his aura the properties of what?",opts:["Water and fire","Rubber and gum","Steel and glass","Electricity and magnetism"],ans:1,exp:"Bungee Gum gives Hisoka's aura elasticity (rubber) and adhesion (gum)."},
+    {q:"Which Nen type causes impurities in water during divination?",opts:["Enhancer","Emitter","Conjurer","Manipulator"],ans:2,exp:"Conjurers cause impurities in water — reflecting their ability to materialize real objects."},
+    {q:"Shu technique does what?",opts:["Hides aura","Encases held objects with aura","Creates a detection field","Concentrates aura in eyes"],ans:1,exp:"Shu extends aura to encase an object, treating it as an extension of the body."},
+    {q:"How many members does the Phantom Troupe have?",opts:["10","12","13","15"],ans:2,exp:"The Phantom Troupe always has exactly 13 members, each with a numbered spider tattoo."},
+    {q:"What is Isaac Netero's ultimate technique?",opts:["Dragon Dive","100-Type Guanyin Bodhisattva","Emperor Time","Skill Hunter"],ans:1,exp:"Netero's 100-Type Guanyin Bodhisattva creates massive aura hands at blinding speed."},
+    {q:"Netero rated Ging Freecss as one of the top how many Nen users globally?",opts:["Top 3","Top 5","Top 10","Top 20"],ans:1,exp:"Netero considered Ging Freecss one of the top 5 greatest Nen users in the world."},
   ],
   ar:[
-    {q:"ماذا تعني كلمة 'النين' حرفياً؟",opts:["القوة","الإحساس / قوة العقل","الأورا","طاقة الحياة"],ans:1,exp:"النين (念) تعني حرفياً 'الإحساس' أو 'قوة العقل' باليابانية."},
-    {q:"أي تقنية توقف تدفق الأورا تماماً مما يجعلك غير قابل للكشف؟",opts:["تن","رين","زيتسو","إن"],ans:2,exp:"زيتسو يقمع تدفق الأورا تماماً، مخفياً وجودك عن مستخدمي النين الآخرين."},
-    {q:"غون فريكس هو أي نوع من مستخدمي النين؟",opts:["محول","مطلق","متخصص","معزز"],ans:3,exp:"غون معزز — قدرته جاجانكين تضخم قوته الجسدية إلى مستويات مدمرة."},
-    {q:"ماذا يحدث للماء في اختبار التكهن إذا كنت مطلقاً؟",opts:["يزداد الحجم","يتغير اللون","يتغير الطعم","تتحرك الورقة"],ans:1,exp:"الباعثون يجعلون الماء يتغير لونه خلال اختبار التكهن."},
-    {q:"قدرة كيلوا 'سرعة الإله' تحول أوراه إلى ماذا؟",opts:["نار","كهرباء","ظلام","ريح"],ans:1,exp:"كيلوا محول يغير أوراه إلى كهرباء مما يمنحه سرعة فائقة البشر."},
-    {q:"أي تقنية تركز كل الأورا في جزء واحد من الجسم للهجوم الأقصى؟",opts:["كين","كو","جيو","إن"],ans:1,exp:"كو يركز 100% من أورا المستخدم في جزء واحد — قوة مدمرة لكن بقية الجسم بلا حماية."},
-    {q:"قدرة كرولو 'صائد المهارات' تنتمي لأي نوع نين؟",opts:["الاستدعاء","التحكم","التخصص","الإطلاق"],ans:2,exp:"كرولو متخصص — قدرته على سرقة قدرات مستخدمي النين الآخرين لا تنتمي لأي فئة قياسية."},
-    {q:"ما هو 'النذر' في النين؟",opts:["وعد بالتدريب أكثر","قيد يعزز القوة مع تحمل مخاطر شخصية","تقنية لإخفاء الأورا","طريقة لكشف الأعداء"],ans:1,exp:"النذور هي أقوى القيود — كسرها له عواقب مميتة أو كارثية على المستخدم."},
+    {q:"ماذا تعني كلمة 'النين' حرفياً؟",opts:["القوة","الإحساس / قوة العقل","الأورا","طاقة الحياة"],ans:1,exp:"النين (念) تعني 'الإحساس' أو 'قوة العقل' باليابانية."},
+    {q:"أي تقنية توقف تدفق الأورا مما يجعلك غير قابل للكشف؟",opts:["تن","رين","زيتسو","إن"],ans:2,exp:"زيتسو يقمع تدفق الأورا تماماً مخفياً وجودك."},
+    {q:"غون فريكس هو أي نوع من مستخدمي النين؟",opts:["محول","باعث","متخصص","معزز"],ans:3,exp:"غون معزز — جاجانكين تضخم قوته الجسدية."},
+    {q:"ماذا يحدث للماء في اختبار التكهن إذا كنت باعثاً؟",opts:["يزداد الحجم","يتغير اللون","يتغير الطعم","تتحرك الورقة"],ans:1,exp:"الباعثون يجعلون الماء يتغير لونه."},
+    {q:"قدرة كيلوا 'سرعة الإله' تحول أوراه إلى ماذا؟",opts:["نار","كهرباء","ظلام","ريح"],ans:1,exp:"كيلوا محول يغير أوراه إلى كهرباء."},
+    {q:"أي تقنية تركز كل الأورا في جزء واحد من الجسم؟",opts:["كين","كو","جيو","إن"],ans:1,exp:"كو يركز 100% من الأورا في جزء واحد."},
+    {q:"قدرة كرولو تنتمي لأي نوع نين؟",opts:["الاستدعاء","التلاعب","التخصص","البعث"],ans:2,exp:"كرولو متخصص — قدرته لا تنتمي لأي فئة قياسية."},
+    {q:"ما هو 'النذر' في النين؟",opts:["وعد بالتدريب","قيد يعزز القوة مع مخاطر شخصية","تقنية إخفاء","كشف الأعداء"],ans:1,exp:"النذور أقوى القيود — كسرها له عواقب مميتة."},
+    {q:"بماذا تُعرف فرقة الوهم أيضاً؟",opts:["النسور","العناكب","الذئاب","التنانين"],ans:1,exp:"فرقة الوهم تُعرف بـ'العناكب' — كل عضو يحمل وشم عنكبوت."},
+    {q:"أي عضو في عائلة زولديك يُعتبر أعظم نابغة في تاريخهم؟",opts:["إيلومي","سيلفا","كيلوا","زينو"],ans:2,exp:"كيلوا أعظم نابغة في تاريخ زولديك رغم كونه الابن الثالث."},
+    {q:"ما نذر كوراباكا الذي يجعل سجن السلسلة قوياً جداً؟",opts:["ليلاً فقط","للفرقة فقط وإلا مات","يجب أن يبكي","يفقد عيناه"],ans:1,exp:"استخدامه على غير عضو في الفرقة سيقتل كوراباكا."},
+    {q:"أي تقنية تنشئ كرة كشف حول الجسم؟",opts:["كو","إن","إن الكبير","شو"],ans:1,exp:"إن يطلق أوراً في كرة كبيرة للكشف."},
+    {q:"ما الذي يجعل ميروم يزداد قوةً باستمرار؟",opts:["يسرق النين من كتب","يمتص قدرات بابتلاع الآخرين","ينسخ الهجمات","يستخدم أنواع النين الستة"],ans:1,exp:"تركيب الأورا يمكّنه من امتصاص وتضخيم قدرات من يأكلهم."},
+    {q:"أي عضو في الأبراج يمتلك أقوى نين؟",opts:["غينغ فريكس","باريستون هيل","بوتوباي غيغانتي","شيدل"],ans:2,exp:"يُقال إن بوتوباي يمتلك أقوى نين بين الأبراج."},
+    {q:"بونجي غام لهيسوكا يمنح أوراه خصائص ماذا؟",opts:["الماء والنار","المطاط والصمغ","الفولاذ والزجاج","الكهرباء"],ans:1,exp:"يمنح الأورا المرونة والالتصاق."},
+    {q:"أي نوع نين يجعل شوائب تظهر في الماء؟",opts:["المعزز","الباعث","المجسد","المتلاعب"],ans:2,exp:"المجسدون يجعلون شوائب تظهر انعكاساً لقدرتهم."},
+    {q:"تقنية شو تفعل ماذا؟",opts:["تخفي الأورا","تغلف الأشياء الممسوكة بالأورا","تنشئ حقل كشف","تركز الأورا في العيون"],ans:1,exp:"شو يمتد الأورا ليغلف جسماً خارجياً."},
+    {q:"كم عضو في فرقة الوهم؟",opts:["10","12","13","15"],ans:2,exp:"فرقة الوهم دائماً 13 عضواً."},
+    {q:"ما التقنية النهائية لإسحاق نيتيرو؟",opts:["غوص التنين","بوذيساتفا غوانين من 100 نوع","وقت الإمبراطور","صائد المهارات"],ans:1,exp:"بوذيساتفا غوانين من 100 نوع تنشئ أيادي أورا ضخمة."},
+    {q:"نيتيرو صنّف غينغ ضمن أفضل كم مستخدم نين عالمياً؟",opts:["أفضل 3","أفضل 5","أفضل 10","أفضل 20"],ans:1,exp:"نيتيرو اعتبر غينغ من أفضل 5 مستخدمي نين في العالم."},
   ]
+};
+
+function shuffleArray(arr) {
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+const quizData={
+  en: shuffleArray(quizBank.en).slice(0,8),
+  ar: shuffleArray(quizBank.ar).slice(0,8)
 };
 
 let qIndex=0,score=0,answered=false;
@@ -1874,7 +2525,12 @@ function showFinal(){
   document.getElementById('quizResultMsg').textContent=res2.m;
 }
 
-function restartQuiz(){renderQuiz();}
+function restartQuiz(){
+  // Re-shuffle questions for new session
+  quizData.en = shuffleArray(quizBank.en).slice(0,8);
+  quizData.ar = shuffleArray(quizBank.ar).slice(0,8);
+  renderQuiz();
+}
 
 // ──── BODY FIGURE ────
 const techConfig = {
@@ -2060,9 +2716,18 @@ renderQuiz();
   const f = c.fields || {};
 
   // Apply banner
-  if(c.bannerHtml) {
+  if(c.bannerHtml && c.fields && c.fields.bannerEnabled) {
     const nav = document.querySelector('nav');
-    if(nav) nav.insertAdjacentHTML('beforebegin', c.bannerHtml);
+    if(nav) {
+      nav.insertAdjacentHTML('beforebegin', c.bannerHtml);
+      // Push nav down so banner doesn't overlap
+      const banner = document.getElementById('siteBanner');
+      if(banner) {
+        const bh = banner.offsetHeight;
+        nav.style.top = bh + 'px';
+        document.body.style.paddingTop = bh + 'px';
+      }
+    }
   }
 
   // Apply footer links

@@ -325,6 +325,9 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
       <button class="tab-btn" onclick="switchTab('footer')">
         <span class="en-a">🔗 Footer</span><span class="ar-a">🔗 الفوتر</span>
       </button>
+      <button class="tab-btn" onclick="switchTab('quiz')">
+        <span class="en-a">❓ Quiz</span><span class="ar-a">❓ الاختبار</span>
+      </button>
       <button class="tab-btn" onclick="switchTab('settings')">
         <span class="en-a">⚙ Settings</span><span class="ar-a">⚙ الإعدادات</span>
       </button>
@@ -596,6 +599,31 @@ input[type=color]{opacity:0;position:absolute;pointer-events:none}
           <div class="field-label">Credit Line (AR)</div>
           <input class="field-input" id="footer_credit_ar" value="مستند إلى هنتر × هنتر بقلم يوشيهيرو توغاشي">
         </div>
+      </div>
+    </div>
+
+
+    <!-- QUIZ EDITOR TAB -->
+    <div class="tab-content" id="tab-quiz">
+      <div class="admin-card">
+        <div class="admin-card-title">❓ <span class="en-a">Quiz Question Bank</span><span class="ar-a">بنك أسئلة الاختبار</span></div>
+        <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem;font-family:JetBrains Mono,monospace">
+          <span class="en-a">Add questions to the pool. 8 random questions are shown each session. Questions must have exactly 4 options and one correct answer (0-3).</span>
+          <span class="ar-a">أضف أسئلة للبنك. 8 أسئلة عشوائية تظهر في كل جلسة. لكل سؤال 4 خيارات وإجابة صحيحة واحدة (0-3).</span>
+        </p>
+        <div style="display:flex;gap:.8rem;margin-bottom:1.2rem;align-items:center">
+          <label style="color:var(--muted);font-size:.82rem;font-family:JetBrains Mono,monospace">
+            <span class="en-a">Language:</span><span class="ar-a">اللغة:</span>
+          </label>
+          <select id="quizLangSelect" onchange="renderQuizEditor()" style="padding:.4rem .8rem;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:JetBrains Mono,monospace">
+            <option value="en">English (EN)</option>
+            <option value="ar">العربية (AR)</option>
+          </select>
+        </div>
+        <div id="quizEditorList"></div>
+        <button class="btn-add" onclick="addQuizQuestion()" style="margin-top:1rem">
+          <span class="en-a">+ Add Question</span><span class="ar-a">+ إضافة سؤال</span>
+        </button>
       </div>
     </div>
 
@@ -970,7 +998,8 @@ function saveAll() {
 
   // Banner HTML
   const bannerHtml = fields.bannerEnabled
-    ? `<div id="siteBanner" style="background:${bannerColor}18;border-bottom:1px solid ${bannerColor}44;padding:.6rem 2rem;text-align:center;font-size:.88rem;color:${bannerColor}">
+    ? `<div id="siteBanner" style="background:${bannerColor}22;border-bottom:2px solid ${bannerColor}66;padding:.7rem 2rem;text-align:center;font-size:.9rem;color:${bannerColor};font-weight:600;letter-spacing:.04em;position:relative;z-index:99;backdrop-filter:blur(8px);">
+        <span style="margin-right:.5rem">📢</span>
         <span class="en-only">${fields.bannerTextEn || ''}</span>
         <span class="ar-only">${fields.bannerTextAr || ''}</span>
       </div>`

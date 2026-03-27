@@ -28,8 +28,8 @@ window.NEN_CONFIG = {
     "s_body_tech_ar": "التقنيات مُجسَّدة على الجسم",
     "s_compat_en": "Nen Type Compatibility Chart",
     "s_compat_ar": "جدول توافق أنواع النين",
-    "s_types_en": "The Six Nen Types",
-    "s_types_ar": "أنواع النين الستة",
+    "s_types_en": "The Six Nen Types (Hatsu)",
+    "s_types_ar": "أنواع النين الستة (الهاتسو)",
     "s_water_en": "Water Divination Test",
     "s_water_ar": "اختبار تكهن الماء",
     "s_restrict_en": "Restrictions & Vows",
@@ -153,5 +153,5 @@ window.NEN_CONFIG = {
     "en": [],
     "ar": []
   },
-  "savedAt": "2026-03-27T07:35:58.836Z"
+  "savedAt": "2026-03-27T07:38:40.456Z"
 };

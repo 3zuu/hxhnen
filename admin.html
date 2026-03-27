@@ -3,1063 +3,881 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nen Admin Panel | لوحة التحكم</title>
+<title>⚙ Nen Admin Panel | لوحة التحكم</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+Arabic:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#05070f;--bg2:#080c18;--surface:rgba(255,255,255,0.04);
-  --border:rgba(100,180,255,0.15);--aura:#4db8ff;--aura2:#a78bfa;
-  --gold:#f0c060;--text:#e8f0ff;--muted:#7a8fa8;
+  --bg:#05070f;--bg2:#080c18;--sur:rgba(255,255,255,0.04);
+  --bor:rgba(100,180,255,0.15);--aura:#4db8ff;--aura2:#a78bfa;
+  --gold:#f0c060;--text:#e8f0ff;--mu:#7a8fa8;
   --green:#22c55e;--red:#ef4444;--orange:#f59e0b;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Cinzel',serif;min-height:100vh;
-  display:flex;flex-direction:column;
-}
+body{background:var(--bg);color:var(--text);font-family:'Cinzel',serif;min-height:100vh}
+body.ar{font-family:'Noto Sans Arabic','Cinzel',serif;direction:rtl}
+body.ar .en-a{display:none!important}
+body:not(.ar) .ar-a{display:none!important}
 
-/* ─── LOGIN SCREEN ─── */
-#loginScreen{
-  position:fixed;inset:0;z-index:9999;
-  background:var(--bg);
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:2rem;
-}
-.login-box{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:24px;padding:3rem;
-  width:min(420px,90vw);text-align:center;
-}
-.login-icon{font-size:3rem;margin-bottom:1rem}
-.login-title{
-  font-size:1.4rem;letter-spacing:.1em;
-  background:linear-gradient(135deg,var(--aura),var(--aura2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;margin-bottom:.5rem;
-}
-.login-sub{color:var(--muted);font-size:.8rem;letter-spacing:.12em;margin-bottom:2rem;font-family:JetBrains Mono,monospace}
-.login-field{
-  width:100%;padding:1rem 1.2rem;
-  background:rgba(255,255,255,.03);
-  border:1px solid var(--border);border-radius:12px;
-  color:var(--text);font-size:1rem;margin-bottom:1rem;
-  font-family:JetBrains Mono,monospace;letter-spacing:.15em;
-  transition:border-color .3s;
-}
-.login-field:focus{outline:none;border-color:var(--aura)}
-.login-btn{
-  width:100%;padding:1rem;border-radius:12px;border:none;
-  background:linear-gradient(135deg,var(--aura),var(--aura2));
-  color:#000;font-family:'Cinzel',serif;font-size:.95rem;
-  font-weight:700;letter-spacing:.1em;cursor:pointer;
-  transition:all .3s;
-}
-.login-btn:hover{transform:scale(1.03);box-shadow:0 8px 24px rgba(77,184,255,.3)}
-.login-error{
-  color:var(--red);font-size:.8rem;margin-top:.8rem;
-  min-height:1.2em;font-family:JetBrains Mono,monospace;
-}
-.login-hint{
-  margin-top:2rem;padding:1rem;
-  background:rgba(77,184,255,.04);border:1px solid rgba(77,184,255,.1);
-  border-radius:10px;font-size:.78rem;color:var(--muted);
-  font-family:JetBrains Mono,monospace;line-height:1.7;text-align:left;
-}
+/* LOGIN */
+#loginScreen{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center}
+.lb{background:var(--sur);border:1px solid var(--bor);border-radius:24px;padding:3rem;width:min(440px,92vw);text-align:center}
+.li{font-size:3rem;margin-bottom:.8rem}
+.lt{font-size:1.3rem;letter-spacing:.1em;background:linear-gradient(135deg,var(--aura),var(--aura2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem}
+.ls{color:var(--mu);font-size:.78rem;letter-spacing:.12em;margin-bottom:1.8rem;font-family:JetBrains Mono,monospace}
+.lf{width:100%;padding:.9rem 1.2rem;background:rgba(255,255,255,.03);border:1px solid var(--bor);border-radius:12px;color:var(--text);font-size:1rem;margin-bottom:1rem;font-family:JetBrains Mono,monospace;letter-spacing:.15em;transition:border-color .3s}
+.lf:focus{outline:none;border-color:var(--aura)}
+.lbtn{width:100%;padding:1rem;border-radius:12px;border:none;background:linear-gradient(135deg,var(--aura),var(--aura2));color:#000;font-family:'Cinzel',serif;font-size:.95rem;font-weight:700;letter-spacing:.1em;cursor:pointer;transition:all .3s}
+.lbtn:hover{transform:scale(1.03);box-shadow:0 8px 24px rgba(77,184,255,.3)}
+.lerr{color:var(--red);font-size:.78rem;margin-top:.8rem;min-height:1.2em;font-family:JetBrains Mono,monospace}
+.lhint{margin-top:1.5rem;padding:.9rem;background:rgba(77,184,255,.04);border:1px solid rgba(77,184,255,.1);border-radius:10px;font-size:.75rem;color:var(--mu);font-family:JetBrains Mono,monospace;line-height:1.8;text-align:left}
 
-/* ─── ADMIN LAYOUT ─── */
+/* HEADER */
 #adminPanel{display:none}
-#adminPanel.visible{display:flex;flex-direction:column;min-height:100vh}
-.admin-header{
-  background:rgba(8,12,24,.95);
-  border-bottom:1px solid var(--border);
-  padding:1rem 2rem;
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:100;
-  backdrop-filter:blur(10px);
-}
-.admin-brand{
-  font-size:1rem;letter-spacing:.12em;
-  background:linear-gradient(135deg,var(--aura),var(--aura2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.admin-nav-tabs{display:flex;gap:.3rem}
-.tab-btn{
-  padding:.5rem 1.2rem;border-radius:8px;border:1px solid transparent;
-  background:transparent;color:var(--muted);cursor:pointer;
-  font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.1em;
-  transition:all .3s;
-}
-.tab-btn:hover{color:var(--text);border-color:var(--border)}
-.tab-btn.active{background:rgba(77,184,255,.1);border-color:var(--aura);color:var(--aura)}
-.admin-actions{display:flex;gap:.8rem;align-items:center}
-.btn-save{
-  padding:.5rem 1.5rem;border-radius:8px;border:none;
-  background:var(--green);color:#000;
-  font-family:'Cinzel',serif;font-size:.8rem;font-weight:700;
-  cursor:pointer;transition:all .3s;letter-spacing:.08em;
-}
-.btn-save:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(34,197,94,.4)}
-.btn-logout{
-  padding:.5rem 1rem;border-radius:8px;
-  border:1px solid rgba(239,68,68,.3);
-  background:rgba(239,68,68,.08);
-  color:var(--red);cursor:pointer;font-family:'Cinzel',serif;
-  font-size:.75rem;transition:all .3s;
-}
-.btn-logout:hover{background:rgba(239,68,68,.15)}
+#adminPanel.vis{display:flex;flex-direction:column;min-height:100vh}
+.ah{position:sticky;top:0;z-index:100;background:rgba(8,12,24,.96);border-bottom:1px solid var(--bor);padding:.8rem 1.5rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;backdrop-filter:blur(10px)}
+.ab{font-size:.9rem;letter-spacing:.1em;background:linear-gradient(135deg,var(--aura),var(--aura2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.tabs{display:flex;gap:.3rem;flex-wrap:wrap;flex:1}
+.tab{padding:.4rem .9rem;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--mu);cursor:pointer;font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.08em;transition:all .25s;white-space:nowrap}
+.tab:hover{color:var(--text);border-color:var(--bor)}
+.tab.on{background:rgba(77,184,255,.1);border-color:var(--aura);color:var(--aura)}
+.lang-tog{display:flex;gap:.2rem;background:rgba(255,255,255,.05);border-radius:20px;padding:.2rem}
+.lang-b{border:none;cursor:pointer;padding:.25rem .65rem;border-radius:16px;font-size:.7rem;font-weight:700;transition:all .25s;background:transparent;color:var(--mu)}
+.lang-b.on{background:var(--aura);color:#000}
+.save-b{padding:.45rem 1.2rem;border-radius:8px;border:none;background:var(--green);color:#000;font-family:'Cinzel',serif;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .25s;white-space:nowrap}
+.save-b:hover{transform:scale(1.05);box-shadow:0 4px 14px rgba(34,197,94,.4)}
+.out-b{padding:.45rem .9rem;border-radius:8px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:var(--red);cursor:pointer;font-family:'Cinzel',serif;font-size:.72rem;transition:all .25s}
 
-/* ─── ADMIN BODY ─── */
-.admin-body{
-  display:flex;flex:1;
-  max-width:1400px;margin:0 auto;width:100%;
-  padding:2rem;gap:2rem;
-}
-.tab-content{display:none;width:100%}
-.tab-content.active{display:block}
+/* BODY */
+.abody{max-width:1400px;margin:0 auto;width:100%;padding:1.5rem}
+.tc{display:none;width:100%}
+.tc.on{display:block}
 
-/* ─── CARDS ─── */
-.admin-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:16px;padding:1.8rem;margin-bottom:1.5rem;
-}
-.admin-card-title{
-  font-size:.85rem;letter-spacing:.15em;color:var(--aura);
-  text-transform:uppercase;margin-bottom:1.5rem;
-  padding-bottom:.8rem;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:.6rem;
-}
-.field-row{
-  display:grid;grid-template-columns:160px 1fr;gap:1rem;
-  align-items:start;margin-bottom:1rem;
-}
-.field-label{
-  font-size:.78rem;color:var(--muted);letter-spacing:.1em;
-  text-transform:uppercase;padding-top:.7rem;
-}
-.field-input,.field-textarea{
-  width:100%;padding:.7rem 1rem;
-  background:rgba(255,255,255,.03);
-  border:1px solid var(--border);border-radius:10px;
-  color:var(--text);font-family:JetBrains Mono,monospace;
-  font-size:.9rem;transition:border-color .3s;
-  resize:vertical;
-}
-.field-input:focus,.field-textarea:focus{outline:none;border-color:var(--aura)}
-.field-textarea{min-height:80px}
-.emoji-picker{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}
-.emoji-opt{
-  width:36px;height:36px;border-radius:8px;border:1px solid var(--border);
-  background:rgba(255,255,255,.03);cursor:pointer;font-size:1.1rem;
-  display:flex;align-items:center;justify-content:center;transition:all .2s;
-}
-.emoji-opt:hover,.emoji-opt.selected{border-color:var(--aura);background:rgba(77,184,255,.1)}
+/* CARDS */
+.card{background:var(--sur);border:1px solid var(--bor);border-radius:16px;padding:1.6rem;margin-bottom:1.4rem}
+.card-t{font-size:.8rem;letter-spacing:.14em;color:var(--aura);text-transform:uppercase;margin-bottom:1.4rem;padding-bottom:.7rem;border-bottom:1px solid var(--bor);display:flex;align-items:center;gap:.5rem}
+.row{display:grid;grid-template-columns:150px 1fr;gap:.9rem;align-items:start;margin-bottom:.9rem}
+.lbl{font-size:.73rem;color:var(--mu);letter-spacing:.09em;text-transform:uppercase;padding-top:.65rem}
+.fi,.ta{width:100%;padding:.65rem .9rem;background:rgba(255,255,255,.03);border:1px solid var(--bor);border-radius:10px;color:var(--text);font-family:JetBrains Mono,monospace;font-size:.85rem;transition:border-color .3s;resize:vertical}
+.fi:focus,.ta:focus{outline:none;border-color:var(--aura)}
+.ta{min-height:70px}
 
-/* ─── NEN TYPES EDITOR ─── */
-.type-editor-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;
-}
-.type-edit-card{
-  background:rgba(255,255,255,.02);
-  border:1px solid var(--border);border-radius:12px;
-  overflow:hidden;
-}
-.type-edit-header{
-  padding:.8rem 1rem;
-  font-size:.8rem;font-weight:700;letter-spacing:.1em;
-  display:flex;align-items:center;gap:.5rem;
-}
-.type-edit-body{padding:1rem}
-.mini-field{
-  width:100%;padding:.5rem .7rem;margin-bottom:.6rem;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.06);border-radius:8px;
-  color:var(--text);font-size:.82rem;font-family:JetBrains Mono,monospace;
-  transition:border-color .3s;
-}
-.mini-field:focus{outline:none;border-color:var(--aura)}
-.mini-label{font-size:.68rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem}
+/* TYPE EDITOR */
+.type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.type-ec{background:rgba(255,255,255,.02);border:1px solid var(--bor);border-radius:12px;overflow:hidden}
+.type-eh{padding:.7rem 1rem;font-size:.78rem;font-weight:700;letter-spacing:.09em;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--bor)}
+.type-eb{padding:.9rem}
+.mf{width:100%;padding:.45rem .65rem;margin-bottom:.5rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;color:var(--text);font-size:.8rem;font-family:JetBrains Mono,monospace;transition:border-color .25s;resize:vertical}
+.mf:focus{outline:none;border-color:var(--aura)}
+.ml{font-size:.65rem;color:var(--mu);letter-spacing:.09em;text-transform:uppercase;margin-bottom:.25rem}
 
-/* ─── FOOTER LINKS EDITOR ─── */
-.links-list{display:flex;flex-direction:column;gap:.8rem}
-.link-row{
-  display:flex;gap:.8rem;align-items:center;
-  background:rgba(255,255,255,.02);padding:.8rem;
-  border-radius:10px;border:1px solid var(--border);
-}
-.link-row input{flex:1}
-.btn-del{
-  padding:.4rem .8rem;border-radius:8px;border:1px solid rgba(239,68,68,.3);
-  background:rgba(239,68,68,.08);color:var(--red);cursor:pointer;
-  font-size:.8rem;transition:all .2s;white-space:nowrap;
-}
-.btn-del:hover{background:rgba(239,68,68,.2)}
-.btn-add{
-  padding:.6rem 1.2rem;border-radius:8px;
-  border:1px solid rgba(34,197,94,.3);
-  background:rgba(34,197,94,.08);color:var(--green);
-  cursor:pointer;font-family:'Cinzel',serif;font-size:.8rem;
-  transition:all .2s;margin-top:.5rem;
-}
-.btn-add:hover{background:rgba(34,197,94,.15)}
+/* CHARS + AVATAR */
+.chars-section{border-top:1px solid rgba(255,255,255,.06);margin-top:.6rem;padding-top:.6rem}
+.char-item{background:rgba(255,255,255,.02);border-radius:8px;padding:.7rem;margin-bottom:.6rem;border:1px solid rgba(255,255,255,.04)}
+.char-header{display:flex;align-items:center;gap:.8rem;margin-bottom:.5rem}
+.char-avatar-preview{width:44px;height:44px;border-radius:50%;border:2px solid var(--bor);overflow:hidden;flex-shrink:0;background:rgba(77,184,255,.08);display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.char-avatar-preview img{width:100%;height:100%;object-fit:cover}
+.av-upload-row{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-top:.4rem}
+.av-btn{padding:.3rem .8rem;border-radius:7px;border:1px solid var(--bor);background:rgba(255,255,255,.03);color:var(--mu);cursor:pointer;font-size:.72rem;font-family:'Cinzel',serif;transition:all .25s}
+.av-btn:hover{border-color:var(--aura);color:var(--aura)}
+.av-url-in{flex:1;min-width:160px;padding:.3rem .6rem;background:rgba(255,255,255,.03);border:1px solid var(--bor);border-radius:7px;color:var(--text);font-size:.75rem;font-family:JetBrains Mono,monospace}
+.av-url-in:focus{outline:none;border-color:var(--aura)}
+.av-apply{padding:.3rem .7rem;border-radius:7px;border:none;background:var(--aura);color:#000;font-size:.72rem;font-family:'Cinzel',serif;font-weight:700;cursor:pointer;transition:all .25s}
+.av-apply:hover{transform:scale(1.05)}
 
-/* ─── PREVIEW PANEL ─── */
-.preview-bar{
-  background:rgba(240,192,96,.06);
-  border:1px solid rgba(240,192,96,.2);
-  border-radius:12px;padding:1rem 1.5rem;
-  margin-bottom:1.5rem;
-  display:flex;align-items:center;gap:1rem;
-  font-size:.85rem;color:var(--gold);
-}
-.preview-btn{
-  padding:.5rem 1.2rem;border-radius:8px;border:1px solid var(--gold);
-  background:transparent;color:var(--gold);cursor:pointer;
-  font-family:'Cinzel',serif;font-size:.8rem;transition:all .3s;
-  margin-left:auto;
-}
-.preview-btn:hover{background:rgba(240,192,96,.1)}
+/* CONTENT EDITOR (full text) */
+.content-editor{border:1px solid var(--bor);border-radius:10px;overflow:hidden}
+.ce-toolbar{display:flex;gap:.4rem;padding:.6rem;background:rgba(255,255,255,.03);border-bottom:1px solid var(--bor);flex-wrap:wrap}
+.ce-btn{padding:.3rem .6rem;border-radius:6px;border:1px solid var(--bor);background:transparent;color:var(--mu);cursor:pointer;font-size:.72rem;transition:all .2s}
+.ce-btn:hover{border-color:var(--aura);color:var(--aura)}
 
-/* ─── STATUS TOAST ─── */
-#toast{
-  position:fixed;bottom:2rem;right:2rem;
-  background:var(--green);color:#000;
-  padding:.8rem 1.5rem;border-radius:10px;
-  font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;
-  transform:translateY(100px);opacity:0;
-  transition:all .4s;z-index:9999;
-}
-#toast.show{transform:translateY(0);opacity:1}
-#toast.error{background:var(--red);color:#fff}
+/* FOOTER LINKS */
+.link-row{display:flex;gap:.7rem;align-items:center;background:rgba(255,255,255,.02);padding:.7rem;border-radius:10px;border:1px solid var(--bor);margin-bottom:.7rem;flex-wrap:wrap}
+.link-row .fi{flex:1;min-width:100px}
+.del-b{padding:.35rem .7rem;border-radius:7px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:var(--red);cursor:pointer;font-size:.75rem;transition:all .2s}
+.del-b:hover{background:rgba(239,68,68,.2)}
+.add-b{padding:.55rem 1.2rem;border-radius:8px;border:1px solid rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:var(--green);cursor:pointer;font-family:'Cinzel',serif;font-size:.78rem;transition:all .2s}
+.add-b:hover{background:rgba(34,197,94,.15)}
 
-/* ─── STATS ─── */
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
-.stat-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:12px;padding:1.2rem;text-align:center;
-}
-.stat-num{font-size:2rem;font-weight:700;color:var(--aura)}
-.stat-label{font-size:.72rem;color:var(--muted);letter-spacing:.1em;margin-top:.3rem}
+/* QUIZ EDITOR */
+.qitem{background:rgba(255,255,255,.02);border:1px solid var(--bor);border-radius:12px;padding:1.1rem;margin-bottom:.9rem}
+.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin:.5rem 0}
 
-/* ─── COLOR PICKER ─── */
-.color-swatch{
-  display:inline-block;width:24px;height:24px;border-radius:50%;
-  border:2px solid var(--border);cursor:pointer;vertical-align:middle;
-  margin-right:.5rem;
-}
-input[type=color]{opacity:0;position:absolute;pointer-events:none}
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.stat{background:var(--sur);border:1px solid var(--bor);border-radius:12px;padding:1.1rem;text-align:center}
+.stat .n{font-size:2rem;font-weight:700;color:var(--aura)}
+.stat .l{font-size:.68rem;color:var(--mu);letter-spacing:.1em;margin-top:.2rem}
+
+/* TOAST */
+#toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--green);color:#000;padding:.7rem 1.4rem;border-radius:10px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;transform:translateY(80px);opacity:0;transition:all .35s;z-index:9999}
+#toast.sh{transform:translateY(0);opacity:1}
+#toast.er{background:var(--red);color:#fff}
+
+/* PREVIEW BAR */
+.prev-bar{background:rgba(240,192,96,.06);border:1px solid rgba(240,192,96,.2);border-radius:12px;padding:.9rem 1.4rem;margin-bottom:1.4rem;display:flex;align-items:center;gap:.8rem;font-size:.82rem;color:var(--gold)}
+.prev-btn{padding:.45rem 1.1rem;border-radius:8px;border:1px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer;font-family:'Cinzel',serif;font-size:.75rem;transition:all .25s;margin-left:auto}
+.prev-btn:hover{background:rgba(240,192,96,.1)}
+.color-sw{display:inline-block;width:22px;height:22px;border-radius:50%;border:2px solid var(--bor);cursor:pointer;vertical-align:middle;margin-right:.4rem}
 
 @media(max-width:900px){
-  .admin-body{flex-direction:column;padding:1rem}
-  .type-editor-grid{grid-template-columns:1fr 1fr}
-  .stats-row{grid-template-columns:1fr 1fr}
-  .field-row{grid-template-columns:1fr}
-  .admin-nav-tabs{flex-wrap:wrap;gap:.3rem}
+  .type-grid{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .row{grid-template-columns:1fr}
+  .ah{gap:.5rem}
 }
 @media(max-width:600px){
-  .type-editor-grid{grid-template-columns:1fr}
-  .stats-row{grid-template-columns:1fr 1fr}
-  .admin-header{flex-wrap:wrap;gap:.8rem}
+  .type-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .tabs{gap:.2rem}
+  .tab{font-size:.65rem;padding:.35rem .65rem}
 }
-
-  /* ─── ADMIN LANG TOGGLE ─── */
-  .admin-lang-toggle{display:flex;gap:.3rem;background:rgba(255,255,255,.05);border-radius:20px;padding:.2rem}
-  .admin-lang-btn{border:none;cursor:pointer;padding:.28rem .7rem;border-radius:16px;font-size:.72rem;font-weight:700;transition:all .3s;background:transparent;color:var(--muted);font-family:'Cinzel',serif}
-  .admin-lang-btn.active{background:var(--aura);color:#000}
-  body.admin-ar{direction:rtl;font-family:'Noto Sans Arabic','Cinzel',serif}
-  body.admin-ar .field-label{text-align:right}
-  body.admin-ar .admin-brand{font-family:'Noto Sans Arabic',serif}
-  body.admin-ar .login-sub{font-family:'Noto Sans Arabic',serif}
-  .en-a{display:inline}.ar-a{display:none}
-  body.admin-ar .en-a{display:none}
-  body.admin-ar .ar-a{display:inline}
-  .en-ablock{display:block}.ar-ablock{display:none}
-  body.admin-ar .en-ablock{display:none}
-  body.admin-ar .ar-ablock{display:block}
 </style>
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
+<!-- LOGIN -->
 <div id="loginScreen">
-  <div class="login-box">
-    <div class="login-icon">⚙️</div>
-    <div class="login-title"><span class="en-a">ADMIN PANEL</span><span class="ar-a">لوحة التحكم</span></div>
-    <div class="login-sub">عالم النين — World of Nen</div>
-    <input type="password" class="login-field" id="pwInput" placeholder="Enter admin password / أدخل كلمة المرور" onkeydown="if(event.key==='Enter')login()">
-    <button class="login-btn" onclick="login()"><span class="en-a">ACCESS CONTROL ROOM</span><span class="ar-a">دخول لوحة التحكم</span></button>
-    <div class="login-error" id="loginError"></div>
-    <div class="login-hint">
-      🔒 <span class="en-a">This panel is password protected.</span><span class="ar-a">هذه اللوحة محمية بكلمة مرور.</span><br>
-      <span class="en-a">Only the site owner can access this page.</span><span class="ar-a">فقط مالك الموقع يستطيع الدخول.</span><br>
-      <span class="en-a">Default password:</span><span class="ar-a">كلمة المرور الافتراضية:</span> <b style="color:var(--aura)">nen-admin-2025</b><br>
-      <span style="color:var(--orange)">⚠ <span class="en-a">Change your password after first login!</span><span class="ar-a">غيّر كلمة مرورك بعد أول تسجيل دخول!</span></span>
-    </div>
+  <div class="lb">
+    <div class="li">⚙️</div>
+    <div class="lt"><span class="en-a">ADMIN PANEL</span><span class="ar-a">لوحة التحكم</span></div>
+    <div class="ls"><span class="en-a">NEN WORLD — CONTROL ROOM</span><span class="ar-a">عالم النين — غرفة التحكم</span></div>
+    <input type="password" class="lf" id="pwIn" placeholder="Password / كلمة المرور" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="lbtn" onclick="doLogin()"><span class="en-a">ACCESS CONTROL ROOM</span><span class="ar-a">دخول لوحة التحكم</span></button>
+    <div class="lerr" id="lErr"></div>
+    <div class="lhint"><b style="color:var(--aura)">Default password:</b> nen-admin-2025<br><span style="color:var(--orange)">⚠ Change after first login!</span></div>
   </div>
 </div>
 
 <!-- ADMIN PANEL -->
 <div id="adminPanel">
 
-  <!-- Header -->
-  <div class="admin-header">
-    <div class="admin-brand">
-      <span class="en-a">⚙ NEN WORLD — ADMIN</span>
-      <span class="ar-a">⚙ عالم النين — لوحة التحكم</span>
+  <!-- HEADER -->
+  <div class="ah">
+    <div class="ab">⚙ <span class="en-a">NEN ADMIN</span><span class="ar-a">لوحة النين</span></div>
+    <div class="tabs">
+      <button class="tab on" onclick="goTab('dash')">📊 <span class="en-a">Dashboard</span><span class="ar-a">الرئيسية</span></button>
+      <button class="tab" onclick="goTab('hero')">🏠 <span class="en-a">Hero</span><span class="ar-a">الهيرو</span></button>
+      <button class="tab" onclick="goTab('sects')">📄 <span class="en-a">Sections</span><span class="ar-a">الأقسام</span></button>
+      <button class="tab" onclick="goTab('types')">🔷 <span class="en-a">Nen Types</span><span class="ar-a">أنواع النين</span></button>
+      <button class="tab" onclick="goTab('groups')">👥 <span class="en-a">Groups & Chars</span><span class="ar-a">المجموعات</span></button>
+      <button class="tab" onclick="goTab('quiz')">❓ <span class="en-a">Quiz</span><span class="ar-a">الاختبار</span></button>
+      <button class="tab" onclick="goTab('footer')">🔗 <span class="en-a">Footer</span><span class="ar-a">الفوتر</span></button>
+      <button class="tab" onclick="goTab('settings')">⚙ <span class="en-a">Settings</span><span class="ar-a">الإعدادات</span></button>
     </div>
-    <div class="admin-nav-tabs">
-      <button class="tab-btn active" onclick="switchTab('dashboard')">
-        <span class="en-a">📊 Dashboard</span><span class="ar-a">📊 لوحة الرئيسية</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('hero')">
-        <span class="en-a">🏠 Hero</span><span class="ar-a">🏠 الهيرو</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('sections')">
-        <span class="en-a">📄 Sections</span><span class="ar-a">📄 الأقسام</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('types')">
-        <span class="en-a">🔷 Nen Types</span><span class="ar-a">🔷 أنواع النين</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('footer')">
-        <span class="en-a">🔗 Footer</span><span class="ar-a">🔗 الفوتر</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('quiz')">
-        <span class="en-a">❓ Quiz</span><span class="ar-a">❓ الاختبار</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('settings')">
-        <span class="en-a">⚙ Settings</span><span class="ar-a">⚙ الإعدادات</span>
-      </button>
+    <div class="lang-tog">
+      <button class="lang-b on" id="lbEN" onclick="setALang('en')">EN</button>
+      <button class="lang-b" id="lbAR" onclick="setALang('ar')">عر</button>
     </div>
-    <div class="admin-actions">
-      <div class="admin-lang-toggle">
-        <button class="admin-lang-btn active" id="aBtn-en" onclick="setAdminLang('en')">EN</button>
-        <button class="admin-lang-btn" id="aBtn-ar" onclick="setAdminLang('ar')">عر</button>
-      </div>
-      <button class="btn-save" onclick="saveAll()">
-        <span class="en-a">💾 SAVE ALL</span><span class="ar-a">💾 حفظ الكل</span>
-      </button>
-      <button class="btn-logout" onclick="logout()">
-        <span class="en-a">Exit</span><span class="ar-a">خروج</span>
-      </button>
-    </div>
+    <button class="save-b" onclick="doSave()">💾 <span class="en-a">Save All</span><span class="ar-a">حفظ الكل</span></button>
+    <button class="out-b" onclick="doLogout()"><span class="en-a">Exit</span><span class="ar-a">خروج</span></button>
   </div>
 
-  <!-- Body -->
-  <div class="admin-body">
+  <div class="abody">
 
-    <!-- DASHBOARD TAB -->
-    <div class="tab-content active" id="tab-dashboard">
-      <div class="stats-row">
-        <div class="stat-card"><div class="stat-num">6</div><div class="stat-label"><span class="en-a">Nen Types</span><span class="ar-a">أنواع النين</span></div></div>
-        <div class="stat-card"><div class="stat-num">10</div><div class="stat-label"><span class="en-a">Techniques</span><span class="ar-a">التقنيات</span></div></div>
-        <div class="stat-card"><div class="stat-num">8</div><div class="stat-label"><span class="en-a">Quiz Questions</span><span class="ar-a">أسئلة الاختبار</span></div></div>
-        <div class="stat-card"><div class="stat-num" id="linksCount">0</div><div class="stat-label">Footer Links</div></div>
+    <!-- DASHBOARD -->
+    <div class="tc on" id="tc-dash">
+      <div class="stats">
+        <div class="stat"><div class="n">6</div><div class="l"><span class="en-a">Nen Types</span><span class="ar-a">أنواع النين</span></div></div>
+        <div class="stat"><div class="n">5</div><div class="l"><span class="en-a">Groups</span><span class="ar-a">المجموعات</span></div></div>
+        <div class="stat"><div class="n" id="dQ">0</div><div class="l"><span class="en-a">Quiz Questions</span><span class="ar-a">أسئلة الاختبار</span></div></div>
+        <div class="stat"><div class="n" id="dL">0</div><div class="l"><span class="en-a">Footer Links</span><span class="ar-a">روابط الفوتر</span></div></div>
       </div>
-      <div class="preview-bar">
-        🌟 Your changes are saved locally and will apply when you click "Save All"
-        <a href="index.html" target="_blank"><button class="preview-btn">👁 Preview Site</button></a>
+      <div class="prev-bar">
+        🌟 <span class="en-a">Changes are saved locally. Click Save All to download config file.</span>
+        <span class="ar-a">التغييرات محفوظة محلياً. اضغط حفظ الكل لتنزيل ملف الإعدادات.</span>
+        <a href="index.html" target="_blank"><button class="prev-btn"><span class="en-a">👁 Preview Site</span><span class="ar-a">👁 معاينة الموقع</span></button></a>
       </div>
-      <div class="admin-card">
-        <div class="admin-card-title">📋 Quick Guide</div>
-        <div style="color:var(--muted);font-size:.88rem;line-height:2;font-family:JetBrains Mono,monospace">
-          <p class="en-ablock">1. <span style="color:var(--aura)">Hero Tab</span> → Edit page title, subtitle, badge text</p>
-          <p class="ar-ablock" dir="rtl">١. تبويب <span style="color:var(--aura)">الهيرو</span> ← تعديل العنوان والوصف</p>
-          <p class="en-ablock">2. <span style="color:var(--aura)">Sections Tab</span> → Edit section headings and descriptions</p>
-          <p class="ar-ablock" dir="rtl">٢. تبويب <span style="color:var(--aura)">الأقسام</span> ← تعديل عناوين الأقسام</p>
-          <p class="en-ablock">3. <span style="color:var(--aura)">Nen Types Tab</span> → Edit names, descriptions, character abilities for each type</p>
-          <p class="ar-ablock" dir="rtl">٣. تبويب <span style="color:var(--aura)">أنواع النين</span> ← تعديل الأسماء والأوصاف والشخصيات</p>
-          <p class="en-ablock">4. <span style="color:var(--aura)">Footer Tab</span> → Add/remove your social links, portfolio, etc.</p>
-          <p class="ar-ablock" dir="rtl">٤. تبويب <span style="color:var(--aura)">الفوتر</span> ← إضافة روابطك الشخصية</p>
-          <p class="en-ablock">5. <span style="color:var(--aura)">Settings Tab</span> → Change admin password, site colors</p>
-          <p class="ar-ablock" dir="rtl">٥. تبويب <span style="color:var(--aura)">الإعدادات</span> ← تغيير كلمة المرور والألوان</p>
-          <p class="en-ablock">6. Click <span style="color:var(--green)">💾 SAVE ALL</span> → Download updated <b>index.html</b> to replace on your host</p>
-          <p class="ar-ablock" dir="rtl">٦. اضغط <span style="color:var(--green)">💾 حفظ الكل</span> ← حمّل ملف <b>nen-config.js</b> وارفعه</p>
-        </div>
-      </div>
-      <div class="admin-card">
-        <div class="admin-card-title">🚀 Deployment Guide</div>
-        <div style="color:var(--muted);font-size:.85rem;line-height:2;font-family:JetBrains Mono,monospace">
-          <p><b style="color:var(--gold)">GitHub + Vercel:</b></p>
-          <p>1. Create a GitHub repo (e.g. <span style="color:var(--aura)">nen-world</span>)</p>
-          <p>2. Upload both <b>index.html</b> and <b>admin.html</b></p>
-          <p>3. Go to <a href="https://vercel.com" target="_blank" style="color:var(--aura)">vercel.com</a> → Import your repo</p>
-          <p>4. Deploy — your site will be live in seconds!</p>
-          <p style="margin-top:.5rem"><b style="color:var(--gold)">Security:</b></p>
-          <p>• <b>admin.html</b> is only accessible if someone knows the URL</p>
-          <p>• Password is checked client-side — ideal for personal projects</p>
-          <p>• For higher security: add Vercel Password Protection (Pro plan) or rename admin.html</p>
+      <div class="card">
+        <div class="card-t">📋 <span class="en-a">Quick Guide</span><span class="ar-a">دليل سريع</span></div>
+        <div style="color:var(--mu);font-size:.85rem;line-height:2.2;font-family:JetBrains Mono,monospace">
+          <p class="en-a">1. <span style="color:var(--aura)">Hero</span> → Edit title, subtitle, badge, scroll hint</p>
+          <p class="ar-a">١. <span style="color:var(--aura)">الهيرو</span> ← عدّل العنوان والوصف والشارة</p>
+          <p class="en-a">2. <span style="color:var(--aura)">Sections</span> → Edit all section headings and descriptions</p>
+          <p class="ar-a">٢. <span style="color:var(--aura)">الأقسام</span> ← عدّل عناوين جميع الأقسام وأوصافها</p>
+          <p class="en-a">3. <span style="color:var(--aura)">Nen Types</span> → Edit type names, descriptions, water test, personality, characters + upload character images</p>
+          <p class="ar-a">٣. <span style="color:var(--aura)">أنواع النين</span> ← عدّل الأسماء والأوصاف واختبار الماء والشخصية والشخصيات + ارفع صور الشخصيات</p>
+          <p class="en-a">4. <span style="color:var(--aura)">Groups & Chars</span> → Upload/change character images for all groups (Zoldyck, Troupe, Zodiacs, etc.)</p>
+          <p class="ar-a">٤. <span style="color:var(--aura)">المجموعات</span> ← ارفع/غيّر صور الشخصيات لجميع المجموعات</p>
+          <p class="en-a">5. <span style="color:var(--aura)">Quiz</span> → Add/edit questions (8 random shown per session)</p>
+          <p class="ar-a">٥. <span style="color:var(--aura)">الاختبار</span> ← أضف/عدّل الأسئلة (8 عشوائية في كل جلسة)</p>
+          <p class="en-a">6. <span style="color:var(--aura)">Footer</span> → Add your social/portfolio links</p>
+          <p class="ar-a">٦. <span style="color:var(--aura)">الفوتر</span> ← أضف روابط سوشيال/بورتفوليو</p>
+          <p class="en-a">7. Click <span style="color:var(--green)">💾 Save All</span> → Download <b>nen-config.js</b> → upload to GitHub → Vercel auto-deploys</p>
+          <p class="ar-a">٧. اضغط <span style="color:var(--green)">💾 حفظ الكل</span> ← نزّل <b>nen-config.js</b> ← ارفعه على GitHub ← Vercel يحدّث تلقائياً</p>
         </div>
       </div>
     </div>
 
     <!-- HERO TAB -->
-    <div class="tab-content" id="tab-hero">
-      <div class="admin-card">
-        <div class="admin-card-title">🏠 <span class="en-a">Hero Section</span><span class="ar-a">قسم الهيرو</span></div>
-        <div class="field-row">
-          <div class="field-label">Badge (EN)</div>
-          <input class="field-input" id="hero_badge_en" value="World of Nen — Interactive Guide">
-        </div>
-        <div class="field-row">
-          <div class="field-label">Badge (AR)</div>
-          <input class="field-input" id="hero_badge_ar" value="عالم النين — دليل تفاعلي">
-        </div>
-        <div class="field-row">
-          <div class="field-label">Title (EN)</div>
-          <input class="field-input" id="hero_title_en" value="World of Nen">
-        </div>
-        <div class="field-row">
-          <div class="field-label">Title (AR)</div>
-          <input class="field-input" id="hero_title_ar" value="عالم النين">
-        </div>
-        <div class="field-row">
-          <div class="field-label">Subtitle (EN)</div>
-          <textarea class="field-textarea" id="hero_sub_en">The art of manipulating life energy — aura — to transcend human limits. Discover the most complex power system in anime.</textarea>
-        </div>
-        <div class="field-row">
-          <div class="field-label">Subtitle (AR)</div>
-          <textarea class="field-textarea" id="hero_sub_ar">فن التحكم في طاقة الحياة — الأورا — لتجاوز الحدود البشرية. اكتشف أعقد نظام قوى في عالم الأنمي.</textarea>
-        </div>
-        <div class="field-row">
-          <div class="field-label">Scroll Hint (EN)</div>
-          <input class="field-input" id="hero_scroll_en" value="↓ Scroll to explore ↓">
-        </div>
-        <div class="field-row">
-          <div class="field-label">Scroll Hint (AR)</div>
-          <input class="field-input" id="hero_scroll_ar" value="↓ اسحب لاستكشاف ↓">
-        </div>
+    <div class="tc" id="tc-hero">
+      <div class="card">
+        <div class="card-t">🏠 <span class="en-a">Hero Section</span><span class="ar-a">قسم الهيرو</span></div>
+        <div class="row"><div class="lbl">Badge EN</div><input class="fi" id="hero_badge_en" value="World of Nen — Interactive Guide"></div>
+        <div class="row"><div class="lbl">Badge AR</div><input class="fi" id="hero_badge_ar" value="عالم النين — دليل تفاعلي"></div>
+        <div class="row"><div class="lbl">Title EN</div><input class="fi" id="hero_title_en" value="World of Nen"></div>
+        <div class="row"><div class="lbl">Title AR</div><input class="fi" id="hero_title_ar" value="عالم النين"></div>
+        <div class="row"><div class="lbl">Subtitle EN</div><textarea class="ta" id="hero_sub_en">The art of manipulating life energy — aura — to transcend human limits. Discover the most complex power system in anime.</textarea></div>
+        <div class="row"><div class="lbl">Subtitle AR</div><textarea class="ta" id="hero_sub_ar">فن التحكم في طاقة الحياة — الأورا — لتجاوز الحدود البشرية. اكتشف أعقد نظام قوى في عالم الأنمي.</textarea></div>
+        <div class="row"><div class="lbl">Scroll Hint EN</div><input class="fi" id="hero_scroll_en" value="↓ Scroll to explore ↓"></div>
+        <div class="row"><div class="lbl">Scroll Hint AR</div><input class="fi" id="hero_scroll_ar" value="↓ اسحب لاستكشاف ↓"></div>
       </div>
-
-      <div class="admin-card">
-        <div class="admin-card-title">🖼 <span class="en-a">Logo Settings</span><span class="ar-a">إعدادات الشعار</span></div>
-        <div class="field-row">
-          <div class="field-label">Logo Image</div>
+      <div class="card">
+        <div class="card-t">🖼 <span class="en-a">Logo Image</span><span class="ar-a">صورة الشعار</span></div>
+        <div class="row">
+          <div class="lbl"><span class="en-a">Upload Logo</span><span class="ar-a">رفع الشعار</span></div>
           <div>
-            <input type="file" id="logoUpload" accept="image/*" onchange="handleLogoUpload(this)" style="color:var(--muted);font-size:.85rem">
-            <p style="color:var(--muted);font-size:.78rem;margin-top:.4rem">Upload a new logo (PNG with transparent background recommended)</p>
+            <input type="file" id="logoFile" accept="image/*" style="display:none" onchange="handleLogoUpload(this)">
+            <button class="av-btn" onclick="document.getElementById('logoFile').click()">📁 <span class="en-a">Upload from device</span><span class="ar-a">رفع من الجهاز</span></button>
+            <div style="margin-top:.5rem;display:flex;gap:.5rem;align-items:center">
+              <input class="av-url-in" id="logo_url" placeholder="Or paste image URL...">
+              <button class="av-apply" onclick="applyLogoUrl()"><span class="en-a">Apply</span><span class="ar-a">تطبيق</span></button>
+            </div>
+            <div id="logo_preview" style="margin-top:.8rem;max-width:280px;border-radius:8px;overflow:hidden;border:1px solid var(--bor)"></div>
           </div>
         </div>
-        <div class="field-row">
-          <div class="field-label">Logo Width</div>
-          <input class="field-input" id="logo_width" value="clamp(240px,45vw,520px)" placeholder="e.g. 400px or clamp(240px,40vw,480px)">
+      </div>
+      <div class="card">
+        <div class="card-t">📢 <span class="en-a">Announcement Banner</span><span class="ar-a">بانر الإعلانات</span></div>
+        <div class="row">
+          <div class="lbl"><span class="en-a">Enable</span><span class="ar-a">تفعيل</span></div>
+          <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer;padding-top:.7rem">
+            <input type="checkbox" id="bannerEnabled" style="width:16px;height:16px">
+            <span style="color:var(--mu);font-size:.85rem"><span class="en-a">Show banner at top of site</span><span class="ar-a">إظهار البانر في أعلى الموقع</span></span>
+          </label>
+        </div>
+        <div class="row"><div class="lbl">Text EN</div><input class="fi" id="bannerTextEn" placeholder="e.g. New section added!"></div>
+        <div class="row"><div class="lbl">Text AR</div><input class="fi" id="bannerTextAr" placeholder="مثال: تم إضافة قسم جديد!"></div>
+        <div class="row">
+          <div class="lbl"><span class="en-a">Color</span><span class="ar-a">اللون</span></div>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap;padding-top:.5rem">
+            <span class="color-sw" style="background:#4db8ff" onclick="setBannerColor('#4db8ff',this)" id="bc1"></span>
+            <span class="color-sw" style="background:#f0c060" onclick="setBannerColor('#f0c060',this)" id="bc2"></span>
+            <span class="color-sw" style="background:#22c55e" onclick="setBannerColor('#22c55e',this)" id="bc3"></span>
+            <span class="color-sw" style="background:#ef4444" onclick="setBannerColor('#ef4444',this)" id="bc4"></span>
+            <span class="color-sw" style="background:#a78bfa" onclick="setBannerColor('#a78bfa',this)" id="bc5"></span>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- SECTIONS TAB -->
-    <div class="tab-content" id="tab-sections">
-      <div class="admin-card">
-        <div class="admin-card-title">📄 Section Titles & Intros</div>
-
-        <div style="margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border)">
-          <p style="color:var(--aura);font-size:.8rem;letter-spacing:.1em;margin-bottom:.8rem">WHAT IS NEN?</p>
-          <div class="field-row">
-            <div class="field-label">Title (EN)</div>
-            <input class="field-input" id="s_whatnen_en" value="What is Nen?">
-          </div>
-          <div class="field-row">
-            <div class="field-label">Title (AR)</div>
-            <input class="field-input" id="s_whatnen_ar" value="ما هو النين؟">
-          </div>
-          <div class="field-row">
-            <div class="field-label">Subtitle (EN)</div>
-            <input class="field-input" id="s_whatnen_sub_en" value="念 — The Art of Aura">
-          </div>
-          <div class="field-row">
-            <div class="field-label">Subtitle (AR)</div>
-            <input class="field-input" id="s_whatnen_sub_ar" value="念 — فن الأورا">
-          </div>
-        </div>
-
-        <div style="margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border)">
-          <p style="color:var(--aura);font-size:.8rem;letter-spacing:.1em;margin-bottom:.8rem">FOUR PRINCIPLES</p>
-          <div class="field-row">
-            <div class="field-label">Title (EN)</div>
-            <input class="field-input" id="s_principles_en" value="The Four Major Principles">
-          </div>
-          <div class="field-row">
-            <div class="field-label">Title (AR)</div>
-            <input class="field-input" id="s_principles_ar" value="المبادئ الأربعة الرئيسية">
-          </div>
-        </div>
-
-        <div style="margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border)">
-          <p style="color:var(--aura);font-size:.8rem;letter-spacing:.1em;margin-bottom:.8rem">BODY TECHNIQUES</p>
-          <div class="field-row">
-            <div class="field-label">Title (EN)</div>
-            <input class="field-input" id="s_body_en" value="Techniques Visualized on the Body">
-          </div>
-          <div class="field-row">
-            <div class="field-label">Title (AR)</div>
-            <input class="field-input" id="s_body_ar" value="التقنيات مُجسَّدة على الجسم">
-          </div>
-        </div>
-
-        <div style="margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border)">
-          <p style="color:var(--aura);font-size:.8rem;letter-spacing:.1em;margin-bottom:.8rem">NEN TYPES</p>
-          <div class="field-row">
-            <div class="field-label">Title (EN)</div>
-            <input class="field-input" id="s_types_en" value="The Six Nen Types">
-          </div>
-          <div class="field-row">
-            <div class="field-label">Title (AR)</div>
-            <input class="field-input" id="s_types_ar" value="أنواع النين الستة">
-          </div>
-        </div>
-
-        <div>
-          <p style="color:var(--aura);font-size:.8rem;letter-spacing:.1em;margin-bottom:.8rem">RESTRICTIONS & VOWS</p>
-          <div class="field-row">
-            <div class="field-label">Title (EN)</div>
-            <input class="field-input" id="s_restrict_en" value="Restrictions & Vows">
-          </div>
-          <div class="field-row">
-            <div class="field-label">Title (AR)</div>
-            <input class="field-input" id="s_restrict_ar" value="القيود والنذور">
-          </div>
-        </div>
-      </div>
-
-      <div class="admin-card">
-        <div class="admin-card-title">✏️ <span class="en-a">Custom Announcement Banner</span><span class="ar-a">بانر الإعلانات</span></div>
-        <div class="field-row">
-          <div class="field-label">Enable Banner</div>
-          <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer">
-            <input type="checkbox" id="bannerEnabled" style="width:16px;height:16px">
-            <span style="color:var(--muted);font-size:.85rem">Show announcement banner at top of site</span>
-          </label>
-        </div>
-        <div class="field-row">
-          <div class="field-label">Banner Text (EN)</div>
-          <input class="field-input" id="bannerTextEn" placeholder="e.g. New section added! Check out the Chimera Ant arc guide">
-        </div>
-        <div class="field-row">
-          <div class="field-label">Banner Text (AR)</div>
-          <input class="field-input" id="bannerTextAr" placeholder="مثال: تم إضافة قسم جديد!">
-        </div>
-        <div class="field-row">
-          <div class="field-label">Banner Color</div>
-          <div>
-            <div class="emoji-picker" id="bannerColorPicker">
-              <div class="emoji-opt selected" style="background:rgba(77,184,255,.15);border-color:var(--aura)" onclick="selectBannerColor('#4db8ff',this)">🔵</div>
-              <div class="emoji-opt" style="background:rgba(240,192,96,.1)" onclick="selectBannerColor('#f0c060',this)">🟡</div>
-              <div class="emoji-opt" style="background:rgba(34,197,94,.1)" onclick="selectBannerColor('#22c55e',this)">🟢</div>
-              <div class="emoji-opt" style="background:rgba(239,68,68,.1)" onclick="selectBannerColor('#ef4444',this)">🔴</div>
-              <div class="emoji-opt" style="background:rgba(167,139,250,.1)" onclick="selectBannerColor('#a78bfa',this)">🟣</div>
-            </div>
-          </div>
-        </div>
+    <div class="tc" id="tc-sects">
+      <div class="card">
+        <div class="card-t">📄 <span class="en-a">Section Titles & Descriptions</span><span class="ar-a">عناوين الأقسام وأوصافها</span></div>
+        <div id="sectionsEditor"></div>
       </div>
     </div>
 
     <!-- NEN TYPES TAB -->
-    <div class="tab-content" id="tab-types">
-      <div class="admin-card">
-        <div class="admin-card-title">🔷 <span class="en-a">Edit Nen Type Cards</span><span class="ar-a">تعديل بطاقات أنواع النين</span></div>
-        <div class="type-editor-grid" id="typeEditorGrid">
-          <!-- Generated by JS -->
+    <div class="tc" id="tc-types">
+      <div class="card">
+        <div class="card-t">🔷 <span class="en-a">Nen Type Cards — Edit Names, Descriptions, Characters & Images</span><span class="ar-a">بطاقات أنواع النين — تعديل الأسماء والأوصاف والشخصيات والصور</span></div>
+        <div class="type-grid" id="typeGrid"></div>
+      </div>
+    </div>
+
+    <!-- GROUPS & CHARACTERS TAB -->
+    <div class="tc" id="tc-groups">
+      <div class="card">
+        <div class="card-t">👥 <span class="en-a">Character Images — Upload photos for all characters in all groups</span><span class="ar-a">صور الشخصيات — ارفع صور لكل الشخصيات في جميع المجموعات</span></div>
+        <p style="color:var(--mu);font-size:.82rem;margin-bottom:1.2rem;line-height:1.7">
+          <span class="en-a">Upload an image from your device or paste a URL. Images are saved in your browser and applied to the site automatically.</span>
+          <span class="ar-a">ارفع صورة من جهازك أو الصق رابطاً. الصور تُحفظ في متصفحك وتُطبَّق على الموقع تلقائياً.</span>
+        </p>
+        <div id="groupsCharGrid"></div>
+      </div>
+    </div>
+
+    <!-- QUIZ TAB -->
+    <div class="tc" id="tc-quiz">
+      <div class="card">
+        <div class="card-t">❓ <span class="en-a">Quiz Question Bank</span><span class="ar-a">بنك أسئلة الاختبار</span></div>
+        <div style="display:flex;gap:.8rem;margin-bottom:1.1rem;align-items:center">
+          <label style="color:var(--mu);font-size:.8rem"><span class="en-a">Language:</span><span class="ar-a">اللغة:</span></label>
+          <select id="qLang" onchange="renderQuizEditor()" style="padding:.35rem .7rem;background:rgba(255,255,255,.04);border:1px solid var(--bor);border-radius:8px;color:var(--text);font-family:JetBrains Mono,monospace">
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+          </select>
         </div>
+        <div id="qList"></div>
+        <button class="add-b" onclick="addQ()"><span class="en-a">+ Add Question</span><span class="ar-a">+ إضافة سؤال</span></button>
       </div>
     </div>
 
     <!-- FOOTER TAB -->
-    <div class="tab-content" id="tab-footer">
-      <div class="admin-card">
-        <div class="admin-card-title">🔗 <span class="en-a">Footer Links</span><span class="ar-a">روابط الفوتر</span></div>
-        <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.2rem">Add your social media links, portfolio, or other pages. These appear in the footer of the site.</p>
-        <div class="links-list" id="linksList"></div>
-        <button class="btn-add" onclick="addLink()"><span class="en-a">+ Add Link</span><span class="ar-a">+ إضافة رابط</span></button>
+    <div class="tc" id="tc-footer">
+      <div class="card">
+        <div class="card-t">🔗 <span class="en-a">Footer Links</span><span class="ar-a">روابط الفوتر</span></div>
+        <p style="color:var(--mu);font-size:.82rem;margin-bottom:1rem"><span class="en-a">Add your social media, portfolio, or other links to display in the site footer.</span><span class="ar-a">أضف روابطك الاجتماعية أو البورتفوليو لعرضها في فوتر الموقع.</span></p>
+        <div id="linksList"></div>
+        <button class="add-b" onclick="addLink()"><span class="en-a">+ Add Link</span><span class="ar-a">+ إضافة رابط</span></button>
       </div>
-
-      <div class="admin-card">
-        <div class="admin-card-title">📝 <span class="en-a">Footer Text</span><span class="ar-a">نصوص الفوتر</span></div>
-        <div class="field-row">
-          <div class="field-label">Site Name (EN)</div>
-          <input class="field-input" id="footer_name_en" value="World of Nen">
-        </div>
-        <div class="field-row">
-          <div class="field-label">Site Name (AR)</div>
-          <input class="field-input" id="footer_name_ar" value="عالم النين">
-        </div>
-        <div class="field-row">
-          <div class="field-label">Tagline (EN)</div>
-          <input class="field-input" id="footer_tag_en" value="Hunter × Hunter Interactive Guide">
-        </div>
-        <div class="field-row">
-          <div class="field-label">Tagline (AR)</div>
-          <input class="field-input" id="footer_tag_ar" value="دليل هنتر × هنتر التفاعلي">
-        </div>
-        <div class="field-row">
-          <div class="field-label">Credit Line (EN)</div>
-          <input class="field-input" id="footer_credit_en" value="Based on Hunter × Hunter by Yoshihiro Togashi">
-        </div>
-        <div class="field-row">
-          <div class="field-label">Credit Line (AR)</div>
-          <input class="field-input" id="footer_credit_ar" value="مستند إلى هنتر × هنتر بقلم يوشيهيرو توغاشي">
-        </div>
-      </div>
-    </div>
-
-
-    <!-- QUIZ EDITOR TAB -->
-    <div class="tab-content" id="tab-quiz">
-      <div class="admin-card">
-        <div class="admin-card-title">❓ <span class="en-a">Quiz Question Bank</span><span class="ar-a">بنك أسئلة الاختبار</span></div>
-        <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem;font-family:JetBrains Mono,monospace">
-          <span class="en-a">Add questions to the pool. 8 random questions are shown each session. Questions must have exactly 4 options and one correct answer (0-3).</span>
-          <span class="ar-a">أضف أسئلة للبنك. 8 أسئلة عشوائية تظهر في كل جلسة. لكل سؤال 4 خيارات وإجابة صحيحة واحدة (0-3).</span>
-        </p>
-        <div style="display:flex;gap:.8rem;margin-bottom:1.2rem;align-items:center">
-          <label style="color:var(--muted);font-size:.82rem;font-family:JetBrains Mono,monospace">
-            <span class="en-a">Language:</span><span class="ar-a">اللغة:</span>
-          </label>
-          <select id="quizLangSelect" onchange="renderQuizEditor()" style="padding:.4rem .8rem;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:JetBrains Mono,monospace">
-            <option value="en">English (EN)</option>
-            <option value="ar">العربية (AR)</option>
-          </select>
-        </div>
-        <div id="quizEditorList"></div>
-        <button class="btn-add" onclick="addQuizQuestion()" style="margin-top:1rem">
-          <span class="en-a">+ Add Question</span><span class="ar-a">+ إضافة سؤال</span>
-        </button>
+      <div class="card">
+        <div class="card-t">📝 <span class="en-a">Footer Text</span><span class="ar-a">نصوص الفوتر</span></div>
+        <div class="row"><div class="lbl">Site Name EN</div><input class="fi" id="ft_name_en" value="World of Nen"></div>
+        <div class="row"><div class="lbl">Site Name AR</div><input class="fi" id="ft_name_ar" value="عالم النين"></div>
+        <div class="row"><div class="lbl">Tagline EN</div><input class="fi" id="ft_tag_en" value="Hunter × Hunter Interactive Guide"></div>
+        <div class="row"><div class="lbl">Tagline AR</div><input class="fi" id="ft_tag_ar" value="دليل هنتر × هنتر التفاعلي"></div>
+        <div class="row"><div class="lbl">Credit EN</div><input class="fi" id="ft_cr_en" value="Based on Hunter × Hunter by Yoshihiro Togashi"></div>
+        <div class="row"><div class="lbl">Credit AR</div><input class="fi" id="ft_cr_ar" value="مستند إلى هنتر × هنتر بقلم يوشيهيرو توغاشي"></div>
       </div>
     </div>
 
     <!-- SETTINGS TAB -->
-    <div class="tab-content" id="tab-settings">
-      <div class="admin-card">
-        <div class="admin-card-title">🔐 <span class="en-a">Change Admin Password</span><span class="ar-a">تغيير كلمة المرور</span></div>
-        <p style="color:var(--orange);font-size:.82rem;margin-bottom:1.2rem;font-family:JetBrains Mono,monospace">⚠ Change the default password immediately for security</p>
-        <div class="field-row">
-          <div class="field-label">Current Password</div>
-          <input type="password" class="field-input" id="pwCurrent" placeholder="Current password">
-        </div>
-        <div class="field-row">
-          <div class="field-label">New Password</div>
-          <input type="password" class="field-input" id="pwNew" placeholder="New password (min 8 chars)">
-        </div>
-        <div class="field-row">
-          <div class="field-label">Confirm Password</div>
-          <input type="password" class="field-input" id="pwConfirm" placeholder="Repeat new password">
-        </div>
-        <button class="btn-save" style="margin-top:.5rem" onclick="changePassword()">🔐 Update Password</button>
+    <div class="tc" id="tc-settings">
+      <div class="card">
+        <div class="card-t">🔐 <span class="en-a">Change Password</span><span class="ar-a">تغيير كلمة المرور</span></div>
+        <p style="color:var(--orange);font-size:.8rem;margin-bottom:1rem;font-family:JetBrains Mono,monospace">⚠ <span class="en-a">Change the default password immediately!</span><span class="ar-a">غيّر كلمة المرور الافتراضية فوراً!</span></p>
+        <div class="row"><div class="lbl"><span class="en-a">Current PW</span><span class="ar-a">الحالية</span></div><input type="password" class="fi" id="pwCur" placeholder="Current password"></div>
+        <div class="row"><div class="lbl"><span class="en-a">New PW</span><span class="ar-a">الجديدة</span></div><input type="password" class="fi" id="pwNew" placeholder="New password (min 8 chars)"></div>
+        <div class="row"><div class="lbl"><span class="en-a">Confirm</span><span class="ar-a">تأكيد</span></div><input type="password" class="fi" id="pwCon" placeholder="Repeat new password"></div>
+        <button class="save-b" style="margin-top:.5rem" onclick="changePW()">🔐 <span class="en-a">Update Password</span><span class="ar-a">تحديث كلمة المرور</span></button>
       </div>
-
-      <div class="admin-card">
-        <div class="admin-card-title">🎨 <span class="en-a">Site Colors</span><span class="ar-a">ألوان الموقع</span></div>
-        <p style="color:var(--muted);font-size:.82rem;margin-bottom:1.2rem">Customize the primary accent colors of the site.</p>
-        <div class="field-row">
-          <div class="field-label">Aura Blue</div>
-          <div style="display:flex;align-items:center;gap:.8rem">
-            <input type="color" id="color_aura" value="#4db8ff" onchange="previewColor('aura',this.value)">
-            <div class="color-swatch" id="swatch_aura" style="background:#4db8ff" onclick="document.getElementById('color_aura').click()"></div>
-            <input class="field-input" id="color_aura_text" value="#4db8ff" style="max-width:120px" oninput="previewColor('aura',this.value)">
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field-label">Aura Purple</div>
-          <div style="display:flex;align-items:center;gap:.8rem">
-            <input type="color" id="color_aura2" value="#a78bfa" onchange="previewColor('aura2',this.value)">
-            <div class="color-swatch" id="swatch_aura2" style="background:#a78bfa" onclick="document.getElementById('color_aura2').click()"></div>
-            <input class="field-input" id="color_aura2_text" value="#a78bfa" style="max-width:120px" oninput="previewColor('aura2',this.value)">
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field-label">Gold Accent</div>
-          <div style="display:flex;align-items:center;gap:.8rem">
-            <input type="color" id="color_gold" value="#f0c060" onchange="previewColor('gold',this.value)">
-            <div class="color-swatch" id="swatch_gold" style="background:#f0c060" onclick="document.getElementById('color_gold').click()"></div>
-            <input class="field-input" id="color_gold_text" value="#f0c060" style="max-width:120px" oninput="previewColor('gold',this.value)">
-          </div>
-        </div>
+      <div class="card">
+        <div class="card-t">🎨 <span class="en-a">Site Colors</span><span class="ar-a">ألوان الموقع</span></div>
+        <div class="row"><div class="lbl">Aura Blue</div><div style="display:flex;gap:.7rem;align-items:center"><input type="color" id="c_aura" value="#4db8ff" onchange="updColor('aura',this.value)"><div class="color-sw" id="sw_aura" style="background:#4db8ff" onclick="document.getElementById('c_aura').click()"></div><input class="fi" id="ct_aura" value="#4db8ff" style="max-width:110px" oninput="updColor('aura',this.value)"></div></div>
+        <div class="row"><div class="lbl">Aura Purple</div><div style="display:flex;gap:.7rem;align-items:center"><input type="color" id="c_aura2" value="#a78bfa" onchange="updColor('aura2',this.value)"><div class="color-sw" id="sw_aura2" style="background:#a78bfa" onclick="document.getElementById('c_aura2').click()"></div><input class="fi" id="ct_aura2" value="#a78bfa" style="max-width:110px" oninput="updColor('aura2',this.value)"></div></div>
+        <div class="row"><div class="lbl">Gold</div><div style="display:flex;gap:.7rem;align-items:center"><input type="color" id="c_gold" value="#f0c060" onchange="updColor('gold',this.value)"><div class="color-sw" id="sw_gold" style="background:#f0c060" onclick="document.getElementById('c_gold').click()"></div><input class="fi" id="ct_gold" value="#f0c060" style="max-width:110px" oninput="updColor('gold',this.value)"></div></div>
       </div>
-
-      <div class="admin-card">
-        <div class="admin-card-title">🗑 <span class="en-a">Danger Zone</span><span class="ar-a">منطقة الخطر</span></div>
-        <p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem">Reset all admin panel settings to defaults. The main site content will not be affected.</p>
-        <button onclick="resetSettings()" style="padding:.7rem 1.4rem;border-radius:10px;border:1px solid var(--red);background:rgba(239,68,68,.08);color:var(--red);cursor:pointer;font-family:'Cinzel',serif;font-size:.82rem;transition:all .3s" onmouseover="this.style.background='rgba(239,68,68,.2)'" onmouseout="this.style.background='rgba(239,68,68,.08)'">⚠ Reset Admin Settings</button>
+      <div class="card">
+        <div class="card-t">🗑 <span class="en-a">Danger Zone</span><span class="ar-a">منطقة الخطر</span></div>
+        <p style="color:var(--mu);font-size:.83rem;margin-bottom:.8rem"><span class="en-a">Reset all admin settings to defaults. Site content is not affected.</span><span class="ar-a">إعادة تعيين جميع إعدادات لوحة التحكم. محتوى الموقع لن يتأثر.</span></p>
+        <button onclick="doReset()" style="padding:.65rem 1.3rem;border-radius:10px;border:1px solid var(--red);background:rgba(239,68,68,.08);color:var(--red);cursor:pointer;font-family:'Cinzel',serif;font-size:.8rem;transition:all .25s" onmouseover="this.style.background='rgba(239,68,68,.2)'" onmouseout="this.style.background='rgba(239,68,68,.08)'">⚠ <span class="en-a">Reset Admin Settings</span><span class="ar-a">إعادة تعيين الإعدادات</span></button>
       </div>
     </div>
 
-  </div><!-- admin-body -->
-</div><!-- adminPanel -->
+  </div>
+</div>
 
-<div id="toast">✅ Saved!</div>
+<div id="toast"></div>
 
 <script>
-// ─── CONSTANTS ───
-const DEFAULT_PASSWORD = 'nen-admin-2025';
-const STORAGE_KEY = 'nen_admin_data';
-const PW_KEY = 'nen_admin_pw';
-
 // ─── AUTH ───
-function getPassword() {
-  return localStorage.getItem(PW_KEY) || DEFAULT_PASSWORD;
-}
+const SK = 'nen_admin_data', PK = 'nen_admin_pw', AK = 'nen_avatars', QK = 'nen_quiz_bank';
+const DEF_PW = 'nen-admin-2025';
+const getPW = () => localStorage.getItem(PK) || DEF_PW;
 
-function login() {
-  const pw = document.getElementById('pwInput').value;
-  const err = document.getElementById('loginError');
-  if(pw === getPassword()) {
+function doLogin() {
+  const v = document.getElementById('pwIn').value;
+  if(v === getPW()) {
     document.getElementById('loginScreen').style.display = 'none';
-    const panel = document.getElementById('adminPanel');
-    panel.classList.add('visible');
+    document.getElementById('adminPanel').classList.add('vis');
+    sessionStorage.setItem('nen_auth','1');
     initAdmin();
   } else {
-    err.textContent = '❌ Wrong password. Try again.';
-    document.getElementById('pwInput').value = '';
-    document.getElementById('pwInput').focus();
-    setTimeout(() => err.textContent = '', 3000);
+    const e = document.getElementById('lErr');
+    e.textContent = '❌ Wrong password';
+    setTimeout(() => e.textContent='', 3000);
+    document.getElementById('pwIn').value='';
   }
 }
+document.getElementById('pwIn').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
 
-function logout() {
-  document.getElementById('loginScreen').style.display = 'flex';
-  document.getElementById('adminPanel').classList.remove('visible');
-  document.getElementById('pwInput').value = '';
+function doLogout() {
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('adminPanel').classList.remove('vis');
+  sessionStorage.removeItem('nen_auth');
+  document.getElementById('pwIn').value='';
 }
 
-document.getElementById('pwInput').addEventListener('keydown', e => {
-  if(e.key === 'Enter') login();
-});
-
-// ─── TAB SWITCHING ───
-function switchTab(name) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelector(`.tab-btn[onclick="switchTab('${name}')"]`).classList.add('active');
-  document.getElementById(`tab-${name}`).classList.add('active');
+// ─── TABS ───
+function goTab(n) {
+  document.querySelectorAll('.tc').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('tc-'+n).classList.add('on');
+  event.currentTarget.classList.add('on');
 }
+
+// ─── LANG ───
+function setALang(l) {
+  document.body.classList.toggle('ar', l==='ar');
+  document.body.setAttribute('dir', l==='ar'?'rtl':'ltr');
+  document.getElementById('lbEN').classList.toggle('on', l==='en');
+  document.getElementById('lbAR').classList.toggle('on', l==='ar');
+  localStorage.setItem('nen_admin_lang', l);
+}
+(function(){ const sl=localStorage.getItem('nen_admin_lang'); if(sl==='ar') setALang('ar'); })();
 
 // ─── TOAST ───
-function showToast(msg, isError=false) {
+function toast(msg, err=false) {
   const t = document.getElementById('toast');
-  t.textContent = (isError ? '❌ ' : '✅ ') + msg;
-  t.className = 'show' + (isError ? ' error' : '');
-  setTimeout(() => t.className = '', 2800);
+  t.textContent = (err?'❌ ':'✅ ') + msg;
+  t.className = 'sh' + (err?' er':'');
+  setTimeout(() => t.className='', 2800);
 }
 
-// ─── DATA ───
-const nenTypes = [
-  { id:'enhancer', nameEn:'Enhancer', nameAr:'المعزز', color:'#22c55e',
-    descEn:'The most straightforward and powerful type. Enhancers boost their own physical capabilities to superhuman levels.',
-    descAr:'النوع الأكثر مباشرةً وقوةً. يعززون قدراتهم الجسدية إلى مستويات فوق بشرية.',
-    waterEn:'Water volume increases', waterAr:'يزداد حجم الماء',
-    personEn:'Simple, determined, and focused on their goals', personAr:'بسيطون، عزيمة قوية، مركزون على أهدافهم',
-    char1:'Gon Freecss', char1En:'Jajanken (Rock-Paper-Scissors)', char1Ar:'جاجانكين (حجر ورق مقص)',
-    char2:'Uvogin', char2En:'Enhanced physical destruction', char2Ar:'تدمير جسدي معزز' },
-  { id:'transmuter', nameEn:'Transmuter', nameAr:'المحول', color:'#a855f7',
-    descEn:'Transmuters alter the properties of their aura to mimic other substances — electricity, fire, or water.',
-    descAr:'يغيرون خصائص أوراهم ليحاكوا مواد أخرى — كهرباء، نار، أو ماء.',
-    waterEn:'Water changes taste', waterAr:'يتغير طعم الماء',
-    personEn:'Whimsical, unpredictable, prone to deception', personAr:'متقلبون، غير متوقعين، يميلون للخداع',
-    char1:'Killua Zoldyck', char1En:'Godspeed — lightning electricity', char1Ar:'سرعة الإله — كهرباء',
-    char2:'Hisoka', char2En:'Bungee Gum — elastic sticky aura', char2Ar:'بنجي غام — أورا مرنة ولزجة' },
-  { id:'emitter', nameEn:'Emitter', nameAr:'الباعث', color:'#f59e0b',
-    descEn:'Emitters project their aura beyond their body, launching it as projectiles or maintaining it at a distance.',
-    descAr:'يطلقون أوراهم خارج أجسامهم ويحافظون عليها عن بُعد.',
-    waterEn:'Water changes color', waterAr:'يتغير لون الماء',
-    personEn:'Impatient, hot-headed, volatile and impulsive', personAr:'غير صبورين، متهورون، متفجرون وانفعاليون',
-    char1:'Leorio Paradinight', char1En:'Long-range aura punch', char1Ar:'لكمة أورا بعيدة المدى',
-    char2:'Franklin Bordeau', char2En:'Double Machine Gun — aura bullets', char2Ar:'رشاش مزدوج — رصاصات أورا' },
-  { id:'conjurer', nameEn:'Conjurer', nameAr:'المجسد', color:'#ef4444',
-    descEn:'Conjurers materialize physical objects from their aura. These objects are real and can interact with the world.',
-    descAr:'يجسدون أشياء مادية من أوراهم. هذه الأشياء حقيقية وتتفاعل مع العالم.',
-    waterEn:'Impurities appear in water', waterAr:'تظهر شوائب في الماء',
-    personEn:'High-strung, overly cautious, stoic, analytical', personAr:'متوترون، حذرون جداً، متزنون، تحليليون',
-    char1:'Kurapika', char1En:'Emperor Time — holy chains', char1Ar:'وقت الإمبراطور — سلاسل مقدسة',
-    char2:'Kortopi', char2En:'Gallery Fake — perfect object copies', char2Ar:'معرض المزيف — نسخ مثالية من الأشياء' },
-  { id:'manipulator', nameEn:'Manipulator', nameAr:'المتلاعب', color:'#64748b',
-    descEn:'Manipulators control living beings or objects with their aura. The harder the condition, the greater the control.',
-    descAr:'يتلاعبون بالكائنات الحية أو الأشياء بأوراهم. كلما صعب الشرط، كانت درجة السيطرة أكبر.',
-    waterEn:'Leaf moves on the water', waterAr:'تتحرك الورقة على الماء',
-    personEn:'Argumentative, logical, and calculative', personAr:'جدليون، منطقيون، حسابيون',
-    char1:'Illumi Zoldyck', char1En:'Control via needles in others', char1Ar:'التحكم عبر إبر في الآخرين',
-    char2:'Neferpitou', char2En:'Doctor Blythe — puppet surgery', char2Ar:'طبيب بلايس — جراحة الدمى' },
-  { id:'specialist', nameEn:'Specialist', nameAr:'المتخصص', color:'#3b82f6',
-    descEn:'The rarest and most mysterious type. Specialists have abilities that don\'t fit any other category.',
-    descAr:'النوع الأنادر والأكثر غموضاً. للمتخصصين قدرات لا تنتمي لأي فئة أخرى.',
-    waterEn:'A completely unique reaction', waterAr:'رد فعل مختلف تماماً وفريد',
-    personEn:'Independent, charismatic, and unconventional', personAr:'مستقلون، كاريزماتيون، غير تقليديين',
-    char1:'Chrollo Lucilfer', char1En:'Skill Hunter — steals others\' abilities', char1Ar:'صائد المهارات — يسرق قدرات الآخرين',
-    char2:'Neon Nostrade', char2En:'Lovely Ghost Writer — future prophecy', char2Ar:'كاتبة الأشباح — التنبؤ بالمستقبل' },
+// ─── DATA MODEL ───
+let footerLinks = [];
+let quizBank = { en:[], ar:[] };
+let bannerColor = '#4db8ff';
+let avatars = {};
+
+// All characters with their IDs for image management
+const ALL_CHARS = [
+  // Zoldyck
+  {id:'mc-maha', name:'Maha Zoldyck', group:'Zoldyck'},
+  {id:'mc-zeno', name:'Zeno Zoldyck', group:'Zoldyck'},
+  {id:'mc-silva', name:'Silva Zoldyck', group:'Zoldyck'},
+  {id:'mc-kikyo', name:'Kikyo Zoldyck', group:'Zoldyck'},
+  {id:'mc-illumi', name:'Illumi Zoldyck', group:'Zoldyck'},
+  {id:'mc-milluki', name:'Milluki Zoldyck', group:'Zoldyck'},
+  {id:'mc-killua', name:'Killua Zoldyck', group:'Zoldyck'},
+  {id:'mc-alluka', name:'Alluka Zoldyck', group:'Zoldyck'},
+  {id:'mc-kalluto', name:'Kalluto Zoldyck', group:'Zoldyck'},
 ];
 
-let footerLinks = [];
-let bannerColor = '#4db8ff';
+// Nen types data
+const NEN_TYPES = [
+  {id:'enhancer',nameEn:'Enhancer',nameAr:'المعزز',color:'#22c55e',
+   chars:[{id:'nt-en-c1',nameEn:'Gon Freecss',nameAr:'غون فريكس'},{id:'nt-en-c2',nameEn:'Uvogin',nameAr:'أوفوغين'},{id:'nt-en-c3',nameEn:'Meruem',nameAr:'ميروم'}]},
+  {id:'transmuter',nameEn:'Transmuter',nameAr:'المحول',color:'#a855f7',
+   chars:[{id:'nt-tr-c1',nameEn:'Killua Zoldyck',nameAr:'كيلوا زولديك'},{id:'nt-tr-c2',nameEn:'Hisoka',nameAr:'هيسوكا'}]},
+  {id:'emitter',nameEn:'Emitter',nameAr:'الباعث',color:'#f59e0b',
+   chars:[{id:'nt-em-c1',nameEn:'Leorio',nameAr:'ليوريو'},{id:'nt-em-c2',nameEn:'Franklin',nameAr:'فرانكلين'}]},
+  {id:'conjurer',nameEn:'Conjurer',nameAr:'المجسد',color:'#ef4444',
+   chars:[{id:'nt-co-c1',nameEn:'Kurapika',nameAr:'كوراباكا'},{id:'nt-co-c2',nameEn:'Kortopi',nameAr:'كورتوبي'}]},
+  {id:'manipulator',nameEn:'Manipulator',nameAr:'المتلاعب',color:'#64748b',
+   chars:[{id:'nt-ma-c1',nameEn:'Illumi Zoldyck',nameAr:'إيلومي زولديك'},{id:'nt-ma-c2',nameEn:'Neferpitou',nameAr:'نيفيربيتو'}]},
+  {id:'specialist',nameEn:'Specialist',nameAr:'المتخصص',color:'#3b82f6',
+   chars:[{id:'nt-sp-c1',nameEn:'Chrollo Lucilfer',nameAr:'كرولو لوسيلفر'},{id:'nt-sp-c2',nameEn:'Neon Nostrade',nameAr:'نيون نوسترادي'}]},
+];
 
+// ─── INIT ───
 function initAdmin() {
   loadData();
-  renderTypeEditors();
+  renderSectionsEditor();
+  renderTypeGrid();
+  renderGroupsChars();
+  renderQuizEditor();
   renderLinks();
-  updateLinksCount();
+  updateStats();
+  if(sessionStorage.getItem('nen_auth')==='1' && !document.getElementById('adminPanel').classList.contains('vis')) {
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('adminPanel').classList.add('vis');
+  }
 }
 
 function loadData() {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if(saved) {
-    try {
-      const d = JSON.parse(saved);
-      footerLinks = d.footerLinks || [];
-      // Restore form values
-      Object.keys(d.fields || {}).forEach(k => {
-        const el = document.getElementById(k);
-        if(el) {
-          if(el.type === 'checkbox') el.checked = d.fields[k];
-          else el.value = d.fields[k];
-        }
-      });
-    } catch(e) {}
-  }
+  try {
+    const d = JSON.parse(localStorage.getItem(SK)||'{}');
+    footerLinks = d.footerLinks || [];
+    bannerColor = d.bannerColor || '#4db8ff';
+    const fields = d.fields || {};
+    Object.keys(fields).forEach(k => {
+      const el = document.getElementById(k);
+      if(el) el.type==='checkbox' ? el.checked=fields[k] : el.value=fields[k];
+    });
+  } catch(e){}
+  try { quizBank = JSON.parse(localStorage.getItem(QK)||'{"en":[],"ar":[]}'); } catch(e){}
+  try { avatars = JSON.parse(localStorage.getItem(AK)||'{}'); } catch(e){}
 }
 
-// ─── TYPE EDITORS ───
-function renderTypeEditors() {
-  const grid = document.getElementById('typeEditorGrid');
-  grid.innerHTML = nenTypes.map((t,i) => `
-    <div class="type-edit-card">
-      <div class="type-edit-header" style="background:${t.color}22;border-bottom:2px solid ${t.color}44;color:${t.color}">
-        <div style="width:12px;height:12px;border-radius:50%;background:${t.color}"></div>
-        ${t.nameEn}
+function updateStats() {
+  const ql = (quizBank.en||[]).length + (quizBank.ar||[]).length;
+  const el = document.getElementById('dQ'); if(el) el.textContent=ql;
+  const el2 = document.getElementById('dL'); if(el2) el2.textContent=footerLinks.length;
+}
+
+// ─── SECTIONS EDITOR ───
+const SECTIONS_DEF = [
+  {key:'whatnen', titleEn:'What is Nen?', titleAr:'ما هو النين؟'},
+  {key:'principles', titleEn:'The Four Major Principles', titleAr:'المبادئ الأربعة الرئيسية'},
+  {key:'adv_tech', titleEn:'Advanced Techniques', titleAr:'التقنيات المتقدمة'},
+  {key:'body_tech', titleEn:'Techniques Visualized on the Body', titleAr:'التقنيات مُجسَّدة على الجسم'},
+  {key:'compat', titleEn:'Nen Type Compatibility Chart', titleAr:'جدول توافق أنواع النين'},
+  {key:'types', titleEn:'The Six Nen Types', titleAr:'أنواع النين الستة'},
+  {key:'water', titleEn:'Water Divination Test', titleAr:'اختبار تكهن الماء'},
+  {key:'restrict', titleEn:'Restrictions & Vows', titleAr:'القيود والنذور'},
+  {key:'groups', titleEn:'Groups & Factions', titleAr:'المجموعات والفصائل'},
+  {key:'arcs', titleEn:'Story Arcs', titleAr:'مسارات القصة'},
+  {key:'worldmap', titleEn:'World Map', titleAr:'خريطة العالم'},
+  {key:'quiz', titleEn:'Test Your Nen Knowledge', titleAr:'اختبر معرفتك بالنين'},
+];
+
+function renderSectionsEditor() {
+  const el = document.getElementById('sectionsEditor');
+  if(!el) return;
+  el.innerHTML = SECTIONS_DEF.map(s => `
+    <div style="border-bottom:1px solid var(--bor);padding-bottom:1rem;margin-bottom:1rem">
+      <div style="color:var(--aura);font-size:.72rem;letter-spacing:.12em;margin-bottom:.5rem;text-transform:uppercase">${s.titleEn}</div>
+      <div class="row"><div class="lbl">Title EN</div><input class="fi" id="s_${s.key}_en" value="${s.titleEn}"></div>
+      <div class="row"><div class="lbl">Title AR</div><input class="fi" id="s_${s.key}_ar" value="${s.titleAr}"></div>
+    </div>
+  `).join('');
+}
+
+// ─── TYPE GRID ───
+function renderTypeGrid() {
+  const g = document.getElementById('typeGrid');
+  if(!g) return;
+  g.innerHTML = NEN_TYPES.map(t => `
+    <div class="type-ec">
+      <div class="type-eh" style="background:${t.color}18;border-bottom-color:${t.color}33;color:${t.color}">
+        <div style="width:10px;height:10px;border-radius:50%;background:${t.color}"></div>${t.nameEn}
       </div>
-      <div class="type-edit-body">
-        <div class="mini-label">Name (EN)</div>
-        <input class="mini-field" id="type_${t.id}_nameEn" value="${t.nameEn}">
-        <div class="mini-label">Name (AR)</div>
-        <input class="mini-field" id="type_${t.id}_nameAr" value="${t.nameAr}">
-        <div class="mini-label">Description (EN)</div>
-        <textarea class="mini-field" id="type_${t.id}_descEn" style="min-height:70px">${t.descEn}</textarea>
-        <div class="mini-label">Description (AR)</div>
-        <textarea class="mini-field" id="type_${t.id}_descAr" style="min-height:70px">${t.descAr}</textarea>
-        <div class="mini-label">Water Test (EN)</div>
-        <input class="mini-field" id="type_${t.id}_waterEn" value="${t.waterEn}">
-        <div class="mini-label">Water Test (AR)</div>
-        <input class="mini-field" id="type_${t.id}_waterAr" value="${t.waterAr}">
-        <div class="mini-label">Personality (EN)</div>
-        <input class="mini-field" id="type_${t.id}_personEn" value="${t.personEn}">
-        <div class="mini-label">Personality (AR)</div>
-        <input class="mini-field" id="type_${t.id}_personAr" value="${t.personAr}">
-        <div style="border-top:1px solid rgba(255,255,255,.06);margin:.5rem 0;padding-top:.5rem">
-          <div class="mini-label">Character 1 Name</div>
-          <input class="mini-field" id="type_${t.id}_char1" value="${t.char1}">
-          <div class="mini-label">Ability (EN)</div>
-          <input class="mini-field" id="type_${t.id}_char1En" value="${t.char1En}">
-          <div class="mini-label">Ability (AR)</div>
-          <input class="mini-field" id="type_${t.id}_char1Ar" value="${t.char1Ar}">
-          <div class="mini-label">Character 2 Name</div>
-          <input class="mini-field" id="type_${t.id}_char2" value="${t.char2}">
-          <div class="mini-label">Ability (EN)</div>
-          <input class="mini-field" id="type_${t.id}_char2En" value="${t.char2En}">
-          <div class="mini-label">Ability (AR)</div>
-          <input class="mini-field" id="type_${t.id}_char2Ar" value="${t.char2Ar}">
+      <div class="type-eb">
+        <div class="ml">Name EN</div><input class="mf" id="nt_${t.id}_nameEn" value="${t.nameEn}">
+        <div class="ml">Name AR</div><input class="mf" id="nt_${t.id}_nameAr" value="${t.nameAr}">
+        <div class="ml">Description EN</div><textarea class="mf" id="nt_${t.id}_descEn" rows="3"></textarea>
+        <div class="ml">Description AR</div><textarea class="mf" id="nt_${t.id}_descAr" rows="3"></textarea>
+        <div class="ml">Water Test EN</div><input class="mf" id="nt_${t.id}_waterEn">
+        <div class="ml">Water Test AR</div><input class="mf" id="nt_${t.id}_waterAr">
+        <div class="ml">Personality EN</div><input class="mf" id="nt_${t.id}_personEn">
+        <div class="ml">Personality AR</div><input class="mf" id="nt_${t.id}_personAr">
+        <div class="chars-section">
+          <div class="ml" style="color:var(--aura);margin-bottom:.5rem">CHARACTERS + IMAGES</div>
+          ${t.chars.map(c => renderCharItem(c)).join('')}
         </div>
       </div>
     </div>
   `).join('');
 }
 
-// ─── FOOTER LINKS ───
-function renderLinks() {
-  const list = document.getElementById('linksList');
-  if(footerLinks.length === 0) {
-    list.innerHTML = '<p style="color:var(--muted);font-size:.85rem;font-style:italic">No links yet. Click "+ Add Link" to add one.</p>';
-    return;
-  }
-  list.innerHTML = footerLinks.map((l,i) => `
-    <div class="link-row">
-      <span style="font-size:1.2rem;cursor:pointer" onclick="pickEmoji(${i})" title="Click to change icon">${l.icon || '🔗'}</span>
-      <input class="field-input mini-field" value="${l.label}" placeholder="Label (e.g. Twitter)" oninput="footerLinks[${i}].label=this.value" style="flex:.6">
-      <input class="field-input mini-field" value="${l.url}" placeholder="https://..." oninput="footerLinks[${i}].url=this.value" style="flex:1">
-      <button class="btn-del" onclick="removeLink(${i})">✕ Remove</button>
+function renderCharItem(c) {
+  const saved = avatars[c.id] || '';
+  const imgHtml = saved
+    ? `<div class="char-avatar-preview"><img src="${saved}" onerror="this.parentElement.innerHTML='👤'"></div>`
+    : `<div class="char-avatar-preview">👤</div>`;
+  return `
+    <div class="char-item">
+      <div class="char-header">
+        ${imgHtml}
+        <div style="flex:1">
+          <div class="ml">Name EN</div><input class="mf" id="${c.id}_nameEn" value="${c.nameEn}" style="margin-bottom:.3rem">
+          <div class="ml">Name AR</div><input class="mf" id="${c.id}_nameAr" value="${c.nameAr}">
+        </div>
+      </div>
+      <div class="ml">Ability EN</div><input class="mf" id="${c.id}_abilityEn" placeholder="e.g. Jajanken — Rock Paper Scissors">
+      <div class="ml">Ability AR</div><input class="mf" id="${c.id}_abilityAr" placeholder="مثال: جاجانكين">
+      <div class="ml" style="margin-top:.4rem">Character Image</div>
+      <div class="av-upload-row">
+        <input type="file" id="fup_${c.id}" accept="image/*" style="display:none" onchange="uploadCharImg('${c.id}',this)">
+        <button class="av-btn" onclick="document.getElementById('fup_${c.id}').click()">📁 <span class="en-a">Device</span><span class="ar-a">الجهاز</span></button>
+        <input class="av-url-in" id="url_${c.id}" placeholder="Or paste image URL (https://...)" value="${saved}">
+        <button class="av-apply" onclick="applyCharImg('${c.id}')"><span class="en-a">Apply</span><span class="ar-a">تطبيق</span></button>
+        ${saved ? `<button class="av-btn" onclick="clearCharImg('${c.id}')" style="border-color:rgba(239,68,68,.3);color:var(--red)">✕</button>` : ''}
+      </div>
+    </div>`;
+}
+
+// ─── GROUPS CHARS ───
+function renderGroupsChars() {
+  const g = document.getElementById('groupsCharGrid');
+  if(!g) return;
+  const groups = ['Zoldyck','Phantom Troupe','Zodiacs','Chimera Ants','Heroes'];
+  const groupIcons = {'Zoldyck':'🏔','Phantom Troupe':'🕷','Zodiacs':'⭕','Chimera Ants':'🐜','Heroes':'⭐'};
+  const groupChars = {
+    'Zoldyck': [
+      {id:'mc-maha',n:'Maha Zoldyck'},{id:'mc-zeno',n:'Zeno Zoldyck'},
+      {id:'mc-silva',n:'Silva Zoldyck'},{id:'mc-kikyo',n:'Kikyo Zoldyck'},
+      {id:'mc-illumi',n:'Illumi Zoldyck'},{id:'mc-milluki',n:'Milluki Zoldyck'},
+      {id:'mc-killua',n:'Killua Zoldyck'},{id:'mc-alluka',n:'Alluka Zoldyck'},
+      {id:'mc-kalluto',n:'Kalluto Zoldyck'},
+    ],
+    'Phantom Troupe': [
+      {id:'gp-chrollo',n:'Chrollo Lucilfer'},{id:'gp-feitan',n:'Feitan Portor'},
+      {id:'gp-phinks',n:'Phinks Magcub'},{id:'gp-machi',n:'Machi Komacine'},
+      {id:'gp-hisoka',n:'Hisoka Morow'},{id:'gp-franklin',n:'Franklin Bordeau'},
+      {id:'gp-nobunaga',n:'Nobunaga Hazama'},{id:'gp-uvogin',n:'Uvogin'},
+      {id:'gp-shalnark',n:'Shalnark'},{id:'gp-pakunoda',n:'Pakunoda'},
+      {id:'gp-shizuku',n:'Shizuku'},{id:'gp-kortopi',n:'Kortopi'},
+    ],
+    'Zodiacs': [
+      {id:'zo-pariston',n:'Pariston (Rat)'},{id:'zo-mizaistom',n:'Mizaistom (Ox)'},
+      {id:'zo-kanzai',n:'Kanzai (Tiger)'},{id:'zo-pyon',n:'Pyon (Rabbit)'},
+      {id:'zo-botobai',n:'Botobai (Dragon)'},{id:'zo-gel',n:'Gel (Cobra)'},
+      {id:'zo-cheadle',n:'Cheadle (Dog)'},{id:'zo-ging',n:'Ging (Boar)'},
+      {id:'zo-cluck',n:'Cluck (Rooster)'},{id:'zo-saiyu',n:'Saiyu (Monkey)'},
+    ],
+    'Chimera Ants': [
+      {id:'ca-meruem',n:'Meruem (King)'},{id:'ca-neferpitou',n:'Neferpitou'},
+      {id:'ca-shaiapouf',n:'Shaiapouf'},{id:'ca-youpi',n:'Menthuthuyoupi'},
+      {id:'ca-queen',n:'Chimera Ant Queen'},{id:'ca-cheetu',n:'Cheetu'},
+    ],
+    'Heroes': [
+      {id:'hr-gon',n:'Gon Freecss'},{id:'hr-killua',n:'Killua Zoldyck'},
+      {id:'hr-kurapika',n:'Kurapika'},{id:'hr-leorio',n:'Leorio'},
+      {id:'hr-netero',n:'Isaac Netero'},{id:'hr-hisoka',n:'Hisoka'},
+      {id:'hr-kite',n:'Kite'},{id:'hr-alluka',n:'Alluka/Nanika'},
+    ],
+  };
+
+  g.innerHTML = groups.map(grp => `
+    <div style="margin-bottom:2rem">
+      <div style="font-family:Cinzel,serif;font-size:.85rem;color:var(--aura);letter-spacing:.1em;margin-bottom:.8rem;padding:.6rem .8rem;background:rgba(77,184,255,.05);border-radius:8px;border:1px solid var(--bor)">
+        ${groupIcons[grp]} ${grp}
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.7rem">
+        ${(groupChars[grp]||[]).map(c => {
+          const saved = avatars[c.id] || '';
+          const img = saved ? `<img src="${saved}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.parentElement.innerHTML='👤'">` : '👤';
+          return `
+            <div style="background:var(--sur);border:1px solid var(--bor);border-radius:10px;padding:.9rem;display:flex;align-items:center;gap:.8rem">
+              <div style="width:44px;height:44px;border-radius:50%;border:2px solid var(--bor);overflow:hidden;flex-shrink:0;background:rgba(77,184,255,.08);display:flex;align-items:center;justify-content:center;font-size:1.1rem">${img}</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:.78rem;color:var(--text);margin-bottom:.4rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.n}</div>
+                <div style="display:flex;gap:.3rem;flex-wrap:wrap">
+                  <input type="file" id="gfup_${c.id}" accept="image/*" style="display:none" onchange="uploadCharImg('${c.id}',this)">
+                  <button class="av-btn" style="font-size:.65rem;padding:.2rem .5rem" onclick="document.getElementById('gfup_${c.id}').click()">📁</button>
+                  <input class="av-url-in" id="gurl_${c.id}" placeholder="Paste URL..." value="${saved}" style="font-size:.7rem;flex:1;min-width:80px">
+                  <button class="av-apply" style="font-size:.65rem;padding:.25rem .55rem" onclick="applyGroupImg('${c.id}')">✓</button>
+                  ${saved ? `<button class="av-btn" style="font-size:.65rem;padding:.2rem .4rem;border-color:rgba(239,68,68,.3);color:var(--red)" onclick="clearCharImg('${c.id}')">✕</button>` : ''}
+                </div>
+              </div>
+            </div>`;
+        }).join('')}
+      </div>
     </div>
   `).join('');
-  updateLinksCount();
 }
 
-function addLink() {
-  footerLinks.push({ icon:'🔗', label:'', url:'' });
-  renderLinks();
+// ─── IMAGE UPLOAD FUNCTIONS ───
+function uploadCharImg(id, input) {
+  const file = input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const url = e.target.result;
+    avatars[id] = url;
+    localStorage.setItem(AK, JSON.stringify(avatars));
+    // Update preview in types tab
+    const urlIn = document.getElementById('url_'+id);
+    if(urlIn) urlIn.value = url;
+    // Update preview in groups tab
+    const gurlIn = document.getElementById('gurl_'+id);
+    if(gurlIn) gurlIn.value = url;
+    // Refresh both panels
+    renderTypeGrid();
+    renderGroupsChars();
+    toast('Image uploaded for ' + id.split('-').pop());
+  };
+  reader.readAsDataURL(file);
 }
 
-function removeLink(i) {
-  footerLinks.splice(i, 1);
-  renderLinks();
+function applyCharImg(id) {
+  const urlEl = document.getElementById('url_'+id);
+  const url = urlEl ? urlEl.value.trim() : '';
+  if(!url) { toast('Paste a URL first', true); return; }
+  avatars[id] = url;
+  localStorage.setItem(AK, JSON.stringify(avatars));
+  renderTypeGrid();
+  renderGroupsChars();
+  toast('Image applied!');
 }
 
-function updateLinksCount() {
-  const el = document.getElementById('linksCount');
-  if(el) el.textContent = footerLinks.length;
+function applyGroupImg(id) {
+  const urlEl = document.getElementById('gurl_'+id);
+  const url = urlEl ? urlEl.value.trim() : '';
+  if(!url) { toast('Paste a URL first', true); return; }
+  avatars[id] = url;
+  localStorage.setItem(AK, JSON.stringify(avatars));
+  renderGroupsChars();
+  toast('Image applied!');
 }
 
-const EMOJIS = ['🔗','🐦','📷','💼','🌐','📺','📘','📧','💬','🎮','🎨','📝','⭐','🏠','🌟','📱'];
-function pickEmoji(i) {
-  const icon = prompt('Pick an icon (paste emoji):\n' + EMOJIS.join(' '), footerLinks[i].icon || '🔗');
-  if(icon) { footerLinks[i].icon = icon; renderLinks(); }
+function clearCharImg(id) {
+  delete avatars[id];
+  localStorage.setItem(AK, JSON.stringify(avatars));
+  renderTypeGrid();
+  renderGroupsChars();
+  toast('Image removed');
 }
 
-// ─── BANNER COLOR ───
-function selectBannerColor(color, el) {
-  bannerColor = color;
-  document.querySelectorAll('#bannerColorPicker .emoji-opt').forEach(e => e.classList.remove('selected'));
-  el.classList.add('selected');
-}
-
-// ─── PASSWORD ───
-function changePassword() {
-  const cur = document.getElementById('pwCurrent').value;
-  const nw = document.getElementById('pwNew').value;
-  const cf = document.getElementById('pwConfirm').value;
-  if(cur !== getPassword()) { showToast('Wrong current password', true); return; }
-  if(nw.length < 8) { showToast('New password must be at least 8 characters', true); return; }
-  if(nw !== cf) { showToast('Passwords do not match', true); return; }
-  localStorage.setItem(PW_KEY, nw);
-  showToast('Password updated successfully!');
-  ['pwCurrent','pwNew','pwConfirm'].forEach(id => document.getElementById(id).value = '');
-}
-
-// ─── COLORS ───
-function previewColor(key, val) {
-  document.getElementById(`swatch_${key}`).style.background = val;
-  document.getElementById(`color_${key}_text`).value = val;
-}
-
-// ─── LOGO UPLOAD ───
 function handleLogoUpload(input) {
   const file = input.files[0];
   if(!file) return;
   const reader = new FileReader();
   reader.onload = e => {
     localStorage.setItem('nen_logo_b64', e.target.result);
-    showToast('Logo uploaded! Click Save All to apply.');
+    const prev = document.getElementById('logo_preview');
+    if(prev) prev.innerHTML = `<img src="${e.target.result}" style="width:100%;display:block">`;
+    toast('Logo uploaded! Save All to apply.');
   };
   reader.readAsDataURL(file);
 }
 
-// ─── RESET ───
-function resetSettings() {
-  if(!confirm('Reset all admin panel settings? The site content will not change.')) return;
-  localStorage.removeItem(STORAGE_KEY);
-  localStorage.removeItem(PW_KEY);
-  showToast('Settings reset. Reloading...');
-  setTimeout(() => location.reload(), 1500);
+function applyLogoUrl() {
+  const url = document.getElementById('logo_url').value.trim();
+  if(!url) return;
+  localStorage.setItem('nen_logo_b64', url);
+  const prev = document.getElementById('logo_preview');
+  if(prev) prev.innerHTML = `<img src="${url}" style="width:100%;display:block">`;
+  toast('Logo URL applied!');
 }
 
-// ─── COLLECT ALL FIELD VALUES ───
-function collectFields() {
-  const fields = {};
-  const ids = [
+// ─── BANNER COLOR ───
+let bannerColorEl = '#bc1';
+function setBannerColor(c, el) {
+  bannerColor = c;
+  document.querySelectorAll('.color-sw[onclick*="setBannerColor"]').forEach(e => e.style.outline='none');
+  el.style.outline = '2px solid var(--aura)';
+}
+
+// ─── QUIZ EDITOR ───
+function renderQuizEditor() {
+  const lang = document.getElementById('qLang').value;
+  const list = document.getElementById('qList');
+  if(!list) return;
+  const qs = quizBank[lang] || [];
+  if(qs.length === 0) {
+    list.innerHTML = '<p style="color:var(--mu);font-size:.83rem;font-style:italic;margin-bottom:1rem">No custom questions yet.</p>';
+    return;
+  }
+  list.innerHTML = qs.map((q,i) => `
+    <div class="qitem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.7rem">
+        <span style="color:var(--aura);font-family:JetBrains Mono,monospace;font-size:.72rem">Q${i+1}</span>
+        <button class="del-b" onclick="delQ('${lang}',${i})">✕ Remove</button>
+      </div>
+      <div class="ml">Question</div>
+      <input class="mf" value="${esc(q.q)}" oninput="quizBank['${lang}'][${i}].q=this.value">
+      <div class="q-opts">
+        ${q.opts.map((o,oi) => `
+          <div>
+            <div class="ml" style="color:${oi===q.ans?'var(--green)':'var(--mu)'}">Option ${oi+1} ${oi===q.ans?'✓':''}</div>
+            <input class="mf" style="border-color:${oi===q.ans?'rgba(34,197,94,.3)':''}" value="${esc(o)}" oninput="quizBank['${lang}'][${i}].opts[${oi}]=this.value">
+          </div>`).join('')}
+      </div>
+      <div class="ml">Correct Answer (0–3)</div>
+      <select class="mf" style="height:32px" onchange="quizBank['${lang}'][${i}].ans=parseInt(this.value)">
+        ${[0,1,2,3].map(n=>`<option value="${n}" ${q.ans===n?'selected':''}>${n} — ${esc(q.opts[n]||'')}</option>`).join('')}
+      </select>
+      <div class="ml" style="margin-top:.3rem">Explanation</div>
+      <textarea class="mf" rows="2" oninput="quizBank['${lang}'][${i}].exp=this.value">${esc(q.exp||'')}</textarea>
+    </div>`).join('');
+  updateStats();
+}
+
+function addQ() {
+  const lang = document.getElementById('qLang').value;
+  if(!quizBank[lang]) quizBank[lang]=[];
+  quizBank[lang].push({q:'New question?',opts:['A','B','C','D'],ans:0,exp:'Explanation.'});
+  renderQuizEditor();
+}
+
+function delQ(lang,i) {
+  quizBank[lang].splice(i,1);
+  renderQuizEditor();
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ─── FOOTER LINKS ───
+function renderLinks() {
+  const list = document.getElementById('linksList');
+  if(!list) return;
+  if(footerLinks.length===0){list.innerHTML='<p style="color:var(--mu);font-size:.82rem;font-style:italic;margin-bottom:.8rem">No links yet.</p>';return;}
+  list.innerHTML = footerLinks.map((l,i) => `
+    <div class="link-row">
+      <span style="font-size:1.1rem;cursor:pointer" onclick="pickIcon(${i})" title="Click to change icon">${l.icon||'🔗'}</span>
+      <input class="fi" value="${esc(l.label)}" placeholder="Label" oninput="footerLinks[${i}].label=this.value" style="flex:.5;min-width:80px">
+      <input class="fi" value="${esc(l.url)}" placeholder="https://..." oninput="footerLinks[${i}].url=this.value" style="flex:1;min-width:120px">
+      <button class="del-b" onclick="footerLinks.splice(${i},1);renderLinks()">✕</button>
+    </div>`).join('');
+  updateStats();
+}
+
+function addLink(){footerLinks.push({icon:'🔗',label:'',url:''});renderLinks();}
+function pickIcon(i){const ic=prompt('Emoji icon:',footerLinks[i].icon||'🔗');if(ic){footerLinks[i].icon=ic;renderLinks();}}
+
+// ─── COLORS ───
+function updColor(key,val){
+  document.getElementById('sw_'+key).style.background=val;
+  document.getElementById('ct_'+key).value=val;
+}
+
+// ─── PASSWORD ───
+function changePW(){
+  const cur=document.getElementById('pwCur').value;
+  const nw=document.getElementById('pwNew').value;
+  const cf=document.getElementById('pwCon').value;
+  if(cur!==getPW()){toast('Wrong current password',true);return;}
+  if(nw.length<8){toast('Min 8 characters',true);return;}
+  if(nw!==cf){toast('Passwords do not match',true);return;}
+  localStorage.setItem(PK,nw);
+  toast('Password updated!');
+  ['pwCur','pwNew','pwCon'].forEach(id=>document.getElementById(id).value='');
+}
+
+// ─── RESET ───
+function doReset(){
+  if(!confirm('Reset all settings?')) return;
+  [SK,PK,QK,'nen_logo_b64'].forEach(k=>localStorage.removeItem(k));
+  toast('Reset done. Reloading...');
+  setTimeout(()=>location.reload(),1500);
+}
+
+// ─── COLLECT FIELDS ───
+function collectFields(){
+  const fields={};
+  const ids=[
     'hero_badge_en','hero_badge_ar','hero_title_en','hero_title_ar',
     'hero_sub_en','hero_sub_ar','hero_scroll_en','hero_scroll_ar',
-    'logo_width',
-    's_whatnen_en','s_whatnen_ar','s_whatnen_sub_en','s_whatnen_sub_ar',
-    's_principles_en','s_principles_ar',
-    's_body_en','s_body_ar',
-    's_types_en','s_types_ar',
-    's_restrict_en','s_restrict_ar',
     'bannerEnabled','bannerTextEn','bannerTextAr',
-    'footer_name_en','footer_name_ar','footer_tag_en','footer_tag_ar',
-    'footer_credit_en','footer_credit_ar',
+    'ft_name_en','ft_name_ar','ft_tag_en','ft_tag_ar','ft_cr_en','ft_cr_ar',
   ];
-  ids.forEach(id => {
-    const el = document.getElementById(id);
-    if(el) fields[id] = el.type === 'checkbox' ? el.checked : el.value;
+  // Section titles
+  ['whatnen','principles','adv_tech','body_tech','compat','types','water','restrict','groups','arcs','worldmap','quiz'].forEach(k=>{
+    ids.push('s_'+k+'_en','s_'+k+'_ar');
   });
-  // Type editors
-  nenTypes.forEach(t => {
-    const typeFields = ['nameEn','nameAr','descEn','descAr','waterEn','waterAr','personEn','personAr','char1','char1En','char1Ar','char2','char2En','char2Ar'];
-    typeFields.forEach(f => {
-      const el = document.getElementById(`type_${t.id}_${f}`);
-      if(el) fields[`type_${t.id}_${f}`] = el.value;
+  ids.forEach(id=>{const el=document.getElementById(id);if(el)fields[id]=el.type==='checkbox'?el.checked:el.value;});
+  // Nen type fields
+  NEN_TYPES.forEach(t=>{
+    ['nameEn','nameAr','descEn','descAr','waterEn','waterAr','personEn','personAr'].forEach(f=>{
+      const el=document.getElementById('nt_'+t.id+'_'+f);if(el)fields['nt_'+t.id+'_'+f]=el.value;
+    });
+    t.chars.forEach(c=>{
+      ['nameEn','nameAr','abilityEn','abilityAr'].forEach(f=>{
+        const el=document.getElementById(c.id+'_'+f);if(el)fields[c.id+'_'+f]=el.value;
+      });
     });
   });
   return fields;
 }
 
-// ─── GENERATE UPDATED INDEX.HTML ───
-async function generateHTML() {
-  // We can't directly fetch index.html cross-origin in some environments
-  // So we use the injection approach: save a JSON config and apply via injected script
-  return null;
-}
-
 // ─── SAVE ALL ───
-function saveAll() {
+function doSave(){
+  localStorage.setItem(QK, JSON.stringify(quizBank));
+  localStorage.setItem(AK, JSON.stringify(avatars));
   const fields = collectFields();
-  const data = { fields, footerLinks, bannerColor, savedAt: new Date().toISOString() };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  const data = {fields, footerLinks, bannerColor, savedAt: new Date().toISOString()};
+  localStorage.setItem(SK, JSON.stringify(data));
 
-  // Build footer links HTML to inject
-  const linksHtml = footerLinks.length > 0
-    ? `<div class="footer-links-title en-only">Links</div><div class="footer-links-title ar-only">روابط</div>` +
-      footerLinks.map(l => `<div class="footer-link-item"><span>${l.icon}</span><a href="${l.url}" target="_blank" rel="noopener">${l.label}</a></div>`).join('')
+  // Build footer links HTML
+  const linksHtml = footerLinks.length>0
+    ? footerLinks.map(l=>`<div class="footer-link-item"><span>${l.icon}</span><a href="${l.url}" target="_blank" rel="noopener">${l.label}</a></div>`).join('')
     : '';
 
-  // Banner HTML
   const bannerHtml = fields.bannerEnabled
-    ? `<div id="siteBanner" style="background:${bannerColor}22;border-bottom:2px solid ${bannerColor}66;padding:.7rem 2rem;text-align:center;font-size:.9rem;color:${bannerColor};font-weight:600;letter-spacing:.04em;position:relative;z-index:99;backdrop-filter:blur(8px);">
-        <span style="margin-right:.5rem">📢</span>
-        <span class="en-only">${fields.bannerTextEn || ''}</span>
-        <span class="ar-only">${fields.bannerTextAr || ''}</span>
-      </div>`
+    ? `<div id="siteBanner" style="background:${bannerColor}22;border-bottom:2px solid ${bannerColor}66;padding:.7rem 2rem;text-align:center;font-size:.9rem;color:${bannerColor};font-weight:600;position:relative;z-index:99">📢 <span class="en-only">${fields.bannerTextEn||''}</span><span class="ar-only">${fields.bannerTextAr||''}</span></div>`
     : '';
 
-  // Create a downloadable config
   const config = {
-    fields, footerLinks, bannerColor,
-    linksHtml, bannerHtml,
-    logoB64: localStorage.getItem('nen_logo_b64') || null,
+    fields, footerLinks, bannerColor, linksHtml, bannerHtml,
+    logoB64: localStorage.getItem('nen_logo_b64')||null,
+    avatars, quizBank,
+    savedAt: new Date().toISOString()
   };
 
-  // Create config.js that index.html will load
-  const configJs = `/* NEN ADMIN CONFIG — auto-generated */
-window.NEN_CONFIG = ${JSON.stringify(config, null, 2)};`;
-
-  const blob = new Blob([configJs], { type: 'application/javascript' });
+  const js = `/* NEN ADMIN CONFIG */\nwindow.NEN_CONFIG = ${JSON.stringify(config, null, 2)};`;
+  const blob = new Blob([js], {type:'application/javascript'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'nen-config.js';
   a.click();
 
-  showToast('Config saved! Download nen-config.js and place it next to index.html');
+  toast('Config saved! Upload nen-config.js to GitHub');
+  updateStats();
 }
 
-// Show save hint on load
-window.addEventListener('DOMContentLoaded', () => {
-  // Auto-check if already logged in this session
-  if(sessionStorage.getItem('nen_admin_auth') === '1') {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('adminPanel').classList.add('visible');
+// On load
+window.addEventListener('DOMContentLoaded',()=>{
+  if(sessionStorage.getItem('nen_auth')==='1'){
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('adminPanel').classList.add('vis');
     initAdmin();
   }
 });
-
-document.getElementById('pwInput').addEventListener('keydown', e => {
-  if(e.key === 'Enter') login();
-});
-
-// ─── ADMIN LANGUAGE ───
-function setAdminLang(lang) {
-  const body = document.body;
-  if(lang === 'ar') {
-    body.classList.add('admin-ar');
-    body.setAttribute('dir','rtl');
-  } else {
-    body.classList.remove('admin-ar');
-    body.setAttribute('dir','ltr');
-  }
-  document.getElementById('aBtn-en').classList.toggle('active', lang === 'en');
-  document.getElementById('aBtn-ar').classList.toggle('active', lang === 'ar');
-  localStorage.setItem('nen_admin_lang', lang);
-}
-
-// Restore saved lang preference
-(function(){
-  const savedLang = localStorage.getItem('nen_admin_lang');
-  if(savedLang === 'ar') setAdminLang('ar');
-})();
-
 </script>
 </body>
 </html>

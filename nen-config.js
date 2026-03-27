@@ -4,7 +4,7 @@ window.NEN_CONFIG = {
     "hero_badge_en": "World of Nen — Interactive Guide",
     "hero_badge_ar": "عالم النين — دليل تفاعلي",
     "hero_title_en": "World of Nen",
-    "hero_title_ar": "عـالـم الـنـيـن",
+    "hero_title_ar": "عـالـم الـنـيــــــن",
     "hero_sub_en": "The art of manipulating life energy — aura — to transcend human limits. Discover the most complex power system in anime.",
     "hero_sub_ar": "فن التحكم في طاقة الحياة — الأورا — لتجاوز الحدود البشرية. اكتشف أعقد نظام قوى في عالم الأنمي.",
     "hero_scroll_en": "↓ Scroll to explore ↓",
@@ -143,9 +143,15 @@ window.NEN_CONFIG = {
     "nt-sp-c2_abilityEn": "",
     "nt-sp-c2_abilityAr": ""
   },
-  "footerLinks": [],
+  "footerLinks": [
+    {
+      "icon": "🔗",
+      "label": "Ko-fi",
+      "url": "https://ko-fi.com/i3zuu"
+    }
+  ],
   "bannerColor": "#f0c060",
-  "linksHtml": "",
+  "linksHtml": "<div class=\"footer-link-item\"><span>🔗</span><a href=\"https://ko-fi.com/i3zuu\" target=\"_blank\" rel=\"noopener\">Ko-fi</a></div>",
   "bannerHtml": "<div id=\"siteBanner\" style=\"background:#f0c06022;border-bottom:2px solid #f0c06066;padding:.7rem 2rem;text-align:center;font-size:.9rem;color:#f0c060;font-weight:600;position:relative;z-index:99\">📢 <span class=\"en-only\">This website is experimental and under construction — we apologize for any errors in the site or the information!</span><span class=\"ar-only\">هذا الموقع تجريبي وتحت الإنشاء - نأسف لأي خطأ في الموقع والمعلومات!</span></div>",
   "logoB64": null,
   "avatars": {},
@@ -153,5 +159,5 @@ window.NEN_CONFIG = {
     "en": [],
     "ar": []
   },
-  "savedAt": "2026-03-27T07:38:40.456Z"
+  "savedAt": "2026-03-27T07:52:17.513Z"
 };

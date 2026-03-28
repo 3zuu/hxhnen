@@ -3472,107 +3472,103 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-<script src="nen-config.js"></script>
 
 <script>
-/* ─── ADMIN CONFIG LOADER ─── */
-(function(){
-  if(typeof window.NEN_CONFIG === 'undefined' || !window.NEN_CONFIG) return;
-  const c = window.NEN_CONFIG;
-  const f = c.fields || {};
-
-  // Apply banner
-  if(c.bannerHtml && f.bannerEnabled) {
-    const nav = document.querySelector('nav');
-    if(nav) {
-      nav.insertAdjacentHTML('beforebegin', c.bannerHtml);
-      const banner = document.getElementById('siteBanner');
-      if(banner) {
-        const bh = banner.offsetHeight;
-        nav.style.top = bh + 'px';
-        document.body.style.paddingTop = bh + 'px';
-      }
-    }
-  }
-
-  // Apply footer links
-  const fl = document.getElementById('footerLinks');
-  if(fl && c.linksHtml) fl.innerHTML = c.linksHtml;
-
-  // Apply all text edits via data-eid
-  if(c.textEdits) {
-    Object.entries(c.textEdits).forEach(([eid, vals]) => {
+/* ─── INLINE RUNTIME — No config file needed ─── */
+(function applyLocalEdits(){
+  // Apply text edits from localStorage
+  try {
+    const edits = JSON.parse(localStorage.getItem('nen_text_edits') || '{}');
+    Object.entries(edits).forEach(([eid, vals]) => {
       document.querySelectorAll('[data-eid="'+eid+'"]').forEach(el => {
         if(el.classList.contains('en-only') && vals.en !== undefined) el.textContent = vals.en;
         if(el.classList.contains('ar-only') && vals.ar !== undefined) el.textContent = vals.ar;
       });
     });
-  }
+  } catch(e){}
 
-  // Apply logo
-  if(c.logoB64) {
-    const logo = document.getElementById('heroLogo');
-    if(logo) logo.src = c.logoB64;
-  }
-
-  // Apply all avatars (member cards + DC cards)
+  // Apply avatars from localStorage
   const applyAvatars = () => {
-    if(c.avatars) {
-      Object.entries(c.avatars).forEach(([id, url]) => {
+    try {
+      const avs = JSON.parse(localStorage.getItem('nen_avatars') || '{}');
+      Object.entries(avs).forEach(([id, url]) => {
+        if(!url) return;
         const card = document.getElementById(id);
-        if(!card || !url) return;
-        // Member card avatar
+        if(!card) return;
+        // Member card
         const av = card.querySelector('.member-avatar');
         if(av) {
-          av.innerHTML = '<img src="'+url+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.parentElement.innerHTML='<span style=font-size:1.8rem>👤</span>'"><span class="avatar-edit-btn" onclick="(function(e){e.stopPropagation();const c=this.closest('[id]');if(c)openAvatarEditor(c.id,e)}).call(this,event)">✏</span>';
+          av.innerHTML = '<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.parentElement.innerHTML='<span style=font-size:1.8rem>👤</span>'">'
+            +'<span class="avatar-edit-btn" onclick="(function(e){e.stopPropagation();const c=this.closest('[id]');if(c)openAvatarEditor(c.id,e)}).call(this,event)">✏</span>';
           return;
         }
-        // DC calamity avatar
-        const dcav = card.querySelector('.dc-cal-avatar, .dc-prince-avatar');
+        // DC avatars
+        const dcav = card.querySelector('.dc-cal-avatar,.dc-prince-avatar');
         if(dcav) {
-          dcav.innerHTML = '<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.parentElement.innerHTML='<span style=font-size:1.8rem>👑</span>'"><span class="dc-av-edit">✏</span>';
+          const editSpan = dcav.querySelector('.dc-av-edit');
+          dcav.innerHTML = '<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%"><span class="dc-av-edit">✏</span>';
         }
       });
-      // Merge into localStorage
-      try {
-        const ex = JSON.parse(localStorage.getItem('nen_avatars')||'{}');
-        localStorage.setItem('nen_avatars', JSON.stringify(Object.assign({},ex,c.avatars)));
-      } catch(e){}
-    }
+    } catch(e){}
   };
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', applyAvatars);
   else applyAvatars();
 
-  // Apply footer text
-  if(f.ft_name_en) document.querySelectorAll('.footer-title.en-only').forEach(el=>el.textContent=f.ft_name_en);
-  if(f.ft_name_ar) document.querySelectorAll('.footer-title.ar-only').forEach(el=>el.textContent=f.ft_name_ar);
-  if(f.ft_tag_en) document.querySelectorAll('.footer-subtitle.en-only').forEach(el=>el.textContent=f.ft_tag_en);
-  if(f.ft_tag_ar) document.querySelectorAll('.footer-subtitle.ar-only').forEach(el=>el.textContent=f.ft_tag_ar);
+  // Apply footer links
+  try {
+    const links = JSON.parse(localStorage.getItem('nen_links') || '[]');
+    if(links.length > 0) {
+      const fl = document.getElementById('footerLinks');
+      if(fl) fl.innerHTML = links.map(l=>'<div class="footer-link-item"><span>'+l.icon+'</span><a href="'+l.url+'" target="_blank" rel="noopener">'+l.label+'</a></div>').join('');
+    }
+  } catch(e){}
 
-  // Apply quiz bank
-  if(c.quizBank) {
-    try { localStorage.setItem('nen_quiz_bank', JSON.stringify(c.quizBank)); } catch(e){}
-  }
+  // Apply banner
+  try {
+    const banner = JSON.parse(localStorage.getItem('nen_banner') || 'null');
+    if(banner && banner.enabled && banner.text_en) {
+      const nav = document.querySelector('nav');
+      if(nav) {
+        const div = document.createElement('div');
+        div.id = 'siteBanner';
+        div.style.cssText = 'background:'+banner.color+'22;border-bottom:2px solid '+banner.color+'66;padding:.7rem 2rem;text-align:center;font-size:.9rem;color:'+banner.color+';font-weight:600;position:relative;z-index:99';
+        div.innerHTML = '📢 <span class="en-only">'+banner.text_en+'</span><span class="ar-only">'+banner.text_ar+'</span>';
+        nav.parentNode.insertBefore(div, nav);
+        nav.style.top = div.offsetHeight + 'px';
+      }
+    }
+  } catch(e){}
+
+  // Apply logo
+  try {
+    const logo = localStorage.getItem('nen_logo');
+    if(logo) { const el=document.getElementById('heroLogo'); if(el) el.src=logo; }
+  } catch(e){}
+
+  // Apply quiz bank override
+  try {
+    const qb = JSON.parse(localStorage.getItem('nen_quiz_bank') || 'null');
+    if(qb && window.quizBank === undefined) window._qbOverride = qb;
+  } catch(e){}
 })();
 
-// ─── DC AVATAR EDITOR (on-page) ───
+// ─── DC AVATAR EDITOR ───
 function openDCAvatarEditor(cardId, evt) {
   if(evt) evt.stopPropagation();
   const existing = document.getElementById('dcAvModal');
   if(existing) existing.remove();
-  const saved = (JSON.parse(localStorage.getItem('nen_avatars')||'{}')||{})[cardId]||'';
+  const avs = JSON.parse(localStorage.getItem('nen_avatars')||'{}');
+  const saved = avs[cardId] || '';
   const modal = document.createElement('div');
   modal.id = 'dcAvModal';
   modal.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)';
   modal.innerHTML = '<div style="background:#120000;border:1px solid rgba(255,68,0,.4);border-radius:20px;padding:2rem;width:min(420px,90vw);text-align:center">'
-    +'<div style="font-family:Cinzel,serif;font-size:.95rem;color:#ff8844;margin-bottom:1rem;letter-spacing:.08em">🔥 Set Character Image</div>'
-    +'<div style="color:rgba(255,68,0,.6);font-size:.78rem;margin-bottom:.8rem">ID: '+cardId+'</div>'
+    +'<div style="font-family:Cinzel,serif;color:#ff8844;margin-bottom:1rem;letter-spacing:.08em">🔥 Set Character Image</div>'
     +'<input id="dcav_url" type="url" placeholder="Paste image URL (https://...)" value="'+saved+'" style="width:100%;padding:.7rem 1rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,68,0,.2);border-radius:10px;color:#ffe4cc;font-size:.88rem;margin-bottom:.8rem">'
     +'<div style="color:rgba(255,68,0,.5);font-size:.78rem;margin-bottom:.6rem">— or —</div>'
     +'<input type="file" id="dcav_file" accept="image/*" style="display:none" onchange="dcAvPreview(this)">'
     +'<button onclick="document.getElementById('dcav_file').click()" style="padding:.55rem 1.2rem;border-radius:10px;border:1px solid rgba(255,68,0,.3);background:rgba(255,68,0,.08);color:#ff8844;cursor:pointer;font-family:Cinzel,serif;font-size:.78rem;margin-bottom:1rem">📁 Upload from device</button>'
-    +'<div id="dcav_prev" style="width:80px;height:80px;border-radius:50%;border:2px solid rgba(255,68,0,.3);margin:0 auto 1rem;overflow:hidden;background:rgba(255,68,0,.06);display:flex;align-items:center;justify-content:center;font-size:1.5rem">'
-    +(saved?'<img src="'+saved+'" style="width:100%;height:100%;object-fit:cover">':'👑')+'</div>'
+    +'<div id="dcav_prev" style="width:80px;height:80px;border-radius:50%;border:2px solid rgba(255,68,0,.3);margin:0 auto 1rem;overflow:hidden;background:rgba(255,68,0,.06);display:flex;align-items:center;justify-content:center;font-size:1.5rem">'+(saved?'<img src="'+saved+'" style="width:100%;height:100%;object-fit:cover">':'👑')+'</div>'
     +'<div style="display:flex;gap:.8rem;justify-content:center">'
     +'<button onclick="dcAvApply(''+cardId+'')" style="padding:.7rem 1.5rem;border-radius:10px;border:none;background:linear-gradient(135deg,#cc2200,#ff4400);color:#fff;font-family:Cinzel,serif;font-size:.82rem;font-weight:700;cursor:pointer">✓ Apply</button>'
     +'<button onclick="document.getElementById('dcAvModal').remove()" style="padding:.7rem 1.1rem;border-radius:10px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:#f87171;cursor:pointer;font-family:Cinzel,serif;font-size:.82rem">Cancel</button>'
@@ -3610,42 +3606,43 @@ function openDarkContinent(e) {
   const sparks = document.getElementById('dcSparks');
   if(sparks) {
     sparks.innerHTML = '';
-    const cols = ['#ff4400','#ff6600','#ff8800','#ffaa00','#ffcc00'];
+    const cols=['#ff4400','#ff6600','#ff8800','#ffaa00','#ffcc00'];
     for(let i=0;i<25;i++){
-      const p=document.createElement('div'); p.className='dc-spark';
+      const p=document.createElement('div');p.className='dc-spark';
       const s=Math.random()*3+1;
       p.style.cssText='width:'+s+'px;height:'+s+'px;left:'+Math.random()*100+'%;background:'+cols[Math.floor(Math.random()*cols.length)]+';animation-duration:'+(Math.random()*10+5)+'s;animation-delay:'+(Math.random()*6)+'s;position:fixed;top:0;z-index:5010;pointer-events:none;border-radius:50%;animation-name:dcRise;opacity:0';
       sparks.appendChild(p);
     }
   }
-  document.getElementById('dcWarning').style.display = 'flex';
+  document.getElementById('dcWarning').style.display='flex';
   document.getElementById('dcContent').classList.remove('show');
 }
-function showDCContent() {
-  document.getElementById('dcWarning').style.display = 'none';
+function showDCContent(){
+  document.getElementById('dcWarning').style.display='none';
   document.getElementById('dcContent').classList.add('show');
-  // Load saved DC avatars
-  const avs = JSON.parse(localStorage.getItem('nen_avatars')||'{}');
-  Object.entries(avs).forEach(([id, url]) => {
-    if(!id.startsWith('dc-')) return;
-    const card = document.getElementById(id);
-    if(!card) return;
-    const av = card.querySelector('.dc-cal-avatar,.dc-prince-avatar');
-    if(av) av.innerHTML='<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%"><span class="dc-av-edit">✏</span>';
-  });
+  // Apply DC avatars
+  try {
+    const avs=JSON.parse(localStorage.getItem('nen_avatars')||'{}');
+    Object.entries(avs).forEach(([id,url])=>{
+      if(!id.startsWith('dc-')||!url) return;
+      const card=document.getElementById(id); if(!card) return;
+      const av=card.querySelector('.dc-cal-avatar,.dc-prince-avatar');
+      if(av) av.innerHTML='<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%"><span class="dc-av-edit">✏</span>';
+    });
+  } catch(e){}
 }
-function closeDarkContinent() {
-  const modal = document.getElementById('dcModal');
+function closeDarkContinent(){
+  const modal=document.getElementById('dcModal');
   if(modal) modal.classList.remove('open');
-  document.body.style.overflow = '';
-  setTimeout(() => {
-    const w = document.getElementById('dcWarning');
-    const c = document.getElementById('dcContent');
-    if(w) w.style.display = 'flex';
+  document.body.style.overflow='';
+  setTimeout(()=>{
+    const w=document.getElementById('dcWarning');
+    const c=document.getElementById('dcContent');
+    if(w) w.style.display='flex';
     if(c) c.classList.remove('show');
-  }, 400);
+  },400);
 }
-document.addEventListener('keydown', e => { if(e.key==='Escape') { closeDarkContinent(); } });
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeDarkContinent();});
 </script>
 
 <!-- ═══ DARK CONTINENT MODAL ═══ -->

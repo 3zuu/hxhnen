@@ -1,9 +1,7 @@
 {
   "version": 2,
   "name": "hxhnen",
-  "builds": [
-    {"src": "*.html","use": "@vercel/static"}
-  ],
+  "builds": [{"src": "*.html","use": "@vercel/static"}],
   "routes": [
     {"src": "/admin","dest": "/admin.html"},
     {"src": "/(.*)", "dest": "/$1"}

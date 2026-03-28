@@ -10,9 +10,19 @@
     {"src": "/(.*)", "dest": "/$1"}
   ],
   "headers": [
-    {"source": "/admin.html","headers": [
-      {"key": "X-Robots-Tag","value": "noindex, nofollow"},
-      {"key": "Cache-Control","value": "no-store"}
-    ]}
+    {
+      "source": "/nen-config.js",
+      "headers": [
+        {"key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, max-age=0"},
+        {"key": "Pragma", "value": "no-cache"}
+      ]
+    },
+    {
+      "source": "/admin.html",
+      "headers": [
+        {"key": "X-Robots-Tag", "value": "noindex, nofollow"},
+        {"key": "Cache-Control", "value": "no-store"}
+      ]
+    }
   ]
 }

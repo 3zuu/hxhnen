@@ -2,618 +2,343 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🔥 Dark Continent — MANGA SPOILERS</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>🔥 Dark Continent — HxH Manga Spoilers</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Noto+Sans+Arabic:wght@300;400;600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0a0000;--bg2:#120000;--surface:rgba(255,50,0,0.04);
-  --border:rgba(255,80,0,0.2);--fire:#ff4400;--fire2:#ff8800;
-  --fire3:#ffcc00;--text:#ffe4cc;--muted:#a07060;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Crimson Pro',serif;overflow-x:hidden;min-height:100vh}
-body.ar{font-family:'Noto Sans Arabic','Crimson Pro',serif;direction:rtl}
-body.ar .en-only{display:none}
-body:not(.ar) .ar-only{display:none}
-
-/* Particles */
-#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
-.spark{position:absolute;border-radius:50%;animation:rise linear infinite;opacity:0}
-@keyframes rise{
-  0%{transform:translateY(100vh) scale(0);opacity:0}
-  10%{opacity:.8}90%{opacity:.2}
-  100%{transform:translateY(-5vh) scale(2);opacity:0}
-}
-
-/* Warning overlay */
-#warningScreen{
-  position:fixed;inset:0;z-index:9999;
-  background:radial-gradient(ellipse at center,#1a0000 0%,#000 100%);
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:1.5rem;text-align:center;padding:2rem;
-}
-.warn-fire{font-size:4rem;animation:flicker 1.5s ease-in-out infinite}
+:root{--bg:#0a0000;--bg2:#120000;--sur:rgba(255,50,0,.04);--bor:rgba(255,68,0,.2);--fire:#ff4400;--fire2:#ff8800;--fire3:#ffcc00;--text:#ffe4cc;--mu:#a07060}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:"Crimson Pro",serif;overflow-x:hidden;min-height:100vh}
+body.ar{font-family:"Noto Sans Arabic","Crimson Pro",serif;direction:rtl}
+body.ar .eo{display:none} body:not(.ar) .ao{display:none}
+#pk{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.sp{position:absolute;border-radius:50%;animation:rise linear infinite;opacity:0}
+@keyframes rise{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:.8}90%{opacity:.2}100%{transform:translateY(-5vh) scale(2);opacity:0}}
+/* WARNING */
+#WS{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at center,#1a0000 0%,#000 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.2rem;text-align:center;padding:2rem}
+.wf{font-size:3.5rem;animation:flicker 1.5s ease-in-out infinite}
 @keyframes flicker{0%,100%{transform:scale(1) rotate(-2deg)}50%{transform:scale(1.1) rotate(2deg)}}
-.warn-title{
-  font-family:'Cinzel Decorative',serif;font-size:clamp(1.5rem,5vw,3rem);
-  background:linear-gradient(135deg,var(--fire),var(--fire2),var(--fire3));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.warn-sub{color:#a06040;font-size:1.05rem;max-width:500px;line-height:1.7;font-style:italic}
-.warn-sub-ar{display:none;color:#a06040;font-size:1.05rem;max-width:500px;line-height:1.7;font-style:italic}
-body.ar .warn-sub{display:none}
-body.ar .warn-sub-ar{display:block}
-.warn-badges{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin:.5rem 0}
-.warn-badge{
-  padding:.4rem 1rem;border-radius:12px;font-size:.8rem;
-  font-family:'Cinzel',serif;letter-spacing:.1em;
-}
-.warn-btn{
-  padding:1rem 2.5rem;border-radius:14px;border:none;
-  background:linear-gradient(135deg,#cc2200,#ff4400);
-  color:#fff;font-family:'Cinzel Decorative',serif;font-size:1rem;
-  letter-spacing:.08em;cursor:pointer;transition:all .3s;
-  box-shadow:0 0 30px rgba(255,68,0,.4);
-}
-.warn-btn:hover{transform:scale(1.05);box-shadow:0 0 50px rgba(255,68,0,.7)}
-.warn-back-link{
-  color:var(--muted);font-size:.85rem;text-decoration:none;
-  font-family:'Cinzel',serif;letter-spacing:.1em;
-  border-bottom:1px solid transparent;transition:all .3s;
-}
-.warn-back-link:hover{color:var(--fire);border-color:var(--fire)}
-.warn-lang{display:flex;gap:.4rem;background:rgba(255,255,255,.05);border-radius:20px;padding:.2rem;position:absolute;top:1.5rem;right:1.5rem}
-.warn-lang-btn{border:none;cursor:pointer;padding:.28rem .7rem;border-radius:16px;font-size:.72rem;font-weight:700;transition:all .3s;background:transparent;color:var(--muted);font-family:'Cinzel',serif}
-.warn-lang-btn.active{background:var(--fire);color:#fff}
-
-/* Main nav */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;
-  background:linear-gradient(to bottom,rgba(10,0,0,.95),transparent);
-  backdrop-filter:blur(8px);
-}
-.nav-logo{
-  font-family:'Cinzel Decorative',serif;font-size:.95rem;
-  background:linear-gradient(135deg,var(--fire),var(--fire2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.nav-back{
-  color:var(--muted);text-decoration:none;font-family:'Cinzel',serif;
-  font-size:.75rem;letter-spacing:.15em;transition:color .3s;
-  border:1px solid rgba(255,68,0,.2);padding:.4rem .9rem;border-radius:8px;
-}
-.nav-back:hover{color:var(--fire);border-color:var(--fire)}
-.lang-toggle{display:flex;gap:.4rem;background:rgba(255,255,255,.05);border-radius:20px;padding:.25rem}
-.lang-btn{border:none;cursor:pointer;padding:.3rem .8rem;border-radius:16px;font-size:.75rem;font-weight:700;transition:all .3s;background:transparent;color:var(--muted)}
-.lang-btn.active{background:var(--fire);color:#fff}
-
-/* Sections */
-section{position:relative;z-index:1;padding:5rem 2rem}
+.wt{font-family:"Cinzel Decorative",serif;font-size:clamp(1.5rem,5vw,2.8rem);background:linear-gradient(135deg,#ff4400,#ff8800,#ffcc00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ws{color:#a06040;font-size:.98rem;max-width:480px;line-height:1.7;font-style:italic}
+.wb{padding:.8rem 2.2rem;border-radius:14px;border:none;background:linear-gradient(135deg,#cc2200,#ff4400);color:#fff;font-family:"Cinzel Decorative",serif;font-size:.95rem;cursor:pointer;transition:all .3s;box-shadow:0 0 30px rgba(255,68,0,.4)}
+.wb:hover{transform:scale(1.05);box-shadow:0 0 50px rgba(255,68,0,.7)}
+.wback{color:var(--mu);font-size:.82rem;text-decoration:none;font-family:"Cinzel",serif;letter-spacing:.1em;border-bottom:1px solid transparent;transition:all .3s}
+.wback:hover{color:var(--fire);border-color:var(--fire)}
+.wbadge{padding:.3rem .8rem;border-radius:10px;font-size:.75rem;font-family:"Cinzel",serif;letter-spacing:.08em}
+.wlang{display:flex;gap:.3rem;background:rgba(255,255,255,.05);border-radius:20px;padding:.18rem;position:absolute;top:1.2rem;right:1.2rem}
+.wlb{border:none;cursor:pointer;padding:.22rem .6rem;border-radius:16px;font-size:.68rem;font-weight:700;transition:all .22s;background:transparent;color:var(--mu)} .wlb.on{background:var(--fire);color:#fff}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(10,0,0,.95),transparent);backdrop-filter:blur(8px)}
+.nlogo{font-family:"Cinzel Decorative",serif;font-size:.92rem;background:linear-gradient(135deg,var(--fire),var(--fire2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nback{color:var(--mu);text-decoration:none;font-family:"Cinzel",serif;font-size:.72rem;letter-spacing:.14em;border:1px solid rgba(255,68,0,.2);padding:.38rem .85rem;border-radius:8px;transition:all .3s}
+.nback:hover{color:var(--fire);border-color:var(--fire)}
+.nlang{display:flex;gap:.2rem;background:rgba(255,255,255,.05);border-radius:20px;padding:.18rem}
+.nlb{border:none;cursor:pointer;padding:.22rem .6rem;border-radius:16px;font-size:.67rem;font-weight:700;transition:all .22s;background:transparent;color:var(--mu)} .nlb.on{background:var(--fire);color:#fff}
+/* CONTENT */
+#MC{display:none}#MC.sh{display:block}
+section{position:relative;z-index:1;padding:4rem 2rem}
 .container{max-width:1100px;margin:0 auto}
-.section-title{
-  font-family:'Cinzel Decorative',serif;
-  font-size:clamp(1.3rem,3vw,2.2rem);text-align:center;margin-bottom:.8rem;
-  background:linear-gradient(135deg,var(--text),var(--fire2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.section-divider{width:80px;height:2px;margin:0 auto 3rem;background:linear-gradient(to right,transparent,var(--fire),transparent)}
-
-/* Hero */
-.dark-hero{
-  min-height:100vh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;
-  padding:8rem 2rem 4rem;position:relative;z-index:1;
-}
-.dark-hero-badge{
-  display:inline-block;border:1px solid rgba(255,68,0,.4);
-  padding:.4rem 1.2rem;border-radius:20px;
-  font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.2em;
-  color:var(--fire2);margin-bottom:2rem;
-  background:rgba(255,68,0,.06);
-  animation:fadeIn 1s ease;
-}
-.dark-hero h1{
-  font-family:'Cinzel Decorative',serif;
-  font-size:clamp(2rem,7vw,5rem);line-height:1;letter-spacing:.05em;
-  background:linear-gradient(135deg,#ff8800 0%,#ff4400 40%,#cc0000 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:1.2rem;
-  text-shadow:0 0 60px rgba(255,68,0,.3);
-}
-.dark-hero-sub{
-  font-size:1.1rem;color:var(--muted);max-width:650px;line-height:1.8;font-style:italic;
-}
-.fire-glow{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:700px;height:400px;
-  background:radial-gradient(ellipse,rgba(255,68,0,.06) 0%,rgba(255,136,0,.03) 40%,transparent 70%);
-  pointer-events:none;
-}
-
-/* Info cards */
-.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem}
-.info-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:16px;padding:1.5rem;text-align:center;
-}
-.info-card .num{font-family:'Cinzel Decorative',serif;font-size:2.2rem;color:var(--fire2);margin-bottom:.3rem}
-.info-card .lbl{font-family:'Cinzel',serif;font-size:.72rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
-
-/* Calamities */
-.calamities-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem}
-.calamity-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:16px;padding:1.5rem;
-  transition:all .35s;position:relative;overflow:hidden;
-}
-.calamity-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(to right,var(--fire),var(--fire2));
-  opacity:0;transition:opacity .3s;
-}
-.calamity-card:hover{border-color:rgba(255,68,0,.4);transform:translateY(-4px)}
-.calamity-card:hover::before{opacity:1}
-.cal-icon{font-size:2rem;margin-bottom:.8rem}
-.cal-name{font-family:'Cinzel',serif;font-size:.95rem;color:var(--fire2);margin-bottom:.3rem;letter-spacing:.08em}
-.cal-type{font-size:.72rem;color:var(--muted);font-family:'Cinzel',serif;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.1em}
-.cal-desc{color:var(--muted);font-size:.88rem;line-height:1.65}
-
-/* Princes table */
-.princes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
-.prince-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:12px;padding:1.2rem;
-  transition:all .3s;
-}
-.prince-card:hover{border-color:rgba(255,68,0,.3)}
-.prince-num{
-  font-family:'Cinzel Decorative',serif;font-size:1.4rem;
-  color:var(--fire2);margin-bottom:.2rem;
-}
-.prince-name{font-family:'Cinzel',serif;font-size:.9rem;color:var(--text);margin-bottom:.3rem}
-.prince-info{font-size:.8rem;color:var(--muted);line-height:1.55}
-.prince-beast{
-  margin-top:.5rem;padding:.35rem .5rem;
-  background:rgba(255,68,0,.05);border:1px solid rgba(255,68,0,.1);
-  border-radius:6px;font-size:.72rem;color:rgba(255,136,0,.8);font-style:italic;
-}
-.status-alive-p{display:inline-block;padding:.1rem .4rem;border-radius:6px;font-size:.65rem;background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.2);margin-left:.3rem}
-.status-dead-p{display:inline-block;padding:.1rem .4rem;border-radius:6px;font-size:.65rem;background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.2);margin-left:.3rem}
-
-/* Timeline blocks */
-.timeline-block{
-  border-left:2px solid rgba(255,68,0,.3);
-  padding-left:1.5rem;margin-bottom:2rem;position:relative;
-}
-.timeline-block::before{
-  content:'';position:absolute;left:-6px;top:.3rem;
-  width:10px;height:10px;border-radius:50%;
-  background:var(--fire);box-shadow:0 0 12px var(--fire);
-}
-.timeline-ch{
-  font-family:'Cinzel',serif;font-size:.72rem;color:var(--fire2);
-  letter-spacing:.12em;margin-bottom:.3rem;text-transform:uppercase;
-}
-.timeline-title{font-family:'Cinzel',serif;font-size:1rem;color:var(--text);margin-bottom:.4rem}
-.timeline-desc{color:var(--muted);font-size:.9rem;line-height:1.65}
-
-/* Mafia */
-.mafia-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.mafia-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:14px;padding:1.5rem;
-}
-.mafia-name{font-family:'Cinzel',serif;font-size:1rem;color:var(--fire2);margin-bottom:.4rem}
-.mafia-desc{color:var(--muted);font-size:.88rem;line-height:1.6}
-
-/* Footer */
-footer{
-  padding:3rem 2rem;text-align:center;
-  border-top:1px solid var(--border);
-  color:var(--muted);font-size:.85rem;position:relative;z-index:1;
-}
-
-/* Animations */
+.sec-title{font-family:"Cinzel Decorative",serif;font-size:clamp(1.2rem,3vw,2rem);text-align:center;margin-bottom:.8rem;background:linear-gradient(135deg,var(--text),var(--fire2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec-div{width:60px;height:2px;margin:0 auto 2rem;background:linear-gradient(to right,transparent,var(--fire),transparent)}
+/* HERO */
+.hero{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 4rem;position:relative}
+.fg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(255,68,0,.08) 0%,transparent 70%);pointer-events:none}
+.hbadge{display:inline-block;border:1px solid rgba(255,68,0,.4);padding:.35rem 1rem;border-radius:20px;font-family:"Cinzel",serif;font-size:.68rem;letter-spacing:.2em;color:var(--fire2);margin-bottom:1.5rem;background:rgba(255,68,0,.06)}
+.hero h1{font-family:"Cinzel Decorative",serif;font-size:clamp(1.8rem,6vw,4.5rem);line-height:1;letter-spacing:.05em;background:linear-gradient(135deg,#ff8800 0%,#ff4400 40%,#cc0000 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem}
+.hsub{font-size:1rem;color:var(--mu);max-width:600px;line-height:1.8;font-style:italic}
+/* STATS */
+.stat-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.stat{background:var(--sur);border:1px solid var(--bor);border-radius:12px;padding:1.2rem;text-align:center}
+.stat .n{font-family:"Cinzel Decorative",serif;font-size:2rem;color:var(--fire2);margin-bottom:.2rem}
+.stat .l{font-family:"Cinzel",serif;font-size:.68rem;color:var(--mu);letter-spacing:.12em;text-transform:uppercase}
+/* CALAMITIES */
+.cal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.2rem}
+.cal-card{background:var(--sur);border:1px solid var(--bor);border-radius:14px;padding:1.3rem;text-align:center;transition:all .3s;cursor:pointer}
+.cal-card:hover{border-color:rgba(255,68,0,.5);transform:translateY(-4px)}
+.cal-av{width:80px;height:80px;border-radius:50%;border:2px solid rgba(255,68,0,.3);margin:0 auto .9rem;overflow:hidden;background:rgba(255,68,0,.06);display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;transition:border-color .25s}
+.cal-av:hover{border-color:rgba(255,68,0,.8)}
+.cal-av img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.cal-av .av-empty-dc{width:100%;height:100%;background:rgba(255,68,0,.08);border-radius:50%}
+.cal-edit{position:absolute;bottom:0;right:0;width:22px;height:22px;border-radius:50%;background:#ff4400;border:2px solid #0a0000;font-size:.6rem;display:flex;align-items:center;justify-content:center;color:#fff;opacity:0;transition:opacity .2s}
+.cal-av:hover .cal-edit{opacity:1}
+.cal-name{font-family:"Cinzel",serif;font-size:.92rem;color:var(--fire2);margin-bottom:.25rem;letter-spacing:.08em}
+.cal-type{font-size:.7rem;color:var(--mu);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.55rem}
+.cal-desc{color:var(--mu);font-size:.84rem;line-height:1.6}
+/* PRINCES */
+.pr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:.9rem}
+.pr-card{background:var(--sur);border:1px solid var(--bor);border-radius:10px;padding:1.1rem;transition:all .3s}
+.pr-card:hover{border-color:rgba(255,68,0,.35)}
+.pr-av{width:58px;height:58px;border-radius:50%;border:2px solid rgba(255,68,0,.3);margin:0 auto .6rem;overflow:hidden;background:rgba(255,68,0,.06);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .25s;position:relative}
+.pr-av:hover{border-color:rgba(255,68,0,.8)}
+.pr-av img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.pr-av .av-empty-dc{width:100%;height:100%;border-radius:50%;background:rgba(255,68,0,.06)}
+.pr-av .cal-edit{opacity:0} .pr-av:hover .cal-edit{opacity:1}
+.pr-num{font-family:"Cinzel Decorative",serif;font-size:1.1rem;color:var(--fire2);margin-bottom:.2rem;text-align:center}
+.pr-name{font-family:"Cinzel",serif;font-size:.82rem;color:var(--text);margin-bottom:.3rem;text-align:center}
+.pr-info{font-size:.76rem;color:var(--mu);line-height:1.55;text-align:center}
+.pr-beast{margin-top:.4rem;padding:.3rem .5rem;background:rgba(255,68,0,.05);border:1px solid rgba(255,68,0,.1);border-radius:5px;font-size:.68rem;color:rgba(255,136,0,.8);font-style:italic;text-align:center}
+.s-alive{display:inline-block;padding:.1rem .35rem;border-radius:5px;font-size:.62rem;background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.2);margin-left:.2rem}
+.s-dead{display:inline-block;padding:.1rem .35rem;border-radius:5px;font-size:.62rem;background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.2);margin-left:.2rem}
+/* TIMELINE */
+.tl{border-left:2px solid rgba(255,68,0,.25);padding-left:1.3rem;margin-bottom:1.7rem;position:relative}
+.tl::before{content:"";position:absolute;left:-6px;top:.3rem;width:10px;height:10px;border-radius:50%;background:var(--fire);box-shadow:0 0 10px var(--fire)}
+.tl .ch{font-family:"Cinzel",serif;font-size:.68rem;color:var(--fire2);letter-spacing:.1em;margin-bottom:.2rem;text-transform:uppercase}
+.tl .ti{font-family:"Cinzel",serif;font-size:.9rem;color:var(--text);margin-bottom:.3rem}
+.tl .de{color:var(--mu);font-size:.87rem;line-height:1.6}
+/* MAFIA */
+.maf-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.maf{background:var(--sur);border:1px solid var(--bor);border-radius:12px;padding:1.3rem}
+.maf .mn{font-family:"Cinzel",serif;font-size:.95rem;color:var(--fire2);margin-bottom:.4rem}
+.maf .md{color:var(--mu);font-size:.87rem;line-height:1.6}
+/* AVATAR MODAL */
+#avModal{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
+#avModal.sh{display:flex}
+.av-box{background:#120000;border:1px solid rgba(255,68,0,.4);border-radius:20px;padding:2rem;width:min(420px,90vw);text-align:center}
+.av-title{font-family:"Cinzel",serif;font-size:.95rem;color:#ff8844;margin-bottom:1rem;letter-spacing:.08em}
+.av-input{width:100%;padding:.7rem 1rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,68,0,.2);border-radius:10px;color:#ffe4cc;font-size:.88rem;margin-bottom:.8rem}
+.av-prev{width:80px;height:80px;border-radius:50%;border:2px solid rgba(255,68,0,.3);margin:0 auto 1rem;overflow:hidden;background:rgba(255,68,0,.06);display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.av-prev img{width:100%;height:100%;object-fit:cover}
+.av-btn{padding:.55rem 1.2rem;border-radius:10px;border:1px solid rgba(255,68,0,.3);background:rgba(255,68,0,.08);color:#ff8844;cursor:pointer;font-family:"Cinzel",serif;font-size:.78rem;margin-bottom:1rem;transition:all .3s}
+.av-btn:hover{background:rgba(255,68,0,.2)}
+.av-apply{padding:.7rem 1.5rem;border-radius:10px;border:none;background:linear-gradient(135deg,#cc2200,#ff4400);color:#fff;font-family:"Cinzel",serif;font-size:.82rem;font-weight:700;cursor:pointer;margin-right:.5rem}
+.av-cancel{padding:.7rem 1.1rem;border-radius:10px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:#f87171;cursor:pointer;font-family:"Cinzel",serif;font-size:.82rem}
+footer{padding:2.5rem 2rem;text-align:center;border-top:1px solid rgba(255,68,0,.15);color:var(--mu);font-size:.82rem;position:relative;z-index:1}
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.fade-in{opacity:0;transform:translateY(30px);transition:all .8s ease}
-.fade-in.visible{opacity:1;transform:translateY(0)}
-
-@media(max-width:900px){
-  .info-grid{grid-template-columns:repeat(2,1fr)}
-  .mafia-grid{grid-template-columns:1fr}
-}
-@media(max-width:600px){
-  .info-grid{grid-template-columns:repeat(2,1fr)}
-  .calamities-grid,.princes-grid{grid-template-columns:1fr 1fr}
-  nav{padding:.8rem 1rem}
-}
+.fi2{opacity:0;transform:translateY(25px);transition:all .7s ease}
+.fi2.vis{opacity:1;transform:translateY(0)}
+@media(max-width:700px){.stat-g{grid-template-columns:repeat(2,1fr)}.maf-g{grid-template-columns:1fr}.pr-grid{grid-template-columns:repeat(2,1fr)}.cal-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
+<div id="pk"></div>
 
-<div id="particles"></div>
-
-<!-- WARNING SCREEN -->
-<div id="warningScreen">
-  <div class="warn-lang">
-    <button class="warn-lang-btn active" id="wBtn-en" onclick="setWarnLang('en')">EN</button>
-    <button class="warn-lang-btn" id="wBtn-ar" onclick="setWarnLang('ar')">عر</button>
+<!-- WARNING -->
+<div id="WS">
+  <div class="wlang">
+    <button class="wlb on" id="wEN" onclick="wLang('en')">EN</button>
+    <button class="wlb" id="wAR" onclick="wLang('ar')">عر</button>
   </div>
-  <div class="warn-fire">🔥</div>
-  <div class="warn-title">
-    <span class="en-only">Dark Continent</span>
-    <span class="ar-only">القارة المظلمة</span>
+  <div class="wf">🔥</div>
+  <div class="wt"><span class="eo">Dark Continent</span><span class="ao">القارة المظلمة</span></div>
+  <div style="display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center">
+    <span class="wbadge" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#f87171">⚠ MANGA ONLY</span>
+    <span class="wbadge" style="background:rgba(255,68,0,.12);border:1px solid rgba(255,68,0,.3);color:#ff8844">🔥 MAJOR SPOILERS</span>
+    <span class="wbadge" style="background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);color:#c084fc">📖 Ch. 340–410+</span>
   </div>
-  <div class="warn-badges">
-    <span class="warn-badge" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#f87171">⚠ MANGA ONLY</span>
-    <span class="warn-badge" style="background:rgba(255,68,0,.12);border:1px solid rgba(255,68,0,.3);color:#ff8844">🔥 MAJOR SPOILERS</span>
-    <span class="warn-badge" style="background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);color:#c084fc">📖 Ch. 340–410+</span>
-  </div>
-  <p class="warn-sub">This page contains major spoilers for content that has <b>NOT</b> been adapted to anime yet.<br>Chapters 340–410+ only exist in the manga.<br>If you haven't finished the 2011 anime — <b>turn back now.</b></p>
-  <p class="warn-sub-ar">هذه الصفحة تحتوي على حرق كبير لمحتوى <b>لم</b> يُحوَّل للأنمي بعد.<br>الفصول 340–410+ موجودة في المانجا فقط.<br>إذا لم تنهِ أنمي 2011 — <b>ارجع الآن.</b></p>
-  <button class="warn-btn" onclick="enterPage()">
-    <span class="en-only">🔥 I Accept the Spoilers — Enter</span>
-    <span class="ar-only">🔥 أقبل الحرق — ادخل</span>
-  </button>
-  <a href="index.html" class="warn-back-link">
-    <span class="en-only">← Return to Safety (Main Site)</span>
-    <span class="ar-only">← عودة للأمان (الموقع الرئيسي)</span>
-  </a>
+  <p class="ws eo">This page contains <b>major spoilers</b> for content NOT adapted to anime yet. Chapters 340–410+ exist only in the manga. If you haven't finished the 2011 anime — <b>turn back now.</b></p>
+  <p class="ws ao">هذه الصفحة تحتوي على <b>حرق كبير</b> لمحتوى لم يُحوَّل للأنمي بعد. الفصول 340–410+ في المانجا فقط. إذا لم تنهِ أنمي 2011 — <b>ارجع الآن.</b></p>
+  <button class="wb" onclick="enter()"><span class="eo">🔥 I Accept — Enter</span><span class="ao">🔥 أقبل — ادخل</span></button>
+  <a href="index.html" class="wback"><span class="eo">← Return to Main Site</span><span class="ao">← العودة للموقع الرئيسي</span></a>
 </div>
 
-<!-- MAIN CONTENT (hidden until warning accepted) -->
-<div id="mainContent" style="display:none">
-
+<!-- MAIN CONTENT -->
+<div id="MC">
 <nav>
-  <div class="nav-logo">
-    <span class="en-only">🔥 Dark Continent</span>
-    <span class="ar-only">🔥 القارة المظلمة</span>
-  </div>
-  <a href="index.html" class="nav-back">
-    <span class="en-only">← Main Site</span>
-    <span class="ar-only">← الموقع الرئيسي</span>
-  </a>
-  <div class="lang-toggle">
-    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-    <button class="lang-btn" id="btn-ar" onclick="setLang('ar')">عر</button>
+  <div class="nlogo"><span class="eo">🔥 Dark Continent</span><span class="ao">🔥 القارة المظلمة</span></div>
+  <a href="index.html" class="nback"><span class="eo">← Main Site</span><span class="ao">← الموقع الرئيسي</span></a>
+  <div class="nlang">
+    <button class="nlb on" id="nEN" onclick="setLang('en')">EN</button>
+    <button class="nlb" id="nAR" onclick="setLang('ar')">عر</button>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="dark-hero">
-  <div class="fire-glow"></div>
-  <div class="dark-hero-badge">
-    <span class="en-only">⚠ MANGA ONLY — CHAPTERS 340–410+</span>
-    <span class="ar-only">⚠ مانجا فقط — الفصول 340–410+</span>
-  </div>
-  <h1>
-    <span class="en-only">Dark Continent</span>
-    <span class="ar-only">القارة المظلمة</span>
-  </h1>
-  <p class="dark-hero-sub">
-    <span class="en-only">A forbidden land beyond Lake Mobius where humanity originated — and where every attempt to return has ended in catastrophe. The ultimate destination in Hunter × Hunter's ongoing saga.</span>
-    <span class="ar-only">أرض محظورة خارج بحيرة موبيوس حيث نشأت البشرية — وكل محاولة للعودة إليها انتهت بكارثة. الوجهة النهائية في ملحمة هنتر × هنتر المستمرة.</span>
-  </p>
+<!-- Hero -->
+<section class="hero">
+  <div class="fg"></div>
+  <div class="hbadge"><span class="eo">⚠ MANGA ONLY — CH. 340–410+</span><span class="ao">⚠ مانجا فقط — ف. 340–410+</span></div>
+  <h1><span class="eo">Dark Continent</span><span class="ao">القارة المظلمة</span></h1>
+  <p class="hsub"><span class="eo">A forbidden land beyond Lake Mobius where humanity originated — every attempt to return has ended in catastrophe.</span><span class="ao">أرض محظورة خارج بحيرة موبيوس حيث نشأت البشرية — كل محاولة للعودة انتهت بكارثة.</span></p>
 </section>
 
-<!-- STATS -->
+<!-- Stats -->
 <section style="padding-top:0">
-  <div class="container">
-    <div class="info-grid fade-in">
-      <div class="info-card">
-        <div class="num">340+</div>
-        <div class="lbl"><span class="en-only">Starting Chapter</span><span class="ar-only">الفصل الأول</span></div>
-      </div>
-      <div class="info-card">
-        <div class="num">0.04%</div>
-        <div class="lbl"><span class="en-only">Survival Rate (past expeditions)</span><span class="ar-only">معدل البقاء (البعثات السابقة)</span></div>
-      </div>
-      <div class="info-card">
-        <div class="num">5</div>
-        <div class="lbl"><span class="en-only">Dark Continent Calamities</span><span class="ar-only">كوارث القارة المظلمة</span></div>
-      </div>
-      <div class="info-card">
-        <div class="num">14</div>
-        <div class="lbl"><span class="en-only">Kakin Princes in Succession War</span><span class="ar-only">أمراء كاكين في حرب الخلافة</span></div>
-      </div>
-      <div class="info-card">
-        <div class="num">200K</div>
-        <div class="lbl"><span class="en-only">Passengers on Black Whale</span><span class="ar-only">مسافرو السفينة Black Whale</span></div>
-      </div>
-      <div class="info-card">
-        <div class="num">V6</div>
-        <div class="lbl"><span class="en-only">World Powers Backing Expedition</span><span class="ar-only">القوى العالمية الداعمة للبعثة</span></div>
-      </div>
-    </div>
-  </div>
+<div class="container">
+<div class="stat-g fi2">
+  <div class="stat"><div class="n">340+</div><div class="l"><span class="eo">Starting Chapter</span><span class="ao">الفصل الأول</span></div></div>
+  <div class="stat"><div class="n">0.04%</div><div class="l"><span class="eo">Survival Rate</span><span class="ao">نسبة النجاة</span></div></div>
+  <div class="stat"><div class="n">5</div><div class="l"><span class="eo">Calamities</span><span class="ao">كوارث</span></div></div>
+  <div class="stat"><div class="n">14</div><div class="l"><span class="eo">Princes at War</span><span class="ao">أمراء في الحرب</span></div></div>
+  <div class="stat"><div class="n">200K</div><div class="l"><span class="eo">Ship Passengers</span><span class="ao">مسافرو السفينة</span></div></div>
+  <div class="stat"><div class="n">V6</div><div class="l"><span class="eo">World Powers</span><span class="ao">القوى العالمية</span></div></div>
+</div>
+</div>
 </section>
 
-<!-- 5 CALAMITIES -->
+<!-- Calamities -->
+<section style="background:rgba(255,30,0,.03)">
+<div class="container">
+  <div class="sec-title fi2"><span class="eo">The 5 Dark Continent Calamities</span><span class="ao">الكوارث الخمس للقارة المظلمة</span></div>
+  <div class="sec-div"></div>
+  <div class="cal-grid fi2">
+    <div class="cal-card"><div class="cal-av" id="dc-cal-brion" onclick="openAv('dc-cal-brion')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="cal-name">Brion</div><div class="cal-type"><span class="eo">Botanical Weapon</span><span class="ao">سلاح نباتي</span></div><div class="cal-desc"><span class="eo">Plant-type weapon with extreme offensive capability. Its flowers attack living beings with unknown energy projectiles.</span><span class="ao">سلاح نباتي بقدرة هجومية قصوى. أزهاره تهاجم الكائنات بقذائف طاقة مجهولة.</span></div></div>
+    <div class="cal-card"><div class="cal-av" id="dc-cal-pap" onclick="openAv('dc-cal-pap')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="cal-name">Pap</div><div class="cal-type"><span class="eo">Lurking Parasite</span><span class="ao">طفيلي كامن</span></div><div class="cal-desc"><span class="eo">Hides in the mind and magnifies negative emotions — rage, fear, despair. Causes civilizations to self-destruct from within.</span><span class="ao">يختبئ في العقل ويضخم المشاعر السلبية. يدمّر الحضارات من الداخل.</span></div></div>
+    <div class="cal-card"><div class="cal-av" id="dc-cal-hellbell" onclick="openAv('dc-cal-hellbell')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="cal-name">Hellbell</div><div class="cal-type"><span class="eo">Spreading Curse</span><span class="ao">لعنة منتشرة</span></div><div class="cal-desc"><span class="eo">A snake-like creature whose bite transforms victims into another Hellbell — exponentially spreading the curse.</span><span class="ao">مخلوق شبيه بالأفعى لدغته تحوّل الضحية لهيلبيل آخر.</span></div></div>
+    <div class="cal-card"><div class="cal-av" id="dc-cal-ai" onclick="openAv('dc-cal-ai')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="cal-name">Ai (Nanika)</div><div class="cal-type"><span class="eo">Gaseous Wish-Granter</span><span class="ao">كيان غازي</span></div><div class="cal-desc"><span class="eo">Grants wishes at an escalating fatal cost. Theorized to inhabit Alluka Zoldyck as "Nanika." The most mysterious calamity.</span><span class="ao">يمنح الأمنيات بثمن مميت. يُعتقد أنه يسكن أللوكا زولديك كـ"نانيكا".</span></div></div>
+    <div class="cal-card"><div class="cal-av" id="dc-cal-zobae" onclick="openAv('dc-cal-zobae')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="cal-name">Zobae Disease</div><div class="cal-type"><span class="eo">Immortality Plague</span><span class="ao">وباء الخلود</span></div><div class="cal-desc"><span class="eo">Grants immortality but removes the will to live. The infected wander endlessly with no purpose — worse than death.</span><span class="ao">يمنح الخلود لكن يزيل إرادة الحياة. أسوأ من الموت.</span></div></div>
+  </div>
+</div>
+</section>
+
+<!-- 14 Princes -->
 <section>
-  <div class="container">
-    <h2 class="section-title fade-in">
-      <span class="en-only">The 5 Dark Continent Calamities</span>
-      <span class="ar-only">الكوارث الخمس للقارة المظلمة</span>
-    </h2>
-    <div class="section-divider"></div>
-    <p style="text-align:center;color:var(--muted);font-size:.95rem;font-style:italic;max-width:700px;margin:0 auto 2.5rem;line-height:1.8" class="fade-in">
-      <span class="en-only">Past expeditions brought back five catastrophic entities. Only three survivors fully passed the return evaluation. These entities are still present in the Known World today.</span>
-      <span class="ar-only">البعثات السابقة أعادت خمسة كيانات كارثية. ثلاثة ناجين فقط اجتازوا تقييم العودة. هذه الكيانات لا تزال موجودة في العالم المعروف اليوم.</span>
-    </p>
-    <div class="calamities-grid fade-in">
-      <div class="calamity-card">
-        <div class="cal-icon">🌿</div>
-        <div class="cal-name">Brion</div>
-        <div class="cal-type"><span class="en-only">Botanical Weapon</span><span class="ar-only">سلاح نباتي</span></div>
-        <div class="cal-desc">
-          <span class="en-only">A plant-type weapon with extreme offensive capability. Its flowers attack living beings with unknown energy projectiles. Considered the most straightforward threat among the five.</span>
-          <span class="ar-only">سلاح من نوع النبات بقدرة هجومية قصوى. أزهاره تهاجم الكائنات الحية بقذائف طاقة مجهولة. يُعدّ الأكثر مباشرةً بين الكوارث الخمس.</span>
-        </div>
-      </div>
-      <div class="calamity-card">
-        <div class="cal-icon">🦠</div>
-        <div class="cal-name">Pap</div>
-        <div class="cal-type"><span class="en-only">Lurking Parasite</span><span class="ar-only">طفيلي كامن</span></div>
-        <div class="cal-desc">
-          <span class="en-only">A micro-organism that hides in the mind and magnifies negative emotions. The host experiences uncontrollable rage, fear, or despair. It causes civilizations to self-destruct from within.</span>
-          <span class="ar-only">كائن دقيق يختبئ في العقل ويضخم المشاعر السلبية. يعاني المضيف من غضب أو خوف أو يأس لا يمكن التحكم فيه. يتسبب في تدمير الحضارات من الداخل.</span>
-        </div>
-      </div>
-      <div class="calamity-card">
-        <div class="cal-icon">🌊</div>
-        <div class="cal-name">Hellbell</div>
-        <div class="cal-type"><span class="en-only">Mysterious Creature</span><span class="ar-only">مخلوق غامض</span></div>
-        <div class="cal-desc">
-          <span class="en-only">A snake-like creature whose bite transforms the victim into another Hellbell — exponentially spreading the curse. Even one bite is enough to start a catastrophic chain reaction.</span>
-          <span class="ar-only">مخلوق شبيه بالأفعى تحوّل لدغته الضحية إلى هيلبيل آخر — ينتشر اللعنة بشكل أسي. لدغة واحدة كافية لبدء تفاعل متسلسل كارثي.</span>
-        </div>
-      </div>
-      <div class="calamity-card">
-        <div class="cal-icon">🌑</div>
-        <div class="cal-name">Ai — The Gaseous Lifeform</div>
-        <div class="cal-type"><span class="en-only">Gaseous Entity / Wish Granter</span><span class="ar-only">كيان غازي / مانح الأمنيات</span></div>
-        <div class="cal-desc">
-          <span class="en-only">A gaseous being believed to grant wishes — but the cost escalates fatally with each granted request. Theorized to currently inhabit Alluka Zoldyck as "Nanika." The most mysterious of all five.</span>
-          <span class="ar-only">كائن غازي يُعتقد أنه يمنح الأمنيات — لكن الثمن يتصاعد بشكل مميت مع كل طلب ممنوح. يُعتقد أنه يسكن أللوكا زولديك بهيئة "نانيكا". أغمض الكوارث الخمس.</span>
-        </div>
-      </div>
-      <div class="calamity-card">
-        <div class="cal-icon">👁️</div>
-        <div class="cal-name">Zobae Disease</div>
-        <div class="cal-type"><span class="en-only">Immortality Plague</span><span class="ar-only">وباء الخلود</span></div>
-        <div class="cal-desc">
-          <span class="en-only">A disease that grants immortality but removes the will to live. The infected survive any injury but lose all sense of purpose — wandering endlessly with no goal. A fate worse than death.</span>
-          <span class="ar-only">مرض يمنح الخلود لكنه يزيل إرادة الحياة. المصابون ينجون من أي إصابة لكنهم يفقدون كل هدف — يتجولون إلى الأبد بلا غاية. مصير أسوأ من الموت.</span>
-        </div>
-      </div>
-    </div>
+<div class="container">
+  <div class="sec-title fi2"><span class="eo">The 14 Kakin Princes — Succession War</span><span class="ao">الـ14 أمراء كاكين — حرب الخلافة</span></div>
+  <div class="sec-div"></div>
+  <p style="text-align:center;color:var(--mu);font-size:.9rem;font-style:italic;max-width:700px;margin:0 auto 2rem;line-height:1.8" class="fi2"><span class="eo">Aboard the Black Whale, King Nasubi's 14 children must secretly eliminate each other. Each prince has a Guardian Spirit Beast Nen ability. The last one standing inherits the Kakin throne.</span><span class="ao">على متن Black Whale، يجب على أبناء الملك ناسوبي الـ14 التخلص من بعضهم سراً. لكل أمير وحش روح من النين. الناجي الأخير يرث عرش كاكين.</span></p>
+  <div class="pr-grid fi2">
+    <div class="pr-card"><div class="pr-av" id="dc-pr-1" onclick="openAv('dc-pr-1')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="pr-num">1st</div><div class="pr-name">Benjamin <span class="s-alive">active</span></div><div class="pr-info"><span class="eo">Military-minded eldest. Commands private army.</span><span class="ao">الأكبر العسكري. يقود جيشاً خاصاً.</span></div><div class="pr-beast">Steals abilities from dying soldiers</div></div>
+    <div class="pr-card"><div class="pr-av" id="dc-pr-2" onclick="openAv('dc-pr-2')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="pr-num">2nd</div><div class="pr-name">Camilla <span class="s-alive">active</span></div><div class="pr-info"><span class="eo">If she dies, her killer dies 30 days later.</span><span class="ao">إذا ماتت قاتلها يموت بعد 30 يوماً.</span></div><div class="pr-beast">Post-death revenge kill</div></div>
+    <div class="pr-card"><div class="pr-av" id="dc-pr-3" onclick="openAv('dc-pr-3')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="pr-num">3rd</div><div class="pr-name">Zhang Lei <span class="s-alive">active</span></div><div class="pr-info"><span class="eo">Charming & diplomatic. Recruits allies openly.</span><span class="ao">ساحر ودبلوماسي. يجنّد الحلفاء علناً.</span></div><div class="pr-beast">Grants wishes to followers</div></div>
+    <div class="pr-card" style="border-color:rgba(239,68,68,.3)"><div class="pr-av" id="dc-pr-4" onclick="openAv('dc-pr-4')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="pr-num" style="color:#f87171">4th ⚠</div><div class="pr-name">Tserriednich <span class="s-alive">active</span></div><div class="pr-info"><span class="eo">Serial killer. Awakened Nen at terrifying speed. Kurapika's primary target.</span><span class="ao">قاتل متسلسل. أيقظ نينه بسرعة مرعبة. هدف كوراباكا.</span></div><div class="pr-beast">Future-seeing — Tier 1 threat</div></div>
+    <div class="pr-card"><div class="pr-av" id="dc-pr-5" onclick="openAv('dc-pr-5')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="pr-num">5th</div><div class="pr-name">Tubeppa <span class="s-alive">active</span></div><div class="pr-info"><span class="eo">Analytical. Studies Nen academically.</span><span class="ao">تحليلية. تدرس النين أكاديمياً.</span></div><div class="pr-beast">Analysis & intel gathering</div></div>
+    <div class="pr-card"><div class="pr-av" id="dc-pr-6" onclick="openAv('dc-pr-6')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="pr-num">6th</div><div class="pr-name">Tyson <span class="s-alive">active</span></div><div class="pr-info"><span class="eo">Religious. Believes the war is a "blessing."</span><span class="ao">دينية. تعتقد الحرب "نعمة".</span></div><div class="pr-beast">Converts followers to her religion</div></div>
+    <div class="pr-card"><div class="pr-av" id="dc-pr-7" onclick="openAv('dc-pr-7')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="pr-num">7th</div><div class="pr-name">Luzurus <span class="s-alive">active</span></div><div class="pr-info"><span class="eo">Hedonistic. Underestimated but dangerous.</span><span class="ao">محب للملذات. يُستهان به لكن خطير.</span></div><div class="pr-beast">Smoke & addiction manipulation</div></div>
+    <div class="pr-card"><div class="pr-av" id="dc-pr-8" onclick="openAv('dc-pr-8')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="pr-num">8th</div><div class="pr-name">Salé-salé <span class="s-alive">active</span></div><div class="pr-info"><span class="eo">Party-lover. Has the most unusual Guardian Beast.</span><span class="ao">محب للحفلات. وحشه الأكثر غرابة.</span></div><div class="pr-beast">Creates aphrodisiac atmosphere</div></div>
+    <div class="pr-card"><div class="pr-av" id="dc-pr-9" onclick="openAv('dc-pr-9')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="pr-num">9th</div><div class="pr-name">Halkenburg <span class="s-alive">active</span></div><div class="pr-info"><span class="eo">Idealist who REFUSES to participate.</span><span class="ao">مثالي يرفض المشاركة.</span></div><div class="pr-beast">Arrows that attack his OWN followers</div></div>
+    <div class="pr-card"><div class="pr-av" id="dc-pr-10" onclick="openAv('dc-pr-10')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="pr-num">10th</div><div class="pr-name">Kacho <span class="s-dead">deceased</span></div><div class="pr-info"><span class="eo">Sacrificed herself to protect her twin Fugetsu.</span><span class="ao">ضحّت بنفسها لحماية توأمها فوغيتسو.</span></div><div class="pr-beast">Post-death sacrifice</div></div>
+    <div class="pr-card"><div class="pr-av" id="dc-pr-11" onclick="openAv('dc-pr-11')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="pr-num">11th</div><div class="pr-name">Fugetsu <span class="s-alive">active</span></div><div class="pr-info"><span class="eo">Twin with Kacho. Teleportation door escape ability.</span><span class="ao">توأم كاتشو. تفتح أبواباً للانتقال الفوري.</span></div><div class="pr-beast">Door to anywhere — escape portals</div></div>
+    <div class="pr-card"><div class="pr-av" id="dc-pr-12" onclick="openAv('dc-pr-12')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="pr-num">12th</div><div class="pr-name">Momoze <span class="s-dead">deceased</span></div><div class="pr-info"><span class="eo">Young with weakest guard team. Eliminated early.</span><span class="ao">صغيرة مع أضعف حراسة. اغتيلت مبكراً.</span></div><div class="pr-beast">Eliminated before full use</div></div>
+    <div class="pr-card"><div class="pr-av" id="dc-pr-13" onclick="openAv('dc-pr-13')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="pr-num">13th</div><div class="pr-name">Marayam <span class="s-alive">active</span></div><div class="pr-info"><span class="eo">9-year-old child. Kurapika's primary client.</span><span class="ao">طفل 9 سنوات. الموكّل الرئيسي لكوراباكا.</span></div><div class="pr-beast">Teddy bear beast (protective)</div></div>
+    <div class="pr-card"><div class="pr-av" id="dc-pr-14" onclick="openAv('dc-pr-14')"><div class="av-empty-dc"></div><div class="cal-edit">✏</div></div><div class="pr-num">14th</div><div class="pr-name">Woble <span class="s-alive">active</span></div><div class="pr-info"><span class="eo">Infant princess. Kurapika is her bodyguard captain.</span><span class="ao">رضيعة. كوراباكا يحرسها.</span></div><div class="pr-beast">Unknown — too young to control it</div></div>
   </div>
+</div>
 </section>
 
-<!-- SUCCESSION WAR -->
-<section style="background:rgba(10,0,0,.5)">
-  <div class="container">
-    <h2 class="section-title fade-in">
-      <span class="en-only">The 14 Kakin Princes — Succession War</span>
-      <span class="ar-only">الـ14 أمراء كاكين — حرب الخلافة</span>
-    </h2>
-    <div class="section-divider"></div>
-    <p style="text-align:center;color:var(--muted);font-size:.95rem;font-style:italic;max-width:700px;margin:0 auto 2.5rem;line-height:1.8" class="fade-in">
-      <span class="en-only">King Nasubi's 14 children must secretly eliminate each other aboard the Black Whale. Each prince received a Guardian Spirit Beast Nen ability from birth. The last one standing inherits the Kakin throne.</span>
-      <span class="ar-only">يجب على أبناء الملك ناسوبي الـ14 التخلص من بعضهم سراً على متن Black Whale. كل أمير تلقى قدرة وحش روح النين منذ الولادة. الناجي الأخير يرث عرش كاكين.</span>
-    </p>
-    <div class="princes-grid fade-in">
-      <div class="prince-card">
-        <div class="prince-num">1st</div>
-        <div class="prince-name">Benjamin Hui Guo Rou <span class="status-alive-p">active</span></div>
-        <div class="prince-info"><span class="en-only">Eldest & military-minded. Commands his own private army. Most aggressive in pursuing the throne.</span><span class="ar-only">الأكبر والأكثر عسكريةً. يقود جيشه الخاص. الأكثر عدوانية في السعي للعرش.</span></div>
-        <div class="prince-beast">Guardian Beast: Ability theft from dying soldiers</div>
-      </div>
-      <div class="prince-card">
-        <div class="prince-num">2nd</div>
-        <div class="prince-name">Camilla Hui Guo Rou <span class="status-alive-p">active</span></div>
-        <div class="prince-info"><span class="en-only">Ruthless and cunning. Has her own Nen ability that activates on her death — a guaranteed trap.</span><span class="ar-only">قاسية ومكارة. لديها قدرة نين تتفعل عند موتها — فخ مضمون.</span></div>
-        <div class="prince-beast">Guardian Beast: "If I die, my killer dies 30 days later"</div>
-      </div>
-      <div class="prince-card">
-        <div class="prince-num">3rd</div>
-        <div class="prince-name">Zhang Lei Hui Guo Rou <span class="status-alive-p">active</span></div>
-        <div class="prince-info"><span class="en-only">Charming and diplomatic. Recruits allies openly. Powerful political player with wide support.</span><span class="ar-only">ساحر ودبلوماسي. يجنّد الحلفاء بشكل صريح. لاعب سياسي قوي بدعم واسع.</span></div>
-        <div class="prince-beast">Guardian Beast: Grants wishes to recruited followers</div>
-      </div>
-      <div class="prince-card" style="border-color:rgba(239,68,68,.35)">
-        <div class="prince-num">4th</div>
-        <div class="prince-name">Tserriednich Hui Guo Rou <span class="status-alive-p">active</span></div>
-        <div class="prince-info"><span class="en-only">Most dangerous and sadistic. A serial killer who collects Scarlet Eyes. <b>Awakened his own Nen</b> at terrifying speed — confronting Kurapika's main target.</span><span class="ar-only">الأخطر والأكثر سادية. قاتل متسلسل يجمع العيون القرمزية. <b>أيقظ نينه الخاص</b> بسرعة مرعبة — الهدف الرئيسي لكوراباكا.</span></div>
-        <div class="prince-beast">Guardian Beast: Future-seeing ability (Tier 1 threat)</div>
-      </div>
-      <div class="prince-card">
-        <div class="prince-num">5th</div>
-        <div class="prince-name">Tubeppa Hui Guo Rou</div>
-        <div class="prince-info"><span class="en-only">Analytical and cautious. Studies Nen academically. Forms alliances strategically rather than through combat.</span><span class="ar-only">تحليلية وحذرة. تدرس النين أكاديمياً. تشكّل تحالفات استراتيجياً بدلاً من القتال.</span></div>
-        <div class="prince-beast">Guardian Beast: Analysis & information gathering</div>
-      </div>
-      <div class="prince-card">
-        <div class="prince-num">6th</div>
-        <div class="prince-name">Tyson Hui Guo Rou</div>
-        <div class="prince-info"><span class="en-only">Religious-minded. Believes the succession war is a "blessing." Spreads her ideology through a book-based cult.</span><span class="ar-only">ذات توجه ديني. تعتقد أن حرب الخلافة "نعمة". تنشر أيديولوجيتها من خلال طائفة قائمة على الكتب.</span></div>
-        <div class="prince-beast">Guardian Beast: Converts followers to her religion</div>
-      </div>
-      <div class="prince-card">
-        <div class="prince-num">7th</div>
-        <div class="prince-name">Luzurus Hui Guo Rou</div>
-        <div class="prince-info"><span class="en-only">Hedonistic and indulgent. Smokes constantly. Underestimated by others — but possesses a dangerous smoke-based ability.</span><span class="ar-only">محب للملذات ومسرف. يدخن باستمرار. يستهين به الآخرون — لكنه يمتلك قدرة دخانية خطيرة.</span></div>
-        <div class="prince-beast">Guardian Beast: Smoke & addiction-based manipulation</div>
-      </div>
-      <div class="prince-card">
-        <div class="prince-num">8th</div>
-        <div class="prince-name">Salé-salé Hui Guo Rou</div>
-        <div class="prince-info"><span class="en-only">Party-loving and carefree. Seems disinterested in the throne. His Guardian Beast may be the most unusual of all.</span><span class="ar-only">محب للحفلات ومستهتر. يبدو غير مهتم بالعرش. وحشه الروحي قد يكون الأكثر غرابةً بين الجميع.</span></div>
-        <div class="prince-beast">Guardian Beast: Creates an "aphrodisiac atmosphere"</div>
-      </div>
-      <div class="prince-card">
-        <div class="prince-num">9th</div>
-        <div class="prince-name">Halkenburg Hui Guo Rou</div>
-        <div class="prince-info"><span class="en-only">Idealistic — REFUSES to participate in the succession war. Awakened powerful Nen despite no prior training. His beast punishes his own followers.</span><span class="ar-only">مثالي — يرفض المشاركة في حرب الخلافة. أيقظ نيناً قوياً دون تدريب مسبق. وحشه يعاقب أتباعه هو.</span></div>
-        <div class="prince-beast">Guardian Beast: Arrows that attack the prince's own followers</div>
-      </div>
-      <div class="prince-card">
-        <div class="prince-num">10th</div>
-        <div class="prince-name">Kacho Hui Guo Rou <span class="status-dead-p">deceased</span></div>
-        <div class="prince-info"><span class="en-only">Twin with Fugetsu. Sacrificed herself to protect her twin using a powerful post-death Nen vow that faked Fugetsu's death.</span><span class="ar-only">توأم مع فوغيتسو. ضحّت بنفسها لحماية توأمها بنذر نين بعد الموت قوي زيّف موت فوغيتسو.</span></div>
-        <div class="prince-beast">Post-death: Protected twin via sacrificial vow</div>
-      </div>
-      <div class="prince-card">
-        <div class="prince-num">11th</div>
-        <div class="prince-name">Fugetsu Hui Guo Rou <span class="status-alive-p">active</span></div>
-        <div class="prince-info"><span class="en-only">Twin with Kacho. Has a teleportation ability allowing escape from enclosed spaces. Currently protected by her twin's sacrifice.</span><span class="ar-only">توأم مع كاتشو. تمتلك قدرة انتقال فوري للهروب من الأماكن المغلقة. محمية حالياً بتضحية توأمها.</span></div>
-        <div class="prince-beast">Door to anywhere — teleportation escape portals</div>
-      </div>
-      <div class="prince-card">
-        <div class="prince-num">12th</div>
-        <div class="prince-name">Momoze Hui Guo Rou <span class="status-dead-p">deceased</span></div>
-        <div class="prince-info"><span class="en-only">Young and inexperienced. Had the weakest bodyguard team. Assassinated early in the voyage.</span><span class="ar-only">صغيرة وعديمة الخبرة. لديها أضعف فريق حراسة. اغتيلت مبكراً في الرحلة.</span></div>
-        <div class="prince-beast">Frog-type beast (eliminated before being used)</div>
-      </div>
-      <div class="prince-card">
-        <div class="prince-num">13th</div>
-        <div class="prince-name">Marayam Hui Guo Rou <span class="status-alive-p">active</span></div>
-        <div class="prince-info"><span class="en-only">Child prince — only 9 years old. Kurapika's primary client. His naive innocence makes the succession war even more tragic.</span><span class="ar-only">أمير طفل — 9 سنوات فقط. الموكّل الرئيسي لكوراباكا. براءته الساذجة تجعل حرب الخلافة أكثر مأساويةً.</span></div>
-        <div class="prince-beast">Teddy bear beast (defensive / unknown full power)</div>
-      </div>
-      <div class="prince-card">
-        <div class="prince-num">14th</div>
-        <div class="prince-name">Woble Hui Guo Rou <span class="status-alive-p">active</span></div>
-        <div class="prince-info"><span class="en-only">Infant — mere months old. Has Kurapika as her bodyguard captain. Her mother Oito is an ally of Kurapika's mission.</span><span class="ar-only">رضيعة — أشهر قليلة فقط. كوراباكا قائد حراستها. أمها أويتو حليفة لمهمة كوراباكا.</span></div>
-        <div class="prince-beast">Unknown — infant cannot control it yet</div>
-      </div>
-    </div>
+<!-- Key Events -->
+<section style="background:rgba(255,30,0,.03)">
+<div class="container">
+  <div class="sec-title fi2"><span class="eo">Key Story Events</span><span class="ao">أحداث القصة الرئيسية</span></div>
+  <div class="sec-div"></div>
+  <div class="fi2">
+    <div class="tl"><div class="ch">Ch. 340–348</div><div class="ti"><span class="eo">King Nasubi's Announcement</span><span class="ao">إعلان الملك ناسوبي</span></div><div class="de"><span class="eo">Kakin Empire announces the Dark Continent expedition led by Beyond Netero. V5 becomes V6. Leorio and Kurapika join the Zodiacs.</span><span class="ao">إمبراطورية كاكين تعلن البعثة بقيادة Beyond نيتيرو. V5 تصبح V6. ليوريو وكوراباكا يخلفان غينغ وباريستون في الأبراج.</span></div></div>
+    <div class="tl"><div class="ch">Ch. 349–360</div><div class="ti"><span class="eo">Black Whale Boarding & Succession War Begins</span><span class="ao">الصعود على Black Whale وبداية حرب الخلافة</span></div><div class="de"><span class="eo">200,000 passengers board. Kurapika discovers the war. Tserriednich awakens Nen at terrifying speed.</span><span class="ao">200,000 مسافر يصعدون. كوراباكا يكتشف الحرب. تسيريدنيش يُصحي نينه بسرعة مرعبة.</span></div></div>
+    <div class="tl"><div class="ch">Ch. 361–380</div><div class="ti"><span class="eo">Princes Fall & Phantom Troupe Boards</span><span class="ao">سقوط الأمراء وصعود فرقة الوهم</span></div><div class="de"><span class="eo">Kacho and Momoze are killed. Kacho's sacrifice saves Fugetsu. The Phantom Troupe boards searching for Hisoka.</span><span class="ao">تُقتل كاتشو وموموزي. تضحية كاتشو تنقذ فوغيتسو. فرقة الوهم تصعد بحثاً عن هيسوكا.</span></div></div>
+    <div class="tl"><div class="ch">Ch. 381–400</div><div class="ti"><span class="eo">Hisoka vs Chrollo Rematch</span><span class="ao">هيسوكا ضد كرولو — اللقاء الثاني</span></div><div class="de"><span class="eo">Explosive rematch. Cha-R Mafia kills civilians — Phantom Troupe is hired to stop them.</span><span class="ao">لقاء ثانٍ متفجر. عائلة تشا-آر تقتل المدنيين — فرقة الوهم تُستأجر لإيقافهم.</span></div></div>
+    <div class="tl"><div class="ch">Ch. 401–410+ (Ongoing)</div><div class="ti"><span class="eo">Beyond's Secret Revealed</span><span class="ao">سر Beyond ينكشف</span></div><div class="de"><span class="eo">Beyond Netero fathered one of the 14 princes. He manipulates the succession war. The voyage continues toward the Dark Continent.</span><span class="ao">Beyond نيتيرو أنجب أحد الأمراء الـ14. يتلاعب بحرب الخلافة. السفينة تواصل رحلتها نحو القارة.</span></div></div>
   </div>
+</div>
 </section>
 
-<!-- KEY EVENTS -->
+<!-- Mafia -->
 <section>
-  <div class="container">
-    <h2 class="section-title fade-in">
-      <span class="en-only">Key Story Events (Ch. 340–410+)</span>
-      <span class="ar-only">أحداث القصة الرئيسية (ف. 340–410+)</span>
-    </h2>
-    <div class="section-divider"></div>
-    <div class="fade-in">
-      <div class="timeline-block">
-        <div class="timeline-ch">Ch. 340–348</div>
-        <div class="timeline-title"><span class="en-only">King Nasubi's Announcement</span><span class="ar-only">إعلان الملك ناسوبي</span></div>
-        <div class="timeline-desc"><span class="en-only">The Kakin Empire announces the Dark Continent expedition led by Beyond Netero. The V5 becomes V6. Ging and Pariston leave the Zodiacs. Leorio and Kurapika are recruited as replacements.</span><span class="ar-only">تعلن إمبراطورية كاكين عن بعثة القارة المظلمة بقيادة Beyond نيتيرو. V5 تصبح V6. غينغ وباريستون يغادران الأبراج. يُجنَّد ليوريو وكوراباكا كبدلاء.</span></div>
-      </div>
-      <div class="timeline-block">
-        <div class="timeline-ch">Ch. 349–360</div>
-        <div class="timeline-title"><span class="en-only">Black Whale Boarding</span><span class="ar-only">الصعود على Black Whale</span></div>
-        <div class="timeline-desc"><span class="en-only">200,000 passengers board the Black Whale. Kurapika discovers the Succession War happening aboard. He begins training new Nen users including Prince Marayam's staff. Tserriednich awakens his own Nen with terrifying speed.</span><span class="ar-only">200,000 مسافر يصعدون على Black Whale. يكتشف كوراباكا حرب الخلافة على متنها. يبدأ تدريب مستخدمي نين جدد. تسيريدنيش يُصحي نينه الخاص بسرعة مرعبة.</span></div>
-      </div>
-      <div class="timeline-block">
-        <div class="timeline-ch">Ch. 361–380</div>
-        <div class="timeline-title"><span class="en-only">Princes Begin Eliminating Each Other</span><span class="ar-only">الأمراء يبدأون التخلص من بعضهم</span></div>
-        <div class="timeline-desc"><span class="en-only">Multiple princes are eliminated. Kacho and Momoze are killed. Kacho's sacrifice saves Fugetsu via a post-death Nen vow. The Phantom Troupe boards searching for Hisoka. Three Kakin Mafia families operate in the shadows.</span><span class="ar-only">يتم التخلص من عدة أمراء. تُقتل كاتشو وموموزي. تضحية كاتشو تنقذ فوغيتسو بنذر نين بعد الموت. فرقة الوهم تصعد بحثاً عن هيسوكا. ثلاث عائلات مافيا كاكين تعمل في الظل.</span></div>
-      </div>
-      <div class="timeline-block">
-        <div class="timeline-ch">Ch. 381–400</div>
-        <div class="timeline-title"><span class="en-only">Hisoka vs Chrollo — Rematch</span><span class="ar-only">هيسوكا ضد كرولو — اللقاء الثاني</span></div>
-        <div class="timeline-desc"><span class="en-only">Hisoka and Chrollo finally clash in an explosive rematch. Chrollo uses his Skill Hunter to devastating effect. The rogue Cha-R Mafia family starts killing civilians. Kurapika's Nen teaching operation becomes more complex and dangerous.</span><span class="ar-only">يتواجه هيسوكا وكرولو في لقاء ثانٍ متفجر. يستخدم كرولو صائد المهارات بتأثير مدمر. عائلة مافيا تشا-آر المارقة تبدأ قتل المدنيين. عملية تعليم النين لكوراباكا تصبح أكثر تعقيداً وخطورةً.</span></div>
-      </div>
-      <div class="timeline-block">
-        <div class="timeline-ch">Ch. 401–410+ (Ongoing)</div>
-        <div class="timeline-title"><span class="en-only">Beyond's Secret Revealed</span><span class="ar-only">سر Beyond ينكشف</span></div>
-        <div class="timeline-desc"><span class="en-only">Beyond Netero's true agenda is revealed — he fathered a child with one of the Kakin queens, making one of the 14 princes his own son. He manipulates the succession war to install his chosen heir. The voyage continues toward the Dark Continent.</span><span class="ar-only">تتكشف أجندة Beyond نيتيرو الحقيقية — أنجب طفلاً من إحدى ملكات كاكين مما يجعل أحد الأمراء الـ14 ابنه. يتلاعب بحرب الخلافة لتنصيب وريثه المختار. الرحلة تستمر نحو القارة المظلمة.</span></div>
-      </div>
-    </div>
+<div class="container">
+  <div class="sec-title fi2"><span class="eo">Three Kakin Mafia Families Aboard</span><span class="ao">عائلات مافيا كاكين الثلاث على المتن</span></div>
+  <div class="sec-div"></div>
+  <div class="maf-g fi2">
+    <div class="maf"><div class="mn">Cha-R Family 🔴</div><div class="md"><span class="eo"><b>Rogue.</b> Killing civilians to power their Nen. The Phantom Troupe was hired to deal with them.</span><span class="ao"><b>مارقة.</b> تقتل المدنيين لتقوية النين. فرقة الوهم استُؤجرت للتعامل معهم.</span></div></div>
+    <div class="maf"><div class="mn">Tier Family 🟡</div><div class="md"><span class="eo"><b>Allied with Phantom Troupe.</b> Joined forces against Cha-R in exchange for mutual protection.</span><span class="ao"><b>متحالفة مع فرقة الوهم.</b> تحالفت ضد تشا-آر مقابل حماية متبادلة.</span></div></div>
+    <div class="maf"><div class="mn">Heil-Ly Family ⚫</div><div class="md"><span class="eo"><b>Working with Princes.</b> Most politically connected. Backs specific princes for leverage.</span><span class="ao"><b>تعمل مع الأمراء.</b> الأكثر اتصالاً سياسياً. تدعم أمراء بعينهم للنفوذ.</span></div></div>
   </div>
+</div>
 </section>
 
-<!-- THREE MAFIA FAMILIES -->
-<section style="background:rgba(10,0,0,.5)">
-  <div class="container">
-    <h2 class="section-title fade-in">
-      <span class="en-only">The Three Kakin Mafia Families Aboard</span>
-      <span class="ar-only">عائلات مافيا كاكين الثلاث على المتن</span>
-    </h2>
-    <div class="section-divider"></div>
-    <div class="mafia-grid fade-in">
-      <div class="mafia-card">
-        <div class="mafia-name">Cha-R Family 🔴</div>
-        <div class="mafia-desc">
-          <span class="en-only"><b>Status: Rogue / Dangerous.</b> Led by Hinrigh Biganduffno. Began killing civilians to power up their Nen abilities — which grow stronger with each kill. The Phantom Troupe was hired to deal with them. The most immediately dangerous faction on the ship.</span>
-          <span class="ar-only"><b>الحالة: مارقة / خطيرة.</b> بقيادة هينريه. بدأت قتل المدنيين لتقوية قدرات النين التي تزداد قوةً مع كل قتيل. استأجرت فرقة الوهم للتعامل معهم. أكثر الفصائل خطراً فورياً على السفينة.</span>
-        </div>
-      </div>
-      <div class="mafia-card">
-        <div class="mafia-name">Tier Family 🟡</div>
-        <div class="mafia-desc">
-          <span class="en-only"><b>Status: Allied with Phantom Troupe.</b> Joined forces with the remaining Spiders to hunt down the rogue Cha-R family in exchange for mutual protection. A pragmatic alliance of criminals with a shared enemy.</span>
-          <span class="ar-only"><b>الحالة: متحالفة مع فرقة الوهم.</b> تحالفت مع بقايا العناكب لمطاردة عائلة تشا-آر المارقة مقابل حماية متبادلة. تحالف براغماتي بين مجرمين لديهم عدو مشترك.</span>
-        </div>
-      </div>
-      <div class="mafia-card">
-        <div class="mafia-name">Heil-Ly Family ⚫</div>
-        <div class="mafia-desc">
-          <span class="en-only"><b>Status: Working with Princes.</b> The most politically connected Mafia family. Operates through backing specific princes and leveraging their positions. Less violent but more strategically dangerous than the Cha-R family.</span>
-          <span class="ar-only"><b>الحالة: تعمل مع الأمراء.</b> أكثر عائلات المافيا اتصالاً سياسياً. تعمل من خلال دعم أمراء بعينهم والاستفادة من مواقعهم. أقل عنفاً لكن أكثر خطورةً استراتيجياً من عائلة تشا-آر.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  <p>
-    <span class="en-only">🔥 Dark Continent — Hunter × Hunter Manga Spoiler Page</span>
-    <span class="ar-only">🔥 القارة المظلمة — صفحة حرق مانجا هنتر × هنتر</span>
-  </p>
-  <p style="margin-top:.5rem;font-size:.75rem;color:rgba(120,80,60,.5)">
-    <span class="en-only">Based on <span style="color:var(--fire2)">Hunter × Hunter</span> by Yoshihiro Togashi — Ongoing as of 2025</span>
-    <span class="ar-only">مستند إلى <span style="color:var(--fire2)">هنتر × هنتر</span> بقلم يوشيهيرو توغاشي — مستمر حتى 2025</span>
-  </p>
-  <p style="margin-top:1rem"><a href="index.html" style="color:var(--fire2);font-family:Cinzel,serif;font-size:.8rem;text-decoration:none;letter-spacing:.1em">← Back to Main Site</a></p>
+  <p><span class="eo">Based on Hunter × Hunter by Yoshihiro Togashi — Ongoing</span><span class="ao">مستند إلى هنتر × هنتر بقلم يوشيهيرو توغاشي — مستمر</span></p>
+  <p style="margin-top:.5rem"><a href="index.html" style="color:var(--fire2);font-family:Cinzel,serif;font-size:.78rem;text-decoration:none;letter-spacing:.1em"><span class="eo">← Back to Main Site</span><span class="ao">← الموقع الرئيسي</span></a></p>
 </footer>
+</div>
 
-</div><!-- mainContent -->
+<!-- AVATAR MODAL -->
+<div id="avModal">
+  <div class="av-box">
+    <div class="av-title">🔥 <span class="eo">Set Character Image</span><span class="ao">تعيين صورة الشخصية</span></div>
+    <div class="av-prev" id="avPrev"></div>
+    <input type="url" class="av-input" id="avUrl" placeholder="Paste image URL (https://...)">
+    <div style="color:var(--mu);font-size:.75rem;margin-bottom:.6rem">— <span class="eo">or</span><span class="ao">أو</span> —</div>
+    <input type="file" id="avFile" accept="image/*" style="display:none" onchange="avFilePreview(this)">
+    <button class="av-btn" onclick="document.getElementById('avFile').click()">📁 <span class="eo">Upload from device</span><span class="ao">رفع من الجهاز</span></button>
+    <div>
+      <button class="av-apply" onclick="avApply()"><span class="eo">✓ Apply</span><span class="ao">✓ تطبيق</span></button>
+      <button class="av-cancel" onclick="closeAv()"><span class="eo">Cancel</span><span class="ao">إلغاء</span></button>
+    </div>
+  </div>
+</div>
 
 <script>
+let curAvId='';
+const AV_KEY='nen_dc_avatars';
+
 // Particles
-(function(){
-  const c=document.getElementById('particles');
-  const colors=['#ff4400','#ff6600','#ff8800','#ffaa00','#ffcc00'];
-  for(let i=0;i<30;i++){
-    const p=document.createElement('div');p.className='spark';
+(()=>{
+  const c=document.getElementById('pk');
+  const cols=['#ff4400','#ff6600','#ff8800','#ffaa00','#ffcc00'];
+  for(let i=0;i<25;i++){
+    const p=document.createElement('div');p.className='sp';
     const s=Math.random()*3+1;
-    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*12+6}s;animation-delay:${Math.random()*8}s;filter:blur(${Math.random()>.5?1:0}px)`;
+    p.style.cssText='width:'+s+'px;height:'+s+'px;left:'+Math.random()*100+'%;background:'+cols[Math.floor(Math.random()*cols.length)]+';animation-duration:'+(Math.random()*10+6)+'s;animation-delay:'+(Math.random()*6)+'s;position:fixed';
     c.appendChild(p);
   }
 })();
 
-// Warning + lang
-function enterPage(){
-  document.getElementById('warningScreen').style.display='none';
-  document.getElementById('mainContent').style.display='block';
-}
-function setWarnLang(l){
-  document.body.classList.toggle('ar',l==='ar');
-  document.body.setAttribute('dir',l==='ar'?'rtl':'ltr');
-  document.getElementById('wBtn-en').classList.toggle('active',l==='en');
-  document.getElementById('wBtn-ar').classList.toggle('active',l==='ar');
-}
+// Language
 function setLang(l){
   document.body.classList.toggle('ar',l==='ar');
   document.body.setAttribute('dir',l==='ar'?'rtl':'ltr');
-  document.getElementById('btn-en').classList.toggle('active',l==='en');
-  document.getElementById('btn-ar').classList.toggle('active',l==='ar');
+  document.getElementById('nEN').classList.toggle('on',l==='en');
+  document.getElementById('nAR').classList.toggle('on',l==='ar');
+  localStorage.setItem('dc_lang',l);
 }
+function wLang(l){
+  document.body.classList.toggle('ar',l==='ar');
+  document.body.setAttribute('dir',l==='ar'?'rtl':'ltr');
+  document.getElementById('wEN').classList.toggle('on',l==='en');
+  document.getElementById('wAR').classList.toggle('on',l==='ar');
+  localStorage.setItem('dc_lang',l);
+}
+(()=>{const sl=localStorage.getItem('dc_lang');if(sl==='ar'){wLang('ar');setLang('ar');}})();
+
+// Warning / Enter
+function enter(){
+  document.getElementById('WS').style.display='none';
+  document.getElementById('MC').classList.add('sh');
+  loadAvatars();
+}
+
+// Avatar system
+function loadAvatars(){
+  const saved=JSON.parse(localStorage.getItem(AV_KEY)||'{}');
+  Object.entries(saved).forEach(([id,url])=>applyAvToEl(id,url));
+}
+
+function applyAvToEl(id,url){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.innerHTML='<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%"><div class="cal-edit">✏</div>';
+}
+
+function openAv(id){
+  curAvId=id;
+  const saved=JSON.parse(localStorage.getItem(AV_KEY)||'{}');
+  const url=saved[id]||'';
+  document.getElementById('avUrl').value=url;
+  const prev=document.getElementById('avPrev');
+  prev.innerHTML=url?'<img src="'+url+'" style="width:100%;height:100%;object-fit:cover">':"";
+  document.getElementById('avModal').classList.add('sh');
+}
+function closeAv(){document.getElementById('avModal').classList.remove('sh');curAvId='';}
+function avFilePreview(input){
+  const file=input.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    document.getElementById('avUrl').value=e.target.result;
+    document.getElementById('avPrev').innerHTML='<img src="'+e.target.result+'" style="width:100%;height:100%;object-fit:cover">';
+  };
+  r.readAsDataURL(file);
+}
+function avApply(){
+  const url=document.getElementById('avUrl').value.trim();
+  if(!url){alert('Please enter a URL or upload an image');return;}
+  const saved=JSON.parse(localStorage.getItem(AV_KEY)||'{}');
+  saved[curAvId]=url;
+  localStorage.setItem(AV_KEY,JSON.stringify(saved));
+  applyAvToEl(curAvId,url);
+  closeAv();
+}
+document.getElementById('avModal').addEventListener('click',e=>{if(e.target===document.getElementById('avModal'))closeAv();});
+
 // Scroll animations
-const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.1});
-document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.1});
+document.querySelectorAll('.fi2').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>

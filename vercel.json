@@ -4,7 +4,7 @@
   "builds": [{"src": "*.html","use": "@vercel/static"}],
   "routes": [
     {"src": "/admin","dest": "/admin.html"},
-    {"src": "/dark","dest": "/dark-continent.html"},
+    {"src": "/dark","dest":  "/dark-continent.html"},
     {"src": "/(.*)", "dest": "/$1"}
   ],
   "headers": [

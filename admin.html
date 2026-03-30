@@ -3,119 +3,124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>⚙ Nen Admin — لوحة التحكم</title>
+<title>⚙ Nen Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+Arabic:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#05070f;--sur:rgba(255,255,255,.04);--bor:rgba(100,180,255,.15);--aura:#4db8ff;--aura2:#a78bfa;--gold:#f0c060;--text:#e8f0ff;--mu:#7a8fa8;--green:#22c55e;--red:#ef4444;--orange:#f59e0b}
+:root{--bg:#05070f;--sur:rgba(255,255,255,.04);--bor:rgba(100,180,255,.15);--aura:#4db8ff;--aura2:#a78bfa;--text:#e8f0ff;--mu:#7a8fa8;--green:#22c55e;--red:#ef4444;--orange:#f59e0b}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:'Cinzel',serif;min-height:100vh}
 body.ar{font-family:'Noto Sans Arabic','Cinzel',serif;direction:rtl}
 body.ar .ea{display:none!important} body:not(.ar) .aa{display:none!important}
 
-/* LOGIN */
+/* ── LOGIN ── */
 #LS{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center}
 .lb{background:var(--sur);border:1px solid var(--bor);border-radius:24px;padding:2.5rem;width:min(420px,92vw);text-align:center}
 .lt{font-size:1.15rem;letter-spacing:.1em;background:linear-gradient(135deg,var(--aura),var(--aura2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem}
-.lf{width:100%;padding:.85rem 1rem;background:rgba(255,255,255,.03);border:1px solid var(--bor);border-radius:12px;color:var(--text);font-size:.95rem;margin-bottom:.9rem;font-family:JetBrains Mono,monospace;letter-spacing:.12em;transition:border-color .3s}
-.lf:focus{outline:none;border-color:var(--aura)}
+.lf{width:100%;padding:.85rem 1rem;background:rgba(255,255,255,.03);border:1px solid var(--bor);border-radius:12px;color:var(--text);font-size:.95rem;margin-bottom:.9rem;font-family:JetBrains Mono,monospace;letter-spacing:.12em;transition:border-color .3s;outline:none}
+.lf:focus{border-color:var(--aura)}
 .lbtn{width:100%;padding:.9rem;border-radius:12px;border:none;background:linear-gradient(135deg,var(--aura),var(--aura2));color:#000;font-family:'Cinzel',serif;font-size:.9rem;font-weight:700;letter-spacing:.1em;cursor:pointer;transition:all .3s}
 .lbtn:hover{transform:scale(1.02);box-shadow:0 8px 24px rgba(77,184,255,.3)}
-.lerr{color:var(--red);font-size:.75rem;margin-top:.7rem;min-height:1em;font-family:JetBrains Mono,monospace}
+.lerr{color:var(--red);font-size:.78rem;margin-top:.7rem;min-height:1.2em;font-family:JetBrains Mono,monospace}
 .lhint{margin-top:1.1rem;padding:.75rem;background:rgba(77,184,255,.04);border:1px solid rgba(77,184,255,.1);border-radius:10px;font-size:.72rem;color:var(--mu);font-family:JetBrains Mono,monospace;line-height:1.8;text-align:left}
 
-/* PANEL */
-#AP{display:none} #AP.vis{display:flex;flex-direction:column;min-height:100vh}
+/* ── PANEL ── */
+#AP{display:none}
+#AP.vis{display:flex;flex-direction:column;min-height:100vh}
 .ah{position:sticky;top:0;z-index:100;background:rgba(8,12,24,.97);border-bottom:1px solid var(--bor);padding:.65rem 1.1rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;backdrop-filter:blur(12px)}
 .abrand{font-size:.82rem;letter-spacing:.1em;background:linear-gradient(135deg,var(--aura),var(--aura2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;flex-shrink:0}
 .tabs{display:flex;gap:.22rem;flex-wrap:wrap;flex:1}
 .tab{padding:.35rem .75rem;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--mu);cursor:pointer;font-family:'Cinzel',serif;font-size:.67rem;letter-spacing:.07em;transition:all .22s;white-space:nowrap}
-.tab:hover{color:var(--text);border-color:var(--bor)} .tab.on{background:rgba(77,184,255,.1);border-color:var(--aura);color:var(--aura)}
+.tab:hover{color:var(--text);border-color:var(--bor)}
+.tab.on{background:rgba(77,184,255,.1);border-color:var(--aura);color:var(--aura)}
 .ltog{display:flex;gap:.2rem;background:rgba(255,255,255,.05);border-radius:20px;padding:.18rem;flex-shrink:0}
-.lb2{border:none;cursor:pointer;padding:.22rem .6rem;border-radius:16px;font-size:.67rem;font-weight:700;transition:all .22s;background:transparent;color:var(--mu)} .lb2.on{background:var(--aura);color:#000}
+.lb2{border:none;cursor:pointer;padding:.22rem .6rem;border-radius:16px;font-size:.67rem;font-weight:700;transition:all .22s;background:transparent;color:var(--mu)}
+.lb2.on{background:var(--aura);color:#000}
 .savebig{padding:.45rem 1.3rem;border-radius:8px;border:none;background:linear-gradient(135deg,var(--green),#16a34a);color:#000;font-family:'Cinzel',serif;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .25s;white-space:nowrap;flex-shrink:0;letter-spacing:.06em}
 .savebig:hover{transform:scale(1.04);box-shadow:0 4px 16px rgba(34,197,94,.4)}
+.savebig:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .outb{padding:.38rem .75rem;border-radius:8px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:var(--red);cursor:pointer;font-family:'Cinzel',serif;font-size:.68rem;transition:all .22s;flex-shrink:0}
 
 .abody{max-width:1400px;margin:0 auto;width:100%;padding:1.3rem}
-.tc{display:none;width:100%} .tc.on{display:block}
-
+.tc{display:none;width:100%}
+.tc.on{display:block}
 .card{background:var(--sur);border:1px solid var(--bor);border-radius:16px;padding:1.3rem;margin-bottom:1.1rem}
 .card-t{font-size:.73rem;letter-spacing:.13em;color:var(--aura);text-transform:uppercase;margin-bottom:1.1rem;padding-bottom:.6rem;border-bottom:1px solid var(--bor)}
 .row{display:grid;grid-template-columns:130px 1fr;gap:.75rem;align-items:start;margin-bottom:.75rem}
 .lbl{font-size:.68rem;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;padding-top:.58rem;line-height:1.4}
-.fi,.ta{width:100%;padding:.58rem .82rem;background:rgba(255,255,255,.03);border:1px solid var(--bor);border-radius:10px;color:var(--text);font-family:JetBrains Mono,monospace;font-size:.8rem;transition:border-color .3s;resize:vertical}
-.fi:focus,.ta:focus{outline:none;border-color:var(--aura)} .ta{min-height:60px}
-.mf{width:100%;padding:.4rem .6rem;margin-bottom:.45rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;color:var(--text);font-size:.77rem;font-family:JetBrains Mono,monospace;transition:border-color .25s;resize:vertical}
-.mf:focus{outline:none;border-color:var(--aura)} .ml{font-size:.62rem;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem}
+.fi,.ta{width:100%;padding:.58rem .82rem;background:rgba(255,255,255,.03);border:1px solid var(--bor);border-radius:10px;color:var(--text);font-family:JetBrains Mono,monospace;font-size:.8rem;transition:border-color .3s;resize:vertical;outline:none}
+.fi:focus,.ta:focus{border-color:var(--aura)}
+.ta{min-height:60px}
 
-/* TEXT EDITOR */
+/* ── TEXT EDITOR ── */
 .cat-hdr{padding:.6rem .9rem;background:rgba(77,184,255,.06);border:1px solid rgba(77,184,255,.12);border-radius:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:var(--aura);margin-bottom:.5rem;transition:all .22s;user-select:none}
-.cat-hdr:hover{background:rgba(77,184,255,.1)} .cat-hdr.open .arr{transform:rotate(90deg)}
+.cat-hdr:hover{background:rgba(77,184,255,.1)}
 .arr{transition:transform .22s;font-size:.58rem;flex-shrink:0}
-.cat-items{display:none} .cat-items.open{display:block}
+.cat-hdr.open .arr{transform:rotate(90deg)}
+.cat-items{display:none}
+.cat-items.open{display:block}
 .epair{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:10px;padding:.85rem;margin-bottom:.5rem}
 .epair-id{font-size:.6rem;color:rgba(77,184,255,.35);font-family:JetBrains Mono,monospace;margin-bottom:.45rem}
 .lpair{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 .llbl{font-size:.63rem;color:var(--mu);margin-bottom:.2rem;letter-spacing:.07em;text-transform:uppercase}
-.efi{width:100%;padding:.48rem .72rem;background:rgba(255,255,255,.03);border:1px solid var(--bor);border-radius:8px;color:var(--text);font-family:JetBrains Mono,monospace;font-size:.78rem;resize:vertical;min-height:36px;transition:border-color .25s}
-.efi:focus{outline:none;border-color:var(--aura)} .efi.ml2{min-height:62px}
-.modified{border-color:rgba(34,197,94,.4)!important;background:rgba(34,197,94,.04)!important}
+.efi{width:100%;padding:.48rem .72rem;background:rgba(255,255,255,.03);border:1px solid var(--bor);border-radius:8px;color:var(--text);font-family:JetBrains Mono,monospace;font-size:.78rem;resize:vertical;min-height:36px;transition:border-color .25s;outline:none}
+.efi:focus{border-color:var(--aura)}
+.efi.ml2{min-height:62px}
+.efi.modified{border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.04)}
 
-/* IMAGES */
+/* ── IMAGES ── */
 .av-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:.65rem}
 .av-item{background:rgba(255,255,255,.02);border:1px solid var(--bor);border-radius:10px;padding:.8rem;display:flex;align-items:center;gap:.7rem}
-.av-thumb{width:44px;height:44px;border-radius:50%;border:2px solid var(--bor);overflow:hidden;flex-shrink:0;background:rgba(77,184,255,.08);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
-.av-thumb img{width:100%;height:100%;object-fit:cover} .av-thumb.set{border-color:var(--green)}
+.av-thumb{width:44px;height:44px;border-radius:50%;border:2px solid var(--bor);overflow:hidden;flex-shrink:0;background:rgba(77,184,255,.08);display:flex;align-items:center;justify-content:center}
+.av-thumb img{width:100%;height:100%;object-fit:cover}
+.av-thumb.set{border-color:var(--green)}
 .av-name{font-size:.72rem;color:var(--text);margin-bottom:.38rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .avc{display:flex;gap:.28rem;flex-wrap:wrap;align-items:center}
 .avb{padding:.26rem .58rem;border-radius:7px;border:1px solid var(--bor);background:rgba(255,255,255,.03);color:var(--mu);cursor:pointer;font-size:.65rem;font-family:'Cinzel',serif;transition:all .22s;white-space:nowrap}
 .avb:hover{border-color:var(--aura);color:var(--aura)}
-.av-url{flex:1;min-width:80px;padding:.26rem .52rem;background:rgba(255,255,255,.03);border:1px solid var(--bor);border-radius:7px;color:var(--text);font-size:.68rem;font-family:JetBrains Mono,monospace}
-.av-url:focus{outline:none;border-color:var(--aura)}
+.av-url{flex:1;min-width:80px;padding:.26rem .52rem;background:rgba(255,255,255,.03);border:1px solid var(--bor);border-radius:7px;color:var(--text);font-size:.68rem;font-family:JetBrains Mono,monospace;outline:none}
+.av-url:focus{border-color:var(--aura)}
 .av-ok{padding:.26rem .62rem;border-radius:7px;border:none;background:var(--green);color:#000;font-size:.65rem;font-family:'Cinzel',serif;font-weight:700;cursor:pointer;transition:all .22s}
 .av-ok:hover{transform:scale(1.05)}
 .av-del{padding:.26rem .46rem;border-radius:7px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:var(--red);cursor:pointer;font-size:.65rem;transition:all .22s}
 .av-del:hover{background:rgba(239,68,68,.2)}
 .dc-av-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.65rem}
 .dc-av-item{background:rgba(255,50,0,.04);border:1px solid rgba(255,68,0,.15);border-radius:10px;padding:.8rem;display:flex;align-items:center;gap:.68rem}
-.dc-av-thumb{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,68,0,.3);overflow:hidden;flex-shrink:0;background:rgba(255,68,0,.06);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
-.dc-av-thumb img{width:100%;height:100%;object-fit:cover} .dc-av-thumb.set{border-color:#ff8844}
+.dc-av-thumb{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,68,0,.3);overflow:hidden;flex-shrink:0;background:rgba(255,68,0,.06);display:flex;align-items:center;justify-content:center}
+.dc-av-thumb img{width:100%;height:100%;object-fit:cover}
+.dc-av-thumb.set{border-color:#ff8844}
 
-/* QUIZ */
+/* ── QUIZ ── */
 .qitem{background:rgba(255,255,255,.02);border:1px solid var(--bor);border-radius:12px;padding:.95rem;margin-bottom:.75rem}
 .q-opts{display:grid;grid-template-columns:1fr 1fr;gap:.42rem;margin:.42rem 0}
+.mf{width:100%;padding:.4rem .6rem;margin-bottom:.45rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;color:var(--text);font-size:.77rem;font-family:JetBrains Mono,monospace;resize:vertical;outline:none}
+.mf:focus{border-color:var(--aura)}
+.ml{font-size:.62rem;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem}
 
-/* LINKS */
+/* ── LINKS ── */
 .link-row{display:flex;gap:.55rem;align-items:center;background:rgba(255,255,255,.02);padding:.6rem;border-radius:10px;border:1px solid var(--bor);margin-bottom:.55rem;flex-wrap:wrap}
 .delb{padding:.3rem .62rem;border-radius:7px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:var(--red);cursor:pointer;font-size:.7rem;transition:all .2s}
 .delb:hover{background:rgba(239,68,68,.2)}
 .addb{padding:.48rem 1.1rem;border-radius:8px;border:1px solid rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:var(--green);cursor:pointer;font-family:'Cinzel',serif;font-size:.73rem;transition:all .2s}
 .addb:hover{background:rgba(34,197,94,.15)}
 
-/* STATS */
+/* ── STATS ── */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;margin-bottom:1.1rem}
 .stat{background:var(--sur);border:1px solid var(--bor);border-radius:12px;padding:.95rem;text-align:center}
-.stat .n{font-size:1.8rem;font-weight:700;color:var(--aura)} .stat .l{font-size:.62rem;color:var(--mu);letter-spacing:.1em;margin-top:.18rem}
+.stat .n{font-size:1.8rem;font-weight:700;color:var(--aura)}
+.stat .l{font-size:.62rem;color:var(--mu);letter-spacing:.1em;margin-top:.18rem}
 
-/* HOW TO BLOCK */
-.howto{background:rgba(34,197,94,.04);border:2px solid rgba(34,197,94,.3);border-radius:16px;padding:1.4rem;margin-bottom:1.2rem}
-.howto-title{font-size:.85rem;color:var(--green);letter-spacing:.1em;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
-.step-row{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:.8rem}
-.step-num{width:28px;height:28px;border-radius:50%;background:var(--green);color:#000;font-family:'Cinzel',serif;font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-text{color:var(--mu);font-size:.82rem;line-height:1.6;padding-top:.18rem}
-.step-text b{color:var(--text)}
-.step-text code{background:rgba(77,184,255,.1);color:var(--aura);padding:.1rem .3rem;border-radius:4px;font-family:JetBrains Mono,monospace;font-size:.76rem}
-
-/* SAVE BUTTON AREA */
-.save-area{background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:14px;padding:1.2rem 1.5rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
-.save-desc{flex:1;color:var(--mu);font-size:.82rem;line-height:1.6}
-.save-btn-big{padding:.75rem 2rem;border-radius:12px;border:none;background:linear-gradient(135deg,var(--green),#16a34a);color:#000;font-family:'Cinzel',serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .3s;letter-spacing:.08em;white-space:nowrap}
-.save-btn-big:hover{transform:scale(1.04);box-shadow:0 6px 20px rgba(34,197,94,.4)}
-
-#toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--green);color:#000;padding:.62rem 1.2rem;border-radius:10px;font-family:'Cinzel',serif;font-size:.78rem;font-weight:700;transform:translateY(80px);opacity:0;transition:all .32s;z-index:9999;max-width:300px}
-#toast.sh{transform:translateY(0);opacity:1} #toast.er{background:var(--red);color:#fff}
+/* ── INFO BOX ── */
+.infobox{background:rgba(34,197,94,.04);border:2px solid rgba(34,197,94,.3);border-radius:16px;padding:1.3rem 1.5rem;margin-bottom:1.2rem}
+.infobox-title{font-size:.82rem;color:var(--green);letter-spacing:.1em;margin-bottom:.8rem}
+.infobox p{color:var(--mu);font-size:.82rem;line-height:1.8;margin-bottom:.4rem}
+.infobox code{background:rgba(77,184,255,.1);color:var(--aura);padding:.1rem .3rem;border-radius:4px;font-family:JetBrains Mono,monospace;font-size:.76rem}
 
 .csw{display:inline-block;width:20px;height:20px;border-radius:50%;border:2px solid var(--bor);cursor:pointer;vertical-align:middle;margin-right:.35rem;transition:outline .2s}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--green);color:#000;padding:.62rem 1.2rem;border-radius:10px;font-family:'Cinzel',serif;font-size:.78rem;font-weight:700;transform:translateY(80px);opacity:0;transition:all .32s;z-index:9999;max-width:340px;pointer-events:none}
+#toast.sh{transform:translateY(0);opacity:1}
+#toast.er{background:var(--red);color:#fff}
 
 @media(max-width:900px){.stats{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr}.lpair{grid-template-columns:1fr}}
 @media(max-width:600px){.av-grid{grid-template-columns:1fr}.dc-av-grid{grid-template-columns:1fr}.tabs{gap:.15rem}.tab{font-size:.62rem;padding:.3rem .52rem}}
@@ -123,39 +128,46 @@ body.ar .ea{display:none!important} body:not(.ar) .aa{display:none!important}
 </head>
 <body>
 
-<!-- LOGIN -->
+<!-- ══ LOGIN ══ -->
 <div id="LS">
   <div class="lb">
     <div style="font-size:2.2rem;margin-bottom:.6rem">⚙️</div>
     <div class="lt"><span class="ea">ADMIN PANEL</span><span class="aa">لوحة التحكم</span></div>
     <div style="color:var(--mu);font-size:.73rem;letter-spacing:.12em;margin-bottom:1.4rem;font-family:JetBrains Mono,monospace">NEN WORLD — عالم النين</div>
-    <input type="password" class="lf" id="pwIn" placeholder="Password / كلمة المرور">
-    <button class="lbtn" onclick="doLogin()"><span class="ea">ENTER</span><span class="aa">دخول</span></button>
+    <input type="password" class="lf" id="pwIn" placeholder="Password / كلمة المرور" autocomplete="current-password">
+    <button class="lbtn" id="loginBtn">
+      <span class="ea">ENTER</span><span class="aa">دخول</span>
+    </button>
     <div class="lerr" id="lErr"></div>
-    <div class="lhint"><b style="color:var(--aura)">Default:</b> nen-admin-2025&nbsp;&nbsp;<span style="color:var(--orange)">⚠ Change after login!</span></div>
+    <div class="lhint">
+      <b style="color:var(--aura)">Default:</b> nen-admin-2025
+      <span style="color:var(--orange)">  ⚠ Change after login!</span>
+    </div>
   </div>
 </div>
 
-<!-- PANEL -->
+<!-- ══ PANEL ══ -->
 <div id="AP">
   <div class="ah">
     <div class="abrand">⚙ <span class="ea">NEN ADMIN</span><span class="aa">لوحة النين</span></div>
     <div class="tabs">
-      <button class="tab on" onclick="gT('dash',this)">📊</button>
-      <button class="tab" onclick="gT('texts',this)">✏️ <span class="ea">All Texts</span><span class="aa">كل النصوص</span></button>
-      <button class="tab" onclick="gT('imgs',this)">🖼 <span class="ea">Images</span><span class="aa">الصور</span></button>
-      <button class="tab" onclick="gT('dc',this)">🔥 <span class="ea">Dark Continent</span><span class="aa">القارة المظلمة</span></button>
-      <button class="tab" onclick="gT('quiz',this)">❓ <span class="ea">Quiz</span><span class="aa">الاختبار</span></button>
-      <button class="tab" onclick="gT('footer',this)">🔗 <span class="ea">Footer</span><span class="aa">الفوتر</span></button>
-      <button class="tab" onclick="gT('logo',this)">🖼 <span class="ea">Logo</span><span class="aa">الشعار</span></button>
-      <button class="tab" onclick="gT('princ',this)">📋 <span class="ea">Principles</span><span class="aa">المبادئ</span></button>
-      <button class="tab" onclick="gT('pw',this)">🔐 <span class="ea">Password</span><span class="aa">كلمة المرور</span></button>
+      <button class="tab on"  id="tab-dash"   onclick="gT('dash',this)">📊</button>
+      <button class="tab"     id="tab-texts"  onclick="gT('texts',this)">✏️ <span class="ea">All Texts</span><span class="aa">النصوص</span></button>
+      <button class="tab"     id="tab-imgs"   onclick="gT('imgs',this)">🖼 <span class="ea">Images</span><span class="aa">الصور</span></button>
+      <button class="tab"     id="tab-dc"     onclick="gT('dc',this)">🔥 <span class="ea">Dark Continent</span><span class="aa">القارة</span></button>
+      <button class="tab"     id="tab-princ"  onclick="gT('princ',this)">📋 <span class="ea">Principles</span><span class="aa">المبادئ</span></button>
+      <button class="tab"     id="tab-quiz"   onclick="gT('quiz',this)">❓ <span class="ea">Quiz</span><span class="aa">الاختبار</span></button>
+      <button class="tab"     id="tab-footer" onclick="gT('footer',this)">🔗 <span class="ea">Footer</span><span class="aa">الفوتر</span></button>
+      <button class="tab"     id="tab-logo"   onclick="gT('logo',this)">🖼 <span class="ea">Logo</span><span class="aa">الشعار</span></button>
+      <button class="tab"     id="tab-pw"     onclick="gT('pw',this)">🔐 <span class="ea">Password</span><span class="aa">كلمة المرور</span></button>
     </div>
     <div class="ltog">
       <button class="lb2 on" id="lbEN" onclick="sAL('en')">EN</button>
-      <button class="lb2" id="lbAR" onclick="sAL('ar')">عر</button>
+      <button class="lb2"    id="lbAR" onclick="sAL('ar')">عر</button>
     </div>
-    <button class="savebig" onclick="doSave()">💾 <span class="ea">Save & Download</span><span class="aa">حفظ وتنزيل</span></button>
+    <button class="savebig" id="saveBtn">
+      💾 <span class="ea">Save & Download</span><span class="aa">حفظ وتنزيل</span>
+    </button>
     <button class="outb" onclick="doLogout()">✕</button>
   </div>
 
@@ -163,25 +175,14 @@ body.ar .ea{display:none!important} body:not(.ar) .aa{display:none!important}
 
     <!-- DASHBOARD -->
     <div class="tc on" id="tc-dash">
-      <div class="howto">
-        <div class="howto-title">🎯 <span class="ea">The RIGHT Way to Update Your Site</span><span class="aa">الطريقة الصحيحة لتحديث موقعك</span></div>
-        <div class="step-row"><div class="step-num">1</div><div class="step-text ea">Edit texts / upload images / change anything you want in this panel</div></div>
-        <div class="step-row"><div class="step-num">1</div><div class="step-text aa">عدّل النصوص / ارفع الصور / غيّر أي شيء تريده في هذه اللوحة</div></div>
-        <div class="step-row"><div class="step-num">2</div><div class="step-text ea">Click <b>💾 Save & Download</b> → This downloads a new <code>index.html</code> with ALL your changes already inside it</div></div>
-        <div class="step-row"><div class="step-num">2</div><div class="step-text aa">اضغط <b>💾 حفظ وتنزيل</b> ← يتنزل <code>index.html</code> جديد يحتوي على كل تغييراتك مدمجة بداخله</div></div>
-        <div class="step-row"><div class="step-num">3</div><div class="step-text ea">Upload the new <code>index.html</code> to GitHub → Vercel auto-deploys → Site updated! ✅</div></div>
-        <div class="step-row"><div class="step-num">3</div><div class="step-text aa">ارفع <code>index.html</code> الجديد على GitHub ← Vercel يحدّث ← الموقع يتغير! ✅</div></div>
-        <div style="margin-top:.8rem;padding:.8rem;background:rgba(77,184,255,.08);border-radius:8px;font-size:.78rem;color:var(--aura);font-family:JetBrains Mono,monospace">
-          <span class="ea">⚡ No more nen-config.js needed! Changes are baked into index.html directly. No cache issues.</span>
-          <span class="aa">⚡ لا حاجة لـ nen-config.js بعد الآن! التغييرات مدمجة في index.html مباشرة. لا مشاكل cache.</span>
-        </div>
-      </div>
-      <div class="save-area">
-        <div class="save-desc">
-          <span class="ea">Ready to apply your changes? Click the button → your browser downloads the updated <b>index.html</b> → upload it to GitHub.</span>
-          <span class="aa">جاهز لتطبيق تغييراتك؟ اضغط الزر ← المتصفح يحمّل <b>index.html</b> المحدّث ← ارفعه على GitHub.</span>
-        </div>
-        <button class="save-btn-big" onclick="doSave()">💾 <span class="ea">Save & Download index.html</span><span class="aa">حفظ وتنزيل index.html</span></button>
+      <div class="infobox">
+        <div class="infobox-title">🎯 <span class="ea">How to update your site</span><span class="aa">كيف تحدّث موقعك</span></div>
+        <p class="ea">1. Edit texts / upload images / change anything here</p>
+        <p class="ea">2. Click <b style="color:var(--green)">💾 Save &amp; Download</b> → downloads new <code>index.html</code> with all changes inside</p>
+        <p class="ea">3. Upload <code>index.html</code> to GitHub → Vercel auto-deploys ✅</p>
+        <p class="aa">١. عدّل النصوص / ارفع الصور / غيّر أي شيء</p>
+        <p class="aa">٢. اضغط <b style="color:var(--green)">💾 حفظ وتنزيل</b> ← يتنزل <code>index.html</code> جديد بكل تغييراتك</p>
+        <p class="aa">٣. ارفع <code>index.html</code> على GitHub ← Vercel يحدّث تلقائياً ✅</p>
       </div>
       <div class="stats">
         <div class="stat"><div class="n" id="dT">248</div><div class="l"><span class="ea">Text Fields</span><span class="aa">حقول النص</span></div></div>
@@ -194,11 +195,7 @@ body.ar .ea{display:none!important} body:not(.ar) .aa{display:none!important}
     <!-- ALL TEXTS -->
     <div class="tc" id="tc-texts">
       <div class="card">
-        <div class="card-t">✏️ <span class="ea">All Site Texts — 248 fields organized by section</span><span class="aa">كل نصوص الموقع — 248 حقل مرتبة حسب القسم</span></div>
-        <p style="color:var(--mu);font-size:.78rem;margin-bottom:1rem;line-height:1.6">
-          <span class="ea">Click any section to expand. Edit EN (English) and AR (Arabic) separately. Green border = modified.</span>
-          <span class="aa">اضغط على أي قسم للفتح. عدّل EN (الإنجليزي) وAR (العربي) بشكل منفصل. الحد الأخضر = تم تعديله.</span>
-        </p>
+        <div class="card-t">✏️ <span class="ea">All Site Texts — 248 fields by section</span><span class="aa">كل نصوص الموقع — 248 حقل حسب القسم</span></div>
         <div id="textsRoot"></div>
       </div>
     </div>
@@ -206,10 +203,10 @@ body.ar .ea{display:none!important} body:not(.ar) .aa{display:none!important}
     <!-- IMAGES -->
     <div class="tc" id="tc-imgs">
       <div class="card">
-        <div class="card-t">🖼 <span class="ea">Character Images — Upload from device or paste URL</span><span class="aa">صور الشخصيات — ارفع من الجهاز أو الصق رابط</span></div>
-        <p style="color:var(--mu);font-size:.78rem;margin-bottom:1.1rem;line-height:1.6">
-          <span class="ea">✅ Two ways: Upload image file from your device, OR paste a direct image URL (https://...). Images are embedded directly in the HTML — no external hosting needed.</span>
-          <span class="aa">✅ طريقتان: ارفع ملف صورة من جهازك، أو الصق رابط صورة مباشر (https://...). الصور تُدمج مباشرة في HTML — لا حاجة لاستضافة خارجية.</span>
+        <div class="card-t">🖼 <span class="ea">Character Images</span><span class="aa">صور الشخصيات</span></div>
+        <p style="color:var(--mu);font-size:.78rem;margin-bottom:1rem;line-height:1.6">
+          <span class="ea">📁 Upload from device OR paste a direct image URL. Green border = image set.</span>
+          <span class="aa">📁 ارفع من الجهاز أو الصق رابط صورة مباشر. الحد الأخضر = تم تعيين صورة.</span>
         </p>
         <div id="imgsRoot"></div>
       </div>
@@ -218,18 +215,26 @@ body.ar .ea{display:none!important} body:not(.ar) .aa{display:none!important}
     <!-- DARK CONTINENT -->
     <div class="tc" id="tc-dc">
       <div class="card">
-        <div class="card-t">🔥 <span class="ea">Dark Continent — Calamities & Princes Images</span><span class="aa">القارة المظلمة — صور الكوارث والأمراء</span></div>
+        <div class="card-t">🔥 <span class="ea">Dark Continent — Calamities & Princes</span><span class="aa">القارة المظلمة — الكوارث والأمراء</span></div>
         <div id="dcRoot"></div>
+      </div>
+    </div>
+
+    <!-- PRINCIPLES -->
+    <div class="tc" id="tc-princ">
+      <div class="card">
+        <div class="card-t">📋 <span class="ea">Four Principles — Icons / Images</span><span class="aa">المبادئ الأربعة — أيقونات / صور</span></div>
+        <div class="av-grid" id="princGrid"></div>
       </div>
     </div>
 
     <!-- QUIZ -->
     <div class="tc" id="tc-quiz">
       <div class="card">
-        <div class="card-t">❓ <span class="ea">Quiz Bank — 8 random questions shown each session</span><span class="aa">بنك الأسئلة — 8 أسئلة عشوائية في كل جلسة</span></div>
+        <div class="card-t">❓ <span class="ea">Quiz Bank (8 random per session)</span><span class="aa">بنك الأسئلة (8 عشوائية كل جلسة)</span></div>
         <div style="display:flex;gap:.7rem;margin-bottom:.9rem;align-items:center">
           <label style="color:var(--mu);font-size:.75rem"><span class="ea">Language:</span><span class="aa">اللغة:</span></label>
-          <select id="qLang" onchange="renderQE()" style="padding:.3rem .65rem;background:rgba(255,255,255,.04);border:1px solid var(--bor);border-radius:8px;color:var(--text);font-family:JetBrains Mono,monospace;font-size:.76rem">
+          <select id="qLang" onchange="renderQE()" style="padding:.3rem .65rem;background:rgba(255,255,255,.04);border:1px solid var(--bor);border-radius:8px;color:var(--text);font-family:JetBrains Mono,monospace;font-size:.78rem;outline:none">
             <option value="en">English</option><option value="ar">العربية</option>
           </select>
         </div>
@@ -247,15 +252,17 @@ body.ar .ea{display:none!important} body:not(.ar) .aa{display:none!important}
       </div>
       <div class="card">
         <div class="card-t">📢 <span class="ea">Announcement Banner</span><span class="aa">بانر الإعلانات</span></div>
-        <div class="row"><div class="lbl"><span class="ea">Enable</span><span class="aa">تفعيل</span></div>
+        <div class="row">
+          <div class="lbl"><span class="ea">Enable</span><span class="aa">تفعيل</span></div>
           <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer;padding-top:.58rem">
             <input type="checkbox" id="bannerOn" style="width:15px;height:15px">
-            <span style="color:var(--mu);font-size:.8rem"><span class="ea">Show banner at top</span><span class="aa">إظهار البانر في الأعلى</span></span>
+            <span style="color:var(--mu);font-size:.82rem"><span class="ea">Show at top of site</span><span class="aa">إظهار في أعلى الموقع</span></span>
           </label>
         </div>
-        <div class="row"><div class="lbl">Text EN</div><input class="fi" id="banEn" placeholder="New section added!"></div>
-        <div class="row"><div class="lbl">Text AR</div><input class="fi" id="banAr" placeholder="تم إضافة قسم جديد!"></div>
-        <div class="row"><div class="lbl"><span class="ea">Color</span><span class="aa">اللون</span></div>
+        <div class="row"><div class="lbl">Text EN</div><input class="fi" id="banEn" placeholder="Announcement text..."></div>
+        <div class="row"><div class="lbl">Text AR</div><input class="fi" id="banAr" placeholder="نص الإعلان..."></div>
+        <div class="row">
+          <div class="lbl"><span class="ea">Color</span><span class="aa">اللون</span></div>
           <div style="display:flex;gap:.4rem;flex-wrap:wrap;padding-top:.42rem">
             <span class="csw" style="background:#4db8ff" onclick="setBC('#4db8ff',this)"></span>
             <span class="csw" style="background:#f0c060" onclick="setBC('#f0c060',this)"></span>
@@ -277,7 +284,7 @@ body.ar .ea{display:none!important} body:not(.ar) .aa{display:none!important}
             <input type="file" id="logoFile" accept="image/*" style="display:none" onchange="handleLogo(this)">
             <button class="avb" onclick="document.getElementById('logoFile').click()">📁 <span class="ea">From Device</span><span class="aa">من الجهاز</span></button>
             <div style="display:flex;gap:.4rem;margin-top:.5rem">
-              <input class="fi" id="logoUrl" placeholder="Or paste image URL (https://...)">
+              <input class="fi" id="logoUrl" placeholder="Or paste image URL...">
               <button class="av-ok" style="padding:.5rem .85rem" onclick="applyLogoUrl()"><span class="ea">Apply</span><span class="aa">تطبيق</span></button>
             </div>
             <div id="logoPrev" style="margin-top:.7rem;max-width:260px;border-radius:8px;overflow:hidden;border:1px solid var(--bor)"></div>
@@ -290,610 +297,653 @@ body.ar .ea{display:none!important} body:not(.ar) .aa{display:none!important}
     <div class="tc" id="tc-pw">
       <div class="card">
         <div class="card-t">🔐 <span class="ea">Change Password</span><span class="aa">تغيير كلمة المرور</span></div>
-        <p style="color:var(--orange);font-size:.77rem;margin-bottom:1rem;font-family:JetBrains Mono,monospace">⚠ <span class="ea">Change the default password immediately!</span><span class="aa">غيّر كلمة المرور الافتراضية فوراً!</span></p>
+        <p style="color:var(--orange);font-size:.77rem;margin-bottom:1rem;font-family:JetBrains Mono,monospace">⚠ <span class="ea">Change the default password!</span><span class="aa">غيّر كلمة المرور الافتراضية!</span></p>
         <div class="row"><div class="lbl"><span class="ea">Current</span><span class="aa">الحالية</span></div><input type="password" class="fi" id="pwCur" placeholder="Current password"></div>
-        <div class="row"><div class="lbl"><span class="ea">New</span><span class="aa">الجديدة</span></div><input type="password" class="fi" id="pwNew" placeholder="New password (min 8 chars)"></div>
+        <div class="row"><div class="lbl"><span class="ea">New</span><span class="aa">الجديدة</span></div><input type="password" class="fi" id="pwNew" placeholder="New password (min 8)"></div>
         <div class="row"><div class="lbl"><span class="ea">Confirm</span><span class="aa">تأكيد</span></div><input type="password" class="fi" id="pwCon" placeholder="Repeat new password"></div>
         <button class="savebig" style="margin-top:.6rem;padding:.55rem 1.4rem" onclick="changePW()">🔐 <span class="ea">Update</span><span class="aa">تحديث</span></button>
       </div>
     </div>
 
-  </div>
-</div>
+  </div><!-- abody -->
+</div><!-- AP -->
+
 <div id="toast"></div>
 
 <script>
-// ══════════════════════════════════════════════
-// ALL 248 TEXT PAIRS — EMBEDDED DIRECTLY
-// ══════════════════════════════════════════════
-const TEXT_CATS = [{"name": "🧭 Nav & Logo", "items": [{"eid": "edit-0", "en": "World of Nen", "ar": "عالم النين"}, {"eid": "edit-1", "en": "World of Nen — Interactive Guide", "ar": "عالم النين — دليل تفاعلي"}, {"eid": "edit-2", "en": "World of Nen", "ar": "عالم النين"}, {"eid": "edit-3", "en": "The art of manipulating life energy — aura — to transcend human limits. Discover the most complex power system in anime.", "ar": "فن التحكم في طاقة الحياة — الأورا — لتجاوز الحدود البشرية. اكتشف أعقد نظام قوى في عالم الأنمي."}, {"eid": "edit-4", "en": "↓ Scroll to explore ↓", "ar": "↓ اسحب لاستكشاف ↓"}]}, {"name": "🏠 Hero Section", "items": [{"eid": "edit-5", "en": "What is Nen?", "ar": "ما هو النين؟"}, {"eid": "edit-6", "en": "念 — The Art of Aura", "ar": "念 — فن الأورا"}, {"eid": "edit-7", "en": "The Four Major Principles", "ar": "المبادئ الأربعة الرئيسية"}, {"eid": "edit-8", "en": "Keeps aura flowing through and around the body like armor. Prevents slow aura loss and slows aging. The first technique every Nen user learns.", "ar": "يحافظ على تدفق الأورا عبر الجسم وحوله كالدرع. يمنع فقدان الأورا البطيء ويبطئ الشيخوخة. أول تقنية يتعلمها مستخدمو النين."}, {"eid": "edit-9", "en": "Completely stops aura flow, making the user undetectable by other Nen users. Used for stealth, but leaves the body vulnerable to Nen attacks.", "ar": "يوقف تدفق الأورا تماماً، مما يجعل المستخدم غير قابل للكشف من قبل مستخدمي النين الآخرين. يُستخدم للتخفي، لكنه يجعل الجسم عُرضة لهجمات النين."}, {"eid": "edit-10", "en": "Dramatically increases aura output beyond normal. Significantly boosts offensive and defensive power. Foundation for most combat applications.", "ar": "يزيد إنتاج الأورا بشكل كبير عما هو طبيعي. يعزز قوة الهجوم والدفاع بشكل ملحوظ. الأساس لمعظم تطبيقات القتال."}, {"eid": "edit-11", "en": "The expression of one's aura as a unique supernatural ability. Determined by personality and Nen type — the most personal of all techniques.", "ar": "التعبير عن الأورا كقدرة خارقة فريدة. يتحدد بالشخصية ونوع النين — أكثر التقنيات شخصية."}]}, {"name": "❓ What is Nen?", "items": [{"eid": "edit-12", "en": "Advanced Techniques", "ar": "التقنيات المتقدمة"}, {"eid": "edit-13", "en": "Extends aura to encase an object, allowing it to be treated as an extension of the user's body and strengthened with Nen.", "ar": "يمتد الأورا ليغلف جسماً ما، مما يسمح بمعاملته كامتداد لجسم المستخدم وتقويته بالنين."}, {"eid": "edit-14", "en": "Hides aura completely — even from other Nen users. Used for stealth attacks and concealing abilities. Extremely difficult to master.", "ar": "يخفي الأورا تماماً — حتى عن مستخدمي النين الآخرين. يُستخدم للهجمات الخفية وإخفاء القدرات. صعب جداً إتقانه."}, {"eid": "edit-15", "en": "Concentrates most of one's aura into a single body part for a dramatic power boost. Used to see through In or enhance a specific limb.", "ar": "يركز معظم الأورا في جزء واحد من الجسم لتعزيز قوة كبير. يُستخدم لرؤية الأورا المخفية أو تعزيز طرف معين."}, {"eid": "edit-16", "en": "Releases aura in a large sphere around the body. Acts as a detection system — the user can sense anyone who enters the radius. Range varies by user.", "ar": "يطلق الأورا في كرة كبيرة حول الجسم. يعمل كنظام كشف — يمكن للمستخدم الإحساس بأي شخص يدخل النطاق. يتفاوت المدى حسب المستخدم."}, {"eid": "edit-17", "en": "Spreads Ren throughout the body while maintaining Ten. A defensive form of Ren that protects the whole body, though less efficient than Gyo in one spot.", "ar": "ينتشر رين في جميع أنحاء الجسم مع الحفاظ على تن. شكل دفاعي لرين يحمي الجسم كله، وإن كان أقل كفاءة من جيو في نقطة واحدة."}, {"eid": "edit-18", "en": "The ultimate offensive technique — 100% of aura into one body part. Devastating power, but the rest of the body is completely unprotected.", "ar": "التقنية الهجومية الباعثة — 100% من الأورا في جزء واحد من الجسم. قوة مدمرة، لكن بقية الجسم غير محمية تماماً."}, {"eid": "edit-19", "en": "Techniques Visualized on the Body", "ar": "التقنيات مُجسَّدة على الجسم"}]}, {"name": "📋 Four Principles", "items": [{"eid": "edit-20", "en": "Click on any technique to see how it affects the human body and where the aura is directed.", "ar": "انقر على أي تقنية لترى كيف تؤثر على جسم الإنسان وأين يتجه الأورا."}, {"eid": "edit-21", "en": "Select a technique", "ar": "اختر تقنية"}, {"eid": "edit-22", "en": "Aura wraps evenly around the entire body like a second skin — a protective layer that prevents leakage and slows aging.", "ar": "يلتف الأورا بالتساوي حول الجسم كاملاً كطبقة ثانية من الجلد — درع واق يمنع التسرب ويبطئ الشيخوخة."}, {"eid": "edit-23", "en": "All aura nodes shut completely. The outline of the body fades — invisible to other Nen users, but completely vulnerable to Nen attacks.", "ar": "تغلق جميع عقد الأورا تماماً. يتلاشى خط الجسم — غير مرئي لمستخدمي النين الآخرين، لكن عرضة لهجمات النين."}, {"eid": "edit-24", "en": "The aura surges and expands dramatically beyond the body's surface, creating a powerful blazing field that multiplies offensive and defensive power.", "ar": "يتدفق الأورا ويتمدد بشكل كبير خارج سطح الجسم، مكوناً حقلاً قوياً يضاعف قوة الهجوم والدفاع."}, {"eid": "edit-25", "en": "Most of the body's aura floods into one specific part — typically the eyes or fists. That part glows intensely while the rest dims.", "ar": "ينهمر معظم أورا الجسم في جزء محدد — عادةً العيون أو القبضات. يتوهج ذلك الجزء بشدة بينما يخبو الباقي."}, {"eid": "edit-26", "en": "Aura extends from the hand to completely encase an external object — a weapon, tool, or even another person — treating it like an extension of the body.", "ar": "يمتد الأورا من اليد ليغلف جسماً خارجياً تماماً — سلاح أو أداة أو حتى شخصاً آخر — معاملته كامتداد للجسم."}, {"eid": "edit-27", "en": "Aura is still present but completely hidden — even from skilled Nen users. The outline of the body appears only as a faint dashed ghost.", "ar": "الأورا لا تزال موجودة لكنها مخفية تماماً — حتى عن مستخدمي النين المهرة. يظهر خط الجسم كشبح منقط خافت فقط."}, {"eid": "edit-28", "en": "A massive sphere of aura expands outward from the body in all directions, forming a detection dome. Anything entering the field is instantly sensed.", "ar": "تتمدد كرة ضخمة من الأورا خارجياً من الجسم في كل الاتجاهات، مشكلةً قبة كشف. يُستشعر فوراً أي شيء يدخل الحقل."}, {"eid": "edit-29", "en": "Ren floods the entire body evenly while Ten maintains the aura shell. Full defensive coverage — the whole body glows uniformly with reinforced aura.", "ar": "يملأ رين الجسم كاملاً بالتساوي بينما يحافظ تن على غلاف الأورا. تغطية دفاعية كاملة — يتوهج كامل الجسم بشكل منتظم بأورا معززة."}, {"eid": "edit-30", "en": "100% of all aura concentrates into one single point — usually the fist. Incandescent white-red explosion of power, but the rest of the body is completely dark and unprotected.", "ar": "100% من كل الأورا يتركز في نقطة واحدة — عادةً القبضة. انفجار أبيض-أحمر متوهج من القوة، لكن بقية الجسم مظلمة تماماً وبلا حماية."}, {"eid": "edit-31", "en": "Real-time aura redistribution across different body parts simultaneously. Different regions glow at different intensities depending on need — attack vs defense.", "ar": "إعادة توزيع الأورا في الوقت الفعلي عبر أجزاء مختلفة من الجسم. تتوهج مناطق مختلفة بشدد مختلفة حسب الحاجة — هجوم أو دفاع."}, {"eid": "edit-32", "en": "Nen Type Compatibility Chart", "ar": "جدول توافق أنواع النين"}, {"eid": "edit-33", "en": "Each Nen type can learn adjacent types more easily. The further apart two types are on the hexagon, the harder it is to learn. Select a type to see its compatibility percentages.", "ar": "يمكن لكل نوع نين تعلم الأنواع المجاورة بسهولة أكبر. كلما كان نوعان بعيدين على السداسي، كان تعلمهما أصعب. اختر نوعاً لرؤية نسب التوافق."}, {"eid": "edit-34", "en": "Enhancer", "ar": "المعزز"}, {"eid": "edit-35", "en": "Transmuter", "ar": "المحول"}, {"eid": "edit-36", "en": "Emitter", "ar": "الباعث"}, {"eid": "edit-37", "en": "Conjurer", "ar": "المجسد"}, {"eid": "edit-38", "en": "Manipulator", "ar": "المتلاعب"}, {"eid": "edit-39", "en": "Specialist", "ar": "المتخصص"}, {"eid": "edit-40", "en": "The Six Nen Types", "ar": "أنواع النين الستة"}, {"eid": "edit-41", "en": "Every person is born with an affinity for one of six Nen categories. Your type reflects your personality — and shapes the unique abilities you develop.", "ar": "كل شخص يولد بميل لأحد أنواع النين الستة. نوعك يعكس شخصيتك — ويشكل القدرات الفريدة التي تطورها."}]}, {"name": "⚡ Advanced Techniques", "items": [{"eid": "edit-42", "en": "Enhancer", "ar": "المعزز"}, {"eid": "edit-43", "en": "The most straightforward and powerful type. Enhancers boost their own physical capabilities or those of objects they touch to superhuman levels. Known for raw strength, speed, and healing.", "ar": "النوع الأكثر مباشرةً وقوةً. يعززون قدراتهم الجسدية أو قدرات الأشياء التي يلمسونها إلى مستويات فوق بشرية. مشهورون بالقوة الخام والسرعة والشفاء."}, {"eid": "edit-44", "en": "💧 Water Divination: Water volume increases", "ar": "💧 اختبار الماء: يزداد حجم الماء"}, {"eid": "edit-45", "en": "🎭 Personality: Simple, determined, and focused on their goals", "ar": "🎭 الشخصية: بسيطون، عزيمة قوية، مركزون على أهدافهم"}, {"eid": "edit-46", "en": "Transmuter", "ar": "المحول"}, {"eid": "edit-47", "en": "Transmuters alter the properties of their aura to mimic other substances — electricity, fire, water, or even more abstract qualities. Highly versatile and creative fighters.", "ar": "يغيرون خصائص أورا ليحاكوا مواد أخرى — كهرباء، نار، ماء، أو حتى خصائص أكثر تجريداً. مقاتلون متعددو المهارات ومبدعون."}, {"eid": "edit-48", "en": "💧 Water Divination: Water changes taste", "ar": "💧 اختبار الماء: يتغير طعم الماء"}, {"eid": "edit-49", "en": "🎭 Personality: Whimsical, unpredictable, prone to deception", "ar": "🎭 الشخصية: متقلبون، غير متوقعين، يميلون للخداع"}, {"eid": "edit-50", "en": "Emitter", "ar": "الباعث"}, {"eid": "edit-51", "en": "Emitters project their aura beyond their body, launching it as projectiles or maintaining it at a distance. Excellent for ranged combat and area control.", "ar": "يطلقون أوراهم خارج أجسامهم، ويطلقونها كقذائف أو يحافظون عليها عن بُعد. ممتازون في القتال على المدى البعيد والسيطرة على المنطقة."}, {"eid": "edit-52", "en": "💧 Water Divination: Water color changes", "ar": "💧 اختبار الماء: يتغير لون الماء"}, {"eid": "edit-53", "en": "🎭 Personality: Impatient, hot-headed, volatile and impulsive", "ar": "🎭 الشخصية: غير صبورين، متهورون، متفجرون وانفعاليون"}, {"eid": "edit-54", "en": "Conjurer", "ar": "المجسد"}, {"eid": "edit-55", "en": "Conjurers materialize physical objects from their aura. These objects are real and can interact with the world. Potency is greatly increased by setting strict conditions (vows).", "ar": "يجسدون أشياء مادية من أوراهم. هذه الأشياء حقيقية وتتفاعل مع العالم. تزداد القوة بشكل كبير بوضع شروط صارمة (نذور)."}, {"eid": "edit-56", "en": "💧 Water Divination: Impurities appear in water", "ar": "💧 اختبار الماء: تظهر شوائب في الماء"}, {"eid": "edit-57", "en": "🎭 Personality: High-strung, overly cautious, stoic, analytical", "ar": "🎭 الشخصية: متوترون، حذرون جداً، متزنون، تحليليون"}, {"eid": "edit-58", "en": "Manipulator", "ar": "المتلاعب"}, {"eid": "edit-59", "en": "Manipulators control living beings or objects with their aura. The hardest the condition to apply control, the greater the degree of control achieved. Often use a medium object.", "ar": "يتحكمون في الكائنات الحية أو الأشياء بأوراهم. كلما صعب تطبيق شرط السيطرة، كلما كانت درجة التحكم أكبر. غالباً يستخدمون وسيطاً."}, {"eid": "edit-60", "en": "💧 Water Divination: Leaf moves on the water", "ar": "💧 اختبار الماء: تتحرك الورقة على الماء"}, {"eid": "edit-61", "en": "🎭 Personality: Argumentative, logical, and calculative", "ar": "🎭 الشخصية: جدليون، منطقيون، حسابيون"}]}, {"name": "🫁 Body Techniques", "items": [{"eid": "edit-62", "en": "Specialist", "ar": "المتخصص"}, {"eid": "edit-63", "en": "The rarest and most mysterious type. Specialists have abilities that don't fit any other category. Often manifesting from deeply personal wishes or trauma. Cannot be fully predicted.", "ar": "النوع الأنادر والأكثر غموضاً. للمتخصصين قدرات لا تنتمي لأي فئة أخرى. غالباً تظهر من رغبات شخصية عميقة أو صدمات. لا يمكن التنبؤ بها بالكامل."}, {"eid": "edit-64", "en": "💧 Water Divination: A completely different, unique change", "ar": "💧 اختبار الماء: تغيير مختلف تماماً وفريد"}, {"eid": "edit-65", "en": "🎭 Personality: Independent, charismatic, and unconventional", "ar": "🎭 الشخصية: مستقلون، كاريزماتيون، غير تقليديين"}, {"eid": "edit-66", "en": "Water Divination Test", "ar": "اختبار تكهن الماء"}, {"eid": "edit-67", "en": "How It Works", "ar": "كيف يعمل"}, {"eid": "edit-68", "en": "Restrictions & Vows", "ar": "القيود والنذور"}, {"eid": "edit-69", "en": "The greater the restriction you place on yourself, the more powerful your ability becomes. This is one of Nen's most fascinating — and dangerous — rules.", "ar": "كلما كانت القيود التي تضعها على نفسك أكبر، كانت قدرتك أقوى. هذه إحدى أكثر قواعد النين إثارةً للاهتمام — وخطورةً."}, {"eid": "edit-70", "en": "Conditions", "ar": "الشروط"}, {"eid": "edit-71", "en": "Simple rules that must be met to activate an ability. The more limiting the condition, the greater the power boost received.", "ar": "قواعد بسيطة يجب الوفاء بها لتفعيل القدرة. كلما كان الشرط أكثر تقييداً، كلما كان تعزيز القوة أكبر."}, {"eid": "edit-72", "en": "Example: Kurapika's chains activate only against Phantom Troupe members.", "ar": "مثال: سلاسل كوراباكا تتفعل فقط ضد أعضاء فرقة الوهم."}, {"eid": "edit-73", "en": "Vows (Pledge)", "ar": "النذور (العهد)"}, {"eid": "edit-74", "en": "The most powerful and dangerous restriction. A solemn oath where breaking it carries lethal or catastrophic consequences for the user themselves.", "ar": "القيد الأقوى والأخطر. قسم مقدس يستلزم كسره عواقب مميتة أو كارثية على المستخدم نفسه."}, {"eid": "edit-75", "en": "If Kurapika uses Chain Jail on a non-Troupe member, he will die. This vow makes it one of the strongest conjured abilities.", "ar": "إذا استخدم كوراباكا سجن السلسلة على غير عضو في الفرقة، سيموت. هذا النذر يجعلها من أقوى القدرات المجسدة."}, {"eid": "edit-76", "en": "Post-Death Nen", "ar": "نين ما بعد الموت"}, {"eid": "edit-77", "en": "When a Nen user dies while deeply committed to a purpose, their aura can persist and even grow stronger. Death itself becomes the ultimate condition.", "ar": "عندما يموت مستخدم النين وهو ملتزم بغاية عميقة، يمكن أن تستمر أوراه وتقوى. الموت نفسه يصبح الشرط النهائي."}, {"eid": "edit-78", "en": "Meruem was cursed by Netero's post-death Nen ability — the Poor Man's Rose — which spread poison after activating.", "ar": "لُعن ميروم بقدرة نيتيرو من بعد الموت — وردة الفقير — التي نشرت السم بعد تفعيلها."}, {"eid": "edit-79", "en": "Groups & Factions", "ar": "المجموعات والفصائل"}, {"eid": "edit-80", "en": "Zoldyck Family", "ar": "عائلة زولديك"}, {"eid": "edit-81", "en": "Phantom Troupe", "ar": "فرقة الوهم"}, {"eid": "edit-82", "en": "Zodiacs", "ar": "الأبراج"}, {"eid": "edit-83", "en": "Chimera Ants", "ar": "نمل الكيميرا"}, {"eid": "edit-84", "en": "Heroes", "ar": "الأبطال"}, {"eid": "edit-85", "en": "Zoldyck Family — World's Greatest Assassins", "ar": "عائلة زولديك — أعظم قتلة في العالم"}, {"eid": "edit-86", "en": "Great-Great-Grandfather", "ar": "الجد الأكبر"}, {"eid": "edit-87", "en": "Oldest living Zoldyck. Netero was the only one to fight him and survive. His Nen is described as \"very quiet.\"", "ar": "أكبر زولديك على قيد الحياة. نيتيرو هو الوحيد الذي حارب ماها ونجا. يُوصف نينه بـ\"الصامت جداً\"."}]}, {"name": "🔷 Nen Compatibility", "items": [{"eid": "edit-88", "en": "Grandfather / Former Head", "ar": "الجد / الرئيس السابق"}, {"eid": "edit-89", "en": "Legendary assassin & Nen master. Former peer of Netero. Wise and patient compared to Silva.", "ar": "قاتل أسطوري وعارف نين. رفيق سابق لنيتيرو. حكيم وصبور مقارنةً بسيلفا."}, {"eid": "edit-90", "en": "Current Head", "ar": "الرئيس الحالي"}, {"eid": "edit-91", "en": "Current head of the family. Immensely powerful — killed a Chimera Ant with one blow. Stoic and ruthless.", "ar": "الرأس الحالي للعائلة. بالغ القوة — قتل نمل كيميرا بضربة واحدة. بارد الأعصاب وقاسٍ."}, {"eid": "edit-92", "en": "Mother", "ar": "الأم"}, {"eid": "edit-93", "en": "Overprotective mother from Meteor City. Wears a mask and bionic eye. Deeply controlling over her children.", "ar": "أم حمائية من مدينة نيزك. ترتدي قناعاً وعيناً بيونية. مسيطرة على أطفالها."}, {"eid": "edit-94", "en": "Eldest Son — #1", "ar": "الابن الأكبر"}, {"eid": "edit-95", "en": "Cold & calculating. Master of needle manipulation. Friend/ally of Hisoka. Phantom Troupe #11.", "ar": "بارد وحسابي. خبير التلاعب بالإبر. حليف هيسوكا. رقم 11 في فرقة الوهم."}, {"eid": "edit-96", "en": "Second Son", "ar": "الابن الثاني"}, {"eid": "edit-97", "en": "Tech genius. Hacker and inventor — cracked the Hunter Website. Not a physical fighter like his siblings.", "ar": "عبقري تقني. هاكر ومخترع — اخترق موقع الصيادين. ليس مقاتلاً جسدياً كإخوته."}]}, {"name": "🟢 Nen Type — Enhancer", "items": [{"eid": "edit-98", "en": "Third Son — Prodigy", "ar": "الابن الثالث — النابغة"}, {"eid": "edit-99", "en": "Greatest prodigy in Zoldyck history. Left the family to travel with Gon. Hero of the series.", "ar": "أعظم نابغة في تاريخ زولديك. غادر العائلة للسفر مع غون. بطل الأنمي."}, {"eid": "edit-100", "en": "Daughter / Nanika's Host", "ar": "الابنة / حاضنة نانيكا"}, {"eid": "edit-101", "en": "Hosts the entity \"Nanika\" who can grant any wish — at a devastating cost. Loves only Killua.", "ar": "تحتضن الكائن \"نانيكا\" الذي يمنح أي أمنية — بثمن باهظ. تحب كيلوا فقط."}, {"eid": "edit-102", "en": "Youngest Son — Troupe #4", "ar": "الابن الأصغر — فرقة الوهم"}, {"eid": "edit-103", "en": "Youngest and extremely talented. Joined the Phantom Troupe seeking to prove himself. Uses paper as a weapon.", "ar": "الأصغر وموهوب للغاية. انضم لفرقة الوهم لإثبات نفسه. يستخدم الورق سلاحاً."}, {"eid": "edit-104", "en": "Phantom Troupe — 幻影旅団 — Gen'ei Ryodan", "ar": "فرقة الوهم — 幻影旅団"}, {"eid": "edit-105", "en": "Leader / Founder", "ar": "الزعيم / المؤسس"}, {"eid": "edit-106", "en": "Interrogator", "ar": "المحقق"}, {"eid": "edit-107", "en": "Fighter #2 Strength", "ar": "المقاتل"}, {"eid": "edit-108", "en": "Medic / Fighter", "ar": "الطبيبة والمقاتلة"}, {"eid": "edit-109", "en": "Former Member", "ar": "عضو سابق"}, {"eid": "edit-110", "en": "Fighter", "ar": "المقاتل"}, {"eid": "edit-111", "en": "Strategist / Hunter", "ar": "الاستراتيجي"}, {"eid": "edit-112", "en": "#4 Strength", "ar": "القوة الرابعة"}, {"eid": "edit-113", "en": "Swordsman", "ar": "المحارب"}]}, {"name": "🟣 Nen Type — Transmuter", "items": [{"eid": "edit-114", "en": "Memory Reader", "ar": "قارئة الذاكرة"}, {"eid": "edit-115", "en": "#12 Strength", "ar": "القوة 12"}, {"eid": "edit-116", "en": "Zoldyck Rep", "ar": "ممثل زولديك"}, {"eid": "edit-117", "en": "#13 Strength", "ar": "القوة 13"}, {"eid": "edit-118", "en": "Replaced Hisoka", "ar": "حل محل هيسوكا"}, {"eid": "edit-119", "en": "#1 Strength (Original)", "ar": "القوة الأولى (أصلي)"}, {"eid": "edit-120", "en": "Zodiacs — Netero's Elite Council", "ar": "الأبراج — مجلس نيتيرو النخبوي"}, {"eid": "edit-121", "en": "Rat — Former Vice-Chair", "ar": "الفأر — نائب رئيس سابق"}, {"eid": "edit-122", "en": "Master manipulator & politician. Genius-level strategist. Resigned immediately after becoming Chairman.", "ar": "سياسي متلاعب بارع. استراتيجي عبقري. استقال فور تعيينه رئيساً."}, {"eid": "edit-123", "en": "Ox — Crime Hunter", "ar": "الثور — صائد الجرائم"}, {"eid": "edit-124", "en": "Analytical investigator. Uses traffic-light Nen to capture targets in spectral cages.", "ar": "محقق تحليلي. يستخدم نين إشارات المرور لحبس الأهداف في أقفاص طيفية."}, {"eid": "edit-125", "en": "Tiger — Defense Team", "ar": "النمر — فريق الدفاع"}]}, {"name": "🟡 Nen Type — Emitter", "items": [{"eid": "edit-126", "en": "Temperamental and impulsive. Quick to argue. Strong combatant assigned to the Defense Team.", "ar": "متقلب وانفعالي. سريع الجدل. مقاتل قوي في فريق الدفاع."}, {"eid": "edit-127", "en": "Rabbit — Intel Team", "ar": "الأرنب — فريق الاستخبارات"}, {"eid": "edit-128", "en": "Multilingual programmer and Paleograph Hunter. Hosted election proceedings. Intel Team leader.", "ar": "مبرمجة متعددة اللغات وصائدة كتابة قديمة. أدارت انتخابات الرئاسة. قائدة فريق الاستخبارات."}, {"eid": "edit-129", "en": "Dragon — Terrorist Hunter", "ar": "التنين — صائد الإرهابيين"}, {"eid": "edit-130", "en": "Triple Star Hunter. Most experienced Zodiac. His Nen is said to be the strongest in the group.", "ar": "صياد ثلاثي النجوم. أكثر البروج خبرةً. يُقال إن نينه الأقوى في المجموعة."}, {"eid": "edit-131", "en": "Cobra — Poison Hunter", "ar": "الكوبرا — صائدة السموم"}, {"eid": "edit-132", "en": "Poison specialist. Can transform her arm into a snake. Part of the Science Team for the Dark Continent.", "ar": "متخصصة في السموم. تستطيع تحويل ذراعها لثعبان. جزء من فريق العلوم للقارة المظلمة."}, {"eid": "edit-133", "en": "Horse — Intel Team", "ar": "الحصان — فريق الاستخبارات"}, {"eid": "edit-134", "en": "Works behind the scenes. Methodical and observant. 2-Star Hunter and Intel Team member.", "ar": "يعمل خلف الكواليس. منهجي ومراقب. صياد ذو نجمتين وعضو فريق الاستخبارات."}, {"eid": "edit-135", "en": "Goat — Flora/Fauna", "ar": "الماعز — فريق الأحياء"}, {"eid": "edit-136", "en": "Most emotional Zodiac. Speed-based abilities. Was a sparring partner for Netero. Hisoka rated him 90/100.", "ar": "أكثر البروج عاطفيةً. قدراته قائمة على السرعة. كان شريك تدريب لنيتيرو."}, {"eid": "edit-137", "en": "Monkey — Traitor", "ar": "القرد — الخائن"}]}, {"name": "🔴 Nen Type — Conjurer", "items": [{"eid": "edit-138", "en": "Secret ally of Beyond Netero. Concealed traitor within the Zodiacs. Defense Team member.", "ar": "حليف سري لـ Beyond نيتيرو. الخائن المخفي داخل الأبراج. عضو فريق الدفاع."}, {"eid": "edit-139", "en": "Rooster — Flora/Fauna", "ar": "الديك — فريق الأحياء"}, {"eid": "edit-140", "en": "Controls hundreds of birds simultaneously. Sent election notices via 600+ pigeons to all Hunters worldwide.", "ar": "تتحكم بمئات الطيور في وقت واحد. أرسلت إشعارات الانتخابات بأكثر من 600 حمامة."}, {"eid": "edit-141", "en": "Dog — Current Chairman", "ar": "الكلب — الرئيسة الحالية"}, {"eid": "edit-142", "en": "Current Chairman of the Hunter Association. Triple Star Disease Hunter. Sharp intellect and administrator.", "ar": "الرئيسة الحالية لجمعية الصيادين. صائدة أمراض ثلاثية النجوم. ذكاء حاد وإدارية بارعة."}, {"eid": "edit-143", "en": "Boar — Gon's Father", "ar": "الخنزير — والد غون"}, {"eid": "edit-144", "en": "Top 5 Nen users globally. Created Greed Island. Double Star Ruins Hunter. Abandoned Gon at birth.", "ar": "من أفضل 5 مستخدمي نين عالمياً. ابتكر جزيرة الجشع. صياد آثار مزدوج النجوم. هجر غون عند الولادة."}, {"eid": "edit-145", "en": "Chimera Ants — The Ultimate Predators", "ar": "نمل الكيميرا — المفترسون النهائيون"}, {"eid": "edit-146", "en": "King — Chimera Ant", "ar": "الملك"}, {"eid": "edit-147", "en": "The most powerful being introduced in the series. Born already surpassing elite Hunters. Absorbs Nen abilities by consuming others.", "ar": "أقوى كائن مُقدَّم في السلسلة. وُلد وهو يتجاوز الصيادين النخبة. يمتص قدرات النين بابتلاع الآخرين."}, {"eid": "edit-148", "en": "Royal Guard — #1", "ar": "الحارس الملكي #1"}, {"eid": "edit-149", "en": "Most powerful Royal Guard. Cat-like. En detects kilometers. Expert puppet surgeon and healer.", "ar": "أقوى حارس ملكي. شبيه بالقطط. إن يكشف كيلومترات. جراح دمى وطبيب خبير."}]}, {"name": "⚫ Nen Type — Manipulator", "items": [{"eid": "edit-150", "en": "Royal Guard — #2", "ar": "الحارس الملكي #2"}, {"eid": "edit-151", "en": "Butterfly-type. Devoted to Meruem. Splits into tiny clones. Manipulates via scales that induce illusions.", "ar": "من نوع الفراشة. مخلص لميروم. يتقسم لنسخ صغيرة. يتلاعب بمقاييس تُحدث أوهاماً."}, {"eid": "edit-152", "en": "Royal Guard — #3", "ar": "الحارس الملكي #3"}, {"eid": "edit-153", "en": "Oni-like power. Can reshape his body into any form. Unstable but overwhelmingly powerful in combat.", "ar": "قوة شيطانية. يعيد تشكيل جسمه لأي صورة. غير مستقر لكن ساحق القوة في القتال."}, {"eid": "edit-154", "en": "Queen / Origin", "ar": "الملكة / الأصل"}, {"eid": "edit-155", "en": "Origin of all Chimera Ants. Used Phagogenesis to merge human & animal DNA, creating Nen-capable hybrids. Died giving birth to Meruem.", "ar": "أصل كل نمل الكيميرا. استخدمت الفاغوجينيسيس لدمج الحمض البشري والحيواني. ماتت أثناء ولادة ميروم."}, {"eid": "edit-156", "en": "Squadron Leader", "ar": "قائد سرب"}, {"eid": "edit-157", "en": "Cheetah-type. Fastest Chimera Ant. Arrogant — killed by Silva Zoldyck with one blow before he could show his new ability.", "ar": "من نوع الفهد. أسرع نمل كيميرا. متغطرس — قُتل بيد سيلفا زولديك بضربة واحدة."}, {"eid": "edit-158", "en": "Main Heroes & Key Characters", "ar": "الأبطال الرئيسيون والشخصيات الأساسية"}, {"eid": "edit-159", "en": "Main Protagonist", "ar": "البطل الرئيسي"}, {"eid": "edit-160", "en": "Pure-hearted boy seeking his father Ging. Incredible potential — briefly transformed into an adult form that terrified even Royal Guards.", "ar": "فتى طاهر القلب يبحث عن والده غينغ. إمكانيات هائلة — تحول لهيئة بالغة أرعبت حتى الحراس الملكيين."}, {"eid": "edit-161", "en": "Protagonist / Best Friend", "ar": "البطل / أفضل صديق"}]}, {"name": "🔵 Nen Type — Specialist", "items": [{"eid": "edit-162", "en": "Former assassin heir. Gon's closest friend. Genius prodigy who mastered lightning-speed Nen at a young age.", "ar": "وريث قاتل سابق. أفضل أصدقاء غون. نابغة أتقن نين السرعة البرقية في سنٍّ صغيرة."}, {"eid": "edit-163", "en": "Protagonist / Last Kurta", "ar": "البطل / آخر الكورتا"}, {"eid": "edit-164", "en": "Sole survivor of the Kurta Clan massacre. Becomes Specialist (Emperor Time) when his eyes turn Scarlet, giving 100% efficiency in all Nen types.", "ar": "الناجي الوحيد من مذبحة عشيرة الكورتا. يصبح متخصصاً (وقت الإمبراطور) حين تتحول عيناه للقرمزي."}, {"eid": "edit-165", "en": "Protagonist / Future Doctor", "ar": "البطل / الطبيب المستقبلي"}, {"eid": "edit-166", "en": "Aspiring doctor. Fights for the poor. His raw determination earned him a seat in the Zodiac council. Punched Ging live on TV.", "ar": "طبيب طموح. يناضل من أجل الفقراء. إصراره الخام منحه مقعداً في مجلس الأبراج. لكم غينغ على الهواء مباشرة."}, {"eid": "edit-167", "en": "12th Chairman — Legend", "ar": "الرئيس الثاني عشر — أسطورة"}, {"eid": "edit-168", "en": "Considered the world's strongest Nen user in his prime. Fought Meruem alone. Self-detonated the Poor Man's Rose as a final act.", "ar": "يُعتبر أقوى مستخدم نين في العالم في عز شبابه. حارب ميروم وحيداً. فجّر نفسه بـ\"وردة الفقير\" كعمله الأخير."}, {"eid": "edit-169", "en": "Anti-hero / Wild Card", "ar": "البطل المضاد / الورقة العشوائية"}, {"eid": "edit-170", "en": "Enigmatic magician obsessed with fighting strong opponents. Ally when convenient, predator at heart.", "ar": "ساحر غامض مهووس بمحاربة الخصوم الأقوياء. حليف عند الحاجة، مفترس في جوهره."}, {"eid": "edit-171", "en": "Ging's Student", "ar": "تلميذ غينغ"}]}, {"name": "💧 Water Divination", "items": [{"eid": "edit-172", "en": "Ging's first student. Inspired Gon to become a Hunter. Expert field researcher. Reborn as a Chimera Ant after death.", "ar": "أول تلميذ لغينغ. ألهم غون ليصبح صياداً. باحث ميداني خبير. وُلد من جديد كنملة كيميرا بعد وفاته."}, {"eid": "edit-173", "en": "Zoldyck — Wish Granter", "ar": "زولديك — مانحة الأمنيات"}, {"eid": "edit-174", "en": "Theorized to be one of the 5 Dark Continent calamities (Ai). Can grant any wish — but refusing requests causes escalating deaths.", "ar": "يُعتقد أنها إحدى الكوارث الخمس للقارة المظلمة (آي). تمنح أي أمنية — لكن رفض الطلبات يتسبب بوفيات متصاعدة."}, {"eid": "edit-175", "en": "Story Arcs", "ar": "مسارات القصة"}, {"eid": "edit-176", "en": "Hunter × Hunter's journey told arc by arc — with anime episode numbers and manga chapters for both the 1999 and 2011 adaptations.", "ar": "رحلة هنتر × هنتر قوساً قوساً — مع أرقام حلقات الأنمي وفصول المانجا لكلا نسختَي 1999 و2011."}, {"eid": "edit-177", "en": "Gon leaves Whale Island to take the legendary Hunter Exam. He befriends Kurapika, Leorio, and Killua while surviving deadly trials in a jungle, an underground marathon, and a battle tower. He first encounters the enigmatic Hisoka.", "ar": "يغادر غون جزيرة الحوت لأداء اختبار الصيادين الأسطوري. يصادق كوراباكا وليوريو وكيلوا بينما يتخطى تجارب مميتة في غابة وماراثون تحت الأرض وبرج قتال. يلتقي بهيسوكا الغامض لأول مرة."}, {"eid": "edit-178", "en": "After the exam, Gon, Kurapika and Leorio travel to Kukuroo Mountain to rescue Killua who was dragged home by Illumi. They face the legendary Testing Gate and encounter the terrifying Zoldyck estate staff.", "ar": "بعد الاختبار، يتجه غون وكوراباكا وليوريو لجبل كوكورو لإنقاذ كيلوا الذي اقتاده إيلومي للمنزل. يواجهون البوابة الأسطورية لـ64 طناً وموظفي قصر زولديك المرعبين."}, {"eid": "edit-179", "en": "Gon and Killua go to Heavens Arena — a 251-floor battle tower — to earn money and train. Wing introduces them to Nen, the life energy system. This arc features the iconic Hisoka vs Gon fight and Killua's first Nen awakening.", "ar": "يتجه غون وكيلوا لساحة السماء — برج قتالي من 251 طابقاً — لكسب المال والتدريب. يعرّفهم وينغ على النين، نظام طاقة الحياة. يتضمن القوس مواجهة هيسوكا وغون الشهيرة وأول صحوة نين لكيلوا."}, {"eid": "edit-180", "en": "The Phantom Troupe massacres the Mafia's auction. Kurapika activates his Scarlet Eyes and begins hunting the Spiders with his chains. The arc reveals the tragedy of the Kurta Clan, introduces Emperor Time, and ends in a standoff between Kurapika and Chrollo.", "ar": "فرقة الوهم تذبح مزاد المافيا. يُفعّل كوراباكا عيناه القرمزيتان ويبدأ صيد العناكب بسلاسله. يكشف القوس مأساة عشيرة الكورتا، ويقدم وقت الإمبراطور، وينتهي بمواجهة بين كوراباكا وكرولو."}, {"eid": "edit-181", "en": "Gon and Killua enter a mysterious real-life video game called Greed Island created by Ging. They train under Biscuit Krueger and collect 100 specified cards to complete the game. Gon's Jajanken ability is fully developed here.", "ar": "يدخل غون وكيلوا لعبة فيديو غريبة في الواقع الحقيقي تُسمى جزيرة الجشع صنعها غينغ. يتدربان تحت إشراف بيسكيت كروغر ويجمعان 100 بطاقة محددة لإكمال اللعبة. تتطور قدرة غون جاجانكين بالكامل هنا."}, {"eid": "edit-183", "en": "After Netero's death, the Hunter Association must elect a new Chairman. Gon, near death, is miraculously healed by Alluka's wish. Leorio punches Ging on live TV. Killua finally frees Alluka. This is where the 2011 anime ends.", "ar": "بعد موت نيتيرو، تنتخب جمعية الصيادين رئيساً جديداً. غون على حافة الموت، يُشفى بأعجوبة عبر أمنية أللوكا. ليوريو يلكم غينغ على الهواء مباشرةً. كيلوا يحرر أللوكا أخيراً. هنا ينتهي أنمي 2011."}]}, {"name": "⛓ Restrictions & Vows", "items": [{"eid": "edit-186", "en": "World Map", "ar": "خريطة العالم"}, {"eid": "edit-187", "en": "The Known World surrounded by Lake Mobius — and beyond it, the forbidden Dark Continent. Pan, zoom, and draw on the map.", "ar": "العالم المعروف المحاط ببحيرة موبيوس — وخارجها القارة المظلمة المحظورة. تحرك وكبّر وارسم على الخريطة."}, {"eid": "edit-188", "en": "Reset", "ar": "إعادة"}, {"eid": "edit-189", "en": "Draw", "ar": "رسم"}, {"eid": "edit-190", "en": "Erase", "ar": "محو"}, {"eid": "edit-191", "en": "Clear", "ar": "مسح الكل"}, {"eid": "edit-192", "en": "🖱 Drag to pan • Scroll to zoom • Use toolbar to draw", "ar": "🖱 اسحب للتحريك • اسكرول للتكبير • استخدم الأدوات للرسم"}, {"eid": "edit-193", "en": "Test Your Nen Knowledge", "ar": "اختبر معرفتك بالنين"}, {"eid": "edit-194", "en": "Try Again", "ar": "حاول مجدداً"}, {"eid": "edit-195", "en": "Fan project — not affiliated with the official series", "ar": "مشروع معجبين — غير مرتبط بالسلسلة الرسمية"}]}, {"name": "🏔 Groups — Zoldyck", "items": [{"eid": "edit-196", "en": "Dark Continent (Manga Spoilers)", "ar": "القارة المظلمة (حرق المانجا)"}, {"eid": "edit-197", "en": "Dark Continent", "ar": "القارة المظلمة"}, {"eid": "edit-198", "en": "🔥 I Accept — Show Me", "ar": "🔥 أقبل الحرق — اعرض لي"}, {"eid": "edit-199", "en": "← Go Back (Safe Zone)", "ar": "← ارجع (منطقة آمنة)"}, {"eid": "edit-200", "en": "🔥 Dark Continent — Manga Spoilers", "ar": "🔥 القارة المظلمة — حرق المانجا"}, {"eid": "edit-201", "en": "Close", "ar": "إغلاق"}, {"eid": "edit-202", "en": "⚠ MANGA ONLY — CH. 340–410+", "ar": "⚠ مانجا فقط — ف. 340–410+"}, {"eid": "edit-203", "en": "Dark Continent", "ar": "القارة المظلمة"}, {"eid": "edit-204", "en": "A forbidden land beyond Lake Mobius where humanity originated — and every attempt to return has ended in catastrophe.", "ar": "أرض محظورة خارج بحيرة موبيوس حيث نشأت البشرية — وكل محاولة للعودة إليها انتهت بكارثة."}, {"eid": "edit-205", "en": "Starting Chapter", "ar": "الفصل الأول"}, {"eid": "edit-206", "en": "Past Expedition Survival", "ar": "نسبة النجاة السابقة"}, {"eid": "edit-207", "en": "Dark Continent Calamities", "ar": "كوارث القارة المظلمة"}, {"eid": "edit-208", "en": "Kakin Princes at War", "ar": "أمراء كاكين في الحرب"}, {"eid": "edit-209", "en": "Black Whale Passengers", "ar": "مسافرو Black Whale"}, {"eid": "edit-210", "en": "World Powers Supporting", "ar": "القوى العالمية الداعمة"}, {"eid": "edit-211", "en": "The 5 Dark Continent Calamities", "ar": "الكوارث الخمس للقارة المظلمة"}, {"eid": "edit-212", "en": "Botanical Weapon", "ar": "سلاح نباتي"}, {"eid": "edit-213", "en": "Plant-type weapon with extreme offensive capability. Its flowers attack living beings with unknown energy projectiles.", "ar": "سلاح نباتي بقدرة هجومية قصوى. أزهاره تهاجم الكائنات بقذائف طاقة مجهولة."}, {"eid": "edit-214", "en": "Lurking Parasite", "ar": "طفيلي كامن"}, {"eid": "edit-215", "en": "Hides in the mind and magnifies negative emotions — rage, fear, despair. Causes civilizations to self-destruct from within.", "ar": "يختبئ في العقل ويضخم المشاعر السلبية — غضب، خوف، يأس. يدمّر الحضارات من الداخل."}, {"eid": "edit-216", "en": "Spreading Curse", "ar": "لعنة منتشرة"}, {"eid": "edit-217", "en": "A snake-like creature whose bite transforms the victim into another Hellbell — exponentially spreading the curse.", "ar": "مخلوق شبيه بالأفعى تحوّل لدغته الضحية لهيلبيل آخر — اللعنة تنتشر بشكل أسي."}, {"eid": "edit-218", "en": "Gaseous Wish-Granter", "ar": "كيان غازي مانح الأمنيات"}, {"eid": "edit-219", "en": "Grants wishes at an escalating fatal cost. Theorized to inhabit Alluka Zoldyck as \"Nanika.\" The most mysterious calamity.", "ar": "يمنح الأمنيات بثمن مميت متصاعد. يُعتقد أنه يسكن أللوكا زولديك كـ\"نانيكا\". أغمض الكوارث."}]}, {"name": "🕷 Groups — Phantom Troupe", "items": [{"eid": "edit-220", "en": "Immortality Plague", "ar": "وباء الخلود"}, {"eid": "edit-221", "en": "Grants immortality but removes the will to live. The infected survive anything but wander endlessly with no purpose — worse than death.", "ar": "يمنح الخلود لكنه يزيل إرادة الحياة. المصابون يتجولون إلى الأبد بلا هدف — أسوأ من الموت."}, {"eid": "edit-222", "en": "The 14 Kakin Princes — Succession War", "ar": "الـ14 أمراء كاكين — حرب الخلافة"}, {"eid": "edit-223", "en": "Military-minded eldest. Commands private army. Most aggressive in pursuing the throne.", "ar": "الأكبر العسكري. يقود جيشاً خاصاً. الأكثر عدوانية."}, {"eid": "edit-224", "en": "Ruthless. If she dies, her killer dies 30 days later — a guaranteed death trap.", "ar": "قاسية. إذا ماتت قاتلها يموت بعد 30 يوماً."}, {"eid": "edit-225", "en": "Charming & diplomatic. Recruits allies openly. Strong political support base.", "ar": "ساحر ودبلوماسي. يجنّد الحلفاء علناً."}, {"eid": "edit-226", "en": "Serial killer collecting Scarlet Eyes. Awakened his own Nen at terrifying speed. Kurapika's primary target.", "ar": "قاتل متسلسل يجمع العيون القرمزية. أيقظ نينه بسرعة مرعبة. هدف كوراباكا الأول."}, {"eid": "edit-227", "en": "Analytical. Studies Nen academically. Strategic alliances over combat.", "ar": "تحليلية. تدرس النين أكاديمياً."}, {"eid": "edit-228", "en": "Religious. Believes the war is a \"blessing.\" Runs a book-based cult.", "ar": "دينية. تعتقد الحرب \"نعمة\". تدير طائفة كتب."}, {"eid": "edit-229", "en": "Hedonistic. Underestimated but has a dangerous smoke-based ability.", "ar": "محب للملذات. يُستهان به لكن يمتلك قدرة دخان خطيرة."}, {"eid": "edit-230", "en": "Party-lover, seems disinterested. Has the most unusual Guardian Beast.", "ar": "محب للحفلات. وحشه الأكثر غرابةً."}, {"eid": "edit-231", "en": "Idealist who REFUSES to participate. Awakened powerful Nen with no prior training.", "ar": "مثالي يرفض المشاركة. أيقظ نيناً قوياً دون تدريب."}, {"eid": "edit-232", "en": "Twin with Fugetsu. Sacrificed herself using a post-death Nen vow to protect her sister.", "ar": "توأم فوغيتسو. ضحّت بنفسها لحماية توأمها."}, {"eid": "edit-233", "en": "Twin with Kacho. Has teleportation doors allowing escape from enclosed spaces.", "ar": "توأم كاتشو. تفتح أبواباً للانتقال الفوري."}]}, {"name": "⭕ Groups — Zodiacs", "items": [{"eid": "edit-234", "en": "Young and inexperienced with the weakest guard team. Eliminated early.", "ar": "صغيرة مع أضعف حراسة. اغتيلت مبكراً."}, {"eid": "edit-235", "en": "9-year-old child prince. Kurapika's primary client. His innocence makes the war more tragic.", "ar": "طفل 9 سنوات. الموكّل الرئيسي لكوراباكا."}, {"eid": "edit-236", "en": "Infant princess. Kurapika's guarded royal. Her mother Oito is an ally.", "ar": "رضيعة. كوراباكا يحرسها. أمها أويتو حليفة له."}, {"eid": "edit-237", "en": "Key Story Events (Ch. 340–410+)", "ar": "أحداث القصة الرئيسية (ف. 340–410+)"}, {"eid": "edit-238", "en": "King Nasubi's Announcement", "ar": "إعلان الملك ناسوبي"}, {"eid": "edit-239", "en": "Kakin Empire announces the expedition. Beyond Netero leads. V5 becomes V6. Leorio and Kurapika join the Zodiacs replacing Ging and Pariston.", "ar": "إمبراطورية كاكين تعلن البعثة. Beyond نيتيرو يقودها. V5 تصبح V6. ليوريو وكوراباكا يخلفان غينغ وباريستون في الأبراج."}, {"eid": "edit-240", "en": "Black Whale Boarding & Succession War Begins", "ar": "الصعود على Black Whale وبداية حرب الخلافة"}, {"eid": "edit-241", "en": "200,000 passengers board. Kurapika discovers the war aboard. He trains Nen users. Tserriednich awakens Nen at terrifying speed — Kurapika's new crisis.", "ar": "200,000 مسافر يصعدون. كوراباكا يكتشف الحرب. يدرّب مستخدمي نين. تسيريدنيش يُصحي نينه بسرعة مرعبة."}]}, {"name": "🐜 Groups — Chimera Ants", "items": [{"eid": "edit-242", "en": "Princes Fall & Phantom Troupe Boards", "ar": "سقوط الأمراء وصعود فرقة الوهم"}, {"eid": "edit-243", "en": "Kacho and Momoze are killed. Kacho's sacrifice saves Fugetsu via post-death Nen. The Phantom Troupe boards searching for Hisoka. Three Mafia families operate in the shadows.", "ar": "تُقتل كاتشو وموموزي. تضحية كاتشو تنقذ فوغيتسو. فرقة الوهم تصعد بحثاً عن هيسوكا. ثلاث عائلات مافيا تعمل في الظل."}, {"eid": "edit-244", "en": "Hisoka vs Chrollo Rematch", "ar": "هيسوكا ضد كرولو — اللقاء الثاني"}, {"eid": "edit-245", "en": "Hisoka and Chrollo clash in an explosive rematch. Chrollo uses Skill Hunter devastatingly. Cha-R Mafia begins killing civilians — the Phantom Troupe is hired to stop them.", "ar": "هيسوكا وكرولو يتواجهان في لقاء ثانٍ متفجر. عائلة تشا-آر تقتل المدنيين — فرقة الوهم تُستأجر لإيقافهم."}, {"eid": "edit-246", "en": "Beyond's Secret & Voyage Continues", "ar": "سر Beyond والرحلة تستمر"}]}, {"name": "⭐ Groups — Heroes", "items": [{"eid": "edit-247", "en": "Beyond Netero's true agenda is revealed — he fathered one of the 14 princes and is manipulating the war. The Black Whale continues toward the Dark Continent as tensions escalate aboard.", "ar": "أجندة Beyond نيتيرو الحقيقية تنكشف — أنجب أحد الأمراء الـ14 ويتلاعب بالحرب. السفينة تواصل رحلتها نحو القارة المظلمة."}, {"eid": "edit-248", "en": "Three Kakin Mafia Families Aboard", "ar": "عائلات مافيا كاكين الثلاث على المتن"}, {"eid": "edit-249", "en": "Based on Hunter × Hunter by Yoshihiro Togashi — Ongoing", "ar": "مستند إلى هنتر × هنتر بقلم يوشيهيرو توغاشي — مستمر"}]}, {"name": "📖 Story Arcs & Footer", "items": [{"eid": "edit-250", "en": "Close", "ar": "إغلاق"}]}];
+// ══════════════════════════════════════════════════════
+// ALL 248 TEXT PAIRS — loaded from external variable
+// ══════════════════════════════════════════════════════
+var TEXT_CATS = [{"name": "🧭 Nav & Logo", "items": [{"eid": "edit-0", "en": "World of Nen", "ar": "عالم النين"}, {"eid": "edit-1", "en": "World of Nen — Interactive Guide", "ar": "عالم النين — دليل تفاعلي"}, {"eid": "edit-2", "en": "World of Nen", "ar": "عالم النين"}, {"eid": "edit-3", "en": "The art of manipulating life energy — aura — to transcend human limits. Discover the most complex power system in anime.", "ar": "فن التحكم في طاقة الحياة — الأورا — لتجاوز الحدود البشرية. اكتشف أعقد نظام قوى في عالم الأنمي."}, {"eid": "edit-4", "en": "↓ Scroll to explore ↓", "ar": "↓ اسحب لاستكشاف ↓"}]}, {"name": "🏠 Hero Section", "items": [{"eid": "edit-5", "en": "What is Nen?", "ar": "ما هو النين؟"}, {"eid": "edit-6", "en": "念 — The Art of Aura", "ar": "念 — فن الأورا"}, {"eid": "edit-7", "en": "The Four Major Principles", "ar": "المبادئ الأربعة الرئيسية"}, {"eid": "edit-8", "en": "Keeps aura flowing through and around the body like armor. Prevents slow aura loss and slows aging. The first technique every Nen user learns.", "ar": "يحافظ على تدفق الأورا عبر الجسم وحوله كالدرع. يمنع فقدان الأورا البطيء ويبطئ الشيخوخة. أول تقنية يتعلمها مستخدمو النين."}, {"eid": "edit-9", "en": "Completely stops aura flow, making the user undetectable by other Nen users. Used for stealth, but leaves the body vulnerable to Nen attacks.", "ar": "يوقف تدفق الأورا تماماً، مما يجعل المستخدم غير قابل للكشف من قبل مستخدمي النين الآخرين. يُستخدم للتخفي، لكنه يجعل الجسم عُرضة لهجمات النين."}, {"eid": "edit-10", "en": "Dramatically increases aura output beyond normal. Significantly boosts offensive and defensive power. Foundation for most combat applications.", "ar": "يزيد إنتاج الأورا بشكل كبير عما هو طبيعي. يعزز قوة الهجوم والدفاع بشكل ملحوظ. الأساس لمعظم تطبيقات القتال."}, {"eid": "edit-11", "en": "The expression of one's aura as a unique supernatural ability. Determined by personality and Nen type — the most personal of all techniques.", "ar": "التعبير عن الأورا كقدرة خارقة فريدة. يتحدد بالشخصية ونوع النين — أكثر التقنيات شخصية."}]}, {"name": "❓ What is Nen?", "items": [{"eid": "edit-12", "en": "Advanced Techniques", "ar": "التقنيات المتقدمة"}, {"eid": "edit-13", "en": "Extends aura to encase an object, allowing it to be treated as an extension of the user's body and strengthened with Nen.", "ar": "يمتد الأورا ليغلف جسماً ما، مما يسمح بمعاملته كامتداد لجسم المستخدم وتقويته بالنين."}, {"eid": "edit-14", "en": "Hides aura completely — even from other Nen users. Used for stealth attacks and concealing abilities. Extremely difficult to master.", "ar": "يخفي الأورا تماماً — حتى عن مستخدمي النين الآخرين. يُستخدم للهجمات الخفية وإخفاء القدرات. صعب جداً إتقانه."}, {"eid": "edit-15", "en": "Concentrates most of one's aura into a single body part for a dramatic power boost. Used to see through In or enhance a specific limb.", "ar": "يركز معظم الأورا في جزء واحد من الجسم لتعزيز قوة كبير. يُستخدم لرؤية الأورا المخفية أو تعزيز طرف معين."}, {"eid": "edit-16", "en": "Releases aura in a large sphere around the body. Acts as a detection system — the user can sense anyone who enters the radius. Range varies by user.", "ar": "يطلق الأورا في كرة كبيرة حول الجسم. يعمل كنظام كشف — يمكن للمستخدم الإحساس بأي شخص يدخل النطاق. يتفاوت المدى حسب المستخدم."}, {"eid": "edit-17", "en": "Spreads Ren throughout the body while maintaining Ten. A defensive form of Ren that protects the whole body, though less efficient than Gyo in one spot.", "ar": "ينتشر رين في جميع أنحاء الجسم مع الحفاظ على تن. شكل دفاعي لرين يحمي الجسم كله، وإن كان أقل كفاءة من جيو في نقطة واحدة."}, {"eid": "edit-18", "en": "The ultimate offensive technique — 100% of aura into one body part. Devastating power, but the rest of the body is completely unprotected.", "ar": "التقنية الهجومية الباعثة — 100% من الأورا في جزء واحد من الجسم. قوة مدمرة، لكن بقية الجسم غير محمية تماماً."}, {"eid": "edit-19", "en": "Techniques Visualized on the Body", "ar": "التقنيات مُجسَّدة على الجسم"}]}, {"name": "📋 Four Principles", "items": [{"eid": "edit-20", "en": "Click on any technique to see how it affects the human body and where the aura is directed.", "ar": "انقر على أي تقنية لترى كيف تؤثر على جسم الإنسان وأين يتجه الأورا."}, {"eid": "edit-21", "en": "Select a technique", "ar": "اختر تقنية"}, {"eid": "edit-22", "en": "Aura wraps evenly around the entire body like a second skin — a protective layer that prevents leakage and slows aging.", "ar": "يلتف الأورا بالتساوي حول الجسم كاملاً كطبقة ثانية من الجلد — درع واق يمنع التسرب ويبطئ الشيخوخة."}, {"eid": "edit-23", "en": "All aura nodes shut completely. The outline of the body fades — invisible to other Nen users, but completely vulnerable to Nen attacks.", "ar": "تغلق جميع عقد الأورا تماماً. يتلاشى خط الجسم — غير مرئي لمستخدمي النين الآخرين، لكن عرضة لهجمات النين."}, {"eid": "edit-24", "en": "The aura surges and expands dramatically beyond the body's surface, creating a powerful blazing field that multiplies offensive and defensive power.", "ar": "يتدفق الأورا ويتمدد بشكل كبير خارج سطح الجسم، مكوناً حقلاً قوياً يضاعف قوة الهجوم والدفاع."}, {"eid": "edit-25", "en": "Most of the body's aura floods into one specific part — typically the eyes or fists. That part glows intensely while the rest dims.", "ar": "ينهمر معظم أورا الجسم في جزء محدد — عادةً العيون أو القبضات. يتوهج ذلك الجزء بشدة بينما يخبو الباقي."}, {"eid": "edit-26", "en": "Aura extends from the hand to completely encase an external object — a weapon, tool, or even another person — treating it like an extension of the body.", "ar": "يمتد الأورا من اليد ليغلف جسماً خارجياً تماماً — سلاح أو أداة أو حتى شخصاً آخر — معاملته كامتداد للجسم."}, {"eid": "edit-27", "en": "Aura is still present but completely hidden — even from skilled Nen users. The outline of the body appears only as a faint dashed ghost.", "ar": "الأورا لا تزال موجودة لكنها مخفية تماماً — حتى عن مستخدمي النين المهرة. يظهر خط الجسم كشبح منقط خافت فقط."}, {"eid": "edit-28", "en": "A massive sphere of aura expands outward from the body in all directions, forming a detection dome. Anything entering the field is instantly sensed.", "ar": "تتمدد كرة ضخمة من الأورا خارجياً من الجسم في كل الاتجاهات، مشكلةً قبة كشف. يُستشعر فوراً أي شيء يدخل الحقل."}, {"eid": "edit-29", "en": "Ren floods the entire body evenly while Ten maintains the aura shell. Full defensive coverage — the whole body glows uniformly with reinforced aura.", "ar": "يملأ رين الجسم كاملاً بالتساوي بينما يحافظ تن على غلاف الأورا. تغطية دفاعية كاملة — يتوهج كامل الجسم بشكل منتظم بأورا معززة."}, {"eid": "edit-30", "en": "100% of all aura concentrates into one single point — usually the fist. Incandescent white-red explosion of power, but the rest of the body is completely dark and unprotected.", "ar": "100% من كل الأورا يتركز في نقطة واحدة — عادةً القبضة. انفجار أبيض-أحمر متوهج من القوة، لكن بقية الجسم مظلمة تماماً وبلا حماية."}, {"eid": "edit-31", "en": "Real-time aura redistribution across different body parts simultaneously. Different regions glow at different intensities depending on need — attack vs defense.", "ar": "إعادة توزيع الأورا في الوقت الفعلي عبر أجزاء مختلفة من الجسم. تتوهج مناطق مختلفة بشدد مختلفة حسب الحاجة — هجوم أو دفاع."}, {"eid": "edit-32", "en": "Nen Type Compatibility Chart", "ar": "جدول توافق أنواع النين"}, {"eid": "edit-33", "en": "Each Nen type can learn adjacent types more easily. The further apart two types are on the hexagon, the harder it is to learn. Select a type to see its compatibility percentages.", "ar": "يمكن لكل نوع نين تعلم الأنواع المجاورة بسهولة أكبر. كلما كان نوعان بعيدين على السداسي، كان تعلمهما أصعب. اختر نوعاً لرؤية نسب التوافق."}, {"eid": "edit-34", "en": "Enhancer", "ar": "المعزز"}, {"eid": "edit-35", "en": "Transmuter", "ar": "المحول"}, {"eid": "edit-36", "en": "Emitter", "ar": "الباعث"}, {"eid": "edit-37", "en": "Conjurer", "ar": "المجسد"}, {"eid": "edit-38", "en": "Manipulator", "ar": "المتلاعب"}, {"eid": "edit-39", "en": "Specialist", "ar": "المتخصص"}, {"eid": "edit-40", "en": "The Six Nen Types", "ar": "أنواع النين الستة"}, {"eid": "edit-41", "en": "Every person is born with an affinity for one of six Nen categories. Your type reflects your personality — and shapes the unique abilities you develop.", "ar": "كل شخص يولد بميل لأحد أنواع النين الستة. نوعك يعكس شخصيتك — ويشكل القدرات الفريدة التي تطورها."}]}, {"name": "⚡ Advanced Techniques", "items": [{"eid": "edit-42", "en": "Enhancer", "ar": "المعزز"}, {"eid": "edit-43", "en": "The most straightforward and powerful type. Enhancers boost their own physical capabilities or those of objects they touch to superhuman levels. Known for raw strength, speed, and healing.", "ar": "النوع الأكثر مباشرةً وقوةً. يعززون قدراتهم الجسدية أو قدرات الأشياء التي يلمسونها إلى مستويات فوق بشرية. مشهورون بالقوة الخام والسرعة والشفاء."}, {"eid": "edit-44", "en": "💧 Water Divination: Water volume increases", "ar": "💧 اختبار الماء: يزداد حجم الماء"}, {"eid": "edit-45", "en": "🎭 Personality: Simple, determined, and focused on their goals", "ar": "🎭 الشخصية: بسيطون، عزيمة قوية، مركزون على أهدافهم"}, {"eid": "edit-46", "en": "Transmuter", "ar": "المحول"}, {"eid": "edit-47", "en": "Transmuters alter the properties of their aura to mimic other substances — electricity, fire, water, or even more abstract qualities. Highly versatile and creative fighters.", "ar": "يغيرون خصائص أورا ليحاكوا مواد أخرى — كهرباء، نار، ماء، أو حتى خصائص أكثر تجريداً. مقاتلون متعددو المهارات ومبدعون."}, {"eid": "edit-48", "en": "💧 Water Divination: Water changes taste", "ar": "💧 اختبار الماء: يتغير طعم الماء"}, {"eid": "edit-49", "en": "🎭 Personality: Whimsical, unpredictable, prone to deception", "ar": "🎭 الشخصية: متقلبون، غير متوقعين، يميلون للخداع"}, {"eid": "edit-50", "en": "Emitter", "ar": "الباعث"}, {"eid": "edit-51", "en": "Emitters project their aura beyond their body, launching it as projectiles or maintaining it at a distance. Excellent for ranged combat and area control.", "ar": "يطلقون أوراهم خارج أجسامهم، ويطلقونها كقذائف أو يحافظون عليها عن بُعد. ممتازون في القتال على المدى البعيد والسيطرة على المنطقة."}, {"eid": "edit-52", "en": "💧 Water Divination: Water color changes", "ar": "💧 اختبار الماء: يتغير لون الماء"}, {"eid": "edit-53", "en": "🎭 Personality: Impatient, hot-headed, volatile and impulsive", "ar": "🎭 الشخصية: غير صبورين، متهورون، متفجرون وانفعاليون"}, {"eid": "edit-54", "en": "Conjurer", "ar": "المجسد"}, {"eid": "edit-55", "en": "Conjurers materialize physical objects from their aura. These objects are real and can interact with the world. Potency is greatly increased by setting strict conditions (vows).", "ar": "يجسدون أشياء مادية من أوراهم. هذه الأشياء حقيقية وتتفاعل مع العالم. تزداد القوة بشكل كبير بوضع شروط صارمة (نذور)."}, {"eid": "edit-56", "en": "💧 Water Divination: Impurities appear in water", "ar": "💧 اختبار الماء: تظهر شوائب في الماء"}, {"eid": "edit-57", "en": "🎭 Personality: High-strung, overly cautious, stoic, analytical", "ar": "🎭 الشخصية: متوترون، حذرون جداً، متزنون، تحليليون"}, {"eid": "edit-58", "en": "Manipulator", "ar": "المتلاعب"}, {"eid": "edit-59", "en": "Manipulators control living beings or objects with their aura. The hardest the condition to apply control, the greater the degree of control achieved. Often use a medium object.", "ar": "يتحكمون في الكائنات الحية أو الأشياء بأوراهم. كلما صعب تطبيق شرط السيطرة، كلما كانت درجة التحكم أكبر. غالباً يستخدمون وسيطاً."}, {"eid": "edit-60", "en": "💧 Water Divination: Leaf moves on the water", "ar": "💧 اختبار الماء: تتحرك الورقة على الماء"}, {"eid": "edit-61", "en": "🎭 Personality: Argumentative, logical, and calculative", "ar": "🎭 الشخصية: جدليون، منطقيون، حسابيون"}]}, {"name": "🫁 Body Techniques", "items": [{"eid": "edit-62", "en": "Specialist", "ar": "المتخصص"}, {"eid": "edit-63", "en": "The rarest and most mysterious type. Specialists have abilities that don't fit any other category. Often manifesting from deeply personal wishes or trauma. Cannot be fully predicted.", "ar": "النوع الأنادر والأكثر غموضاً. للمتخصصين قدرات لا تنتمي لأي فئة أخرى. غالباً تظهر من رغبات شخصية عميقة أو صدمات. لا يمكن التنبؤ بها بالكامل."}, {"eid": "edit-64", "en": "💧 Water Divination: A completely different, unique change", "ar": "💧 اختبار الماء: تغيير مختلف تماماً وفريد"}, {"eid": "edit-65", "en": "🎭 Personality: Independent, charismatic, and unconventional", "ar": "🎭 الشخصية: مستقلون، كاريزماتيون، غير تقليديين"}, {"eid": "edit-66", "en": "Water Divination Test", "ar": "اختبار تكهن الماء"}, {"eid": "edit-67", "en": "How It Works", "ar": "كيف يعمل"}, {"eid": "edit-68", "en": "Restrictions & Vows", "ar": "القيود والنذور"}, {"eid": "edit-69", "en": "The greater the restriction you place on yourself, the more powerful your ability becomes. This is one of Nen's most fascinating — and dangerous — rules.", "ar": "كلما كانت القيود التي تضعها على نفسك أكبر، كانت قدرتك أقوى. هذه إحدى أكثر قواعد النين إثارةً للاهتمام — وخطورةً."}, {"eid": "edit-70", "en": "Conditions", "ar": "الشروط"}, {"eid": "edit-71", "en": "Simple rules that must be met to activate an ability. The more limiting the condition, the greater the power boost received.", "ar": "قواعد بسيطة يجب الوفاء بها لتفعيل القدرة. كلما كان الشرط أكثر تقييداً، كلما كان تعزيز القوة أكبر."}, {"eid": "edit-72", "en": "Example: Kurapika's chains activate only against Phantom Troupe members.", "ar": "مثال: سلاسل كوراباكا تتفعل فقط ضد أعضاء فرقة الوهم."}, {"eid": "edit-73", "en": "Vows (Pledge)", "ar": "النذور (العهد)"}, {"eid": "edit-74", "en": "The most powerful and dangerous restriction. A solemn oath where breaking it carries lethal or catastrophic consequences for the user themselves.", "ar": "القيد الأقوى والأخطر. قسم مقدس يستلزم كسره عواقب مميتة أو كارثية على المستخدم نفسه."}, {"eid": "edit-75", "en": "If Kurapika uses Chain Jail on a non-Troupe member, he will die. This vow makes it one of the strongest conjured abilities.", "ar": "إذا استخدم كوراباكا سجن السلسلة على غير عضو في الفرقة، سيموت. هذا النذر يجعلها من أقوى القدرات المجسدة."}, {"eid": "edit-76", "en": "Post-Death Nen", "ar": "نين ما بعد الموت"}, {"eid": "edit-77", "en": "When a Nen user dies while deeply committed to a purpose, their aura can persist and even grow stronger. Death itself becomes the ultimate condition.", "ar": "عندما يموت مستخدم النين وهو ملتزم بغاية عميقة، يمكن أن تستمر أوراه وتقوى. الموت نفسه يصبح الشرط النهائي."}, {"eid": "edit-78", "en": "Meruem was cursed by Netero's post-death Nen ability — the Poor Man's Rose — which spread poison after activating.", "ar": "لُعن ميروم بقدرة نيتيرو من بعد الموت — وردة الفقير — التي نشرت السم بعد تفعيلها."}, {"eid": "edit-79", "en": "Groups & Factions", "ar": "المجموعات والفصائل"}, {"eid": "edit-80", "en": "Zoldyck Family", "ar": "عائلة زولديك"}, {"eid": "edit-81", "en": "Phantom Troupe", "ar": "فرقة الوهم"}, {"eid": "edit-82", "en": "Zodiacs", "ar": "الأبراج"}, {"eid": "edit-83", "en": "Chimera Ants", "ar": "نمل الكيميرا"}, {"eid": "edit-84", "en": "Heroes", "ar": "الأبطال"}, {"eid": "edit-85", "en": "Zoldyck Family — World's Greatest Assassins", "ar": "عائلة زولديك — أعظم قتلة في العالم"}, {"eid": "edit-86", "en": "Great-Great-Grandfather", "ar": "الجد الأكبر"}, {"eid": "edit-87", "en": "Oldest living Zoldyck. Netero was the only one to fight him and survive. His Nen is described as \"very quiet.\"", "ar": "أكبر زولديك على قيد الحياة. نيتيرو هو الوحيد الذي حارب ماها ونجا. يُوصف نينه بـ\"الصامت جداً\"."}]}, {"name": "🔷 Nen Compatibility", "items": [{"eid": "edit-88", "en": "Grandfather / Former Head", "ar": "الجد / الرئيس السابق"}, {"eid": "edit-89", "en": "Legendary assassin & Nen master. Former peer of Netero. Wise and patient compared to Silva.", "ar": "قاتل أسطوري وعارف نين. رفيق سابق لنيتيرو. حكيم وصبور مقارنةً بسيلفا."}, {"eid": "edit-90", "en": "Current Head", "ar": "الرئيس الحالي"}, {"eid": "edit-91", "en": "Current head of the family. Immensely powerful — killed a Chimera Ant with one blow. Stoic and ruthless.", "ar": "الرأس الحالي للعائلة. بالغ القوة — قتل نمل كيميرا بضربة واحدة. بارد الأعصاب وقاسٍ."}, {"eid": "edit-92", "en": "Mother", "ar": "الأم"}, {"eid": "edit-93", "en": "Overprotective mother from Meteor City. Wears a mask and bionic eye. Deeply controlling over her children.", "ar": "أم حمائية من مدينة نيزك. ترتدي قناعاً وعيناً بيونية. مسيطرة على أطفالها."}, {"eid": "edit-94", "en": "Eldest Son — #1", "ar": "الابن الأكبر"}, {"eid": "edit-95", "en": "Cold & calculating. Master of needle manipulation. Friend/ally of Hisoka. Phantom Troupe #11.", "ar": "بارد وحسابي. خبير التلاعب بالإبر. حليف هيسوكا. رقم 11 في فرقة الوهم."}, {"eid": "edit-96", "en": "Second Son", "ar": "الابن الثاني"}, {"eid": "edit-97", "en": "Tech genius. Hacker and inventor — cracked the Hunter Website. Not a physical fighter like his siblings.", "ar": "عبقري تقني. هاكر ومخترع — اخترق موقع الصيادين. ليس مقاتلاً جسدياً كإخوته."}]}, {"name": "🟢 Nen Type — Enhancer", "items": [{"eid": "edit-98", "en": "Third Son — Prodigy", "ar": "الابن الثالث — النابغة"}, {"eid": "edit-99", "en": "Greatest prodigy in Zoldyck history. Left the family to travel with Gon. Hero of the series.", "ar": "أعظم نابغة في تاريخ زولديك. غادر العائلة للسفر مع غون. بطل الأنمي."}, {"eid": "edit-100", "en": "Daughter / Nanika's Host", "ar": "الابنة / حاضنة نانيكا"}, {"eid": "edit-101", "en": "Hosts the entity \"Nanika\" who can grant any wish — at a devastating cost. Loves only Killua.", "ar": "تحتضن الكائن \"نانيكا\" الذي يمنح أي أمنية — بثمن باهظ. تحب كيلوا فقط."}, {"eid": "edit-102", "en": "Youngest Son — Troupe #4", "ar": "الابن الأصغر — فرقة الوهم"}, {"eid": "edit-103", "en": "Youngest and extremely talented. Joined the Phantom Troupe seeking to prove himself. Uses paper as a weapon.", "ar": "الأصغر وموهوب للغاية. انضم لفرقة الوهم لإثبات نفسه. يستخدم الورق سلاحاً."}, {"eid": "edit-104", "en": "Phantom Troupe — 幻影旅団 — Gen'ei Ryodan", "ar": "فرقة الوهم — 幻影旅団"}, {"eid": "edit-105", "en": "Leader / Founder", "ar": "الزعيم / المؤسس"}, {"eid": "edit-106", "en": "Interrogator", "ar": "المحقق"}, {"eid": "edit-107", "en": "Fighter #2 Strength", "ar": "المقاتل"}, {"eid": "edit-108", "en": "Medic / Fighter", "ar": "الطبيبة والمقاتلة"}, {"eid": "edit-109", "en": "Former Member", "ar": "عضو سابق"}, {"eid": "edit-110", "en": "Fighter", "ar": "المقاتل"}, {"eid": "edit-111", "en": "Strategist / Hunter", "ar": "الاستراتيجي"}, {"eid": "edit-112", "en": "#4 Strength", "ar": "القوة الرابعة"}, {"eid": "edit-113", "en": "Swordsman", "ar": "المحارب"}]}, {"name": "🟣 Nen Type — Transmuter", "items": [{"eid": "edit-114", "en": "Memory Reader", "ar": "قارئة الذاكرة"}, {"eid": "edit-115", "en": "#12 Strength", "ar": "القوة 12"}, {"eid": "edit-116", "en": "Zoldyck Rep", "ar": "ممثل زولديك"}, {"eid": "edit-117", "en": "#13 Strength", "ar": "القوة 13"}, {"eid": "edit-118", "en": "Replaced Hisoka", "ar": "حل محل هيسوكا"}, {"eid": "edit-119", "en": "#1 Strength (Original)", "ar": "القوة الأولى (أصلي)"}, {"eid": "edit-120", "en": "Zodiacs — Netero's Elite Council", "ar": "الأبراج — مجلس نيتيرو النخبوي"}, {"eid": "edit-121", "en": "Rat — Former Vice-Chair", "ar": "الفأر — نائب رئيس سابق"}, {"eid": "edit-122", "en": "Master manipulator & politician. Genius-level strategist. Resigned immediately after becoming Chairman.", "ar": "سياسي متلاعب بارع. استراتيجي عبقري. استقال فور تعيينه رئيساً."}, {"eid": "edit-123", "en": "Ox — Crime Hunter", "ar": "الثور — صائد الجرائم"}, {"eid": "edit-124", "en": "Analytical investigator. Uses traffic-light Nen to capture targets in spectral cages.", "ar": "محقق تحليلي. يستخدم نين إشارات المرور لحبس الأهداف في أقفاص طيفية."}, {"eid": "edit-125", "en": "Tiger — Defense Team", "ar": "النمر — فريق الدفاع"}]}, {"name": "🟡 Nen Type — Emitter", "items": [{"eid": "edit-126", "en": "Temperamental and impulsive. Quick to argue. Strong combatant assigned to the Defense Team.", "ar": "متقلب وانفعالي. سريع الجدل. مقاتل قوي في فريق الدفاع."}, {"eid": "edit-127", "en": "Rabbit — Intel Team", "ar": "الأرنب — فريق الاستخبارات"}, {"eid": "edit-128", "en": "Multilingual programmer and Paleograph Hunter. Hosted election proceedings. Intel Team leader.", "ar": "مبرمجة متعددة اللغات وصائدة كتابة قديمة. أدارت انتخابات الرئاسة. قائدة فريق الاستخبارات."}, {"eid": "edit-129", "en": "Dragon — Terrorist Hunter", "ar": "التنين — صائد الإرهابيين"}, {"eid": "edit-130", "en": "Triple Star Hunter. Most experienced Zodiac. His Nen is said to be the strongest in the group.", "ar": "صياد ثلاثي النجوم. أكثر البروج خبرةً. يُقال إن نينه الأقوى في المجموعة."}, {"eid": "edit-131", "en": "Cobra — Poison Hunter", "ar": "الكوبرا — صائدة السموم"}, {"eid": "edit-132", "en": "Poison specialist. Can transform her arm into a snake. Part of the Science Team for the Dark Continent.", "ar": "متخصصة في السموم. تستطيع تحويل ذراعها لثعبان. جزء من فريق العلوم للقارة المظلمة."}, {"eid": "edit-133", "en": "Horse — Intel Team", "ar": "الحصان — فريق الاستخبارات"}, {"eid": "edit-134", "en": "Works behind the scenes. Methodical and observant. 2-Star Hunter and Intel Team member.", "ar": "يعمل خلف الكواليس. منهجي ومراقب. صياد ذو نجمتين وعضو فريق الاستخبارات."}, {"eid": "edit-135", "en": "Goat — Flora/Fauna", "ar": "الماعز — فريق الأحياء"}, {"eid": "edit-136", "en": "Most emotional Zodiac. Speed-based abilities. Was a sparring partner for Netero. Hisoka rated him 90/100.", "ar": "أكثر البروج عاطفيةً. قدراته قائمة على السرعة. كان شريك تدريب لنيتيرو."}, {"eid": "edit-137", "en": "Monkey — Traitor", "ar": "القرد — الخائن"}]}, {"name": "🔴 Nen Type — Conjurer", "items": [{"eid": "edit-138", "en": "Secret ally of Beyond Netero. Concealed traitor within the Zodiacs. Defense Team member.", "ar": "حليف سري لـ Beyond نيتيرو. الخائن المخفي داخل الأبراج. عضو فريق الدفاع."}, {"eid": "edit-139", "en": "Rooster — Flora/Fauna", "ar": "الديك — فريق الأحياء"}, {"eid": "edit-140", "en": "Controls hundreds of birds simultaneously. Sent election notices via 600+ pigeons to all Hunters worldwide.", "ar": "تتحكم بمئات الطيور في وقت واحد. أرسلت إشعارات الانتخابات بأكثر من 600 حمامة."}, {"eid": "edit-141", "en": "Dog — Current Chairman", "ar": "الكلب — الرئيسة الحالية"}, {"eid": "edit-142", "en": "Current Chairman of the Hunter Association. Triple Star Disease Hunter. Sharp intellect and administrator.", "ar": "الرئيسة الحالية لجمعية الصيادين. صائدة أمراض ثلاثية النجوم. ذكاء حاد وإدارية بارعة."}, {"eid": "edit-143", "en": "Boar — Gon's Father", "ar": "الخنزير — والد غون"}, {"eid": "edit-144", "en": "Top 5 Nen users globally. Created Greed Island. Double Star Ruins Hunter. Abandoned Gon at birth.", "ar": "من أفضل 5 مستخدمي نين عالمياً. ابتكر جزيرة الجشع. صياد آثار مزدوج النجوم. هجر غون عند الولادة."}, {"eid": "edit-145", "en": "Chimera Ants — The Ultimate Predators", "ar": "نمل الكيميرا — المفترسون النهائيون"}, {"eid": "edit-146", "en": "King — Chimera Ant", "ar": "الملك"}, {"eid": "edit-147", "en": "The most powerful being introduced in the series. Born already surpassing elite Hunters. Absorbs Nen abilities by consuming others.", "ar": "أقوى كائن مُقدَّم في السلسلة. وُلد وهو يتجاوز الصيادين النخبة. يمتص قدرات النين بابتلاع الآخرين."}, {"eid": "edit-148", "en": "Royal Guard — #1", "ar": "الحارس الملكي #1"}, {"eid": "edit-149", "en": "Most powerful Royal Guard. Cat-like. En detects kilometers. Expert puppet surgeon and healer.", "ar": "أقوى حارس ملكي. شبيه بالقطط. إن يكشف كيلومترات. جراح دمى وطبيب خبير."}]}, {"name": "⚫ Nen Type — Manipulator", "items": [{"eid": "edit-150", "en": "Royal Guard — #2", "ar": "الحارس الملكي #2"}, {"eid": "edit-151", "en": "Butterfly-type. Devoted to Meruem. Splits into tiny clones. Manipulates via scales that induce illusions.", "ar": "من نوع الفراشة. مخلص لميروم. يتقسم لنسخ صغيرة. يتلاعب بمقاييس تُحدث أوهاماً."}, {"eid": "edit-152", "en": "Royal Guard — #3", "ar": "الحارس الملكي #3"}, {"eid": "edit-153", "en": "Oni-like power. Can reshape his body into any form. Unstable but overwhelmingly powerful in combat.", "ar": "قوة شيطانية. يعيد تشكيل جسمه لأي صورة. غير مستقر لكن ساحق القوة في القتال."}, {"eid": "edit-154", "en": "Queen / Origin", "ar": "الملكة / الأصل"}, {"eid": "edit-155", "en": "Origin of all Chimera Ants. Used Phagogenesis to merge human & animal DNA, creating Nen-capable hybrids. Died giving birth to Meruem.", "ar": "أصل كل نمل الكيميرا. استخدمت الفاغوجينيسيس لدمج الحمض البشري والحيواني. ماتت أثناء ولادة ميروم."}, {"eid": "edit-156", "en": "Squadron Leader", "ar": "قائد سرب"}, {"eid": "edit-157", "en": "Cheetah-type. Fastest Chimera Ant. Arrogant — killed by Silva Zoldyck with one blow before he could show his new ability.", "ar": "من نوع الفهد. أسرع نمل كيميرا. متغطرس — قُتل بيد سيلفا زولديك بضربة واحدة."}, {"eid": "edit-158", "en": "Main Heroes & Key Characters", "ar": "الأبطال الرئيسيون والشخصيات الأساسية"}, {"eid": "edit-159", "en": "Main Protagonist", "ar": "البطل الرئيسي"}, {"eid": "edit-160", "en": "Pure-hearted boy seeking his father Ging. Incredible potential — briefly transformed into an adult form that terrified even Royal Guards.", "ar": "فتى طاهر القلب يبحث عن والده غينغ. إمكانيات هائلة — تحول لهيئة بالغة أرعبت حتى الحراس الملكيين."}, {"eid": "edit-161", "en": "Protagonist / Best Friend", "ar": "البطل / أفضل صديق"}]}, {"name": "🔵 Nen Type — Specialist", "items": [{"eid": "edit-162", "en": "Former assassin heir. Gon's closest friend. Genius prodigy who mastered lightning-speed Nen at a young age.", "ar": "وريث قاتل سابق. أفضل أصدقاء غون. نابغة أتقن نين السرعة البرقية في سنٍّ صغيرة."}, {"eid": "edit-163", "en": "Protagonist / Last Kurta", "ar": "البطل / آخر الكورتا"}, {"eid": "edit-164", "en": "Sole survivor of the Kurta Clan massacre. Becomes Specialist (Emperor Time) when his eyes turn Scarlet, giving 100% efficiency in all Nen types.", "ar": "الناجي الوحيد من مذبحة عشيرة الكورتا. يصبح متخصصاً (وقت الإمبراطور) حين تتحول عيناه للقرمزي."}, {"eid": "edit-165", "en": "Protagonist / Future Doctor", "ar": "البطل / الطبيب المستقبلي"}, {"eid": "edit-166", "en": "Aspiring doctor. Fights for the poor. His raw determination earned him a seat in the Zodiac council. Punched Ging live on TV.", "ar": "طبيب طموح. يناضل من أجل الفقراء. إصراره الخام منحه مقعداً في مجلس الأبراج. لكم غينغ على الهواء مباشرة."}, {"eid": "edit-167", "en": "12th Chairman — Legend", "ar": "الرئيس الثاني عشر — أسطورة"}, {"eid": "edit-168", "en": "Considered the world's strongest Nen user in his prime. Fought Meruem alone. Self-detonated the Poor Man's Rose as a final act.", "ar": "يُعتبر أقوى مستخدم نين في العالم في عز شبابه. حارب ميروم وحيداً. فجّر نفسه بـ\"وردة الفقير\" كعمله الأخير."}, {"eid": "edit-169", "en": "Anti-hero / Wild Card", "ar": "البطل المضاد / الورقة العشوائية"}, {"eid": "edit-170", "en": "Enigmatic magician obsessed with fighting strong opponents. Ally when convenient, predator at heart.", "ar": "ساحر غامض مهووس بمحاربة الخصوم الأقوياء. حليف عند الحاجة، مفترس في جوهره."}, {"eid": "edit-171", "en": "Ging's Student", "ar": "تلميذ غينغ"}]}, {"name": "💧 Water Divination", "items": [{"eid": "edit-172", "en": "Ging's first student. Inspired Gon to become a Hunter. Expert field researcher. Reborn as a Chimera Ant after death.", "ar": "أول تلميذ لغينغ. ألهم غون ليصبح صياداً. باحث ميداني خبير. وُلد من جديد كنملة كيميرا بعد وفاته."}, {"eid": "edit-173", "en": "Zoldyck — Wish Granter", "ar": "زولديك — مانحة الأمنيات"}, {"eid": "edit-174", "en": "Theorized to be one of the 5 Dark Continent calamities (Ai). Can grant any wish — but refusing requests causes escalating deaths.", "ar": "يُعتقد أنها إحدى الكوارث الخمس للقارة المظلمة (آي). تمنح أي أمنية — لكن رفض الطلبات يتسبب بوفيات متصاعدة."}, {"eid": "edit-175", "en": "Story Arcs", "ar": "مسارات القصة"}, {"eid": "edit-176", "en": "Hunter × Hunter's journey told arc by arc — with anime episode numbers and manga chapters for both the 1999 and 2011 adaptations.", "ar": "رحلة هنتر × هنتر قوساً قوساً — مع أرقام حلقات الأنمي وفصول المانجا لكلا نسختَي 1999 و2011."}, {"eid": "edit-177", "en": "Gon leaves Whale Island to take the legendary Hunter Exam. He befriends Kurapika, Leorio, and Killua while surviving deadly trials in a jungle, an underground marathon, and a battle tower. He first encounters the enigmatic Hisoka.", "ar": "يغادر غون جزيرة الحوت لأداء اختبار الصيادين الأسطوري. يصادق كوراباكا وليوريو وكيلوا بينما يتخطى تجارب مميتة في غابة وماراثون تحت الأرض وبرج قتال. يلتقي بهيسوكا الغامض لأول مرة."}, {"eid": "edit-178", "en": "After the exam, Gon, Kurapika and Leorio travel to Kukuroo Mountain to rescue Killua who was dragged home by Illumi. They face the legendary Testing Gate and encounter the terrifying Zoldyck estate staff.", "ar": "بعد الاختبار، يتجه غون وكوراباكا وليوريو لجبل كوكورو لإنقاذ كيلوا الذي اقتاده إيلومي للمنزل. يواجهون البوابة الأسطورية لـ64 طناً وموظفي قصر زولديك المرعبين."}, {"eid": "edit-179", "en": "Gon and Killua go to Heavens Arena — a 251-floor battle tower — to earn money and train. Wing introduces them to Nen, the life energy system. This arc features the iconic Hisoka vs Gon fight and Killua's first Nen awakening.", "ar": "يتجه غون وكيلوا لساحة السماء — برج قتالي من 251 طابقاً — لكسب المال والتدريب. يعرّفهم وينغ على النين، نظام طاقة الحياة. يتضمن القوس مواجهة هيسوكا وغون الشهيرة وأول صحوة نين لكيلوا."}, {"eid": "edit-180", "en": "The Phantom Troupe massacres the Mafia's auction. Kurapika activates his Scarlet Eyes and begins hunting the Spiders with his chains. The arc reveals the tragedy of the Kurta Clan, introduces Emperor Time, and ends in a standoff between Kurapika and Chrollo.", "ar": "فرقة الوهم تذبح مزاد المافيا. يُفعّل كوراباكا عيناه القرمزيتان ويبدأ صيد العناكب بسلاسله. يكشف القوس مأساة عشيرة الكورتا، ويقدم وقت الإمبراطور، وينتهي بمواجهة بين كوراباكا وكرولو."}, {"eid": "edit-181", "en": "Gon and Killua enter a mysterious real-life video game called Greed Island created by Ging. They train under Biscuit Krueger and collect 100 specified cards to complete the game. Gon's Jajanken ability is fully developed here.", "ar": "يدخل غون وكيلوا لعبة فيديو غريبة في الواقع الحقيقي تُسمى جزيرة الجشع صنعها غينغ. يتدربان تحت إشراف بيسكيت كروغر ويجمعان 100 بطاقة محددة لإكمال اللعبة. تتطور قدرة غون جاجانكين بالكامل هنا."}, {"eid": "edit-183", "en": "After Netero's death, the Hunter Association must elect a new Chairman. Gon, near death, is miraculously healed by Alluka's wish. Leorio punches Ging on live TV. Killua finally frees Alluka. This is where the 2011 anime ends.", "ar": "بعد موت نيتيرو، تنتخب جمعية الصيادين رئيساً جديداً. غون على حافة الموت، يُشفى بأعجوبة عبر أمنية أللوكا. ليوريو يلكم غينغ على الهواء مباشرةً. كيلوا يحرر أللوكا أخيراً. هنا ينتهي أنمي 2011."}]}, {"name": "⛓ Restrictions & Vows", "items": [{"eid": "edit-186", "en": "World Map", "ar": "خريطة العالم"}, {"eid": "edit-187", "en": "The Known World surrounded by Lake Mobius — and beyond it, the forbidden Dark Continent. Pan, zoom, and draw on the map.", "ar": "العالم المعروف المحاط ببحيرة موبيوس — وخارجها القارة المظلمة المحظورة. تحرك وكبّر وارسم على الخريطة."}, {"eid": "edit-188", "en": "Reset", "ar": "إعادة"}, {"eid": "edit-189", "en": "Draw", "ar": "رسم"}, {"eid": "edit-190", "en": "Erase", "ar": "محو"}, {"eid": "edit-191", "en": "Clear", "ar": "مسح الكل"}, {"eid": "edit-192", "en": "🖱 Drag to pan • Scroll to zoom • Use toolbar to draw", "ar": "🖱 اسحب للتحريك • اسكرول للتكبير • استخدم الأدوات للرسم"}, {"eid": "edit-193", "en": "Test Your Nen Knowledge", "ar": "اختبر معرفتك بالنين"}, {"eid": "edit-194", "en": "Try Again", "ar": "حاول مجدداً"}, {"eid": "edit-195", "en": "Fan project — not affiliated with the official series", "ar": "مشروع معجبين — غير مرتبط بالسلسلة الرسمية"}]}, {"name": "🏔 Groups — Zoldyck", "items": [{"eid": "edit-196", "en": "Dark Continent (Manga Spoilers)", "ar": "القارة المظلمة (حرق المانجا)"}, {"eid": "edit-197", "en": "Dark Continent", "ar": "القارة المظلمة"}, {"eid": "edit-198", "en": "🔥 I Accept — Show Me", "ar": "🔥 أقبل الحرق — اعرض لي"}, {"eid": "edit-199", "en": "← Go Back (Safe Zone)", "ar": "← ارجع (منطقة آمنة)"}, {"eid": "edit-200", "en": "🔥 Dark Continent — Manga Spoilers", "ar": "🔥 القارة المظلمة — حرق المانجا"}, {"eid": "edit-201", "en": "Close", "ar": "إغلاق"}, {"eid": "edit-202", "en": "⚠ MANGA ONLY — CH. 340–410+", "ar": "⚠ مانجا فقط — ف. 340–410+"}, {"eid": "edit-203", "en": "Dark Continent", "ar": "القارة المظلمة"}, {"eid": "edit-204", "en": "A forbidden land beyond Lake Mobius where humanity originated — and every attempt to return has ended in catastrophe.", "ar": "أرض محظورة خارج بحيرة موبيوس حيث نشأت البشرية — وكل محاولة للعودة إليها انتهت بكارثة."}, {"eid": "edit-205", "en": "Starting Chapter", "ar": "الفصل الأول"}, {"eid": "edit-206", "en": "Past Expedition Survival", "ar": "نسبة النجاة السابقة"}, {"eid": "edit-207", "en": "Dark Continent Calamities", "ar": "كوارث القارة المظلمة"}, {"eid": "edit-208", "en": "Kakin Princes at War", "ar": "أمراء كاكين في الحرب"}, {"eid": "edit-209", "en": "Black Whale Passengers", "ar": "مسافرو Black Whale"}, {"eid": "edit-210", "en": "World Powers Supporting", "ar": "القوى العالمية الداعمة"}, {"eid": "edit-211", "en": "The 5 Dark Continent Calamities", "ar": "الكوارث الخمس للقارة المظلمة"}, {"eid": "edit-212", "en": "Botanical Weapon", "ar": "سلاح نباتي"}, {"eid": "edit-213", "en": "Plant-type weapon with extreme offensive capability. Its flowers attack living beings with unknown energy projectiles.", "ar": "سلاح نباتي بقدرة هجومية قصوى. أزهاره تهاجم الكائنات بقذائف طاقة مجهولة."}, {"eid": "edit-214", "en": "Lurking Parasite", "ar": "طفيلي كامن"}, {"eid": "edit-215", "en": "Hides in the mind and magnifies negative emotions — rage, fear, despair. Causes civilizations to self-destruct from within.", "ar": "يختبئ في العقل ويضخم المشاعر السلبية — غضب، خوف، يأس. يدمّر الحضارات من الداخل."}, {"eid": "edit-216", "en": "Spreading Curse", "ar": "لعنة منتشرة"}, {"eid": "edit-217", "en": "A snake-like creature whose bite transforms the victim into another Hellbell — exponentially spreading the curse.", "ar": "مخلوق شبيه بالأفعى تحوّل لدغته الضحية لهيلبيل آخر — اللعنة تنتشر بشكل أسي."}, {"eid": "edit-218", "en": "Gaseous Wish-Granter", "ar": "كيان غازي مانح الأمنيات"}, {"eid": "edit-219", "en": "Grants wishes at an escalating fatal cost. Theorized to inhabit Alluka Zoldyck as \"Nanika.\" The most mysterious calamity.", "ar": "يمنح الأمنيات بثمن مميت متصاعد. يُعتقد أنه يسكن أللوكا زولديك كـ\"نانيكا\". أغمض الكوارث."}]}, {"name": "🕷 Groups — Phantom Troupe", "items": [{"eid": "edit-220", "en": "Immortality Plague", "ar": "وباء الخلود"}, {"eid": "edit-221", "en": "Grants immortality but removes the will to live. The infected survive anything but wander endlessly with no purpose — worse than death.", "ar": "يمنح الخلود لكنه يزيل إرادة الحياة. المصابون يتجولون إلى الأبد بلا هدف — أسوأ من الموت."}, {"eid": "edit-222", "en": "The 14 Kakin Princes — Succession War", "ar": "الـ14 أمراء كاكين — حرب الخلافة"}, {"eid": "edit-223", "en": "Military-minded eldest. Commands private army. Most aggressive in pursuing the throne.", "ar": "الأكبر العسكري. يقود جيشاً خاصاً. الأكثر عدوانية."}, {"eid": "edit-224", "en": "Ruthless. If she dies, her killer dies 30 days later — a guaranteed death trap.", "ar": "قاسية. إذا ماتت قاتلها يموت بعد 30 يوماً."}, {"eid": "edit-225", "en": "Charming & diplomatic. Recruits allies openly. Strong political support base.", "ar": "ساحر ودبلوماسي. يجنّد الحلفاء علناً."}, {"eid": "edit-226", "en": "Serial killer collecting Scarlet Eyes. Awakened his own Nen at terrifying speed. Kurapika's primary target.", "ar": "قاتل متسلسل يجمع العيون القرمزية. أيقظ نينه بسرعة مرعبة. هدف كوراباكا الأول."}, {"eid": "edit-227", "en": "Analytical. Studies Nen academically. Strategic alliances over combat.", "ar": "تحليلية. تدرس النين أكاديمياً."}, {"eid": "edit-228", "en": "Religious. Believes the war is a \"blessing.\" Runs a book-based cult.", "ar": "دينية. تعتقد الحرب \"نعمة\". تدير طائفة كتب."}, {"eid": "edit-229", "en": "Hedonistic. Underestimated but has a dangerous smoke-based ability.", "ar": "محب للملذات. يُستهان به لكن يمتلك قدرة دخان خطيرة."}, {"eid": "edit-230", "en": "Party-lover, seems disinterested. Has the most unusual Guardian Beast.", "ar": "محب للحفلات. وحشه الأكثر غرابةً."}, {"eid": "edit-231", "en": "Idealist who REFUSES to participate. Awakened powerful Nen with no prior training.", "ar": "مثالي يرفض المشاركة. أيقظ نيناً قوياً دون تدريب."}, {"eid": "edit-232", "en": "Twin with Fugetsu. Sacrificed herself using a post-death Nen vow to protect her sister.", "ar": "توأم فوغيتسو. ضحّت بنفسها لحماية توأمها."}, {"eid": "edit-233", "en": "Twin with Kacho. Has teleportation doors allowing escape from enclosed spaces.", "ar": "توأم كاتشو. تفتح أبواباً للانتقال الفوري."}]}, {"name": "⭕ Groups — Zodiacs", "items": [{"eid": "edit-234", "en": "Young and inexperienced with the weakest guard team. Eliminated early.", "ar": "صغيرة مع أضعف حراسة. اغتيلت مبكراً."}, {"eid": "edit-235", "en": "9-year-old child prince. Kurapika's primary client. His innocence makes the war more tragic.", "ar": "طفل 9 سنوات. الموكّل الرئيسي لكوراباكا."}, {"eid": "edit-236", "en": "Infant princess. Kurapika's guarded royal. Her mother Oito is an ally.", "ar": "رضيعة. كوراباكا يحرسها. أمها أويتو حليفة له."}, {"eid": "edit-237", "en": "Key Story Events (Ch. 340–410+)", "ar": "أحداث القصة الرئيسية (ف. 340–410+)"}, {"eid": "edit-238", "en": "King Nasubi's Announcement", "ar": "إعلان الملك ناسوبي"}, {"eid": "edit-239", "en": "Kakin Empire announces the expedition. Beyond Netero leads. V5 becomes V6. Leorio and Kurapika join the Zodiacs replacing Ging and Pariston.", "ar": "إمبراطورية كاكين تعلن البعثة. Beyond نيتيرو يقودها. V5 تصبح V6. ليوريو وكوراباكا يخلفان غينغ وباريستون في الأبراج."}, {"eid": "edit-240", "en": "Black Whale Boarding & Succession War Begins", "ar": "الصعود على Black Whale وبداية حرب الخلافة"}, {"eid": "edit-241", "en": "200,000 passengers board. Kurapika discovers the war aboard. He trains Nen users. Tserriednich awakens Nen at terrifying speed — Kurapika's new crisis.", "ar": "200,000 مسافر يصعدون. كوراباكا يكتشف الحرب. يدرّب مستخدمي نين. تسيريدنيش يُصحي نينه بسرعة مرعبة."}]}, {"name": "🐜 Groups — Chimera Ants", "items": [{"eid": "edit-242", "en": "Princes Fall & Phantom Troupe Boards", "ar": "سقوط الأمراء وصعود فرقة الوهم"}, {"eid": "edit-243", "en": "Kacho and Momoze are killed. Kacho's sacrifice saves Fugetsu via post-death Nen. The Phantom Troupe boards searching for Hisoka. Three Mafia families operate in the shadows.", "ar": "تُقتل كاتشو وموموزي. تضحية كاتشو تنقذ فوغيتسو. فرقة الوهم تصعد بحثاً عن هيسوكا. ثلاث عائلات مافيا تعمل في الظل."}, {"eid": "edit-244", "en": "Hisoka vs Chrollo Rematch", "ar": "هيسوكا ضد كرولو — اللقاء الثاني"}, {"eid": "edit-245", "en": "Hisoka and Chrollo clash in an explosive rematch. Chrollo uses Skill Hunter devastatingly. Cha-R Mafia begins killing civilians — the Phantom Troupe is hired to stop them.", "ar": "هيسوكا وكرولو يتواجهان في لقاء ثانٍ متفجر. عائلة تشا-آر تقتل المدنيين — فرقة الوهم تُستأجر لإيقافهم."}, {"eid": "edit-246", "en": "Beyond's Secret & Voyage Continues", "ar": "سر Beyond والرحلة تستمر"}]}, {"name": "⭐ Groups — Heroes", "items": [{"eid": "edit-247", "en": "Beyond Netero's true agenda is revealed — he fathered one of the 14 princes and is manipulating the war. The Black Whale continues toward the Dark Continent as tensions escalate aboard.", "ar": "أجندة Beyond نيتيرو الحقيقية تنكشف — أنجب أحد الأمراء الـ14 ويتلاعب بالحرب. السفينة تواصل رحلتها نحو القارة المظلمة."}, {"eid": "edit-248", "en": "Three Kakin Mafia Families Aboard", "ar": "عائلات مافيا كاكين الثلاث على المتن"}, {"eid": "edit-249", "en": "Based on Hunter × Hunter by Yoshihiro Togashi — Ongoing", "ar": "مستند إلى هنتر × هنتر بقلم يوشيهيرو توغاشي — مستمر"}]}, {"name": "📖 Story Arcs & Footer", "items": [{"eid": "edit-250", "en": "Close", "ar": "إغلاق"}]}];
 
-// ══════════════════════════════════════════════
-// THE BASE HTML OF index.html — EMBEDDED
-// ══════════════════════════════════════════════
-// (loaded via fetch when saving, or stored as template)
-
-// ══════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // ALL CHARACTER IDs
-// ══════════════════════════════════════════════
-const SITE_CHARS = [
+// ══════════════════════════════════════════════════════
+var SITE_CHARS = [
   {g:'🏔 Zoldyck Family',chars:[
-    {id:'mc-maha',n:'Maha Zoldyck'},
-    {id:'mc-zeno',n:'Zeno Zoldyck'},
-    {id:'mc-silva',n:'Silva Zoldyck'},
-    {id:'mc-kikyo',n:'Kikyo Zoldyck'},
-    {id:'mc-illumi',n:'Illumi Zoldyck'},
-    {id:'mc-milluki',n:'Milluki Zoldyck'},
-    {id:'mc-killua',n:'Killua Zoldyck'},
-    {id:'mc-alluka',n:'Alluka Zoldyck'},
-    {id:'mc-kalluto',n:'Kalluto Zoldyck'},
+    {id:'mc-maha',n:'Maha Zoldyck'},{id:'mc-zeno',n:'Zeno Zoldyck'},
+    {id:'mc-silva',n:'Silva Zoldyck'},{id:'mc-kikyo',n:'Kikyo Zoldyck'},
+    {id:'mc-illumi',n:'Illumi Zoldyck'},{id:'mc-milluki',n:'Milluki Zoldyck'},
+    {id:'mc-killua',n:'Killua Zoldyck'},{id:'mc-alluka',n:'Alluka Zoldyck'},
+    {id:'mc-kalluto',n:'Kalluto Zoldyck'}
   ]},
   {g:'⭐ Heroes',chars:[
-    {id:'hr-gon',n:'Gon Freecss'},
-    {id:'hr-killua',n:'Killua (Hero)'},
-    {id:'hr-kurapika',n:'Kurapika'},
-    {id:'hr-leorio',n:'Leorio'},
-    {id:'hr-netero',n:'Isaac Netero'},
-    {id:'hr-kite',n:'Kite'},
-    {id:'hr-alluka',n:'Alluka/Nanika'},
-    {id:'gp-hisoka',n:'Hisoka'},
+    {id:'hr-gon',n:'Gon Freecss'},{id:'hr-killua',n:'Killua (Hero)'},
+    {id:'hr-kurapika',n:'Kurapika'},{id:'hr-leorio',n:'Leorio'},
+    {id:'hr-netero',n:'Isaac Netero'},{id:'hr-kite',n:'Kite'},
+    {id:'hr-alluka',n:'Alluka/Nanika'},{id:'gp-hisoka',n:'Hisoka'}
   ]},
   {g:'🕷 Phantom Troupe',chars:[
-    {id:'gp-chrollo',n:'Chrollo Lucilfer'},
-    {id:'gp-feitan',n:'Feitan Portor'},
-    {id:'gp-phinks',n:'Phinks Magcub'},
-    {id:'gp-machi',n:'Machi Komacine'},
-    {id:'gp-franklin',n:'Franklin Bordeau'},
-    {id:'gp-nobunaga',n:'Nobunaga Hazama'},
-    {id:'gp-pakunoda',n:'Pakunoda'},
-    {id:'gp-shizuku',n:'Shizuku Murasaki'},
-    {id:'gp-kortopi',n:'Kortopi'},
-    {id:'gp-uvogin',n:'Uvogin'},
-    {id:'gp-bonolenov',n:'Bonolenov'},
-    {id:'gp-shalnark',n:'Shalnark'},
+    {id:'gp-chrollo',n:'Chrollo'},{id:'gp-feitan',n:'Feitan'},
+    {id:'gp-phinks',n:'Phinks'},{id:'gp-machi',n:'Machi'},
+    {id:'gp-franklin',n:'Franklin'},{id:'gp-nobunaga',n:'Nobunaga'},
+    {id:'gp-pakunoda',n:'Pakunoda'},{id:'gp-shizuku',n:'Shizuku'},
+    {id:'gp-kortopi',n:'Kortopi'},{id:'gp-uvogin',n:'Uvogin'},
+    {id:'gp-bonolenov',n:'Bonolenov'},{id:'gp-shalnark',n:'Shalnark'}
   ]},
   {g:'⭕ Zodiacs',chars:[
-    {id:'zo-pariston',n:'Pariston (Rat)'},
-    {id:'zo-mizaistom',n:'Mizaistom (Ox)'},
-    {id:'zo-kanzai',n:'Kanzai (Tiger)'},
-    {id:'zo-pyon',n:'Pyon (Rabbit)'},
-    {id:'zo-botobai',n:'Botobai (Dragon)'},
-    {id:'zo-gel',n:'Gel (Cobra)'},
-    {id:'zo-saccho',n:'Saccho (Horse)'},
-    {id:'zo-ginta',n:'Ginta (Goat)'},
-    {id:'zo-saiyu',n:'Saiyu (Monkey)'},
-    {id:'zo-cluck',n:'Cluck (Rooster)'},
-    {id:'zo-cheadle',n:'Cheadle (Dog)'},
-    {id:'zo-ging',n:'Ging (Boar)'},
+    {id:'zo-pariston',n:'Pariston'},{id:'zo-mizaistom',n:'Mizaistom'},
+    {id:'zo-kanzai',n:'Kanzai'},{id:'zo-pyon',n:'Pyon'},
+    {id:'zo-botobai',n:'Botobai'},{id:'zo-gel',n:'Gel'},
+    {id:'zo-saccho',n:'Saccho'},{id:'zo-ginta',n:'Ginta'},
+    {id:'zo-saiyu',n:'Saiyu'},{id:'zo-cluck',n:'Cluck'},
+    {id:'zo-cheadle',n:'Cheadle'},{id:'zo-ging',n:'Ging'}
   ]},
   {g:'🐜 Chimera Ants',chars:[
-    {id:'ca-meruem',n:'Meruem (King)'},
-    {id:'ca-neferpitou',n:'Neferpitou'},
-    {id:'ca-shaiapouf',n:'Shaiapouf'},
-    {id:'ca-youpi',n:'Menthuthuyoupi'},
-    {id:'ca-queen',n:'Chimera Ant Queen'},
-    {id:'ca-cheetu',n:'Cheetu'},
-  ]},
+    {id:'ca-meruem',n:'Meruem'},{id:'ca-neferpitou',n:'Neferpitou'},
+    {id:'ca-shaiapouf',n:'Shaiapouf'},{id:'ca-youpi',n:'Menthuthuyoupi'},
+    {id:'ca-queen',n:'Chimera Ant Queen'},{id:'ca-cheetu',n:'Cheetu'}
+  ]}
 ];
-const DC_CHARS = [
+
+var DC_CHARS = [
   {g:'🌿 5 Calamities',chars:[
-    {id:'dc-cal-brion',n:'Brion',icon:'🌿'},{id:'dc-cal-pap',n:'Pap',icon:'🦠'},
-    {id:'dc-cal-hellbell',n:'Hellbell',icon:'🌊'},{id:'dc-cal-ai',n:'Ai (Nanika)',icon:'🌑'},
-    {id:'dc-cal-zobae',n:'Zobae Disease',icon:'👁️'},
+    {id:'dc-cal-brion',n:'Brion'},{id:'dc-cal-pap',n:'Pap'},
+    {id:'dc-cal-hellbell',n:'Hellbell'},{id:'dc-cal-ai',n:'Ai (Nanika)'},
+    {id:'dc-cal-zobae',n:'Zobae Disease'}
   ]},
   {g:'👑 14 Princes',chars:[
-    {id:'dc-pr-1',n:'Benjamin (1st)',icon:'👑'},{id:'dc-pr-2',n:'Camilla (2nd)',icon:'👑'},
-    {id:'dc-pr-3',n:'Zhang Lei (3rd)',icon:'👑'},{id:'dc-pr-4',n:'Tserriednich (4th)',icon:'👑'},
-    {id:'dc-pr-5',n:'Tubeppa (5th)',icon:'👑'},{id:'dc-pr-6',n:'Tyson (6th)',icon:'👑'},
-    {id:'dc-pr-7',n:'Luzurus (7th)',icon:'👑'},{id:'dc-pr-8',n:"Salé-salé (8th)",icon:'👑'},
-    {id:'dc-pr-9',n:'Halkenburg (9th)',icon:'👑'},{id:'dc-pr-10',n:'Kacho (10th)',icon:'👑'},
-    {id:'dc-pr-11',n:'Fugetsu (11th)',icon:'👑'},{id:'dc-pr-12',n:'Momoze (12th)',icon:'👑'},
-    {id:'dc-pr-13',n:'Marayam (13th)',icon:'👑'},{id:'dc-pr-14',n:'Woble (14th)',icon:'👑'},
-  ]},
+    {id:'dc-pr-1',n:'Benjamin (1st)'},{id:'dc-pr-2',n:'Camilla (2nd)'},
+    {id:'dc-pr-3',n:'Zhang Lei (3rd)'},{id:'dc-pr-4',n:'Tserriednich (4th)'},
+    {id:'dc-pr-5',n:'Tubeppa (5th)'},{id:'dc-pr-6',n:'Tyson (6th)'},
+    {id:'dc-pr-7',n:'Luzurus (7th)'},{id:'dc-pr-8',n:'Sale-sale (8th)'},
+    {id:'dc-pr-9',n:'Halkenburg (9th)'},{id:'dc-pr-10',n:'Kacho (10th)'},
+    {id:'dc-pr-11',n:'Fugetsu (11th)'},{id:'dc-pr-12',n:'Momoze (12th)'},
+    {id:'dc-pr-13',n:'Marayam (13th)'},{id:'dc-pr-14',n:'Woble (14th)'}
+  ]}
 ];
 
-// ─── STATE ───
-const PK='nen_admin_pw', AK='nen_avatars', QK='nen_quiz_bank';
-const DEF_PW='nen-admin-2025';
-const getPW=()=>localStorage.getItem(PK)||DEF_PW;
-let avs={}, quizBank={en:[],ar:[]}, links=[], bColor='#4db8ff';
-let textEdits={}; // {eid:{en,ar}}
+var PRINCIPLES = [
+  {id:'pi-ten',  n:'Ten 纏',   def:'🛡️'},
+  {id:'pi-zetsu',n:'Zetsu 絶', def:'🌑'},
+  {id:'pi-ren',  n:'Ren 錬',   def:'⚡'},
+  {id:'pi-hatsu',n:'Hatsu 発', def:'✨'}
+];
 
-// ─── AUTH ───
-function doLogin(){
-  const v=document.getElementById('pwIn').value;
-  if(v===getPW()){
-    document.getElementById('LS').style.display='none';
+// ══════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════
+var PK = 'nen_pw', AK = 'nen_avatars', QK = 'nen_quiz', SK = 'nen_data';
+var DEF_PW = 'nen-admin-2025';
+function getPW(){ return localStorage.getItem(PK) || DEF_PW; }
+
+var avs = {}, quizBank = {en:[],ar:[]}, links = [], bColor = '#4db8ff';
+var textEdits = {};
+
+// ══════════════════════════════════════════════════════
+// AUTH — completely isolated, no dependency on other fns
+// ══════════════════════════════════════════════════════
+function doLogin() {
+  var pw = document.getElementById('pwIn').value;
+  var correct = getPW();
+  if (pw === correct) {
+    document.getElementById('LS').style.display = 'none';
     document.getElementById('AP').classList.add('vis');
-    sessionStorage.setItem('na','1');
+    sessionStorage.setItem('na', '1');
     initAdmin();
   } else {
-    const e=document.getElementById('lErr');
-    e.textContent='❌ Wrong password / كلمة مرور خاطئة';
-    setTimeout(()=>e.textContent='',3000);
-    document.getElementById('pwIn').value='';
+    var errEl = document.getElementById('lErr');
+    errEl.textContent = pw.length === 0 ? 'Please enter password' : 'Wrong password';
+    setTimeout(function(){ errEl.textContent = ''; }, 3000);
   }
 }
-document.getElementById('pwIn').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-function doLogout(){document.getElementById('LS').style.display='flex';document.getElementById('AP').classList.remove('vis');sessionStorage.removeItem('na');}
 
-// ─── TABS ───
-function gT(n,btn){
-  document.querySelectorAll('.tc').forEach(t=>t.classList.remove('on'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
-  document.getElementById('tc-'+n).classList.add('on');
-  if(btn)btn.classList.add('on');
+function doLogout() {
+  document.getElementById('LS').style.display = 'flex';
+  document.getElementById('AP').classList.remove('vis');
+  sessionStorage.removeItem('na');
+  document.getElementById('pwIn').value = '';
 }
 
-// ─── LANG ───
-function sAL(l){
-  document.body.classList.toggle('ar',l==='ar');
-  document.body.setAttribute('dir',l==='ar'?'rtl':'ltr');
-  document.getElementById('lbEN').classList.toggle('on',l==='en');
-  document.getElementById('lbAR').classList.toggle('on',l==='ar');
-  localStorage.setItem('nal',l);
-}
-(()=>{const sl=localStorage.getItem('nal');if(sl==='ar')sAL('ar');})();
+// Wire up login button and Enter key
+document.getElementById('loginBtn').addEventListener('click', doLogin);
+document.getElementById('pwIn').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') doLogin();
+});
 
-// ─── TOAST ───
-function toast(msg,err=false){
-  const t=document.getElementById('toast');
-  t.textContent=(err?'❌ ':'✅ ')+msg;
-  t.className='sh'+(err?' er':'');
-  setTimeout(()=>t.className='',3000);
+// ══════════════════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════════════════
+function gT(n, btn) {
+  document.querySelectorAll('.tc').forEach(function(t){ t.classList.remove('on'); });
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('on'); });
+  document.getElementById('tc-' + n).classList.add('on');
+  if (btn) btn.classList.add('on');
 }
 
-// ─── LOAD ───
-function loadData(){
-  try{avs=JSON.parse(localStorage.getItem(AK)||'{}');}catch(e){}
-  try{quizBank=JSON.parse(localStorage.getItem(QK)||'{"en":[],"ar":[]}');}catch(e){}
-  try{
-    const d=JSON.parse(localStorage.getItem('nen_admin_v8')||'{}');
-    textEdits=d.textEdits||{};
-    links=d.links||[];
-    bColor=d.bColor||'#4db8ff';
-    if(d.banEnabled){const be=document.getElementById('bannerOn');if(be)be.checked=true;}
-    if(d.banEn){const e=document.getElementById('banEn');if(e)e.value=d.banEn;}
-    if(d.banAr){const e=document.getElementById('banAr');if(e)e.value=d.banAr;}
-  }catch(e){}
+// ══════════════════════════════════════════════════════
+// LANGUAGE
+// ══════════════════════════════════════════════════════
+function sAL(l) {
+  document.body.classList.toggle('ar', l === 'ar');
+  document.body.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+  document.getElementById('lbEN').classList.toggle('on', l === 'en');
+  document.getElementById('lbAR').classList.toggle('on', l === 'ar');
+  localStorage.setItem('nal', l);
+}
+(function(){ var sl = localStorage.getItem('nal'); if (sl === 'ar') sAL('ar'); })();
+
+// ══════════════════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════════════════
+function toast(msg, isErr) {
+  var t = document.getElementById('toast');
+  t.textContent = (isErr ? '❌ ' : '✅ ') + msg;
+  t.className = 'sh' + (isErr ? ' er' : '');
+  setTimeout(function(){ t.className = ''; }, 3000);
 }
 
-function saveLocal(){
-  const data={
-    textEdits,links,bColor,
-    banEnabled:document.getElementById('bannerOn')?.checked||false,
-    banEn:document.getElementById('banEn')?.value||'',
-    banAr:document.getElementById('banAr')?.value||'',
-    savedAt:new Date().toISOString()
+// ══════════════════════════════════════════════════════
+// LOAD / SAVE LOCAL
+// ══════════════════════════════════════════════════════
+function loadData() {
+  try { avs = JSON.parse(localStorage.getItem(AK) || '{}'); } catch(e){ avs = {}; }
+  try { quizBank = JSON.parse(localStorage.getItem(QK) || '{"en":[],"ar":[]}'); } catch(e){ quizBank={en:[],ar:[]}; }
+  try {
+    var d = JSON.parse(localStorage.getItem(SK) || '{}');
+    textEdits = d.textEdits || {};
+    links = d.links || [];
+    bColor = d.bColor || '#4db8ff';
+    var be = document.getElementById('bannerOn');
+    if (be && d.banEnabled) be.checked = true;
+    var benEl = document.getElementById('banEn');
+    if (benEl && d.banEn) benEl.value = d.banEn;
+    var barEl = document.getElementById('banAr');
+    if (barEl && d.banAr) barEl.value = d.banAr;
+  } catch(e){ textEdits={}; links=[]; }
+}
+
+function saveLocal() {
+  var data = {
+    textEdits: textEdits,
+    links: links,
+    bColor: bColor,
+    banEnabled: document.getElementById('bannerOn') ? document.getElementById('bannerOn').checked : false,
+    banEn: document.getElementById('banEn') ? document.getElementById('banEn').value : '',
+    banAr: document.getElementById('banAr') ? document.getElementById('banAr').value : '',
+    savedAt: new Date().toISOString()
   };
-  localStorage.setItem('nen_admin_v8',JSON.stringify(data));
-  localStorage.setItem(AK,JSON.stringify(avs));
-  localStorage.setItem(QK,JSON.stringify(quizBank));
+  localStorage.setItem(SK, JSON.stringify(data));
+  localStorage.setItem(AK, JSON.stringify(avs));
+  localStorage.setItem(QK, JSON.stringify(quizBank));
 }
 
-// ─── INIT ───
-function initAdmin(){
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+function initAdmin() {
   loadData();
   renderTexts();
   renderImgs();
   renderDC();
+  renderPrinc();
   renderQE();
   renderLinks();
-  renderPrinc();
   updateStats();
 }
 
-function updateStats(){
-  const im=Object.keys(avs).length;
-  const qn=(quizBank.en||[]).length+(quizBank.ar||[]).length;
-  const di=document.getElementById('dI');if(di)di.textContent=im;
-  const dq=document.getElementById('dQ');if(dq)dq.textContent=qn;
-  const dl=document.getElementById('dL');if(dl)dl.textContent=links.length;
+function updateStats() {
+  var im = Object.keys(avs).length;
+  var qn = (quizBank.en||[]).length + (quizBank.ar||[]).length;
+  var di = document.getElementById('dI'); if (di) di.textContent = im;
+  var dq = document.getElementById('dQ'); if (dq) dq.textContent = qn;
+  var dl = document.getElementById('dL'); if (dl) dl.textContent = links.length;
 }
 
-// ─── TEXT EDITOR ───
-function renderTexts(){
-  const root=document.getElementById('textsRoot');
-  if(!root||!TEXT_CATS)return;
-  let html='';
-  TEXT_CATS.forEach((cat,ci)=>{
-    html+='<div style="margin-bottom:1rem">';
-    html+='<div class="cat-hdr" id="cath-'+ci+'" onclick="tCat('+ci+',this)">';
-    html+='<span>'+cat.name+' <span style="color:var(--mu);font-size:.64rem">('+cat.items.length+')</span></span>';
-    html+='<span class="arr">▶</span></div>';
-    html+='<div class="cat-items" id="ci-'+ci+'">';
-    cat.items.forEach(item=>{
-      const saved=textEdits[item.eid]||{};
-      const enVal=saved.en!==undefined?saved.en:item.en;
-      const arVal=saved.ar!==undefined?saved.ar:item.ar;
-      const isLong=(item.en||'').length>70||(item.ar||'').length>70;
-      const mod=saved.en!==undefined||saved.ar!==undefined;
-      html+='<div class="epair">';
-      html+='<div class="epair-id">'+item.eid+'</div>';
-      html+='<div class="lpair">';
-      // EN field
-      html+='<div><div class="llbl">🇺🇸 English</div>';
-      if(isLong){
-        html+='<textarea class="efi ml2'+(mod?' modified':'')+'" data-eid="'+item.eid+'" data-lang="en" oninput="onTextEdit(''+item.eid+'','en',this.value)" dir="ltr">'+esc(enVal)+'</textarea>';
+// ══════════════════════════════════════════════════════
+// TEXT EDITOR
+// ══════════════════════════════════════════════════════
+function renderTexts() {
+  var root = document.getElementById('textsRoot');
+  if (!root || !TEXT_CATS) return;
+  var html = '';
+  TEXT_CATS.forEach(function(cat, ci) {
+    html += '<div style="margin-bottom:1rem">';
+    html += '<div class="cat-hdr" onclick="tCat(' + ci + ',this)">';
+    html += '<span>' + esc(cat.name) + ' <span style="color:var(--mu);font-size:.64rem">(' + cat.items.length + ')</span></span>';
+    html += '<span class="arr">&#9654;</span></div>';
+    html += '<div class="cat-items" id="ci-' + ci + '">';
+    cat.items.forEach(function(item) {
+      var saved = textEdits[item.eid] || {};
+      var enVal = saved.en !== undefined ? saved.en : (item.en || '');
+      var arVal = saved.ar !== undefined ? saved.ar : (item.ar || '');
+      var isLong = (item.en||'').length > 70 || (item.ar||'').length > 70;
+      var mod = saved.en !== undefined || saved.ar !== undefined;
+      html += '<div class="epair">';
+      html += '<div class="epair-id">' + esc(item.eid) + '</div>';
+      html += '<div class="lpair">';
+      html += '<div><div class="llbl">&#127482;&#127480; English</div>';
+      if (isLong) {
+        html += '<textarea class="efi ml2' + (mod?' modified':'') + '" data-eid="' + item.eid + '" data-lang="en" oninput="onTE(this)" dir="ltr">' + esc(enVal) + '</textarea>';
       } else {
-        html+='<input class="efi'+(mod?' modified':'')+'" data-eid="'+item.eid+'" data-lang="en" oninput="onTextEdit(''+item.eid+'','en',this.value)" value="'+esc(enVal)+'" dir="ltr">';
+        html += '<input class="efi' + (mod?' modified':'') + '" data-eid="' + item.eid + '" data-lang="en" oninput="onTE(this)" value="' + esc(enVal) + '" dir="ltr">';
       }
-      html+='</div>';
-      // AR field
-      html+='<div><div class="llbl">🇸🇦 Arabic</div>';
-      if(isLong){
-        html+='<textarea class="efi ml2'+(mod?' modified':'')+'" data-eid="'+item.eid+'" data-lang="ar" oninput="onTextEdit(''+item.eid+'','ar',this.value)" dir="rtl">'+esc(arVal)+'</textarea>';
+      html += '</div>';
+      html += '<div><div class="llbl">&#127462;&#127466; Arabic</div>';
+      if (isLong) {
+        html += '<textarea class="efi ml2' + (mod?' modified':'') + '" data-eid="' + item.eid + '" data-lang="ar" oninput="onTE(this)" dir="rtl">' + esc(arVal) + '</textarea>';
       } else {
-        html+='<input class="efi'+(mod?' modified':'')+'" data-eid="'+item.eid+'" data-lang="ar" oninput="onTextEdit(''+item.eid+'','ar',this.value)" value="'+esc(arVal)+'" dir="rtl">';
+        html += '<input class="efi' + (mod?' modified':'') + '" data-eid="' + item.eid + '" data-lang="ar" oninput="onTE(this)" value="' + esc(arVal) + '" dir="rtl">';
       }
-      html+='</div>';
-      html+='</div></div>';
+      html += '</div>';
+      html += '</div></div>';
     });
-    html+='</div></div>';
+    html += '</div></div>';
   });
-  root.innerHTML=html;
+  root.innerHTML = html;
 }
 
-
-function tCat(ci,hdr){
-  const items=document.getElementById('ci-'+ci);
-  const open=items.classList.contains('open');
-  items.classList.toggle('open',!open);
-  hdr.classList.toggle('open',!open);
+function tCat(ci, hdr) {
+  var items = document.getElementById('ci-' + ci);
+  var open = items.classList.contains('open');
+  items.classList.toggle('open', !open);
+  hdr.classList.toggle('open', !open);
 }
 
-function onTextEdit(eid,lang,val){
-  if(!textEdits[eid])textEdits[eid]={};
-  textEdits[eid][lang]=val;
-  // Mark field green
-  document.querySelectorAll(`[data-eid="${eid}"]`).forEach(el=>el.classList.add('modified'));
+function onTE(el) {
+  var eid = el.getAttribute('data-eid');
+  var lang = el.getAttribute('data-lang');
+  if (!textEdits[eid]) textEdits[eid] = {};
+  textEdits[eid][lang] = el.value;
+  el.classList.add('modified');
 }
 
-// ─── IMAGES ───
-function renderImgs(){
-  const root=document.getElementById('imgsRoot');
-  if(!root)return;
-  root.innerHTML=SITE_CHARS.map(group=>`
-    <div style="margin-bottom:1.6rem">
-      <div style="font-family:Cinzel,serif;font-size:.78rem;color:var(--aura);letter-spacing:.1em;margin-bottom:.65rem;padding:.5rem .8rem;background:rgba(77,184,255,.05);border:1px solid var(--bor);border-radius:8px">${group.g}</div>
-      <div class="av-grid">${group.chars.map(c=>avCard(c,false)).join('')}
-      </div>
-    </div>`).join('');
+// ══════════════════════════════════════════════════════
+// IMAGES
+// ══════════════════════════════════════════════════════
+function avCard(c, isDC) {
+  var saved = avs[c.id] || '';
+  var cls = isDC ? 'dc-av-item' : 'av-item';
+  var thumbCls = isDC ? 'dc-av-thumb' : 'av-thumb';
+  var bg = isDC ? 'rgba(255,68,0,.08)' : 'rgba(77,184,255,.08)';
+  var thumb = saved
+    ? '<img src="' + esc(saved) + '" onerror="this.parentElement.style.background=\'' + bg + '\'">'
+    : '<div style="width:100%;height:100%;background:' + bg + ';border-radius:50%"></div>';
+  var urlVal = (saved.startsWith('data:') && saved.length > 100) ? '(file uploaded)' : esc(saved);
+  return '<div class="' + cls + '">'
+    + '<div class="' + thumbCls + (saved?' set':'') + '" style="border-radius:50%;overflow:hidden">' + thumb + '</div>'
+    + '<div style="flex:1;min-width:0">'
+    + '<div class="av-name">' + esc(c.n) + '</div>'
+    + '<div class="avc">'
+    + '<input type="file" id="f_' + c.id + '" accept="image/*" style="display:none" onchange="upAv(\'' + c.id + '\',this)">'
+    + '<button class="avb" onclick="document.getElementById(\'f_' + c.id + '\').click()">&#128193;</button>'
+    + '<input class="av-url" id="u_' + c.id + '" placeholder="https://..." value="' + urlVal + '">'
+    + '<button class="av-ok" onclick="apAv(\'' + c.id + '\')">&#10003;</button>'
+    + (saved ? '<button class="av-del" onclick="clAv(\'' + c.id + '\')">&#10005;</button>' : '')
+    + '</div></div></div>';
 }
 
-function avCard(c,isDC){
-  const saved=avs[c.id]||'';
-  const cls=isDC?'dc-av-item':'av-item';
-  const thumbCls=isDC?'dc-av-thumb':'av-thumb';
-  const bg=isDC?'rgba(255,68,0,.08)':'rgba(77,184,255,.08)';
-  const imgHtml=saved
-    ? '<img src="'+saved+'" onerror="this.parentElement.style.background=''+bg+''">'
-    : '<div style="width:100%;height:100%;background:'+bg+';border-radius:50%"></div>';
-  let html='<div class="'+cls+'">';
-  html+='<div class="'+thumbCls+(saved?' set':'')+'" style="border-radius:50%;overflow:hidden">'+imgHtml+'</div>';
-  html+='<div style="flex:1;min-width:0">';
-  html+='<div class="av-name">'+c.n+'</div>';
-  html+='<div class="avc">';
-  html+='<input type="file" id="f_'+c.id+'" accept="image/*" style="display:none" onchange="upAv(''+c.id+'',this)">';
-  html+='<button class="avb" onclick="document.getElementById('f_'+c.id+'').click()">📁</button>';
-  html+='<input class="av-url" id="u_'+c.id+'" placeholder="https://image-url..." value="'+(saved.startsWith('data:')&&saved.length>100?'(file uploaded)':saved)+'">';
-  html+='<button class="av-ok" onclick="apAv(''+c.id+'')">✓</button>';
-  if(saved) html+='<button class="av-del" onclick="clAv(''+c.id+'')" title="Remove image">✕</button>';
-  html+='</div></div></div>';
-  return html;
+function renderImgs() {
+  var root = document.getElementById('imgsRoot');
+  if (!root) return;
+  var html = '';
+  SITE_CHARS.forEach(function(group) {
+    html += '<div style="margin-bottom:1.6rem">';
+    html += '<div style="font-family:Cinzel,serif;font-size:.78rem;color:var(--aura);letter-spacing:.1em;margin-bottom:.65rem;padding:.5rem .8rem;background:rgba(77,184,255,.05);border:1px solid var(--bor);border-radius:8px">' + esc(group.g) + '</div>';
+    html += '<div class="av-grid">';
+    group.chars.forEach(function(c){ html += avCard(c, false); });
+    html += '</div></div>';
+  });
+  root.innerHTML = html;
 }
 
-
-function renderDC(){
-  const root=document.getElementById('dcRoot');
-  if(!root)return;
-  root.innerHTML=DC_CHARS.map(group=>`
-    <div style="margin-bottom:1.5rem">
-      <div style="font-family:Cinzel,serif;font-size:.78rem;color:#ff8844;letter-spacing:.1em;margin-bottom:.6rem;padding:.5rem .8rem;background:rgba(255,68,0,.05);border:1px solid rgba(255,68,0,.15);border-radius:8px">${group.g}</div>
-      <div class="dc-av-grid">${group.chars.map(c=>avCard(c,true)).join('')}</div>
-    </div>`).join('');
+function renderDC() {
+  var root = document.getElementById('dcRoot');
+  if (!root) return;
+  var html = '';
+  DC_CHARS.forEach(function(group) {
+    html += '<div style="margin-bottom:1.5rem">';
+    html += '<div style="font-family:Cinzel,serif;font-size:.78rem;color:#ff8844;letter-spacing:.1em;margin-bottom:.6rem;padding:.5rem .8rem;background:rgba(255,68,0,.05);border:1px solid rgba(255,68,0,.15);border-radius:8px">' + esc(group.g) + '</div>';
+    html += '<div class="dc-av-grid">';
+    group.chars.forEach(function(c){ html += avCard(c, true); });
+    html += '</div></div>';
+  });
+  root.innerHTML = html;
 }
 
-function upAv(id,input){
-  const file=input.files[0];if(!file)return;
-  const r=new FileReader();
-  r.onload=e=>{
-    avs[id]=e.target.result;
-    localStorage.setItem(AK,JSON.stringify(avs));
-    renderImgs();renderDC();
-    toast('Image uploaded: '+id.split('-').pop());updateStats();
+function upAv(id, input) {
+  var file = input.files[0]; if (!file) return;
+  var r = new FileReader();
+  r.onload = function(e) {
+    avs[id] = e.target.result;
+    localStorage.setItem(AK, JSON.stringify(avs));
+    renderImgs(); renderDC(); renderPrinc();
+    toast('Image uploaded: ' + id.split('-').pop());
+    updateStats();
   };
   r.readAsDataURL(file);
 }
-function apAv(id){
-  const urlEl=document.getElementById('u_'+id);
-  let url=urlEl?urlEl.value.trim():'';
-  if(!url||url==='(file uploaded)'){toast('Enter a URL first',true);return;}
-  if(!url.startsWith('http')&&!url.startsWith('data:')){toast('URL must start with https://',true);return;}
-  avs[id]=url;localStorage.setItem(AK,JSON.stringify(avs));
-  renderImgs();renderDC();toast('Image applied!');updateStats();
-}
-function clAv(id){delete avs[id];localStorage.setItem(AK,JSON.stringify(avs));renderImgs();renderDC();toast('Image removed');updateStats();}
 
-// ─── LOGO ───
-function handleLogo(input){
-  const file=input.files[0];if(!file)return;
-  const r=new FileReader();
-  r.onload=e=>{
-    localStorage.setItem('nen_logo',e.target.result);
-    const p=document.getElementById('logoPrev');
-    if(p)p.innerHTML=`<img src="${e.target.result}" style="width:100%;display:block">`;
+function apAv(id) {
+  var urlEl = document.getElementById('u_' + id);
+  var url = urlEl ? urlEl.value.trim() : '';
+  if (!url || url === '(file uploaded)') { toast('Enter a URL first', true); return; }
+  if (!url.startsWith('http') && !url.startsWith('data:')) { toast('URL must start with https://', true); return; }
+  avs[id] = url;
+  localStorage.setItem(AK, JSON.stringify(avs));
+  renderImgs(); renderDC(); renderPrinc();
+  toast('Image applied!');
+  updateStats();
+}
+
+function clAv(id) {
+  delete avs[id];
+  localStorage.setItem(AK, JSON.stringify(avs));
+  renderImgs(); renderDC(); renderPrinc();
+  toast('Image removed');
+  updateStats();
+}
+
+// ══════════════════════════════════════════════════════
+// PRINCIPLES
+// ══════════════════════════════════════════════════════
+function renderPrinc() {
+  var grid = document.getElementById('princGrid');
+  if (!grid) return;
+  var html = '';
+  PRINCIPLES.forEach(function(p) {
+    var saved = avs[p.id] || '';
+    var isImg = saved.startsWith('data:') || saved.startsWith('http');
+    var preview = isImg
+      ? '<img src="' + esc(saved) + '" style="width:100%;height:100%;object-fit:contain;border-radius:6px">'
+      : '<span style="font-size:1.8rem">' + (saved || p.def) + '</span>';
+    html += '<div class="av-item">'
+      + '<div class="av-thumb' + (saved?' set':'') + '" style="border-radius:10px">' + preview + '</div>'
+      + '<div style="flex:1;min-width:0">'
+      + '<div class="av-name">' + esc(p.n) + '</div>'
+      + '<div style="margin-bottom:.35rem;display:flex;align-items:center;gap:.4rem">'
+      + '<input class="av-url" id="pe_' + p.id + '" placeholder="Emoji" value="' + esc(!saved||isImg ? p.def : saved) + '" style="width:60px;text-align:center;font-size:1.1rem">'
+      + '<button class="av-ok" onclick="apPE(\'' + p.id + '\')" style="font-size:.65rem;padding:.25rem .55rem">Set</button>'
+      + '</div>'
+      + '<div class="avc">'
+      + '<input type="file" id="pf_' + p.id + '" accept="image/*" style="display:none" onchange="upAv(\'' + p.id + '\',this)">'
+      + '<button class="avb" onclick="document.getElementById(\'pf_' + p.id + '\').click()">&#128193;</button>'
+      + '<input class="av-url" id="pu_' + p.id + '" placeholder="https://image-url..." value="' + esc(isImg ? saved : '') + '" style="flex:1">'
+      + '<button class="av-ok" onclick="apPrincUrl(\'' + p.id + '\')" style="font-size:.65rem;padding:.25rem .55rem">&#10003;</button>'
+      + (saved ? '<button class="av-del" onclick="clAv(\'' + p.id + '\')" style="font-size:.65rem;padding:.25rem .4rem">&#10005;</button>' : '')
+      + '</div></div></div>';
+  });
+  grid.innerHTML = html;
+}
+
+function apPE(id) {
+  var el = document.getElementById('pe_' + id); if (!el) return;
+  avs[id] = el.value.trim();
+  localStorage.setItem(AK, JSON.stringify(avs));
+  renderPrinc(); toast('Set!');
+}
+function apPrincUrl(id) {
+  var el = document.getElementById('pu_' + id);
+  var url = el ? el.value.trim() : '';
+  if (!url) { toast('Enter URL', true); return; }
+  avs[id] = url;
+  localStorage.setItem(AK, JSON.stringify(avs));
+  renderPrinc(); toast('Applied!');
+}
+
+// ══════════════════════════════════════════════════════
+// QUIZ
+// ══════════════════════════════════════════════════════
+function renderQE() {
+  var lang = document.getElementById('qLang').value;
+  var list = document.getElementById('qList'); if (!list) return;
+  var qs = quizBank[lang] || [];
+  if (!qs.length) { list.innerHTML = '<p style="color:var(--mu);font-size:.78rem;margin-bottom:.8rem">No custom questions yet.</p>'; return; }
+  var html = '';
+  qs.forEach(function(q, i) {
+    html += '<div class="qitem">'
+      + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.55rem">'
+      + '<span style="color:var(--aura);font-family:JetBrains Mono,monospace;font-size:.68rem">Q' + (i+1) + '</span>'
+      + '<button class="delb" style="font-size:.68rem;padding:.26rem .52rem" onclick="delQ(\'' + lang + '\',' + i + ')">&#10005;</button></div>'
+      + '<div class="ml">Question</div>'
+      + '<input class="mf" value="' + esc(q.q) + '" oninput="quizBank[\'' + lang + '\'][' + i + '].q=this.value">';
+    html += '<div class="q-opts">';
+    q.opts.forEach(function(o, oi) {
+      html += '<div><div class="ml" style="color:' + (oi===q.ans?'var(--green)':'var(--mu)') + '">' + (oi+1) + (oi===q.ans?' &#10003;':'') + '</div>'
+        + '<input class="mf" style="border-color:' + (oi===q.ans?'rgba(34,197,94,.35)':'') + '" value="' + esc(o) + '" oninput="quizBank[\'' + lang + '\'][' + i + '].opts[' + oi + ']=this.value"></div>';
+    });
+    html += '</div><div class="ml">Correct (0-3)</div>'
+      + '<select class="mf" style="height:30px" onchange="quizBank[\'' + lang + '\'][' + i + '].ans=parseInt(this.value)">';
+    for (var n=0;n<4;n++) {
+      html += '<option value="' + n + '"' + (q.ans===n?' selected':'') + '>' + n + ': ' + esc(q.opts[n]||'') + '</option>';
+    }
+    html += '</select><div class="ml" style="margin-top:.28rem">Explanation</div>'
+      + '<textarea class="mf" rows="2" oninput="quizBank[\'' + lang + '\'][' + i + '].exp=this.value">' + esc(q.exp||'') + '</textarea>'
+      + '</div>';
+  });
+  list.innerHTML = html;
+  updateStats();
+}
+function addQ() {
+  var l = document.getElementById('qLang').value;
+  if (!quizBank[l]) quizBank[l] = [];
+  quizBank[l].push({q:'New question?',opts:['A','B','C','D'],ans:0,exp:'.'});
+  renderQE();
+}
+function delQ(l,i) { quizBank[l].splice(i,1); renderQE(); }
+
+// ══════════════════════════════════════════════════════
+// FOOTER LINKS
+// ══════════════════════════════════════════════════════
+function renderLinks() {
+  var list = document.getElementById('linksList'); if (!list) return;
+  if (!links.length) { list.innerHTML = '<p style="color:var(--mu);font-size:.76rem;margin-bottom:.7rem;font-style:italic">No links yet.</p>'; updateStats(); return; }
+  var html = '';
+  links.forEach(function(l, i) {
+    html += '<div class="link-row">'
+      + '<span style="font-size:.95rem;cursor:pointer;padding:.3rem;min-width:28px;text-align:center" onclick="pickIcon(' + i + ')" title="Click to change icon">' + esc(l.icon||'🔗') + '</span>'
+      + '<input class="fi" value="' + esc(l.label||'') + '" placeholder="Label" oninput="links[' + i + '].label=this.value" style="flex:.4;min-width:80px">'
+      + '<input class="fi" value="' + esc(l.url||'') + '" placeholder="https://..." oninput="links[' + i + '].url=this.value" style="flex:1;min-width:100px">'
+      + '<button class="delb" onclick="links.splice(' + i + ',1);renderLinks()">&#10005;</button>'
+      + '</div>';
+  });
+  list.innerHTML = html;
+  updateStats();
+}
+function addLink() { links.push({icon:'🔗',label:'',url:''}); renderLinks(); }
+function pickIcon(i) { var ic=prompt('Emoji:',links[i].icon||'🔗'); if(ic){links[i].icon=ic;renderLinks();} }
+
+// ══════════════════════════════════════════════════════
+// BANNER COLOR
+// ══════════════════════════════════════════════════════
+function setBC(c, el) {
+  bColor = c;
+  document.querySelectorAll('.csw').forEach(function(e){ e.style.outline='none'; });
+  el.style.outline = '2px solid #fff';
+}
+
+// ══════════════════════════════════════════════════════
+// LOGO
+// ══════════════════════════════════════════════════════
+function handleLogo(input) {
+  var file = input.files[0]; if (!file) return;
+  var r = new FileReader();
+  r.onload = function(e) {
+    localStorage.setItem('nen_logo', e.target.result);
+    var p = document.getElementById('logoPrev');
+    if (p) p.innerHTML = '<img src="' + e.target.result + '" style="width:100%;display:block">';
     toast('Logo uploaded!');
   };
   r.readAsDataURL(file);
 }
-function applyLogoUrl(){
-  const url=document.getElementById('logoUrl').value.trim();
-  if(!url)return;
-  localStorage.setItem('nen_logo',url);
-  const p=document.getElementById('logoPrev');
-  if(p)p.innerHTML=`<img src="${url}" style="width:100%;display:block">`;
+function applyLogoUrl() {
+  var url = document.getElementById('logoUrl').value.trim(); if (!url) return;
+  localStorage.setItem('nen_logo', url);
+  var p = document.getElementById('logoPrev');
+  if (p) p.innerHTML = '<img src="' + url + '" style="width:100%;display:block">';
   toast('Logo applied!');
 }
 
-// ─── BANNER ───
-function setBC(c,el){bColor=c;document.querySelectorAll('.csw').forEach(e=>e.style.outline='none');el.style.outline='2px solid #fff';}
-
-// ─── QUIZ ───
-function renderQE(){
-  const lang=document.getElementById('qLang').value;
-  const list=document.getElementById('qList');
-  if(!list)return;
-  const qs=quizBank[lang]||[];
-  if(qs.length===0){list.innerHTML='<p style="color:var(--mu);font-size:.78rem;margin-bottom:.8rem">No custom questions yet.</p>';return;}
-  list.innerHTML=qs.map((q,i)=>`<div class="qitem">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.55rem">
-      <span style="color:var(--aura);font-family:JetBrains Mono,monospace;font-size:.68rem">Q${i+1}</span>
-      <button class="delb" style="font-size:.68rem;padding:.26rem .52rem" onclick="delQ('${lang}',${i})">✕</button>
-    </div>
-    <div class="ml">Question</div>
-    <input class="mf" value="${esc(q.q)}" oninput="quizBank['${lang}'][${i}].q=this.value">
-    <div class="q-opts">${q.opts.map((o,oi)=>`<div>
-      <div class="ml" style="color:${oi===q.ans?'var(--green)':'var(--mu)'}">${oi+1}${oi===q.ans?' ✓':''}</div>
-      <input class="mf" style="border-color:${oi===q.ans?'rgba(34,197,94,.35)':''}" value="${esc(o)}" oninput="quizBank['${lang}'][${i}].opts[${oi}]=this.value">
-    </div>`).join('')}</div>
-    <div class="ml">Correct answer (0–3)</div>
-    <select class="mf" style="height:30px" onchange="quizBank['${lang}'][${i}].ans=parseInt(this.value)">
-      ${[0,1,2,3].map(n=>`<option value="${n}" ${q.ans===n?'selected':''}>${n}: ${esc(q.opts[n]||'')}</option>`).join('')}
-    </select>
-    <div class="ml" style="margin-top:.28rem">Explanation</div>
-    <textarea class="mf" rows="2" oninput="quizBank['${lang}'][${i}].exp=this.value">${esc(q.exp||'')}</textarea>
-  </div>`).join('');
-  updateStats();
-}
-function addQ(){const l=document.getElementById('qLang').value;if(!quizBank[l])quizBank[l]=[];quizBank[l].push({q:'?',opts:['A','B','C','D'],ans:0,exp:'.'});renderQE();}
-function delQ(l,i){quizBank[l].splice(i,1);renderQE();}
-
-// ─── LINKS ───
-function renderLinks(){
-  const list=document.getElementById('linksList');
-  if(!list)return;
-  if(!links.length){
-    list.innerHTML='<p style="color:var(--mu);font-size:.76rem;margin-bottom:.7rem;font-style:italic">No links yet. Click "+ Add Link" to add one.</p>';
-    updateStats();return;
-  }
-  let html='';
-  links.forEach((l,i)=>{
-    html+='<div class="link-row">';
-    html+='<span style="font-size:.95rem;cursor:pointer;padding:.3rem;min-width:28px;text-align:center" onclick="pickIcon('+i+')" title="Click to change icon">'+esc(l.icon||'🔗')+'</span>';
-    html+='<input class="fi" value="'+esc(l.label||'')+'" placeholder="Label (e.g. Twitter)" oninput="links['+i+'].label=this.value" style="flex:.4;min-width:80px">';
-    html+='<input class="fi" value="'+esc(l.url||'')+'" placeholder="https://..." oninput="links['+i+'].url=this.value" style="flex:1;min-width:100px">';
-    html+='<button class="delb" onclick="deleteLink('+i+')" title="Delete this link">✕</button>';
-    html+='</div>';
-  });
-  list.innerHTML=html;
-  updateStats();
-}
-
-function deleteLink(i){
-  links.splice(i,1);
-  renderLinks();
-  toast('Link removed');
-}
-
-
-function addLink(){
-  links.push({icon:'🔗',label:'',url:''});
-  renderLinks();
-  // Scroll to bottom of links list
-  const list=document.getElementById('linksList');
-  if(list) list.scrollIntoView({behavior:'smooth',block:'end'});
-}
-
-
-function pickIcon(i){const ic=prompt('Emoji:',links[i].icon||'🔗');if(ic){links[i].icon=ic;renderLinks();}}
-
-// ─── PASSWORD ───
-function changePW(){
-  const cur=document.getElementById('pwCur').value;
-  const nw=document.getElementById('pwNew').value;
-  const cf=document.getElementById('pwCon').value;
-  if(cur!==getPW()){toast('Wrong current password',true);return;}
-  if(nw.length<8){toast('Min 8 characters',true);return;}
-  if(nw!==cf){toast('Passwords do not match',true);return;}
-  localStorage.setItem(PK,nw);
+// ══════════════════════════════════════════════════════
+// PASSWORD
+// ══════════════════════════════════════════════════════
+function changePW() {
+  var cur = document.getElementById('pwCur').value;
+  var nw = document.getElementById('pwNew').value;
+  var cf = document.getElementById('pwCon').value;
+  if (cur !== getPW()) { toast('Wrong current password', true); return; }
+  if (nw.length < 8) { toast('Min 8 characters', true); return; }
+  if (nw !== cf) { toast('Passwords do not match', true); return; }
+  localStorage.setItem(PK, nw);
   toast('Password updated!');
-  ['pwCur','pwNew','pwCon'].forEach(id=>document.getElementById(id).value='');
+  ['pwCur','pwNew','pwCon'].forEach(function(id){ document.getElementById(id).value=''; });
 }
 
-// ─── HELPERS ───
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+// ══════════════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════════════
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
 
-// ══════════════════════════════════════════════
-// 💾 SAVE & DOWNLOAD — THE CORE FUNCTION
-// Modifies index.html directly and downloads it
-// ══════════════════════════════════════════════
-function doSave(){
+// ══════════════════════════════════════════════════════
+// SAVE & DOWNLOAD — fetch index.html, apply edits, download
+// ══════════════════════════════════════════════════════
+document.getElementById('saveBtn').addEventListener('click', function() {
   saveLocal();
-  
-  // Show loading state
-  const btn = document.querySelector('.savebig');
-  const origText = btn ? btn.innerHTML : '';
-  if(btn){ btn.innerHTML='⏳ Loading...'; btn.disabled=true; }
+  var btn = document.getElementById('saveBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Loading...';
 
-  // Fetch the current index.html from the same server
-  fetch('index.html?nocache='+Date.now())
-    .then(r=>{
-      if(!r.ok) throw new Error('Could not load index.html (status '+r.status+')');
+  fetch('index.html?t=' + Date.now())
+    .then(function(r) {
+      if (!r.ok) throw new Error('Cannot load index.html (HTTP ' + r.status + '). Make sure admin.html and index.html are on the same domain.');
       return r.text();
     })
-    .then(html=>{
+    .then(function(html) {
       html = applyAllEdits(html);
-      const blob=new Blob([html],{type:'text/html;charset=utf-8'});
-      const a2=document.createElement('a');
-      a2.href=URL.createObjectURL(blob);
-      a2.download='index.html';
-      document.body.appendChild(a2); a2.click(); document.body.removeChild(a2);
-      URL.revokeObjectURL(a2.href);
-      toast('index.html downloaded! Upload to GitHub ✅');
+      var blob = new Blob([html], {type:'text/html;charset=utf-8'});
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'index.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+      toast('index.html downloaded! Upload to GitHub');
     })
-    .catch(err=>{
-      toast('Error: '+err.message+' — Make sure admin.html is on the same server as index.html',true);
+    .catch(function(err) {
+      toast(err.message, true);
       console.error(err);
     })
-    .finally(()=>{
-      if(btn){ btn.innerHTML=origText; btn.disabled=false; }
+    .finally(function() {
+      btn.disabled = false;
+      btn.innerHTML = '&#128190; <span class="ea">Save &amp; Download</span><span class="aa">حفظ وتنزيل</span>';
     });
-}
+});
 
-function applyAllEdits(html){
-  // ── 1. TEXT EDITS ──
-  Object.entries(textEdits).forEach(([eid,vals])=>{
-    ['en','ar'].forEach(lang=>{
-      if(vals[lang]===undefined) return;
-      const cls=lang==='en'?'en-only':'ar-only';
-      const safe=vals[lang].replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-      html=html.replace(
-        new RegExp('(<span[^>]+class="'+cls+'"[^>]+data-eid="'+eid+'"[^>]*>)[^<]*(</span>)','g'),
-        '$1'+safe+'$2'
+function applyAllEdits(html) {
+  // 1. Text edits
+  Object.keys(textEdits).forEach(function(eid) {
+    var vals = textEdits[eid];
+    ['en','ar'].forEach(function(lang) {
+      if (vals[lang] === undefined) return;
+      var cls = lang === 'en' ? 'en-only' : 'ar-only';
+      var safe = vals[lang].replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      html = html.replace(
+        new RegExp('(<span[^>]+class="' + cls + '"[^>]+data-eid="' + eid + '"[^>]*>)[^<]*(</span>)', 'g'),
+        '$1' + safe + '$2'
       );
-      html=html.replace(
-        new RegExp('(<span[^>]+data-eid="'+eid+'"[^>]+class="'+cls+'"[^>]*>)[^<]*(</span>)','g'),
-        '$1'+safe+'$2'
+      html = html.replace(
+        new RegExp('(<span[^>]+data-eid="' + eid + '"[^>]+class="' + cls + '"[^>]*>)[^<]*(</span>)', 'g'),
+        '$1' + safe + '$2'
       );
     });
   });
 
-  // ── 2. PRINCIPLE ICONS ──
-  ['pi-ten','pi-zetsu','pi-ren','pi-hatsu'].forEach(pid=>{
-    const saved=avs[pid]; if(!saved) return;
-    const isImg=saved.startsWith('data:')||saved.startsWith('http');
-    if(isImg){
-      html=html.replace(
-        new RegExp('(<div[^>]+id="'+pid+'"[^>]*>)[^<]*(</div>)'),
-        '$1<img src="'+saved+'" style="width:100%;height:100%;object-fit:contain;border-radius:6px">$2'
-      );
-    } else {
-      html=html.replace(
-        new RegExp('(<div[^>]+id="'+pid+'"[^>]*>)[^<]*(</div>)'),
-        '$1'+saved+'$2'
-      );
-    }
+  // 2. Principle icons
+  PRINCIPLES.forEach(function(p) {
+    var saved = avs[p.id]; if (!saved) return;
+    var isImg = saved.startsWith('data:') || saved.startsWith('http');
+    var inner = isImg ? '<img src="' + saved + '" style="width:100%;height:100%;object-fit:contain;border-radius:6px">' : saved;
+    html = html.replace(
+      new RegExp('(<div[^>]+id="' + p.id + '"[^>]*>)[^<]*(</div>)'),
+      '$1' + inner + '$2'
+    );
   });
 
-  // ── 3. ALL CHARACTER AVATARS ──
-  const imgTag=url=>'<img src="'+url+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';
-  Object.entries(avs).forEach(([id,url])=>{
-    if(!url||id.startsWith('pi-')) return;
-    if(id.startsWith('dc-cal-')||id.startsWith('dc-pr-')){
-      html=html.replace(new RegExp('(id="'+id+'"[^>]*>)<div class="av-empty[^>]*></div>'), '$1'+imgTag(url));
-      html=html.replace(new RegExp('(id="'+id+'"[^>]*>)<div class="av-empty-dc"[^>]*></div>'), '$1'+imgTag(url));
-      html=html.replace(new RegExp('(id="'+id+'"[^>]*>)<img[^>]*>'), '$1'+imgTag(url));
+  // 3. Character avatars
+  function imgTag(url) {
+    return '<img src="' + url + '" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';
+  }
+  Object.keys(avs).forEach(function(id) {
+    var url = avs[id];
+    if (!url || id.startsWith('pi-')) return;
+    if (id.startsWith('dc-cal-') || id.startsWith('dc-pr-')) {
+      html = html.replace(new RegExp('(id="' + id + '"[^>]*>)<div class="av-empty[^"]*"[^>]*></div>'), '$1' + imgTag(url));
+      html = html.replace(new RegExp('(id="' + id + '"[^>]*>)<div class="av-empty-dc"[^>]*></div>'), '$1' + imgTag(url));
+      html = html.replace(new RegExp('(id="' + id + '"[^>]*>)<img[^>]*>'), '$1' + imgTag(url));
       return;
     }
-    html=html.replace(
-      new RegExp('(id="'+id+'"[^>]*>[\s\S]{0,200}?<div class="member-avatar">)<div class="av-empty"[^>]*></div>'),
-      '$1'+imgTag(url)
+    html = html.replace(
+      new RegExp('(id="' + id + '"[\\s\\S]{0,200}?<div class="member-avatar">)<div class="av-empty"[^>]*></div>'),
+      '$1' + imgTag(url)
     );
-    html=html.replace(
-      new RegExp('(id="'+id+'"[^>]*>[\s\S]{0,200}?<div class="member-avatar">)<img[^>]*>'),
-      '$1'+imgTag(url)
+    html = html.replace(
+      new RegExp('(id="' + id + '"[\\s\\S]{0,200}?<div class="member-avatar">)<img[^>]*>'),
+      '$1' + imgTag(url)
     );
   });
 
-  // ── 4. FOOTER LINKS ──
-  const linksHtml=links.length>0
-    ? links.map(l=>'<div class="footer-link-item"><span>'+l.icon+'</span><a href="'+l.url+'" target="_blank" rel="noopener">'+l.label+'</a></div>').join('')
+  // 4. Footer links
+  var linksHtml = links.length > 0
+    ? links.map(function(l){ return '<div class="footer-link-item"><span>' + l.icon + '</span><a href="' + l.url + '" target="_blank" rel="noopener">' + l.label + '</a></div>'; }).join('')
     : '';
-  html=html.replace(
+  html = html.replace(
     /id="footerLinks">(?:<!-- FOOTER_LINKS_PLACEHOLDER -->)?[^<]*/,
-    'id="footerLinks">'+linksHtml
+    'id="footerLinks">' + linksHtml
   );
 
-  // ── 5. LOGO ──
-  const logo=localStorage.getItem('nen_logo');
-  if(logo) html=html.replace(/(<img[^>]*id="heroLogo"[^>]*)src="[^"]*"/, '$1src="'+logo+'"');
+  // 5. Logo
+  var logo = localStorage.getItem('nen_logo');
+  if (logo) html = html.replace(/(<img[^>]*id="heroLogo"[^>]*)src="[^"]*"/, '$1src="' + logo + '"');
 
-  // ── 6. BANNER ──
-  const banOn=document.getElementById('bannerOn')?.checked;
-  const banEn=document.getElementById('banEn')?.value||'';
-  const banAr=document.getElementById('banAr')?.value||'';
-  if(banOn&&banEn){
-    const bc=bColor||'#4db8ff';
-    html=html.replace(/<div id="siteBanner"[\s\S]*?<\/div>\n?/,'');
-    const banDiv='<div id="siteBanner" style="background:'+bc+'22;border-bottom:2px solid '+bc+'66;padding:.6rem 2rem;text-align:center;font-size:.88rem;color:'+bc+';font-weight:600;z-index:200;position:relative">📢 <span class="en-only">'+banEn+'</span><span class="ar-only">'+banAr+'</span></div>\n';
-    html=html.replace('<nav>',banDiv+'<nav>');
+  // 6. Banner
+  var banOn = document.getElementById('bannerOn') && document.getElementById('bannerOn').checked;
+  var banEn = document.getElementById('banEn') ? document.getElementById('banEn').value : '';
+  var banAr = document.getElementById('banAr') ? document.getElementById('banAr').value : '';
+  if (banOn && banEn) {
+    var bc = bColor || '#4db8ff';
+    html = html.replace(/<div id="siteBanner"[\s\S]*?<\/div>\n?/, '');
+    var banDiv = '<div id="siteBanner" style="background:' + bc + '22;border-bottom:2px solid ' + bc + '66;padding:.6rem 2rem;text-align:center;font-size:.88rem;color:' + bc + ';font-weight:600;z-index:200;position:relative">📢 <span class="en-only">' + banEn + '</span><span class="ar-only">' + banAr + '</span></div>\n';
+    html = html.replace('<nav>', banDiv + '<nav>');
   }
 
-  // ── 7. QUIZ BANK ──
-  if((quizBank.en||[]).length>0||(quizBank.ar||[]).length>0){
-    const qbStr=JSON.stringify(quizBank).replace(/<\/script>/gi,'<\\/script>');
-    html=html.replace('</body>','<script>window._qbOverride='+qbStr+';<\/script>\n</body>');
+  // 7. Quiz bank
+  if ((quizBank.en||[]).length > 0 || (quizBank.ar||[]).length > 0) {
+    var qbStr = JSON.stringify(quizBank);
+    // Safe injection - no script tag issues
+    html = html.replace('</body>', '<scr' + 'ipt>window._qbOverride=' + qbStr + ';</scr' + 'ipt>\n</body>');
   }
 
   return html;
 }
 
-
-
-// ─── PRINCIPLES ICONS ───
-const PRINCIPLES = [
-  {id:'pi-ten',  name:'Ten 纏',  nameAr:'تن',   default:'🛡️'},
-  {id:'pi-zetsu',name:'Zetsu 絶',nameAr:'زيتسو',default:'🌑'},
-  {id:'pi-ren',  name:'Ren 錬',  nameAr:'رين',  default:'⚡'},
-  {id:'pi-hatsu',name:'Hatsu 発',nameAr:'هاتسو',default:'✨'},
-];
-
-function renderPrinc(){
-  const grid=document.getElementById('princGrid');
-  if(!grid) return;
-  let html='';
-  PRINCIPLES.forEach(p=>{
-    const saved=avs[p.id]||'';
-    const isImg=saved.startsWith('data:')||saved.startsWith('http');
-    const preview=isImg
-      ? '<img src="'+saved+'" style="width:100%;height:100%;object-fit:contain;border-radius:6px">'
-      : '<span style="font-size:1.8rem">'+(saved||p.default)+'</span>';
-    html+='<div class="av-item">';
-    html+='<div class="av-thumb'+(saved?' set':'')+'" style="border-radius:10px">'+preview+'</div>';
-    html+='<div style="flex:1;min-width:0">';
-    html+='<div class="av-name">'+p.name+' / '+p.nameAr+'</div>';
-    html+='<div style="margin-bottom:.35rem;display:flex;align-items:center;gap:.4rem">';
-    html+='<input class="av-url" id="pe_'+p.id+'" placeholder="Emoji" value="'+(!saved||isImg?p.default:saved)+'" style="width:60px;text-align:center;font-size:1.1rem">';
-    html+='<button class="av-ok" onclick="apPE(''+p.id+'')" style="font-size:.65rem;padding:.25rem .55rem"><span class="ea">Set</span><span class="aa">تعيين</span></button>';
-    html+='</div>';
-    html+='<div class="avc">';
-    html+='<input type="file" id="pf_'+p.id+'" accept="image/*" style="display:none" onchange="upPrinc(''+p.id+'',this)">';
-    html+='<button class="avb" onclick="document.getElementById('pf_'+p.id+'').click()">📁</button>';
-    html+='<input class="av-url" id="pu_'+p.id+'" placeholder="https://image-url..." value="'+(isImg?saved:'')+'" style="flex:1">';
-    html+='<button class="av-ok" onclick="apPU(''+p.id+'')" style="font-size:.65rem;padding:.25rem .55rem">✓</button>';
-    if(saved) html+='<button class="av-del" onclick="clAv(''+p.id+'');renderPrinc()" style="font-size:.65rem;padding:.25rem .4rem">✕</button>';
-    html+='</div></div></div>';
-  });
-  grid.innerHTML=html;
-}
-function apPE(id){const el=document.getElementById('pe_'+id);if(!el)return;avs[id]=el.value.trim();localStorage.setItem(AK,JSON.stringify(avs));renderPrinc();toast('Emoji set!');}
-function upPrinc(id,input){const file=input.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{avs[id]=e.target.result;localStorage.setItem(AK,JSON.stringify(avs));renderPrinc();toast('Image uploaded!');};r.readAsDataURL(file);}
-function apPU(id){const el=document.getElementById('pu_'+id);const url=el?el.value.trim():'';if(!url){toast('Enter URL',true);return;}avs[id]=url;localStorage.setItem(AK,JSON.stringify(avs));renderPrinc();toast('Image applied!');}
-
-// Auto-login
-if(sessionStorage.getItem('na')==='1'){
-  document.getElementById('LS').style.display='none';
+// ══════════════════════════════════════════════════════
+// AUTO-LOGIN (if session active)
+// ══════════════════════════════════════════════════════
+if (sessionStorage.getItem('na') === '1') {
+  document.getElementById('LS').style.display = 'none';
   document.getElementById('AP').classList.add('vis');
   initAdmin();
 }

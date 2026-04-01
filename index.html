@@ -1244,6 +1244,20 @@
     display:block;width:100%;
   }
 
+
+  /* ─── HUNTER ASSOCIATION ─── */
+  .hunter-tab{display:none}
+  .hunter-tab.active-tab{display:block}
+  .hunter-expand{transition:all .3s}
+  .member-card.expanded .hunter-expand{display:block !important}
+  .member-card{cursor:default}
+  .member-card[onclick]{cursor:pointer}
+  .member-desc{font-size:.78rem;color:var(--muted);line-height:1.55;margin-top:.4rem}
+
+
+  .step{text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.3rem 1rem}
+  .step:hover{border-color:rgba(77,184,255,.3);transform:translateY(-2px);transition:all .3s}
+
 </style>
 </head>
 <body>
@@ -2117,63 +2131,288 @@
 </section>
 
 <!-- Restrictions & Vows -->
-<section>
+<section id="restrictions">
   <div class="container">
     <h2 class="section-title fade-in">
-      <span class="en-only" data-eid="edit-68">Restrictions & Vows</span>
-      <span class="ar-only" data-eid="edit-68">القيود والنذور</span>
+      <span class="en-only" data-eid="edit-68">Restrictions &amp; Vows</span>
+      <span class="ar-only" data-eid="edit-68">الشروط والعهود</span>
     </h2>
     <div class="section-divider"></div>
-    <p style="text-align:center;max-width:700px;margin:0 auto 3rem;color:var(--muted);font-style:italic;font-size:1.05rem" class="fade-in">
-      <span class="en-only" data-eid="edit-69">The greater the restriction you place on yourself, the more powerful your ability becomes. This is one of Nen's most fascinating — and dangerous — rules.</span>
-      <span class="ar-only" data-eid="edit-69">كلما كانت القيود التي تضعها على نفسك أكبر، كانت قدرتك أقوى. هذه إحدى أكثر قواعد النين إثارةً للاهتمام — وخطورةً.</span>
+    <p style="text-align:center;max-width:780px;margin:0 auto 3.5rem;color:var(--muted);font-style:italic;font-size:1.05rem;line-height:1.8" class="fade-in">
+      <span class="en-only" data-eid="edit-69">The core principle: the greater the restriction you impose on yourself, the more powerful your Nen becomes. This is the foundation of all powerful Hatsu abilities — and the key to surpassing your natural limits.</span>
+      <span class="ar-only" data-eid="edit-69">المبدأ الأساسي: كلما أشد القيد الذي تفرضه على نفسك، كلما ازدادت قوة النين الذي تُطلقه — هذا هو جوهر كل قدرة هاتسو قوية، والمفتاح لتجاوز حدودك الطبيعية.</span>
     </p>
-    <div class="restrictions-grid fade-in">
-      <div class="restriction-card">
-        <h4>
-          <span class="en-only" data-eid="edit-70">Conditions</span>
-          <span class="ar-only" data-eid="edit-70">الشروط</span>
-        </h4>
-        <p>
-          <span class="en-only" data-eid="edit-71">Simple rules that must be met to activate an ability. The more limiting the condition, the greater the power boost received.</span>
-          <span class="ar-only" data-eid="edit-71">قواعد بسيطة يجب الوفاء بها لتفعيل القدرة. كلما كان الشرط أكثر تقييداً، كلما كان تعزيز القوة أكبر.</span>
-        </p>
-        <div class="example">
-          <span class="en-only" data-eid="edit-72">Example: Kurapika's chains activate only against Phantom Troupe members.</span>
-          <span class="ar-only" data-eid="edit-72">مثال: سلاسل كوراباكا تتفعل فقط ضد أعضاء فرقة الوهم.</span>
+
+    <!-- Power Scale -->
+    <div class="card fade-in" style="max-width:800px;margin:0 auto 3rem;padding:2rem">
+      <h3 style="font-family:Cinzel,serif;font-size:1rem;color:var(--aura);text-align:center;margin-bottom:1.5rem;letter-spacing:.1em">
+        <span class="en-only">Power Scale by Restriction Level</span>
+        <span class="ar-only">مقياس القوة حسب ثمن الشرط</span>
+      </h3>
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <!-- Each row: label left, track right with filled bar inside -->
+        <div style="display:grid;grid-template-columns:130px 1fr 36px;gap:.7rem;align-items:center">
+          <span style="font-size:.78rem;color:var(--muted);text-align:right;font-family:Cinzel,serif"><span class="en-only">No Restriction</span><span class="ar-only">بلا شرط</span></span>
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;height:20px;overflow:hidden">
+            <div style="background:rgba(77,184,255,.35);height:100%;width:12%;border-radius:8px"></div>
+          </div>
+          <span style="font-size:.75rem;color:var(--aura);font-weight:700;font-family:Cinzel,serif">1×</span>
         </div>
-      </div>
-      <div class="restriction-card">
-        <h4>
-          <span class="en-only" data-eid="edit-73">Vows (Pledge)</span>
-          <span class="ar-only" data-eid="edit-73">النذور (العهد)</span>
-        </h4>
-        <p>
-          <span class="en-only" data-eid="edit-74">The most powerful and dangerous restriction. A solemn oath where breaking it carries lethal or catastrophic consequences for the user themselves.</span>
-          <span class="ar-only" data-eid="edit-74">القيد الأقوى والأخطر. قسم مقدس يستلزم كسره عواقب مميتة أو كارثية على المستخدم نفسه.</span>
-        </p>
-        <div class="example">
-          <span class="en-only" data-eid="edit-75">If Kurapika uses Chain Jail on a non-Troupe member, he will die. This vow makes it one of the strongest conjured abilities.</span>
-          <span class="ar-only" data-eid="edit-75">إذا استخدم كوراباكا سجن السلسلة على غير عضو في الفرقة، سيموت. هذا النذر يجعلها من أقوى القدرات المجسدة.</span>
+        <div style="display:grid;grid-template-columns:130px 1fr 36px;gap:.7rem;align-items:center">
+          <span style="font-size:.78rem;color:var(--muted);text-align:right;font-family:Cinzel,serif"><span class="en-only">Light Vow</span><span class="ar-only">قيد بسيط</span></span>
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;height:20px;overflow:hidden">
+            <div style="background:linear-gradient(to right,rgba(77,184,255,.6),rgba(52,211,153,.6));height:100%;width:35%;border-radius:8px"></div>
+          </div>
+          <span style="font-size:.75rem;color:#34d399;font-weight:700;font-family:Cinzel,serif">1.5×</span>
         </div>
-      </div>
-      <div class="restriction-card">
-        <h4>
-          <span class="en-only" data-eid="edit-76">Post-Death Nen</span>
-          <span class="ar-only" data-eid="edit-76">نين ما بعد الموت</span>
-        </h4>
-        <p>
-          <span class="en-only" data-eid="edit-77">When a Nen user dies while deeply committed to a purpose, their aura can persist and even grow stronger. Death itself becomes the ultimate condition.</span>
-          <span class="ar-only" data-eid="edit-77">عندما يموت مستخدم النين وهو ملتزم بغاية عميقة، يمكن أن تستمر أوراه وتقوى. الموت نفسه يصبح الشرط النهائي.</span>
-        </p>
-        <div class="example">
-          <span class="en-only" data-eid="edit-78">Meruem was cursed by Netero's post-death Nen ability — the Poor Man's Rose — which spread poison after activating.</span>
-          <span class="ar-only" data-eid="edit-78">لُعن ميروم بقدرة نيتيرو من بعد الموت — وردة الفقير — التي نشرت السم بعد تفعيلها.</span>
+        <div style="display:grid;grid-template-columns:130px 1fr 36px;gap:.7rem;align-items:center">
+          <span style="font-size:.78rem;color:var(--muted);text-align:right;font-family:Cinzel,serif"><span class="en-only">Moderate Vow</span><span class="ar-only">قيد متوسط</span></span>
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;height:20px;overflow:hidden">
+            <div style="background:linear-gradient(to right,rgba(245,158,11,.7),rgba(245,158,11,.4));height:100%;width:55%;border-radius:8px"></div>
+          </div>
+          <span style="font-size:.75rem;color:#fbbf24;font-weight:700;font-family:Cinzel,serif">2×</span>
+        </div>
+        <div style="display:grid;grid-template-columns:130px 1fr 36px;gap:.7rem;align-items:center">
+          <span style="font-size:.78rem;color:var(--muted);text-align:right;font-family:Cinzel,serif"><span class="en-only">Heavy Vow</span><span class="ar-only">قيد خطير</span></span>
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;height:20px;overflow:hidden">
+            <div style="background:linear-gradient(to right,rgba(239,68,68,.8),rgba(239,68,68,.5));height:100%;width:78%;border-radius:8px"></div>
+          </div>
+          <span style="font-size:.75rem;color:#f87171;font-weight:700;font-family:Cinzel,serif">5×</span>
+        </div>
+        <div style="display:grid;grid-template-columns:130px 1fr 36px;gap:.7rem;align-items:center">
+          <span style="font-size:.78rem;color:var(--muted);text-align:right;font-family:Cinzel,serif"><span class="en-only">Life Vow</span><span class="ar-only">نذر الحياة</span></span>
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;height:20px;overflow:hidden">
+            <div style="background:linear-gradient(to right,#ef4444,#991b1b);height:100%;width:100%;border-radius:8px"></div>
+          </div>
+          <span style="font-size:.75rem;color:#fff;font-weight:700;font-family:Cinzel,serif">∞×</span>
         </div>
       </div>
     </div>
+
+    <!-- Examples from the series -->
+    <h3 class="fade-in" style="font-family:Cinzel,serif;font-size:.9rem;color:var(--muted);text-align:center;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem">
+      <span class="en-only">Examples from the Series</span>
+      <span class="ar-only">أمثلة من السلسلة</span>
+    </h3>
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem" class="fade-in">
+      <button class="ctype-btn active" onclick="filterVow('all',this)"><span class="en-only">All</span><span class="ar-only">الكل</span></button>
+      <button class="ctype-btn" onclick="filterVow('life',this)"><span class="en-only">Life Vow</span><span class="ar-only">نذر الحياة</span></button>
+      <button class="ctype-btn" onclick="filterVow('target',this)"><span class="en-only">Target Vow</span><span class="ar-only">قيد تقييدي</span></button>
+      <button class="ctype-btn" onclick="filterVow('moderate',this)"><span class="en-only">Moderate</span><span class="ar-only">قيد متوسط</span></button>
+      <button class="ctype-btn" onclick="filterVow('heavy',this)"><span class="en-only">Heavy</span><span class="ar-only">قيد خطير</span></button>
+    </div>
+
+    <div id="vowsGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.3rem;margin-bottom:3rem" class="fade-in">
+
+      <!-- Kurapika — Chain Jail -->
+      <div class="restriction-card" data-vow="life">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.8rem">
+          <div>
+            <div style="font-family:Cinzel,serif;font-size:.95rem;color:var(--text)"><span class="en-only">Kurapika — Chain Jail</span><span class="ar-only">كوراباكا — سجن السلسلة</span></div>
+            <div style="font-size:.75rem;color:var(--aura);margin-top:.2rem;font-family:Cinzel,serif"><span class="en-only">Conjurer → Specialist mode</span><span class="ar-only">مجسّد ← وضع المتخصص</span></div>
+          </div>
+          <span class="restriction-badge" style="background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3)"><span class="en-only">Life Vow</span><span class="ar-only">نذر الحياة</span></span>
+        </div>
+        <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:10px;padding:.85rem;margin-bottom:.7rem">
+          <div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem;font-family:Cinzel,serif"><span class="en-only">The Vow</span><span class="ar-only">الشرط</span></div>
+          <div style="font-size:.88rem;color:var(--text);line-height:1.6"><span class="en-only">"If I ever use Chain Jail on a non-member of the Phantom Troupe, I will die."</span><span class="ar-only">"إذا استخدمت سجن السلسلة على شخص ليس عضواً في فرقة الوهم، أكون قد حكمت على نفسي بالموت."</span></div>
+        </div>
+        <div style="font-size:.84rem;color:var(--muted);line-height:1.65"><span class="en-only">This vow makes Chain Jail unbreakable — even the most powerful Nen users cannot escape it. Without the vow, it would be a normal chain. The life-or-death condition is what gives it absolute power.</span><span class="ar-only">هذا الشرط يجعل سجن السلسلة لا يُكسر — حتى أقوى مستخدمي النين لا يستطيعون الهروب منه. بدون الشرط سيكون مجرد سلسلة عادية. شرط الحياة والموت هو ما يمنحه القوة المطلقة.</span></div>
+        <div style="margin-top:.8rem;font-size:.75rem;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);padding-top:.6rem">
+          <span style="color:var(--aura2)">⚡ <span class="en-only">Power boost: extreme — the chain traps even Uvogin-class opponents</span><span class="ar-only">تضخيم القوة: هائل — السلسلة تحبس حتى الخصوم من مستوى أوفوغين</span></span>
+        </div>
+      </div>
+
+      <!-- Adult Gon -->
+      <div class="restriction-card" data-vow="life">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.8rem">
+          <div>
+            <div style="font-family:Cinzel,serif;font-size:.95rem;color:var(--text)"><span class="en-only">Adult Gon — Ultimate Sacrifice</span><span class="ar-only">غون البالغ — التضحية القصوى</span></div>
+            <div style="font-size:.75rem;color:var(--aura);margin-top:.2rem;font-family:Cinzel,serif"><span class="en-only">Enhancer at full potential release</span><span class="ar-only">معزّز عند الإفراج الكامل عن الإمكانات</span></div>
+          </div>
+          <span class="restriction-badge" style="background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3)"><span class="en-only">Life Vow</span><span class="ar-only">نذر الحياة</span></span>
+        </div>
+        <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:10px;padding:.85rem;margin-bottom:.7rem">
+          <div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem;font-family:Cinzel,serif"><span class="en-only">The Vow</span><span class="ar-only">الشرط</span></div>
+          <div style="font-size:.88rem;color:var(--text);line-height:1.6"><span class="en-only">"I trade away my future potential — everything I could ever be — for power right now."</span><span class="ar-only">"أتخلى عن كل قدراتي المستقبلية — كل ما يمكن أن أكونه — مقابل القوة الآن."</span></div>
+        </div>
+        <div style="font-size:.84rem;color:var(--muted);line-height:1.65"><span class="en-only">Gon transforms into an adult, releasing ALL his potential simultaneously. This gives him power beyond elite Hunters — but at the cost of his Nen and nearly his life. He could never use Nen again after this.</span><span class="ar-only">يتحول غون إلى شكل بالغ مُطلقاً كل إمكاناته دفعة واحدة. هذا يمنحه قوة تتجاوز الصيادين النخبة — لكن بتكلفة نينه ويكاد يكلفه حياته. لم يتمكن من استخدام النين بعد ذلك.</span></div>
+        <div style="margin-top:.8rem;font-size:.75rem;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);padding-top:.6rem">
+          <span style="color:#f87171">⚠ <span class="en-only">Cost: near-death — Nen lost permanently, saved only by Alluka's wish</span><span class="ar-only">الثمن: قاب قوسين من الموت — فقد النين نهائياً، أُنقذ فقط بأمنية أللوكا</span></span>
+        </div>
+      </div>
+
+      <!-- Netero — Post-death -->
+      <div class="restriction-card" data-vow="life">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.8rem">
+          <div>
+            <div style="font-family:Cinzel,serif;font-size:.95rem;color:var(--text)"><span class="en-only">Netero — Poor Man's Rose</span><span class="ar-only">نيتيرو — وردة الفقير</span></div>
+            <div style="font-size:.75rem;color:var(--aura);margin-top:.2rem;font-family:Cinzel,serif"><span class="en-only">Post-death Nen activation</span><span class="ar-only">تفعيل النين بعد الموت</span></div>
+          </div>
+          <span class="restriction-badge" style="background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3)"><span class="en-only">Life Vow</span><span class="ar-only">نذر الحياة</span></span>
+        </div>
+        <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:10px;padding:.85rem;margin-bottom:.7rem">
+          <div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem;font-family:Cinzel,serif"><span class="en-only">The Vow</span><span class="ar-only">الشرط</span></div>
+          <div style="font-size:.88rem;color:var(--text);line-height:1.6"><span class="en-only">"Upon my death, my body will explode — releasing a biological weapon that poisons even those who cannot use Nen."</span><span class="ar-only">"عند موتي، سيتفجر جسدي — مُطلقاً سلاحاً بيولوجياً يُسمّم حتى من لا يستطيع استخدام النين."</span></div>
+        </div>
+        <div style="font-size:.84rem;color:var(--muted);line-height:1.65"><span class="en-only">Netero implanted this weapon in his body knowing it was his final trump card. The vow is his life itself — the greatest restriction possible, triggering after death. Meruem was cursed by Netero's post-death Nen — the Poor Man's Rose spread its poison.</span><span class="ar-only">زرع نيتيرو هذا السلاح في جسده عارفاً أنه ورقته الأخيرة. الشرط هو حياته ذاتها — أعظم قيد ممكن، يُفعَّل بعد الموت. لُعن ميروم بنين نيتيرو من بعد الموت — وردة الفقير نشرت سمّها.</span></div>
+        <div style="margin-top:.8rem;font-size:.75rem;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);padding-top:.6rem">
+          <span style="color:var(--aura2)">⚡ <span class="en-only">The only thing that could defeat the invincible King Meruem</span><span class="ar-only">الشيء الوحيد الذي أطاح بالملك الذي لا يُهزم ميروم</span></span>
+        </div>
+      </div>
+
+      <!-- Hisoka — Texture Surprise -->
+      <div class="restriction-card" data-vow="target">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.8rem">
+          <div>
+            <div style="font-family:Cinzel,serif;font-size:.95rem;color:var(--text)"><span class="en-only">Hisoka — Texture Surprise</span><span class="ar-only">هيسوكا — Texture Surprise</span></div>
+            <div style="font-size:.75rem;color:var(--aura);margin-top:.2rem;font-family:Cinzel,serif"><span class="en-only">Transmuter — deception over force</span><span class="ar-only">محوّل — الخداع فوق القوة</span></div>
+          </div>
+          <span class="restriction-badge" style="background:rgba(100,116,139,.15);color:#94a3b8;border:1px solid rgba(100,116,139,.3)"><span class="en-only">Target Vow</span><span class="ar-only">قيد تقييدي</span></span>
+        </div>
+        <div style="background:rgba(100,116,139,.06);border:1px solid rgba(100,116,139,.15);border-radius:10px;padding:.85rem;margin-bottom:.7rem">
+          <div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem;font-family:Cinzel,serif"><span class="en-only">The Vow</span><span class="ar-only">الشرط</span></div>
+          <div style="font-size:.88rem;color:var(--text);line-height:1.6"><span class="en-only">"I can only use this on a surface or text in front of me — I cannot use it to create an illusion on myself."</span><span class="ar-only">"لا يمكنني استخدام هذا إلا على سطح أو نص أمامي — لا أستطيع تطبيقه لخلق وهم على نفسي."</span></div>
+        </div>
+        <div style="font-size:.84rem;color:var(--muted);line-height:1.65"><span class="en-only">Hisoka uses his rubber-and-gum aura (Bungee Gum) in combination with Texture Surprise to alter the appearance of any surface — but he cannot project a full image from nothing. The restriction shapes the ability into a precise tool.</span><span class="ar-only">هيسوكا يستخدم أوراه (بونجي غام) بالتزامن مع تكسشر سرپرايز لتغيير مظهر أي سطح — لكنه لا يستطيع إسقاط صورة كاملة من لا شيء. القيد يشكّل القدرة كأداة دقيقة.</span></div>
+        <div style="margin-top:.8rem;font-size:.75rem;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);padding-top:.6rem">
+          <span style="color:var(--aura2)">💡 <span class="en-only">Used to fake Hisoka's own death against Chrollo — fooled an entire arena</span><span class="ar-only">استُخدم لتزوير موت هيسوكا أمام كرولو — خدع حلبة كاملة</span></span>
+        </div>
+      </div>
+
+      <!-- Killua — Kanmaru -->
+      <div class="restriction-card" data-vow="moderate">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.8rem">
+          <div>
+            <div style="font-family:Cinzel,serif;font-size:.95rem;color:var(--text)"><span class="en-only">Killua — Kanmaru (Godspeed)</span><span class="ar-only">كيلوا — Kanmaru (سرعة الإله)</span></div>
+            <div style="font-size:.75rem;color:var(--aura);margin-top:.2rem;font-family:Cinzel,serif"><span class="en-only">Transmuter — electrical aura</span><span class="ar-only">محوّل — أورا كهربائية</span></div>
+          </div>
+          <span class="restriction-badge" style="background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.3)"><span class="en-only">Moderate</span><span class="ar-only">قيد متوسط</span></span>
+        </div>
+        <div style="background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.15);border-radius:10px;padding:.85rem;margin-bottom:.7rem">
+          <div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem;font-family:Cinzel,serif"><span class="en-only">The Vow</span><span class="ar-only">الشرط</span></div>
+          <div style="font-size:.88rem;color:var(--text);line-height:1.6"><span class="en-only">"I only use aura concentration on one body part at a time — I cannot simultaneously attack with lightning from multiple points."</span><span class="ar-only">"أركّز الأورا على جزء واحد من الجسم في وقت واحد فقط — لا أستطيع الهجوم بالبرق من عدة نقاط في آن واحد."</span></div>
+        </div>
+        <div style="font-size:.84rem;color:var(--muted);line-height:1.65"><span class="en-only">Killua converts his aura entirely into lightning, redirecting all electrical nerve impulses in his body. This gives him superhuman speed beyond anyone can track. At full power, even his own allies cannot see him move.</span><span class="ar-only">يحوّل كيلوا أوراه بالكامل إلى كهرباء، محوّلاً كل النبضات العصبية الكهربائية في جسمه. هذا يمنحه سرعة خارقة لا يستطيع أحد تتبعها. عند القوة الكاملة، حتى حلفاؤه لا يستطيعون رؤيته وهو يتحرك.</span></div>
+        <div style="margin-top:.8rem;font-size:.75rem;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);padding-top:.6rem">
+          <span style="color:var(--aura2)">⚡ <span class="en-only">Power boost: movement speed becomes untraceable to naked eye</span><span class="ar-only">تضخيم القوة: سرعة الحركة تصبح غير قابلة للتتبع بالعين المجردة</span></span>
+        </div>
+      </div>
+
+      <!-- Neferpitou — Post-death -->
+      <div class="restriction-card" data-vow="life">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.8rem">
+          <div>
+            <div style="font-family:Cinzel,serif;font-size:.95rem;color:var(--text)"><span class="en-only">Neferpitou — Post-Death Puppetry</span><span class="ar-only">نيفيربيتو — التحريك بعد الموت</span></div>
+            <div style="font-size:.75rem;color:var(--aura);margin-top:.2rem;font-family:Cinzel,serif"><span class="en-only">Specialist — post-death Nen</span><span class="ar-only">متخصص — نين بعد الموت</span></div>
+          </div>
+          <span class="restriction-badge" style="background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3)"><span class="en-only">Life Vow</span><span class="ar-only">نذر الحياة</span></span>
+        </div>
+        <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:10px;padding:.85rem;margin-bottom:.7rem">
+          <div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem;font-family:Cinzel,serif"><span class="en-only">The Vow</span><span class="ar-only">الشرط</span></div>
+          <div style="font-size:.88rem;color:var(--text);line-height:1.6"><span class="en-only">"Even after death, I will use the last of my Nen to move my corpse — to keep the promise I made to Gon."</span><span class="ar-only">"حتى بعد الموت، سأستخدم آخر نيني لتحريك جثتي — للوفاء بالوعد الذي قطعته لغون."</span></div>
+        </div>
+        <div style="font-size:.84rem;color:var(--muted);line-height:1.65"><span class="en-only">After being killed by Gon, Neferpitou's corpse continued moving — using residual Nen to attack. This is one of the clearest demonstrations that a Nen user's power can persist even after death, strengthened by intense emotion and vow.</span><span class="ar-only">بعد أن قتلها غون، استمرت جثة نيفيربيتو في الحركة — مستخدمةً النين المتبقي للهجوم. هذا أحد أوضح الأدلة على أن قوة مستخدم النين يمكن أن تستمر حتى بعد الموت، مُعززةً بالعاطفة الشديدة والنذر.</span></div>
+        <div style="margin-top:.8rem;font-size:.75rem;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);padding-top:.6rem">
+          <span style="color:#f87171">⚠ <span class="en-only">Near-fatal for Gon — struck down even though Pitou was already dead</span><span class="ar-only">كاد يقتل غون — ضربه حتى بعد موت نيفيربيتو بالفعل</span></span>
+        </div>
+      </div>
+
+      <!-- Morow — Spring Love -->
+      <div class="restriction-card" data-vow="moderate">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.8rem">
+          <div>
+            <div style="font-family:Cinzel,serif;font-size:.95rem;color:var(--text)"><span class="en-only">Morow — Spring Love</span><span class="ar-only">مورو — Spring Love</span></div>
+            <div style="font-size:.75rem;color:var(--aura);margin-top:.2rem;font-family:Cinzel,serif"><span class="en-only">Conjurer — magical beasts</span><span class="ar-only">مجسّد — وحوش سحرية</span></div>
+          </div>
+          <span class="restriction-badge" style="background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.3)"><span class="en-only">Moderate</span><span class="ar-only">قيد متوسط</span></span>
+        </div>
+        <div style="background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.15);border-radius:10px;padding:.85rem;margin-bottom:.7rem">
+          <div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem;font-family:Cinzel,serif"><span class="en-only">The Vow</span><span class="ar-only">الشرط</span></div>
+          <div style="font-size:.88rem;color:var(--text);line-height:1.6"><span class="en-only">"I can only use leaves shaped outside my body — all my leaves must emerge from outside, never materializing directly in the target."</span><span class="ar-only">"لا أستطيع استخدام إلا أوراقاً مُشكَّلة خارج جسمي — يجب أن تخرج أوراقي من الخارج، دون أن تتجسد مباشرة داخل الهدف."</span></div>
+        </div>
+        <div style="font-size:.84rem;color:var(--muted);line-height:1.65"><span class="en-only">Morow sacrifices the ability to use Nen outside his own hands in any shape other than leaves. In return, his conjured leaves take full control of the target's body — becoming a limiter. One shape, absolute control — this is the tradeoff that makes Manipulation Nen terrifying.</span><span class="ar-only">يتخلى مورو عن القدرة على استخدام النين خارج يديه بأي شكل غير الأوراق. في المقابل، أوراقه المجسَّدة تتحكم الكامل في جسم الهدف — تصبح مقيِّداً كاملاً. شكل واحد، سيطرة مطلقة — هذه المقايضة هي ما يجعل نين التلاعب مرعباً.</span></div>
+        <div style="margin-top:.8rem;font-size:.75rem;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);padding-top:.6rem">
+          <span style="color:var(--aura2)">⚡ <span class="en-only">Transforms all Aura into one form — but that form becomes a perfect domination tool</span><span class="ar-only">يحوّل كل الأورا إلى شكل واحد — لكن هذا الشكل يصبح أداة سيطرة مثالية</span></span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 5 Rules of Vow-Making -->
+    <h3 class="fade-in" style="font-family:Cinzel,serif;font-size:.9rem;color:var(--muted);text-align:center;letter-spacing:.15em;text-transform:uppercase;margin-bottom:2rem">
+      <span class="en-only">The Five Rules of Effective Vows</span>
+      <span class="ar-only">القواعد الخمس للشروط الفعّالة</span>
+    </h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.2rem;margin-bottom:2rem" class="fade-in">
+
+      <div style="background:rgba(77,184,255,.05);border:1px solid rgba(77,184,255,.15);border-radius:14px;padding:1.3rem;display:flex;flex-direction:column;align-items:center;text-align:center">
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(77,184,255,.15);border:2px solid var(--aura);font-family:Cinzel,serif;font-size:.9rem;color:var(--aura);display:flex;align-items:center;justify-content:center;margin-bottom:.9rem;flex-shrink:0">1</div>
+        <div style="font-family:Cinzel,serif;font-size:.88rem;color:var(--text);margin-bottom:.6rem;letter-spacing:.06em">
+          <span class="en-only">Internal Sincerity</span>
+          <span class="ar-only">الصدق الداخلي</span>
+        </div>
+        <div style="font-size:.82rem;color:var(--muted);line-height:1.65">
+          <span class="en-only">The vow must reflect something you truly believe. Lying to yourself about the restriction cancels the power boost entirely.</span>
+          <span class="ar-only">الشرط يجب أن يعكس شيئاً تؤمن به حقاً. الكذب على نفسك بشأن القيد يلغي تضخيم القوة كلياً.</span>
+        </div>
+      </div>
+
+      <div style="background:rgba(77,184,255,.05);border:1px solid rgba(77,184,255,.15);border-radius:14px;padding:1.3rem;display:flex;flex-direction:column;align-items:center;text-align:center">
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(77,184,255,.15);border:2px solid var(--aura);font-family:Cinzel,serif;font-size:.9rem;color:var(--aura);display:flex;align-items:center;justify-content:center;margin-bottom:.9rem;flex-shrink:0">2</div>
+        <div style="font-family:Cinzel,serif;font-size:.88rem;color:var(--text);margin-bottom:.6rem;letter-spacing:.06em">
+          <span class="en-only">True Price</span>
+          <span class="ar-only">الثمن الحقيقي</span>
+        </div>
+        <div style="font-size:.82rem;color:var(--muted);line-height:1.65">
+          <span class="en-only">The restriction must genuinely cost you something. A vow that feels like no sacrifice produces no power boost at all.</span>
+          <span class="ar-only">القيد يجب أن يُكلّفك شيئاً حقيقياً. الشرط الذي لا يشعر بأنه تضحية لا يُنتج أي تضخيم في القوة على الإطلاق.</span>
+        </div>
+      </div>
+
+      <div style="background:rgba(77,184,255,.05);border:1px solid rgba(77,184,255,.15);border-radius:14px;padding:1.3rem;display:flex;flex-direction:column;align-items:center;text-align:center">
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(77,184,255,.15);border:2px solid var(--aura);font-family:Cinzel,serif;font-size:.9rem;color:var(--aura);display:flex;align-items:center;justify-content:center;margin-bottom:.9rem;flex-shrink:0">3</div>
+        <div style="font-family:Cinzel,serif;font-size:.88rem;color:var(--text);margin-bottom:.6rem;letter-spacing:.06em">
+          <span class="en-only">Proportionality</span>
+          <span class="ar-only">التناسب</span>
+        </div>
+        <div style="font-size:.82rem;color:var(--muted);line-height:1.65">
+          <span class="en-only">The power of the Nen boost must match the weight of the restriction. An extreme vow with an extreme cost produces extreme power.</span>
+          <span class="ar-only">قوة تضخيم النين يجب أن تتناسب مع ثقل القيد. الشرط المتطرف الذي يطلب ثمناً مرتفعاً يُنتج قوة مرتفعة بنفس القدر.</span>
+        </div>
+      </div>
+
+      <div style="background:rgba(77,184,255,.05);border:1px solid rgba(77,184,255,.15);border-radius:14px;padding:1.3rem;display:flex;flex-direction:column;align-items:center;text-align:center">
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(77,184,255,.15);border:2px solid var(--aura);font-family:Cinzel,serif;font-size:.9rem;color:var(--aura);display:flex;align-items:center;justify-content:center;margin-bottom:.9rem;flex-shrink:0">4</div>
+        <div style="font-family:Cinzel,serif;font-size:.88rem;color:var(--text);margin-bottom:.6rem;letter-spacing:.06em">
+          <span class="en-only">Accumulation</span>
+          <span class="ar-only">التراكم</span>
+        </div>
+        <div style="font-size:.82rem;color:var(--muted);line-height:1.65">
+          <span class="en-only">Multiple vows stack — each extra restriction further increases the power. Kurapika uses several stacked vows simultaneously to reach Specialist level.</span>
+          <span class="ar-only">يمكن تراكم النذور — كل قيد إضافي يرفع القوة أكثر. كوراباكا يستخدم عدة نذور متراكمة في آن واحد للوصول لمستوى المتخصص.</span>
+        </div>
+      </div>
+
+      <div style="background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.2);border-radius:14px;padding:1.3rem;display:flex;flex-direction:column;align-items:center;text-align:center">
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(239,68,68,.15);border:2px solid #ef4444;font-family:Cinzel,serif;font-size:.9rem;color:#ef4444;display:flex;align-items:center;justify-content:center;margin-bottom:.9rem;flex-shrink:0">5</div>
+        <div style="font-family:Cinzel,serif;font-size:.88rem;color:var(--text);margin-bottom:.6rem;letter-spacing:.06em">
+          <span class="en-only">No Escape</span>
+          <span class="ar-only">لا رجعة فيه</span>
+        </div>
+        <div style="font-size:.82rem;color:var(--muted);line-height:1.65">
+          <span class="en-only">Breaking a vow turns the Nen against you — the power that was boosting you becomes a weapon that destroys you from within. There is no undoing it.</span>
+          <span class="ar-only">كسر الشرط يعني أن النين ينقلب عليك — القوة التي كانت تُضخِّمك تصبح سلاحاً يدمّرك من الداخل. لا يمكن التراجع.</span>
+        </div>
+      </div>
+
+    </div>
+
+
+
   </div>
 </section>
+
 
 <!-- Quiz -->
 
@@ -2188,9 +2427,8 @@
     <div class="groups-tabs fade-in">
       <button class="gtab-btn active" onclick="switchGroup('zoldyck',this)">🏔 <span class="en-only" data-eid="edit-80">Zoldyck Family</span><span class="ar-only" data-eid="edit-80">عائلة زولديك</span></button>
       <button class="gtab-btn" onclick="switchGroup('troupe',this)">🕷 <span class="en-only" data-eid="edit-81">Phantom Troupe</span><span class="ar-only" data-eid="edit-81">فرقة الوهم</span></button>
-      <button class="gtab-btn" onclick="switchGroup('zodiacs',this)">⭕ <span class="en-only" data-eid="edit-82">Zodiacs</span><span class="ar-only" data-eid="edit-82">الأبراج</span></button>
       <button class="gtab-btn" onclick="switchGroup('chimera',this)">🐜 <span class="en-only" data-eid="edit-83">Chimera Ants</span><span class="ar-only" data-eid="edit-83">نمل الكيميرا</span></button>
-      <button class="gtab-btn" onclick="switchGroup('heroes',this)">⭐ <span class="en-only" data-eid="edit-84">Heroes</span><span class="ar-only" data-eid="edit-84">الأبطال</span></button>
+      <button class="gtab-btn" onclick="switchGroup('hunters',this)">🏛 <span class="en-only">Hunter Association</span><span class="ar-only">جمعية الصيادين</span></button>
     </div>
 
     <!-- ZOLDYCK FAMILY -->
@@ -2427,170 +2665,545 @@
       </div>
     </div>
 
-    <!-- ZODIACS -->
-    <div class="group-panel" id="gp-zodiacs">
-      <div class="group-intro-bar fade-in">
-        <div class="group-icon">⭕</div>
-        <div class="group-intro-text">
-          <h3><span class="en-only" data-eid="edit-120">Zodiacs — Netero's Elite Council</span><span class="ar-only" data-eid="edit-120">الأبراج — مجلس نيتيرو النخبوي</span></h3>
-          <p class="en-only">12 elite Hunters hand-picked by Chairman Netero to serve as his advisors and sparring partners. Each is assigned a Chinese Zodiac codename. They are the highest authority in the Hunter Association after the Chairman.</p>
-          <p class="ar-only">12 صياداً نخبةً اختارهم الرئيس نيتيرو ليكونوا مستشاريه وشركاءه في التدريب. كل واحد له اسم رمزي من الأبراج الصينية. أعلى سلطة في جمعية الصيادين بعد الرئيس.</p>
-        </div>
-      </div>
-      <div class="members-grid fade-in">
-        <div class="member-card" id="zo-pariston"><div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div><div class="member-name">Pariston Hill</div><div class="member-role"><span class="en-only" data-eid="edit-121">Rat — Former Vice-Chair</span><span class="ar-only" data-eid="edit-121">الفأر — نائب رئيس سابق</span></div><span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Specialist</span><div class="member-desc"><span class="en-only" data-eid="edit-122">Master manipulator & politician. Genius-level strategist. Resigned immediately after becoming Chairman.</span><span class="ar-only" data-eid="edit-122">سياسي متلاعب بارع. استراتيجي عبقري. استقال فور تعيينه رئيساً.</span></div></div>
-        <div class="member-card" id="zo-mizaistom"><div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div><div class="member-name">Mizaistom Nana</div><div class="member-role"><span class="en-only" data-eid="edit-123">Ox — Crime Hunter</span><span class="ar-only" data-eid="edit-123">الثور — صائد الجرائم</span></div><span class="member-nen" style="background:rgba(239,68,68,.1);color:#f87171">Conjurer</span><div class="member-desc"><span class="en-only" data-eid="edit-124">Analytical investigator. Uses traffic-light Nen to capture targets in spectral cages.</span><span class="ar-only" data-eid="edit-124">محقق تحليلي. يستخدم نين إشارات المرور لحبس الأهداف في أقفاص طيفية.</span></div></div>
-        <div class="member-card" id="zo-kanzai"><div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div><div class="member-name">Kanzai</div><div class="member-role"><span class="en-only" data-eid="edit-125">Tiger — Defense Team</span><span class="ar-only" data-eid="edit-125">النمر — فريق الدفاع</span></div><span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span><div class="member-desc"><span class="en-only" data-eid="edit-126">Temperamental and impulsive. Quick to argue. Strong combatant assigned to the Defense Team.</span><span class="ar-only" data-eid="edit-126">متقلب وانفعالي. سريع الجدل. مقاتل قوي في فريق الدفاع.</span></div></div>
-        <div class="member-card" id="zo-pyon"><div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div><div class="member-name">Pyon</div><div class="member-role"><span class="en-only" data-eid="edit-127">Rabbit — Intel Team</span><span class="ar-only" data-eid="edit-127">الأرنب — فريق الاستخبارات</span></div><span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span><div class="member-desc"><span class="en-only" data-eid="edit-128">Multilingual programmer and Paleograph Hunter. Hosted election proceedings. Intel Team leader.</span><span class="ar-only" data-eid="edit-128">مبرمجة متعددة اللغات وصائدة كتابة قديمة. أدارت انتخابات الرئاسة. قائدة فريق الاستخبارات.</span></div></div>
-        <div class="member-card" id="zo-botobai"><div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div><div class="member-name">Botobai Gigante</div><div class="member-role"><span class="en-only" data-eid="edit-129">Dragon — Terrorist Hunter</span><span class="ar-only" data-eid="edit-129">التنين — صائد الإرهابيين</span></div><span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span><div class="member-desc"><span class="en-only" data-eid="edit-130">Triple Star Hunter. Most experienced Zodiac. His Nen is said to be the strongest in the group.</span><span class="ar-only" data-eid="edit-130">صياد ثلاثي النجوم. أكثر البروج خبرةً. يُقال إن نينه الأقوى في المجموعة.</span></div></div>
-        <div class="member-card" id="zo-gel"><div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div><div class="member-name">Gel</div><div class="member-role"><span class="en-only" data-eid="edit-131">Cobra — Poison Hunter</span><span class="ar-only" data-eid="edit-131">الكوبرا — صائدة السموم</span></div><span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span><div class="member-desc"><span class="en-only" data-eid="edit-132">Poison specialist. Can transform her arm into a snake. Part of the Science Team for the Dark Continent.</span><span class="ar-only" data-eid="edit-132">متخصصة في السموم. تستطيع تحويل ذراعها لثعبان. جزء من فريق العلوم للقارة المظلمة.</span></div></div>
-        <div class="member-card" id="zo-saccho"><div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div><div class="member-name">Saccho Kobayakawa</div><div class="member-role"><span class="en-only" data-eid="edit-133">Horse — Intel Team</span><span class="ar-only" data-eid="edit-133">الحصان — فريق الاستخبارات</span></div><span class="member-nen" style="background:rgba(245,158,11,.1);color:#fbbf24">Emitter</span><div class="member-desc"><span class="en-only" data-eid="edit-134">Works behind the scenes. Methodical and observant. 2-Star Hunter and Intel Team member.</span><span class="ar-only" data-eid="edit-134">يعمل خلف الكواليس. منهجي ومراقب. صياد ذو نجمتين وعضو فريق الاستخبارات.</span></div></div>
-        <div class="member-card" id="zo-ginta"><div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div><div class="member-name">Ginta</div><div class="member-role"><span class="en-only" data-eid="edit-135">Goat — Flora/Fauna</span><span class="ar-only" data-eid="edit-135">الماعز — فريق الأحياء</span></div><span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span><div class="member-desc"><span class="en-only" data-eid="edit-136">Most emotional Zodiac. Speed-based abilities. Was a sparring partner for Netero. Hisoka rated him 90/100.</span><span class="ar-only" data-eid="edit-136">أكثر البروج عاطفيةً. قدراته قائمة على السرعة. كان شريك تدريب لنيتيرو.</span></div></div>
-        <div class="member-card" id="zo-saiyu"><div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div><div class="member-name">Saiyu</div><div class="member-role"><span class="en-only" data-eid="edit-137">Monkey — Traitor</span><span class="ar-only" data-eid="edit-137">القرد — الخائن</span></div><span class="member-nen" style="background:rgba(100,116,139,.1);color:#94a3b8">Manipulator</span><div class="member-desc"><span class="en-only" data-eid="edit-138">Secret ally of Beyond Netero. Concealed traitor within the Zodiacs. Defense Team member.</span><span class="ar-only" data-eid="edit-138">حليف سري لـ Beyond نيتيرو. الخائن المخفي داخل الأبراج. عضو فريق الدفاع.</span></div></div>
-        <div class="member-card" id="zo-cluck"><div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div><div class="member-name">Cluck</div><div class="member-role"><span class="en-only" data-eid="edit-139">Rooster — Flora/Fauna</span><span class="ar-only" data-eid="edit-139">الديك — فريق الأحياء</span></div><span class="member-nen" style="background:rgba(100,116,139,.1);color:#94a3b8">Manipulator</span><div class="member-desc"><span class="en-only" data-eid="edit-140">Controls hundreds of birds simultaneously. Sent election notices via 600+ pigeons to all Hunters worldwide.</span><span class="ar-only" data-eid="edit-140">تتحكم بمئات الطيور في وقت واحد. أرسلت إشعارات الانتخابات بأكثر من 600 حمامة.</span></div></div>
-        <div class="member-card" id="zo-cheadle"><div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div><div class="member-name">Cheadle Yorkshire</div><div class="member-role"><span class="en-only" data-eid="edit-141">Dog — Current Chairman</span><span class="ar-only" data-eid="edit-141">الكلب — الرئيسة الحالية</span></div><span class="member-nen" style="background:rgba(239,68,68,.1);color:#f87171">Conjurer</span><div class="member-desc"><span class="en-only" data-eid="edit-142">Current Chairman of the Hunter Association. Triple Star Disease Hunter. Sharp intellect and administrator.</span><span class="ar-only" data-eid="edit-142">الرئيسة الحالية لجمعية الصيادين. صائدة أمراض ثلاثية النجوم. ذكاء حاد وإدارية بارعة.</span></div></div>
-        <div class="member-card" id="zo-ging"><div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div><div class="member-name">Ging Freecss</div><div class="member-role"><span class="en-only" data-eid="edit-143">Boar — Gon's Father</span><span class="ar-only" data-eid="edit-143">الخنزير — والد غون</span></div><span class="member-nen" style="background:rgba(245,158,11,.1);color:#fbbf24">Emitter</span><div class="member-desc"><span class="en-only" data-eid="edit-144">Top 5 Nen users globally. Created Greed Island. Double Star Ruins Hunter. Abandoned Gon at birth.</span><span class="ar-only" data-eid="edit-144">من أفضل 5 مستخدمي نين عالمياً. ابتكر جزيرة الجشع. صياد آثار مزدوج النجوم. هجر غون عند الولادة.</span></div><div class="member-ability">Copies any attack used against him</div></div>
-      </div>
-    </div>
-
     <!-- CHIMERA ANTS -->
     <div class="group-panel" id="gp-chimera">
       <div class="group-intro-bar fade-in">
         <div class="group-icon">🐜</div>
         <div class="group-intro-text">
-          <h3><span class="en-only" data-eid="edit-145">Chimera Ants — The Ultimate Predators</span><span class="ar-only" data-eid="edit-145">نمل الكيميرا — المفترسون النهائيون</span></h3>
-          <p class="en-only">Hybrid creatures born from the Chimera Ant Queen who can consume and inherit the genetic traits of any species. Through "Phagogenesis" they absorbed human DNA and gained the ability to use Nen — creating beings that surpass even elite Hunters.</p>
-          <p class="ar-only">مخلوقات هجينة وُلدت من ملكة نمل الكيميرا التي تستطيع استهلاك وتوريث صفات أي كائن. عبر "الفاغوجينيسيس" امتصوا الحمض النووي البشري واكتسبوا القدرة على استخدام النين — مما خلق كائنات تتجاوز حتى الصيادين النخبة.</p>
+          <h3>
+            <span class="en-only">Chimera Ant Colony — Royal Hierarchy</span>
+            <span class="ar-only">مستعمرة نمل الكيميرا — التسلسل الملكي</span>
+          </h3>
+          <p class="en-only">A species capable of genetic blending through Phagogenesis — absorbing traits from consumed prey. The Colony that emerged near NGL produced humans with Nen abilities, culminating in the birth of the most powerful entity in HxH history: the Chimera Ant King.</p>
+          <p class="ar-only">نوع قادر على مزج الجينات عبر الابتلاع — امتصاص صفات الفريسة المستهلكة. المستعمرة التي ظهرت قرب NGL أنتجت بشراً يمتلكون قدرات النين، وتوّجت بولادة أقوى كائن في تاريخ HxH: ملك نمل الكيميرا.</p>
         </div>
       </div>
       <div class="members-grid fade-in">
         <div class="member-card" id="ca-meruem">
-          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
-          <div class="member-name">Meruem <span class="status-badge status-dead">deceased</span></div>
-          <div class="member-role"><span class="en-only" data-eid="edit-146">King — Chimera Ant</span><span class="ar-only" data-eid="edit-146">الملك</span></div>
-          <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer+</span>
-          <div class="member-desc"><span class="en-only" data-eid="edit-147">The most powerful being introduced in the series. Born already surpassing elite Hunters. Absorbs Nen abilities by consuming others.</span><span class="ar-only" data-eid="edit-147">أقوى كائن مُقدَّم في السلسلة. وُلد وهو يتجاوز الصيادين النخبة. يمتص قدرات النين بابتلاع الآخرين.</span></div>
-          <div class="member-ability">Aura Synthesis — absorbs & amplifies stolen Nen</div>
+          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(239,68,68,.12);border-radius:50%"></div></div>
+          <div class="member-name"><span class="en-only">Meruem</span><span class="ar-only">ميروم</span></div>
+          <div class="member-role"><span class="en-only">The Chimera Ant King</span><span class="ar-only">ملك نمل الكيميرا</span></div>
+          <span class="member-nen" style="background:rgba(239,68,68,.1);color:#f87171">Specialist</span>
+          <div class="member-desc">
+            <span class="en-only">Born from the Chimera Ant Queen, Meruem is the pinnacle of evolution — possessing Nen far beyond any human. His ability <b>Nen of the King</b> absorbs the Nen of those he kills, growing exponentially stronger. Defeated only by Netero's post-death Poor Man's Rose.</span>
+            <span class="ar-only">وُلد من ملكة نمل الكيميرا، ميروم هو قمة التطور — يمتلك نيناً يتجاوز أي بشري بفارق شاسع. قدرته <b>نين الملك</b> تمتص نين من يقتلهم، ويزداد قوةً بشكل متسارع. هُزم فقط بوردة الفقير التي زرعها نيتيرو في جسمه.</span>
+          </div>
         </div>
         <div class="member-card" id="ca-neferpitou">
-          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
-          <div class="member-name">Neferpitou <span class="status-badge status-dead">deceased</span></div>
-          <div class="member-role"><span class="en-only" data-eid="edit-148">Royal Guard — #1</span><span class="ar-only" data-eid="edit-148">الحارس الملكي #1</span></div>
+          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(168,85,247,.1);border-radius:50%"></div></div>
+          <div class="member-name"><span class="en-only">Neferpitou</span><span class="ar-only">نيفيربيتو</span></div>
+          <div class="member-role"><span class="en-only">Royal Guard — #1</span><span class="ar-only">الحارس الملكي — #1</span></div>
           <span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Specialist</span>
-          <div class="member-desc"><span class="en-only" data-eid="edit-149">Most powerful Royal Guard. Cat-like. En detects kilometers. Expert puppet surgeon and healer.</span><span class="ar-only" data-eid="edit-149">أقوى حارس ملكي. شبيه بالقطط. إن يكشف كيلومترات. جراح دمى وطبيب خبير.</span></div>
-          <div class="member-ability">Doctor Blythe — puppet healing/control</div>
+          <div class="member-desc">
+            <span class="en-only">Cat-type Royal Guard. Devoted to Meruem's protection above all else. Her <b>Terpsichora</b> ability uses Nen strings to control corpses. Her Nen was so powerful it persisted for hours after her death, continuing to attack Gon.</span>
+            <span class="ar-only">الحارس الملكي من نوع القطة. الدفاع عن ميروم فوق كل شيء. قدرتها <b>تيرپسيكورا</b> تستخدم خيوط النين للتحكم في الجثث. كان نينها قوياً لدرجة أنه استمر ساعات بعد موتها مواصلةً مهاجمة غون.</span>
+          </div>
         </div>
         <div class="member-card" id="ca-shaiapouf">
-          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
-          <div class="member-name">Shaiapouf <span class="status-badge status-dead">deceased</span></div>
-          <div class="member-role"><span class="en-only" data-eid="edit-150">Royal Guard — #2</span><span class="ar-only" data-eid="edit-150">الحارس الملكي #2</span></div>
+          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(168,85,247,.1);border-radius:50%"></div></div>
+          <div class="member-name"><span class="en-only">Shaiapouf</span><span class="ar-only">شايابوف</span></div>
+          <div class="member-role"><span class="en-only">Royal Guard — #2</span><span class="ar-only">الحارس الملكي — #2</span></div>
           <span class="member-nen" style="background:rgba(100,116,139,.1);color:#94a3b8">Manipulator</span>
-          <div class="member-desc"><span class="en-only" data-eid="edit-151">Butterfly-type. Devoted to Meruem. Splits into tiny clones. Manipulates via scales that induce illusions.</span><span class="ar-only" data-eid="edit-151">من نوع الفراشة. مخلص لميروم. يتقسم لنسخ صغيرة. يتلاعب بمقاييس تُحدث أوهاماً.</span></div>
-          <div class="member-ability">Beezlebubb — splits into mini-clones</div>
+          <div class="member-desc">
+            <span class="en-only">Butterfly-type. Devoted to Meruem. Splits into tiny clones. Manipulates via scales that induce illusions. His ability <b>Beelzebub</b> splits him into mini-clones. Known for his obsessive, manipulative nature — and his deeply hidden agenda toward the King.</span>
+            <span class="ar-only">نوع الفراشة. مُكرِّس نفسه لميروم. ينقسم إلى نسخ صغيرة. يتلاعب عبر حراشف تُحدث الأوهام. قدرته <b>بيلزيبوب</b> تقسّمه لنسخ مصغّرة. مشهور بطبيعته الهوسية والتلاعبية — وأجندته الخفية تجاه الملك.</span>
+          </div>
         </div>
         <div class="member-card" id="ca-youpi">
-          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
-          <div class="member-name">Menthuthuyoupi <span class="status-badge status-dead">deceased</span></div>
-          <div class="member-role"><span class="en-only" data-eid="edit-152">Royal Guard — #3</span><span class="ar-only" data-eid="edit-152">الحارس الملكي #3</span></div>
-          <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
-          <div class="member-desc"><span class="en-only" data-eid="edit-153">Oni-like power. Can reshape his body into any form. Unstable but overwhelmingly powerful in combat.</span><span class="ar-only" data-eid="edit-153">قوة شيطانية. يعيد تشكيل جسمه لأي صورة. غير مستقر لكن ساحق القوة في القتال.</span></div>
-          <div class="member-ability">Rage Blast — explosive Nen discharge</div>
+          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(239,68,68,.1);border-radius:50%"></div></div>
+          <div class="member-name"><span class="en-only">Menthuthuyoupi</span><span class="ar-only">مينثوثويوبي</span></div>
+          <div class="member-role"><span class="en-only">Royal Guard — #3</span><span class="ar-only">الحارس الملكي — #3</span></div>
+          <span class="member-nen" style="background:rgba(245,158,11,.1);color:#fbbf24">Emitter</span>
+          <div class="member-desc">
+            <span class="en-only">Rhinoceros-type. Pure brute force — the least strategic of the three Guards. Can transform his body into any shape and release massive waves of Ren. His simple, honest nature led him to experience genuine emotion for the first time in battle — a pivotal moment in the arc.</span>
+            <span class="ar-only">نوع وحيد القرن. قوة غاشمة بحتة — الأقل استراتيجيةً من الحراس الثلاثة. يستطيع تحويل جسمه لأي شكل وإطلاق موجات ضخمة من الرين. طبيعته البسيطة والصادقة قادته لتجربة مشاعر حقيقية لأول مرة في المعركة — لحظة محورية في القوس.</span>
+          </div>
         </div>
         <div class="member-card" id="ca-queen">
-          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
-          <div class="member-name">Chimera Ant Queen <span class="status-badge status-dead">deceased</span></div>
-          <div class="member-role"><span class="en-only" data-eid="edit-154">Queen / Origin</span><span class="ar-only" data-eid="edit-154">الملكة / الأصل</span></div>
-          <span class="member-nen" style="background:rgba(77,184,255,.1);color:var(--aura)">None</span>
-          <div class="member-desc"><span class="en-only" data-eid="edit-155">Origin of all Chimera Ants. Used Phagogenesis to merge human & animal DNA, creating Nen-capable hybrids. Died giving birth to Meruem.</span><span class="ar-only" data-eid="edit-155">أصل كل نمل الكيميرا. استخدمت الفاغوجينيسيس لدمج الحمض البشري والحيواني. ماتت أثناء ولادة ميروم.</span></div>
+          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+          <div class="member-name"><span class="en-only">Chimera Ant Queen</span><span class="ar-only">ملكة نمل الكيميرا</span></div>
+          <div class="member-role"><span class="en-only">Origin — The Mother</span><span class="ar-only">الأصل — الأم</span></div>
+          <span class="member-nen" style="background:rgba(77,184,255,.1);color:var(--aura)">Unknown</span>
+          <div class="member-desc">
+            <span class="en-only">Washed ashore in NGL. Her Phagogenesis allowed her to absorb human DNA, creating soldiers with Nen potential. She gave her own life to birth Meruem — the King consumed her from within during delivery. Her sacrificial death is one of the arc's most haunting moments.</span>
+            <span class="ar-only">جُرفت إلى شاطئ NGL. ابتلاعها للحمض النووي البشري سمح لها بخلق جنود يمتلكون إمكانية النين. أعطت حياتها لإنجاب ميروم — الملك استهلكها من الداخل أثناء الولادة. موتها التضحوي هو أحد أكثر لحظات القوس مأساويةً.</span>
+          </div>
         </div>
         <div class="member-card" id="ca-cheetu">
-          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
-          <div class="member-name">Cheetu <span class="status-badge status-dead">deceased</span></div>
-          <div class="member-role"><span class="en-only" data-eid="edit-156">Squadron Leader</span><span class="ar-only" data-eid="edit-156">قائد سرب</span></div>
-          <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span>
-          <div class="member-desc"><span class="en-only" data-eid="edit-157">Cheetah-type. Fastest Chimera Ant. Arrogant — killed by Silva Zoldyck with one blow before he could show his new ability.</span><span class="ar-only" data-eid="edit-157">من نوع الفهد. أسرع نمل كيميرا. متغطرس — قُتل بيد سيلفا زولديك بضربة واحدة.</span></div>
-          <div class="member-ability">Set & Point — creates inescapable arena</div>
+          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+          <div class="member-name"><span class="en-only">Cheetu</span><span class="ar-only">شيتو</span></div>
+          <div class="member-role"><span class="en-only">Squad Leader — Speed Type</span><span class="ar-only">قائد فرقة — النوع السريع</span></div>
+          <span class="member-nen" style="background:rgba(77,184,255,.1);color:var(--aura)">Emitter</span>
+          <div class="member-desc">
+            <span class="en-only">Cheetah-type. The fastest Chimera Ant. Relies entirely on raw speed — never developed real combat tactics. Killed by Silva Zoldyck with one strike after his trap ability was negated by Knov's teleportation.</span>
+            <span class="ar-only">نوع الفهد الصياد. أسرع نملة كيميرا. يعتمد كلياً على السرعة المجردة — لم يطوّر أساليب قتالية حقيقية. قتله سيلفا زولديك بضربة واحدة بعد أن أُبطلت قدرة فخّه بانتقال نوف.</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- HEROES -->
-    <div class="group-panel" id="gp-heroes">
+    <!-- HUNTER ASSOCIATION -->
+    <div class="group-panel" id="gp-hunters">
       <div class="group-intro-bar fade-in">
-        <div class="group-icon">⭐</div>
+        <div class="group-icon">🏛</div>
         <div class="group-intro-text">
-          <h3><span class="en-only" data-eid="edit-158">Main Heroes & Key Characters</span><span class="ar-only" data-eid="edit-158">الأبطال الرئيسيون والشخصيات الأساسية</span></h3>
-          <p class="en-only">The central characters of Hunter × Hunter — protagonists, key allies, and pivotal figures who drive the story forward across every arc.</p>
-          <p class="ar-only">الشخصيات المحورية في هنتر × هنتر — الأبطال والحلفاء الأساسيون والشخصيات المحورية التي تدفع القصة للأمام في كل قوس.</p>
+          <h3>
+            <span class="en-only">Hunter Association — جمعية الصيادين</span>
+            <span class="ar-only">جمعية الصيادين — Hunter Association</span>
+          </h3>
+          <p class="en-only">The largest and most powerful organization in the world. Members hold a Hunter License that grants them access to vast privileges — weapons, databases, travel. The Hunter Exam is the only path to membership, and one of the hardest in existence.</p>
+          <p class="ar-only">أقوى وأكبر منظمة في العالم المعروف — تضم أكثر من 661 صياداً محترفاً. يحمل الأعضاء رخصة الصياد التي تمنحهم الوصول لأي منطقة، السلاح، وقواعد البيانات السرية. اجتياز امتحان الصياد هو الطريق الوحيد للانضمام — وهو من أصعب الامتحانات في الوجود.</p>
         </div>
       </div>
-      <div class="members-grid fade-in">
-        <div class="member-card" id="hr-gon" style="border-color:rgba(34,197,94,.3)">
-          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
-          <div class="member-name">Gon Freecss</div>
-          <div class="member-role"><span class="en-only" data-eid="edit-159">Main Protagonist</span><span class="ar-only" data-eid="edit-159">البطل الرئيسي</span></div>
-          <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span>
-          <div class="member-desc"><span class="en-only" data-eid="edit-160">Pure-hearted boy seeking his father Ging. Incredible potential — briefly transformed into an adult form that terrified even Royal Guards.</span><span class="ar-only" data-eid="edit-160">فتى طاهر القلب يبحث عن والده غينغ. إمكانيات هائلة — تحول لهيئة بالغة أرعبت حتى الحراس الملكيين.</span></div>
-          <div class="member-ability">Jajanken — Rock (Ko), Scissors (En), Paper (Emission)</div>
+
+      <!-- Sub-tabs -->
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem" class="fade-in">
+        <button class="ctype-btn active" onclick="switchHunterTab('hunters-tab-members',this)"><span class="en-only">🏹 Hunters</span><span class="ar-only">🏹 صيادون</span></button>
+        <button class="ctype-btn" onclick="switchHunterTab('hunters-tab-zodiac',this)"><span class="en-only">⭕ The Zodiacs</span><span class="ar-only">⭕ مجموعة البروج</span></button>
+        <button class="ctype-btn" onclick="switchHunterTab('hunters-tab-chairs',this)"><span class="en-only">👑 Chairmen</span><span class="ar-only">👑 الرؤساء</span></button>
+        <button class="ctype-btn" onclick="switchHunterTab('hunters-tab-overview',this)"><span class="en-only">📋 Overview</span><span class="ar-only">📋 نظرة عامة</span></button>
+        <button class="ctype-btn" onclick="switchHunterTab('hunters-tab-details',this)"><span class="en-only">📄 Member Details</span><span class="ar-only">📄 تفاصيل العضو</span></button>
+      </div>
+
+      <!-- TAB: HUNTERS (main hunters list) -->
+      <div id="hunters-tab-members" class="hunter-tab active-tab">
+        <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:1rem 1.4rem;margin-bottom:1.5rem;text-align:center;font-size:.88rem;color:var(--muted)">
+          <span class="en-only">Click on any card to expand full character details.</span>
+          <span class="ar-only">اضغط على أي بطاقة لعرض تفاصيل الشخصية الكاملة.</span>
         </div>
-        <div class="member-card" id="hr-killua" style="border-color:rgba(168,85,247,.3)">
-          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
-          <div class="member-name">Killua Zoldyck</div>
-          <div class="member-role"><span class="en-only" data-eid="edit-161">Protagonist / Best Friend</span><span class="ar-only" data-eid="edit-161">البطل / أفضل صديق</span></div>
-          <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
-          <div class="member-desc"><span class="en-only" data-eid="edit-162">Former assassin heir. Gon's closest friend. Genius prodigy who mastered lightning-speed Nen at a young age.</span><span class="ar-only" data-eid="edit-162">وريث قاتل سابق. أفضل أصدقاء غون. نابغة أتقن نين السرعة البرقية في سنٍّ صغيرة.</span></div>
-          <div class="member-ability">Godspeed / Lightning Palm / Thunderbolt / Whirlwind</div>
+
+        <!-- Main Story Heroes -->
+        <h4 style="font-family:Cinzel,serif;font-size:.8rem;color:var(--aura);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem">
+          ⭐ <span class="en-only">Main Story Heroes</span><span class="ar-only">أبطال القصة الرئيسيون</span>
+        </h4>
+        <div class="members-grid fade-in" style="margin-bottom:2rem">
+          <div class="member-card" id="hr-gon" style="cursor:pointer" onclick="expandHunter(this)">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(34,197,94,.1);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Gon Freecss</span><span class="ar-only">غون فريكس</span></div>
+            <div class="member-role"><span class="en-only">Main Protagonist</span><span class="ar-only">البطل الرئيسي</span></div>
+            <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span>
+            <div class="hunter-expand" style="display:none;margin-top:.8rem;font-size:.8rem;color:var(--muted);line-height:1.6;border-top:1px solid rgba(255,255,255,.06);padding-top:.7rem">
+              <span class="en-only">Pure-hearted boy raised on Whale Island who left home to find his father Ging. Possesses incredible natural potential — briefly transformed into an adult form after a life vow that terrified even Royal Guards. His ability <b>Jajanken</b> (Rock-Paper-Scissors) concentrates all aura into devastating strikes.</span>
+              <span class="ar-only">فتى طاهر القلب نشأ على جزيرة الحوت وغادر البيت بحثاً عن والده غينغ. يمتلك إمكانيات طبيعية هائلة — تحوّل لهيئة بالغة بعد نذر حياة أرعب حتى الحراس الملكيين. قدرته <b>جاجانكين</b> (حجر-ورقة-مقص) تركّز كل الأورا في ضربات مدمّرة.</span>
+            </div>
+          </div>
+          <div class="member-card" id="hr-killua" style="cursor:pointer" onclick="expandHunter(this)">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(168,85,247,.1);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Killua Zoldyck</span><span class="ar-only">كيلوا زولديك</span></div>
+            <div class="member-role"><span class="en-only">Protagonist / Gon's Best Friend</span><span class="ar-only">بطل / أفضل أصدقاء غون</span></div>
+            <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+            <div class="hunter-expand" style="display:none;margin-top:.8rem;font-size:.8rem;color:var(--muted);line-height:1.6;border-top:1px solid rgba(255,255,255,.06);padding-top:.7rem">
+              <span class="en-only">Greatest prodigy in Zoldyck history. Left the family of assassins to travel with Gon. Master of lightning-speed Nen. His <b>Godspeed (Kanmaru)</b> converts aura into electricity, making him untraceable to the naked eye. Freed his sister Alluka in the end.</span>
+              <span class="ar-only">أعظم نابغة في تاريخ زولديك. غادر عائلة القتلة للسفر مع غون. خبير نين السرعة البرقية. قدرته <b>سرعة الإله (Kanmaru)</b> تحوّل الأورا إلى كهرباء مما يجعله غير قابل للتتبع. حرّر أخته أللوكا في النهاية.</span>
+            </div>
+          </div>
+          <div class="member-card" id="hr-kurapika" style="cursor:pointer" onclick="expandHunter(this)">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(239,68,68,.1);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Kurapika</span><span class="ar-only">كوراباكا</span></div>
+            <div class="member-role"><span class="en-only">Last Survivor of the Kurta Clan</span><span class="ar-only">الناجي الأخير من عشيرة الكورتا</span></div>
+            <span class="member-nen" style="background:rgba(239,68,68,.1);color:#f87171">Conjurer → Specialist</span>
+            <div class="hunter-expand" style="display:none;margin-top:.8rem;font-size:.8rem;color:var(--muted);line-height:1.6;border-top:1px solid rgba(255,255,255,.06);padding-top:.7rem">
+              <span class="en-only">Sole survivor of the Kurta Clan massacre by the Phantom Troupe. When his eyes turn Scarlet, he becomes a Specialist with 100% efficiency in all Nen types — <b>Emperor Time</b>. His chain system includes Chain Jail (unbreakable vow), Dowsing Chain, and the fatal Judgment Chain.</span>
+              <span class="ar-only">الناجي الوحيد من مذبحة عشيرة الكورتا على يد فرقة الوهم. حين تتحول عيناه للقرمزي يصبح متخصصاً بكفاءة 100% في جميع أنواع النين — <b>وقت الإمبراطور</b>. منظومة سلاسله تشمل سجن السلسلة (نذر لا يكسر)، سلسلة التعقب، وسلسلة الحكم المميتة.</span>
+            </div>
+          </div>
+          <div class="member-card" id="hr-leorio" style="cursor:pointer" onclick="expandHunter(this)">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(245,158,11,.1);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Leorio Paradinight</span><span class="ar-only">ليوريو باراداينايت</span></div>
+            <div class="member-role"><span class="en-only">Future Doctor / Zodiac Member</span><span class="ar-only">طبيب المستقبل / عضو الأبراج</span></div>
+            <span class="member-nen" style="background:rgba(245,158,11,.1);color:#fbbf24">Emitter</span>
+            <div class="hunter-expand" style="display:none;margin-top:.8rem;font-size:.8rem;color:var(--muted);line-height:1.6;border-top:1px solid rgba(255,255,255,.06);padding-top:.7rem">
+              <span class="en-only">Aspiring doctor who fights for the poor. His raw determination earned him a seat in the Zodiac council. Known for punching Ging Freecss live on TV. His ability <b>Remote Punch</b> creates a Nen wormhole allowing him to strike enemies from a distance.</span>
+              <span class="ar-only">طبيب طموح يناضل من أجل الفقراء. إصراره الخام منحه مقعداً في مجلس الأبراج. مشهور بلكمه لغينغ فريكس على الهواء المباشر. قدرته <b>اللكمة البعيدة</b> تفتح ثقباً من النين لضرب الأعداء عن بُعد.</span>
+            </div>
+          </div>
+          <div class="member-card" id="hr-hisoka" style="cursor:pointer" onclick="expandHunter(this)">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(168,85,247,.1);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Hisoka Morow</span><span class="ar-only">هيسوكا مورو</span></div>
+            <div class="member-role"><span class="en-only">Anti-Hero / Wild Card</span><span class="ar-only">البطل المضاد / الورقة العشوائية</span></div>
+            <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+            <div class="hunter-expand" style="display:none;margin-top:.8rem;font-size:.8rem;color:var(--muted);line-height:1.6;border-top:1px solid rgba(255,255,255,.06);padding-top:.7rem">
+              <span class="en-only">Enigmatic magician obsessed with fighting powerful opponents. Former Phantom Troupe member #4. His <b>Bungee Gum</b> gives his aura the combined properties of rubber and gum — elastic and adhesive. Combined with <b>Texture Surprise</b>, he can alter the appearance of any surface.</span>
+              <span class="ar-only">ساحر غامض مهووس بمحاربة الخصوم الأقوياء. عضو سابق في فرقة الوهم رقم 4. قدرته <b>بونجي غام</b> تمنح أوراه خصائص المطاط والصمغ معاً. مع <b>تكسشر سرپرايز</b> يستطيع تغيير مظهر أي سطح ليخدع خصومه.</span>
+            </div>
+          </div>
+          <div class="member-card" id="hr-kite" style="cursor:pointer" onclick="expandHunter(this)">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.1);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Kite</span><span class="ar-only">كايت</span></div>
+            <div class="member-role"><span class="en-only">Ging's First Student</span><span class="ar-only">أول تلميذ لغينغ</span></div>
+            <span class="member-nen" style="background:rgba(239,68,68,.1);color:#f87171">Conjurer</span>
+            <div class="hunter-expand" style="display:none;margin-top:.8rem;font-size:.8rem;color:var(--muted);line-height:1.6;border-top:1px solid rgba(255,255,255,.06);padding-top:.7rem">
+              <span class="en-only">Ging Freecss' first and most beloved student. Inspired Gon to become a Hunter. Expert field researcher. Reborn as a Chimera Ant after being killed by Neferpitou. His ability <b>Crazy Slots</b> randomly conjures one of several weapons — and he cannot discard the result once summoned.</span>
+              <span class="ar-only">أول وأعز تلميذ لغينغ فريكس. ألهم غون لأن يصبح صياداً. باحث ميداني خبير. وُلد من جديد كنملة كيميرا بعد أن قتله نيفيربيتو. قدرته <b>القرعة المجنونة</b> تستدعي عشوائياً إحدى عدة أسلحة — ولا يستطيع التخلي عن النتيجة بمجرد استدعائها.</span>
+            </div>
+          </div>
+          <div class="member-card" id="hr-netero" style="cursor:pointer" onclick="expandHunter(this)">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(240,192,96,.1);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Isaac Netero</span><span class="ar-only">إسحاق نيتيرو</span></div>
+            <div class="member-role"><span class="en-only">12th Chairman — Legend</span><span class="ar-only">الرئيس الثاني عشر — أسطورة</span></div>
+            <span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Specialist</span>
+            <div class="hunter-expand" style="display:none;margin-top:.8rem;font-size:.8rem;color:var(--muted);line-height:1.6;border-top:1px solid rgba(255,255,255,.06);padding-top:.7rem">
+              <span class="en-only">Considered the world's strongest Nen user in his prime. Trained 12+ hours daily for decades until his movements surpassed his own thoughts. His ultimate technique <b>100-Type Guanyin Bodhisattva</b> creates massive aura hands at blinding speed. Sacrificed himself against Meruem, detonating the Poor Man's Rose.</span>
+              <span class="ar-only">يُعتبر أقوى مستخدم نين في العالم في عزّ شبابه. تدرّب أكثر من 12 ساعة يومياً لعقود حتى تجاوزت تحركاته تفكيره ذاته. تقنيته النهائية <b>بوذيساتفا غوانين من 100 نوع</b> تنشئ أيادي أورا ضخمة بسرعة مبهرة. ضحّى بنفسه أمام ميروم مفجِّراً وردة الفقير.</span>
+            </div>
+          </div>
+          <div class="member-card" id="hr-alluka" style="cursor:pointer" onclick="expandHunter(this)">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(59,130,246,.1);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Alluka / Nanika</span><span class="ar-only">أللوكا / نانيكا</span></div>
+            <div class="member-role"><span class="en-only">Zoldyck — Wish Granter</span><span class="ar-only">زولديك — مانحة الأمنيات</span></div>
+            <span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Specialist</span>
+            <div class="hunter-expand" style="display:none;margin-top:.8rem;font-size:.8rem;color:var(--muted);line-height:1.6;border-top:1px solid rgba(255,255,255,.06);padding-top:.7rem">
+              <span class="en-only">Hosts the entity "Nanika" — theorized to be the Dark Continent calamity "Ai". Can grant any wish, but refusing Nanika's requests causes an escalating death toll. Loves only Killua unconditionally. Her existence is the most mysterious in the entire series.</span>
+              <span class="ar-only">تحتضن الكائن "نانيكا" — يُعتقد أنه كارثة القارة المظلمة "آي". تستطيع منح أي أمنية، لكن رفض طلبات نانيكا يتسبب في وفيات متصاعدة. تُحبّ كيلوا بشكل غير مشروط. وجودها هو الأكثر غموضاً في السلسلة بأكملها.</span>
+            </div>
+          </div>
         </div>
-        <div class="member-card" id="hr-kurapika" style="border-color:rgba(239,68,68,.3)">
-          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
-          <div class="member-name">Kurapika</div>
-          <div class="member-role"><span class="en-only" data-eid="edit-163">Protagonist / Last Kurta</span><span class="ar-only" data-eid="edit-163">البطل / آخر الكورتا</span></div>
-          <span class="member-nen" style="background:rgba(239,68,68,.1);color:#f87171">Conjurer</span>
-          <div class="member-desc"><span class="en-only" data-eid="edit-164">Sole survivor of the Kurta Clan massacre. Becomes Specialist (Emperor Time) when his eyes turn Scarlet, giving 100% efficiency in all Nen types.</span><span class="ar-only" data-eid="edit-164">الناجي الوحيد من مذبحة عشيرة الكورتا. يصبح متخصصاً (وقت الإمبراطور) حين تتحول عيناه للقرمزي.</span></div>
-          <div class="member-ability">5-chain system — Chain Jail / Judgment Chain / Emperor Time</div>
+
+        <!-- Exam Proctors -->
+        <h4 style="font-family:Cinzel,serif;font-size:.8rem;color:var(--aura);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem">
+          🗒 <span class="en-only">Hunter Exam Proctors</span><span class="ar-only">محكّمو امتحان الصياد</span>
+        </h4>
+        <div class="members-grid fade-in" style="margin-bottom:2rem">
+          <div class="member-card">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Satotz</span><span class="ar-only">ساتوتس</span></div>
+            <div class="member-role"><span class="en-only">1st Phase Examiner</span><span class="ar-only">محكّم المرحلة الأولى</span></div>
+            <span class="member-nen" style="background:rgba(77,184,255,.1);color:var(--aura)">Unknown</span>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Menchi</span><span class="ar-only">منتشي</span></div>
+            <div class="member-role"><span class="en-only">2nd Phase — Gourmet Hunter</span><span class="ar-only">المرحلة الثانية — صيادة أطعمة</span></div>
+            <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Buhara</span><span class="ar-only">بوهارا</span></div>
+            <div class="member-role"><span class="en-only">2nd Phase — Gourmet Hunter</span><span class="ar-only">المرحلة الثانية — صياد أطعمة</span></div>
+            <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Lippo</span><span class="ar-only">ليبو</span></div>
+            <div class="member-role"><span class="en-only">3rd Phase — Jail Warden</span><span class="ar-only">المرحلة الثالثة — حارس السجن</span></div>
+            <span class="member-nen" style="background:rgba(77,184,255,.1);color:var(--aura)">Unknown</span>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Killua Zoldyck</span><span class="ar-only">كيلوا زولديك</span></div>
+            <div class="member-role"><span class="en-only">Honorary Exam Substitute (Special)</span><span class="ar-only">صياد خاص (بديل اختبار)</span></div>
+            <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+          </div>
         </div>
-        <div class="member-card" id="hr-leorio" style="border-color:rgba(245,158,11,.3)">
-          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
-          <div class="member-name">Leorio Paradinight</div>
-          <div class="member-role"><span class="en-only" data-eid="edit-165">Protagonist / Future Doctor</span><span class="ar-only" data-eid="edit-165">البطل / الطبيب المستقبلي</span></div>
-          <span class="member-nen" style="background:rgba(245,158,11,.1);color:#fbbf24">Emitter</span>
-          <div class="member-desc"><span class="en-only" data-eid="edit-166">Aspiring doctor. Fights for the poor. His raw determination earned him a seat in the Zodiac council. Punched Ging live on TV.</span><span class="ar-only" data-eid="edit-166">طبيب طموح. يناضل من أجل الفقراء. إصراره الخام منحه مقعداً في مجلس الأبراج. لكم غينغ على الهواء مباشرة.</span></div>
-          <div class="member-ability">Remote Punch — Nen wormhole long-range strike</div>
-        </div>
-        <div class="member-card" id="hr-netero">
-          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
-          <div class="member-name">Isaac Netero <span class="status-badge status-dead">deceased</span></div>
-          <div class="member-role"><span class="en-only" data-eid="edit-167">12th Chairman — Legend</span><span class="ar-only" data-eid="edit-167">الرئيس الثاني عشر — أسطورة</span></div>
-          <span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Specialist</span>
-          <div class="member-desc"><span class="en-only" data-eid="edit-168">Considered the world's strongest Nen user in his prime. Fought Meruem alone. Self-detonated the Poor Man's Rose as a final act.</span><span class="ar-only" data-eid="edit-168">يُعتبر أقوى مستخدم نين في العالم في عز شبابه. حارب ميروم وحيداً. فجّر نفسه بـ"وردة الفقير" كعمله الأخير.</span></div>
-          <div class="member-ability">100-Type Guanyin Bodhisattva — infinite hands of aura</div>
-        </div>
-        <div class="member-card" id="hr-hisoka">
-          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
-          <div class="member-name">Hisoka Morow</div>
-          <div class="member-role"><span class="en-only" data-eid="edit-169">Anti-hero / Wild Card</span><span class="ar-only" data-eid="edit-169">البطل المضاد / الورقة العشوائية</span></div>
-          <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
-          <div class="member-desc"><span class="en-only" data-eid="edit-170">Enigmatic magician obsessed with fighting strong opponents. Ally when convenient, predator at heart.</span><span class="ar-only" data-eid="edit-170">ساحر غامض مهووس بمحاربة الخصوم الأقوياء. حليف عند الحاجة، مفترس في جوهره.</span></div>
-          <div class="member-ability">Bungee Gum + Texture Surprise</div>
-        </div>
-        <div class="member-card" id="hr-kite">
-          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
-          <div class="member-name">Kite</div>
-          <div class="member-role"><span class="en-only" data-eid="edit-171">Ging's Student</span><span class="ar-only" data-eid="edit-171">تلميذ غينغ</span></div>
-          <span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Conjurer</span>
-          <div class="member-desc"><span class="en-only" data-eid="edit-172">Ging's first student. Inspired Gon to become a Hunter. Expert field researcher. Reborn as a Chimera Ant after death.</span><span class="ar-only" data-eid="edit-172">أول تلميذ لغينغ. ألهم غون ليصبح صياداً. باحث ميداني خبير. وُلد من جديد كنملة كيميرا بعد وفاته.</span></div>
-          <div class="member-ability">Crazy Slots — random weapon conjuration (can't be discarded)</div>
-        </div>
-        <div class="member-card" id="hr-alluka">
-          <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
-          <div class="member-name">Alluka / Nanika</div>
-          <div class="member-role"><span class="en-only" data-eid="edit-173">Zoldyck — Wish Granter</span><span class="ar-only" data-eid="edit-173">زولديك — مانحة الأمنيات</span></div>
-          <span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Specialist</span>
-          <div class="member-desc"><span class="en-only" data-eid="edit-174">Theorized to be one of the 5 Dark Continent calamities (Ai). Can grant any wish — but refusing requests causes escalating deaths.</span><span class="ar-only" data-eid="edit-174">يُعتقد أنها إحدى الكوارث الخمس للقارة المظلمة (آي). تمنح أي أمنية — لكن رفض الطلبات يتسبب بوفيات متصاعدة.</span></div>
-          <div class="member-ability">Nanika — infinite wish granting</div>
+
+        <!-- Specialist Hunters -->
+        <h4 style="font-family:Cinzel,serif;font-size:.8rem;color:var(--aura);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem">
+          ✦ <span class="en-only">Specialist Hunters</span><span class="ar-only">صيادون متخصصون</span>
+        </h4>
+        <div class="members-grid fade-in">
+          <div class="member-card">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Knov</span><span class="ar-only">نوف</span></div>
+            <div class="member-role"><span class="en-only">Infiltration Hunter</span><span class="ar-only">صياد تسلل</span></div>
+            <span class="member-nen" style="background:rgba(239,68,68,.1);color:#f87171">Conjurer</span>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Morel</span><span class="ar-only">موريل</span></div>
+            <div class="member-role"><span class="en-only">Specialist Hunter</span><span class="ar-only">صياد متخصص</span></div>
+            <span class="member-nen" style="background:rgba(245,158,11,.1);color:#fbbf24">Emitter</span>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Gel</span><span class="ar-only">جيل</span></div>
+            <div class="member-role"><span class="en-only">Cobra — Poison Hunter</span><span class="ar-only">الكوبرا — صيادة سموم</span></div>
+            <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Pyon</span><span class="ar-only">پيون</span></div>
+            <div class="member-role"><span class="en-only">Rabbit — Paleograph Hunter</span><span class="ar-only">الأرنب — صيادة كتابة قديمة</span></div>
+            <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Biscuit Krueger</span><span class="ar-only">بيسكيت كروغر</span></div>
+            <div class="member-role"><span class="en-only">2-Star Stone Hunter</span><span class="ar-only">صيادة أحجار نجمتان</span></div>
+            <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+          </div>
         </div>
       </div>
-    </div>
+
+      <!-- TAB: ZODIACS -->
+      <div id="hunters-tab-zodiac" class="hunter-tab" style="display:none">
+        <div class="group-intro-bar fade-in" style="margin-bottom:1.5rem">
+          <div class="group-icon">⭕</div>
+          <div class="group-intro-text">
+            <h3><span class="en-only">The Zodiacs — Netero's Elite Council</span><span class="ar-only">مجموعة البروج — The Zodiacs</span></h3>
+            <p class="en-only">12 elite Hunters hand-picked by Chairman Netero to serve as his advisors and sparring partners. Each assigned a Chinese Zodiac codename. They are the highest authority in the Hunter Association after the Chairman.</p>
+            <p class="ar-only">12 صياداً نخبةً اختارهم الرئيس نيتيرو ليكونوا مستشاريه وشركاءه في التدريب. لكل واحد اسم رمزي من الأبراج الصينية. أعلى سلطة في جمعية الصيادين بعد الرئيس.</p>
+          </div>
+        </div>
+        <div class="members-grid fade-in" style="margin-bottom:2rem">
+          <div class="member-card" id="zo-pariston">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Pariston Hill</span><span class="ar-only">باريستون هيل</span></div>
+            <div class="member-role"><span class="en-only">Rat — Former Vice-Chairman</span><span class="ar-only">الفأر — نائب الرئيس السابق</span></div>
+            <span class="member-nen" style="background:rgba(59,130,246,.1);color:#60a5fa">Specialist</span>
+            <div class="member-desc"><span class="en-only">Master manipulator. Genius-level strategist. Resigned immediately after becoming Chairman.</span><span class="ar-only">سياسي متلاعب بارع. استراتيجي عبقري. استقال فور تعيينه رئيساً.</span></div>
+          </div>
+          <div class="member-card" id="zo-mizaistom">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Mizaistom Nana</span><span class="ar-only">ميزايستوم نانا</span></div>
+            <div class="member-role"><span class="en-only">Ox — Crime Hunter</span><span class="ar-only">الثور — صائد الجرائم</span></div>
+            <span class="member-nen" style="background:rgba(239,68,68,.1);color:#f87171">Conjurer</span>
+            <div class="member-desc"><span class="en-only">Analytical investigator. Uses traffic-light Nen to capture targets in spectral cages.</span><span class="ar-only">محقق تحليلي. يستخدم نين إشارات المرور لحبس الأهداف في أقفاص طيفية.</span></div>
+          </div>
+          <div class="member-card" id="zo-kanzai">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Kanzai</span><span class="ar-only">كانزاي</span></div>
+            <div class="member-role"><span class="en-only">Tiger — Defense Team</span><span class="ar-only">النمر — فريق الدفاع</span></div>
+            <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span>
+            <div class="member-desc"><span class="en-only">Temperamental and impulsive. Strong combatant assigned to the Defense Team.</span><span class="ar-only">متقلب وانفعالي. مقاتل قوي في فريق الدفاع.</span></div>
+          </div>
+          <div class="member-card" id="zo-pyon">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Pyon</span><span class="ar-only">پيون</span></div>
+            <div class="member-role"><span class="en-only">Rabbit — Intel Team</span><span class="ar-only">الأرنب — فريق الاستخبارات</span></div>
+            <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+            <div class="member-desc"><span class="en-only">Multilingual programmer and Paleograph Hunter. Intel Team leader.</span><span class="ar-only">مبرمجة متعددة اللغات وصيادة كتابة قديمة. قائدة فريق الاستخبارات.</span></div>
+          </div>
+          <div class="member-card" id="zo-botobai">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Botobai Gigante</span><span class="ar-only">بوتوباي غيغانتي</span></div>
+            <div class="member-role"><span class="en-only">Dragon — Terrorist Hunter</span><span class="ar-only">التنين — صائد الإرهابيين</span></div>
+            <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span>
+            <div class="member-desc"><span class="en-only">Triple Star Hunter. Most experienced Zodiac. His Nen is said to be the strongest in the group.</span><span class="ar-only">صياد ثلاثي النجوم. أكثر البروج خبرةً. يُقال إن نينه الأقوى في المجموعة.</span></div>
+          </div>
+          <div class="member-card" id="zo-gel">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Gel</span><span class="ar-only">جيل</span></div>
+            <div class="member-role"><span class="en-only">Cobra — Poison Hunter</span><span class="ar-only">الكوبرا — صيادة السموم</span></div>
+            <span class="member-nen" style="background:rgba(168,85,247,.1);color:#c084fc">Transmuter</span>
+            <div class="member-desc"><span class="en-only">Poison specialist. Can transform her arm into a snake.</span><span class="ar-only">متخصصة في السموم. تستطيع تحويل ذراعها لثعبان.</span></div>
+          </div>
+          <div class="member-card" id="zo-saccho">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Saccho Kobayakawa</span><span class="ar-only">ساكو كوباياكاوا</span></div>
+            <div class="member-role"><span class="en-only">Horse — Intel Team</span><span class="ar-only">الحصان — فريق الاستخبارات</span></div>
+            <span class="member-nen" style="background:rgba(245,158,11,.1);color:#fbbf24">Emitter</span>
+            <div class="member-desc"><span class="en-only">Works behind the scenes. Methodical and observant. 2-Star Hunter.</span><span class="ar-only">يعمل خلف الكواليس. منهجي ومراقب. صياد ذو نجمتين.</span></div>
+          </div>
+          <div class="member-card" id="zo-ginta">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Ginta</span><span class="ar-only">غينتا</span></div>
+            <div class="member-role"><span class="en-only">Goat — Flora/Fauna</span><span class="ar-only">الماعز — فريق الأحياء</span></div>
+            <span class="member-nen" style="background:rgba(34,197,94,.1);color:#4ade80">Enhancer</span>
+            <div class="member-desc"><span class="en-only">Most emotional Zodiac. Speed-based abilities. Was a sparring partner for Netero.</span><span class="ar-only">أكثر البروج عاطفيةً. قدراته قائمة على السرعة. كان شريك تدريب لنيتيرو.</span></div>
+          </div>
+          <div class="member-card" id="zo-saiyu">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Saiyu</span><span class="ar-only">سايو</span></div>
+            <div class="member-role"><span class="en-only">Monkey — Traitor</span><span class="ar-only">القرد — الخائن</span></div>
+            <span class="member-nen" style="background:rgba(100,116,139,.1);color:#94a3b8">Manipulator</span>
+            <div class="member-desc"><span class="en-only">Secret ally of Beyond Netero. Concealed traitor within the Zodiacs.</span><span class="ar-only">حليف سري لـ Beyond نيتيرو. الخائن المخفي داخل الأبراج.</span></div>
+          </div>
+          <div class="member-card" id="zo-cluck">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Cluck</span><span class="ar-only">كلاك</span></div>
+            <div class="member-role"><span class="en-only">Rooster — Flora/Fauna</span><span class="ar-only">الديك — فريق الأحياء</span></div>
+            <span class="member-nen" style="background:rgba(100,116,139,.1);color:#94a3b8">Manipulator</span>
+            <div class="member-desc"><span class="en-only">Controls hundreds of birds simultaneously. Sent election notices via 600+ pigeons.</span><span class="ar-only">تتحكم بمئات الطيور في آن واحد. أرسلت إشعارات الانتخابات بأكثر من 600 حمامة.</span></div>
+          </div>
+          <div class="member-card" id="zo-cheadle">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Cheadle Yorkshire</span><span class="ar-only">تشيدل يوركشاير</span></div>
+            <div class="member-role"><span class="en-only">Dog — Current Chairman</span><span class="ar-only">الكلب — الرئيسة الحالية</span></div>
+            <span class="member-nen" style="background:rgba(239,68,68,.1);color:#f87171">Conjurer</span>
+            <div class="member-desc"><span class="en-only">Current Chairman. Triple Star Disease Hunter. Sharp intellect and administrator.</span><span class="ar-only">الرئيسة الحالية. صيادة أمراض ثلاثية النجوم. ذكاء حاد وإدارية بارعة.</span></div>
+          </div>
+          <div class="member-card" id="zo-ging">
+            <div class="member-avatar"><div class="av-empty" style="width:100%;height:100%;background:rgba(77,184,255,.08);border-radius:50%"></div></div>
+            <div class="member-name"><span class="en-only">Ging Freecss</span><span class="ar-only">غينغ فريكس</span></div>
+            <div class="member-role"><span class="en-only">Boar — Gon's Father</span><span class="ar-only">الخنزير البري — والد غون</span></div>
+            <span class="member-nen" style="background:rgba(245,158,11,.1);color:#fbbf24">Emitter</span>
+            <div class="member-desc"><span class="en-only">Top 5 Nen users globally. Created Greed Island. Abandoned Gon at birth. Copies any attack used against him.</span><span class="ar-only">من أفضل 5 مستخدمي نين عالمياً. ابتكر جزيرة الجشع. هجر غون عند الولادة. ينسخ أي هجوم يُستخدم ضده.</span></div>
+          </div>
+        </div>
+
+        <!-- Zodiac Factions -->
+        <h4 style="font-family:Cinzel,serif;font-size:.8rem;color:var(--aura);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem">
+          <span class="en-only">The Three Factions Inside the Zodiac</span><span class="ar-only">الفصائل الثلاث داخل البروج</span>
+        </h4>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem" class="fade-in">
+          <div style="background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2);border-radius:12px;padding:1.1rem">
+            <div style="font-family:Cinzel,serif;font-size:.85rem;color:#60a5fa;margin-bottom:.5rem">🔵 <span class="en-only">Liberals — The Non-Conformists</span><span class="ar-only">الليبراليون — اللامنتمون</span></div>
+            <div style="font-size:.82rem;color:var(--muted);line-height:1.6"><span class="en-only">Ging, Kanzai, Saccho — Hunters not aligned with any political faction. They vote independently and are unpredictable.</span><span class="ar-only">غينغ، كانزاي، ساكو — صيادون غير منتمين لأي فصيل سياسي. يصوتون بشكل مستقل ولا يمكن التنبؤ بهم.</span></div>
+          </div>
+          <div style="background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2);border-radius:12px;padding:1.1rem">
+            <div style="font-family:Cinzel,serif;font-size:.85rem;color:#60a5fa;margin-bottom:.5rem">⚙️ <span class="en-only">Moderates — Balancers of Netero</span><span class="ar-only">المعتدلون — أنصار التوازن</span></div>
+            <div style="font-size:.82rem;color:var(--muted);line-height:1.6"><span class="en-only">Cheadle, Mizaistom, Botobai, Cluck — The most loyal to Netero's vision. They form the decisive voting bloc in the Association.</span><span class="ar-only">تشيدل، ميزايستوم، بوتوباي، كلاك — الأكثر ولاءً لرؤية نيتيرو. يشكّلون كتلة التصويت الحاسمة في الجمعية.</span></div>
+          </div>
+          <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:1.1rem">
+            <div style="font-family:Cinzel,serif;font-size:.85rem;color:#f87171;margin-bottom:.5rem">🦅 <span class="en-only">Hawks — Radical Reformists</span><span class="ar-only">الصقور — إصلاحيون جذريون</span></div>
+            <div style="font-size:.82rem;color:var(--muted);line-height:1.6"><span class="en-only">Botobai, Gel, Pyon — They push for drastic reforms in the Association and challenge Netero's methods directly.</span><span class="ar-only">بوتوباي، جيل، پيون — يدفعون نحو إصلاحات جذرية في الجمعية ويتحدّون أساليب نيتيرو مباشرةً.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: CHAIRMEN -->
+      <div id="hunters-tab-chairs" class="hunter-tab" style="display:none">
+        <h4 style="font-family:Cinzel,serif;font-size:.8rem;color:var(--aura);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.2rem">
+          <span class="en-only">History of Association Chairmen</span><span class="ar-only">سلسلة رؤساء جمعية الصيادين</span>
+        </h4>
+        <div style="max-width:800px;margin:0 auto">
+          <div style="border-left:2px solid rgba(77,184,255,.3);padding-left:1.5rem;margin-bottom:1.8rem;position:relative">
+            <div style="position:absolute;left:-7px;top:.3rem;width:12px;height:12px;border-radius:50%;background:var(--aura);box-shadow:0 0 12px var(--aura)"></div>
+            <div style="font-family:Cinzel,serif;font-size:1rem;color:var(--text);margin-bottom:.2rem"><span class="en-only">12th Chairman — Isaac Netero</span><span class="ar-only">الرئيس الثاني عشر — إسحاق نيتيرو</span></div>
+            <div style="font-size:.75rem;color:var(--aura);font-family:Cinzel,serif;margin-bottom:.6rem">Isaac Netero | <span class="en-only">Active in current arc — Deceased</span><span class="ar-only">نشط في القوس الحالي — متوفى</span></div>
+            <div style="font-size:.85rem;color:var(--muted);line-height:1.7"><span class="en-only">The most powerful Hunter in the world. Trained relentlessly from youth, reaching a level where his movements exceeded his own thoughts. Founder of the Chimera Ant mission. Sacrificed his life against King Meruem, detonating the biological weapon known as the Poor Man's Rose embedded in his heart.</span><span class="ar-only">أقوى صياد في العالم. تدرّب بلا توقف منذ صغره حتى وصل لمستوى تجاوزت فيه تحركاته تفكيره ذاته. مؤسس مهمة نمل الكيميرا. ضحّى بحياته أمام الملك ميروم، مفجِّراً السلاح البيولوجي المعروف بوردة الفقير المزروعة في قلبه.</span></div>
+          </div>
+          <div style="border-left:2px solid rgba(77,184,255,.2);padding-left:1.5rem;margin-bottom:1.8rem;position:relative">
+            <div style="position:absolute;left:-7px;top:.3rem;width:12px;height:12px;border-radius:50%;background:rgba(240,192,96,.5);box-shadow:0 0 8px rgba(240,192,96,.3)"></div>
+            <div style="font-family:Cinzel,serif;font-size:1rem;color:var(--text);margin-bottom:.2rem"><span class="en-only">13th Chairman — Pariston Hill</span><span class="ar-only">الرئيس الثالث عشر — باريستون هيل</span></div>
+            <div style="font-size:.75rem;color:var(--aura);font-family:Cinzel,serif;margin-bottom:.6rem">Pariston Hill | <span class="en-only">Rat — Former Vice-Chairman — Resigned</span><span class="ar-only">الفأر — نائب الرئيس السابق — استقال</span></div>
+            <div style="font-size:.85rem;color:var(--muted);line-height:1.7"><span class="en-only">Won the election immediately after Netero's death. A master manipulator who had long worked to undermine the Association from within. Resigned immediately after being elected, having accomplished his true goal — chaos. Later revealed to be working with Beyond Netero.</span><span class="ar-only">فاز بالانتخابات فور وفاة نيتيرو. متلاعب محترف عمل طويلاً على زعزعة استقرار الجمعية من الداخل. استقال فور انتخابه بعد أن حقق هدفه الحقيقي — الفوضى. كُشف لاحقاً أنه كان يعمل مع Beyond نيتيرو.</span></div>
+          </div>
+          <div style="border-left:2px solid rgba(77,184,255,.2);padding-left:1.5rem;position:relative">
+            <div style="position:absolute;left:-7px;top:.3rem;width:12px;height:12px;border-radius:50%;background:rgba(34,197,94,.5);box-shadow:0 0 8px rgba(34,197,94,.3)"></div>
+            <div style="font-family:Cinzel,serif;font-size:1rem;color:var(--text);margin-bottom:.2rem"><span class="en-only">14th Chairman — Cheadle Yorkshire</span><span class="ar-only">الرئيس الرابع عشر — تشيدل يوركشاير</span></div>
+            <div style="font-size:.75rem;color:#4ade80;font-family:Cinzel,serif;margin-bottom:.6rem"><span class="en-only">Current Chairman | Dog — The Reformer</span><span class="ar-only">الرئيسة الحالية | الكلب — المصلحة</span></div>
+            <div style="font-size:.85rem;color:var(--muted);line-height:1.7"><span class="en-only">Took over after Pariston's surprise resignation. Faced the hardest situation in the Association's history. Quickly stabilized the volatile political situation after the Chimera Ant crisis and election chaos, then pivoted to face the Dark Continent challenge with Kurapika and Leorio joining the Zodiacs.</span><span class="ar-only">تولّت بعد استقالة باريستون المفاجئة. واجهت أصعب موقف في تاريخ الجمعية. استقرّت الوضع السياسي المتقلب بسرعة بعد أزمة نمل الكيميرا وفوضى الانتخابات، ثم توجّهت لمواجهة تحدي القارة المظلمة مع انضمام كوراباكا وليوريو للأبراج.</span></div>
+          </div>
+          <div style="background:rgba(77,184,255,.04);border:1px solid rgba(77,184,255,.12);border-radius:10px;padding:1rem;margin-top:1.5rem;font-size:.82rem;color:var(--muted);line-height:1.7">
+            <b style="color:var(--aura)"><span class="en-only">Netero &amp; The Zodiacs:</span><span class="ar-only">نيتيرو والأبراج:</span></b>
+            <span class="en-only"> Netero personally selected all 12 Zodiacs based purely on their abilities and potential — not their political alignment. He was a sparring partner for all of them. Even so, no one had a definite measure of his true strength, though it was said no original member could match him 1-on-1.</span>
+            <span class="ar-only"> اختار نيتيرو شخصياً جميع الأبراج الـ12 بناءً على قدراتهم وإمكاناتهم فقط — لا على توجهاتهم السياسية. كان شريك تدريب لجميعهم. ومع ذلك، لم يكن لأحد قياس حقيقي لقوته الفعلية، وإن كيل أحد الأعضاء الأصليين لا يستطيع مجاراته في مواجهة فردية.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: OVERVIEW (Star Ranks + Structure) -->
+      <div id="hunters-tab-overview" class="hunter-tab" style="display:none">
+        <h4 style="font-family:Cinzel,serif;font-size:.8rem;color:var(--aura);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.2rem">
+          <span class="en-only">Hunter Star Ranks — Certification Levels</span><span class="ar-only">درجات النجوم — تصنيف الصيادين</span>
+        </h4>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-bottom:2rem" class="fade-in">
+          <div style="background:rgba(77,184,255,.04);border:1px solid var(--border);border-radius:12px;padding:1.1rem">
+            <div style="font-family:Cinzel,serif;font-size:.95rem;color:var(--text);margin-bottom:.3rem"><span class="en-only">⭐⭐⭐ Triple Star Hunter</span><span class="ar-only">⭐⭐⭐ صياد ثلاثي النجوم</span></div>
+            <div style="font-size:.78rem;color:var(--aura);margin-bottom:.5rem;font-family:Cinzel,serif"><span class="en-only">Highest rank — voted by peers</span><span class="ar-only">أعلى درجة — يُنتخب من الأقران</span></div>
+            <div style="font-size:.82rem;color:var(--muted);line-height:1.6"><span class="en-only">The most exceptional Hunters who have made a uniquely outstanding contribution. Must be nominated by other Hunters. Examples: Netero, Pariston, Cheadle, Botobai, Kite.</span><span class="ar-only">الصيادون الاستثنائيون الذين قدّموا مساهمة بارزة بشكل فريد. يجب ترشيحهم من صيادين آخرين. أمثلة: نيتيرو، باريستون، تشيدل، بوتوباي، كايت.</span></div>
+          </div>
+          <div style="background:rgba(77,184,255,.04);border:1px solid var(--border);border-radius:12px;padding:1.1rem">
+            <div style="font-family:Cinzel,serif;font-size:.95rem;color:var(--text);margin-bottom:.3rem"><span class="en-only">⭐⭐ Double Star Hunter</span><span class="ar-only">⭐⭐ صياد ثنائي النجوم</span></div>
+            <div style="font-size:.78rem;color:var(--aura);margin-bottom:.5rem;font-family:Cinzel,serif"><span class="en-only">Experienced — direct nomination</span><span class="ar-only">متمرس — ترشيح مباشر</span></div>
+            <div style="font-size:.82rem;color:var(--muted);line-height:1.6"><span class="en-only">Hunters who have mentored at least one new Hunter and published research into a specialized field. Examples: Ging Freecss (Ruins Hunter), Saccho Kobayakawa, Mizaistom Nana.</span><span class="ar-only">الصيادون الذين أرشدوا صياداً جديداً واحداً على الأقل ونشروا أبحاثاً في مجال متخصص. أمثلة: غينغ فريكس (صياد آثار)، ساكو كوباياكاوا.</span></div>
+          </div>
+          <div style="background:rgba(77,184,255,.04);border:1px solid var(--border);border-radius:12px;padding:1.1rem">
+            <div style="font-family:Cinzel,serif;font-size:.95rem;color:var(--text);margin-bottom:.3rem"><span class="en-only">⭐ Single Star Hunter</span><span class="ar-only">⭐ صياد أحادي النجوم</span></div>
+            <div style="font-size:.78rem;color:var(--aura);margin-bottom:.5rem;font-family:Cinzel,serif"><span class="en-only">Recognized excellence</span><span class="ar-only">تميّز معترف به</span></div>
+            <div style="font-size:.82rem;color:var(--muted);line-height:1.6"><span class="en-only">Hunters who have excelled in a specific field and contributed meaningfully to the Association. They can take on disciples and represent the Association officially.</span><span class="ar-only">الصيادون الذين تفوقوا في مجال بعينه وساهموا بشكل مجدٍ في الجمعية. يمكنهم أخذ تلاميذ وتمثيل الجمعية رسمياً.</span></div>
+          </div>
+          <div style="background:rgba(77,184,255,.04);border:1px solid var(--border);border-radius:12px;padding:1.1rem">
+            <div style="font-family:Cinzel,serif;font-size:.95rem;color:var(--text);margin-bottom:.3rem"><span class="en-only">Professional Hunter (No Star)</span><span class="ar-only">صياد محترف (بلا نجوم)</span></div>
+            <div style="font-size:.78rem;color:var(--aura);margin-bottom:.5rem;font-family:Cinzel,serif"><span class="en-only">Passed the exam — full license</span><span class="ar-only">اجتاز الامتحان — رخصة كاملة</span></div>
+            <div style="font-size:.82rem;color:var(--muted);line-height:1.6"><span class="en-only">Passed the Hunter Exam, granting them access to vast privileges: weapons, restricted areas, databases. The license alone is priceless — it can never be sold. Examples: Gon, Kurapika, Leorio, Killua.</span><span class="ar-only">اجتاز امتحان الصياد، مما منحه وصولاً لامتيازات واسعة: الأسلحة، المناطق المحظورة، قواعد البيانات. الرخصة وحدها لا تقدّر بثمن — لا يمكن بيعها أبداً. أمثلة: غون، كوراباكا، ليوريو، كيلوا.</span></div>
+          </div>
+        </div>
+
+        <!-- Org Structure -->
+        <h4 style="font-family:Cinzel,serif;font-size:.8rem;color:var(--aura);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem">
+          <span class="en-only">Association Structure</span><span class="ar-only">هيكل الجمعية</span>
+        </h4>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.9rem;margin-bottom:2rem" class="fade-in">
+          <div style="background:rgba(240,192,96,.06);border:1px solid rgba(240,192,96,.2);border-radius:10px;padding:1rem;text-align:center">
+            <div style="font-family:Cinzel,serif;color:var(--gold);font-size:.9rem;margin-bottom:.3rem"><span class="en-only">Chairman</span><span class="ar-only">الرئيس</span></div>
+            <div style="font-size:.78rem;color:var(--muted);line-height:1.5"><span class="en-only">Supreme authority. Elected by all Hunters, and holds ultimate power over the Association.</span><span class="ar-only">السلطة العليا. يُنتخب من قِبَل جميع الصيادين، ويملك السلطة المطلقة على الجمعية.</span></div>
+          </div>
+          <div style="background:rgba(240,192,96,.04);border:1px solid rgba(240,192,96,.15);border-radius:10px;padding:1rem;text-align:center">
+            <div style="font-family:Cinzel,serif;color:var(--gold);font-size:.9rem;margin-bottom:.3rem"><span class="en-only">Vice Chairman</span><span class="ar-only">نائب الرئيس</span></div>
+            <div style="font-size:.78rem;color:var(--muted);line-height:1.5"><span class="en-only">Holds the Chairman's power if absent. Acts as a bridge between the Chairman and the Zodiacs.</span><span class="ar-only">يتولى سلطة الرئيس عند غيابه. يعمل جسراً بين الرئيس والأبراج.</span></div>
+          </div>
+          <div style="background:rgba(77,184,255,.04);border:1px solid rgba(77,184,255,.12);border-radius:10px;padding:1rem;text-align:center">
+            <div style="font-family:Cinzel,serif;color:var(--aura);font-size:.9rem;margin-bottom:.3rem"><span class="en-only">The Zodiacs</span><span class="ar-only">مجموعة البروج</span></div>
+            <div style="font-size:.78rem;color:var(--muted);line-height:1.5"><span class="en-only">12 elite advisors. Shun on major decisions. Were sparring partners for Netero — the only requirement was Netero's personal interest in them.</span><span class="ar-only">12 مستشاراً نخبةً. يصوتون في القرارات الكبرى. كانوا شركاء تدريب لنيتيرو — الشرط الوحيد كان اهتمامه الشخصي بهم.</span></div>
+          </div>
+          <div style="background:rgba(77,184,255,.04);border:1px solid rgba(77,184,255,.12);border-radius:10px;padding:1rem;text-align:center">
+            <div style="font-family:Cinzel,serif;color:var(--aura);font-size:.9rem;margin-bottom:.3rem"><span class="en-only">Exam Committee</span><span class="ar-only">لجنة الامتحان</span></div>
+            <div style="font-size:.78rem;color:var(--muted);line-height:1.5"><span class="en-only">Designs and oversees the Hunter Exam each year. Members are senior Hunters appointed by the Chairman.</span><span class="ar-only">تنظّم امتحان الصياد كل عام وتشرف عليه. الأعضاء صيادون كبار تعيّنهم الرئيس.</span></div>
+          </div>
+        </div>
+
+        <!-- Specialist Types -->
+        <h4 style="font-family:Cinzel,serif;font-size:.8rem;color:var(--aura);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem">
+          <span class="en-only">Types of Specialist Hunters</span><span class="ar-only">أنواع الصيادين المتخصصين</span>
+        </h4>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem" class="fade-in">
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.9rem">
+            <div style="font-size:.9rem;margin-bottom:.2rem">🦎 <b style="font-family:Cinzel,serif;color:var(--text);font-size:.82rem"><span class="en-only">Exotic Fauna Hunter</span><span class="ar-only">صياد الحيوانات النادرة</span></b></div>
+            <div style="font-size:.75rem;color:var(--muted)"><span class="en-only">Seeks out rare and mysterious creatures. Example: Kite.</span><span class="ar-only">يبحث عن المخلوقات الغريبة والنادرة. مثال: كايت.</span></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.9rem">
+            <div style="font-size:.9rem;margin-bottom:.2rem">🔍 <b style="font-family:Cinzel,serif;color:var(--text);font-size:.82rem"><span class="en-only">Crime Hunter</span><span class="ar-only">صياد جرائم</span></b></div>
+            <div style="font-size:.75rem;color:var(--muted)"><span class="en-only">Investigates large criminal organizations. Example: Mizaistom Nana.</span><span class="ar-only">يحقق في المنظمات الإجرامية الكبرى. مثال: ميزايستوم نانا.</span></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.9rem">
+            <div style="font-size:.9rem;margin-bottom:.2rem">💣 <b style="font-family:Cinzel,serif;color:var(--text);font-size:.82rem"><span class="en-only">Terrorist Hunter</span><span class="ar-only">صياد إرهاب</span></b></div>
+            <div style="font-size:.75rem;color:var(--muted)"><span class="en-only">Pursues and neutralizes terrorist organizations. Example: Botobai Gigante.</span><span class="ar-only">يتتبع المنظمات الإرهابية ويحيّدها. مثال: بوتوباي غيغانتي.</span></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.9rem">
+            <div style="font-size:.9rem;margin-bottom:.2rem">🩺 <b style="font-family:Cinzel,serif;color:var(--text);font-size:.82rem"><span class="en-only">Disease Hunter</span><span class="ar-only">صياد أمراض</span></b></div>
+            <div style="font-size:.75rem;color:var(--muted)"><span class="en-only">Specialist in rare diseases and plagues. Example: Cheadle Yorkshire.</span><span class="ar-only">متخصص في الأمراض النادرة والأوبئة. مثال: تشيدل يوركشاير.</span></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.9rem">
+            <div style="font-size:.9rem;margin-bottom:.2rem">🔎 <b style="font-family:Cinzel,serif;color:var(--text);font-size:.82rem"><span class="en-only">Ruins Hunter</span><span class="ar-only">صياد خطوط قديمة</span></b></div>
+            <div style="font-size:.75rem;color:var(--muted)"><span class="en-only">Translates ancient languages and uncovers lost ruins. Example: Pyon.</span><span class="ar-only">يترجم اللغات القديمة ويكتشف الأطلال المنسية. مثال: پيون.</span></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.9rem">
+            <div style="font-size:.9rem;margin-bottom:.2rem">📋 <b style="font-family:Cinzel,serif;color:var(--text);font-size:.82rem"><span class="en-only">Black List Hunter</span><span class="ar-only">صياد القائمة السوداء</span></b></div>
+            <div style="font-size:.75rem;color:var(--muted)"><span class="en-only">Pursues the most dangerous criminals. Example: Illumi Zoldyck.</span><span class="ar-only">يتعقّب المجرمين الأكثر خطورة. مثال: إيلومي زولديك.</span></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.9rem">
+            <div style="font-size:.9rem;margin-bottom:.2rem">💰 <b style="font-family:Cinzel,serif;color:var(--text);font-size:.82rem"><span class="en-only">Treasure Hunter</span><span class="ar-only">صياد كنوز</span></b></div>
+            <div style="font-size:.75rem;color:var(--muted)"><span class="en-only">Seeks out rare relics and ancient treasures. Example: Kanzai.</span><span class="ar-only">يبحث عن الكنوز والآثار النادرة. مثال: كانزاي.</span></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.9rem">
+            <div style="font-size:.9rem;margin-bottom:.2rem">☠️ <b style="font-family:Cinzel,serif;color:var(--text);font-size:.82rem"><span class="en-only">Poison Hunter</span><span class="ar-only">صياد سم</span></b></div>
+            <div style="font-size:.75rem;color:var(--muted)"><span class="en-only">Expert in toxins and chemicals. Example: Gel.</span><span class="ar-only">خبير في السموم والمواد الكيميائية. مثال: جيل.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: MEMBER DETAILS -->
+      <div id="hunters-tab-details" class="hunter-tab" style="display:none">
+        <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;padding:1.2rem 1.5rem;margin-bottom:1.5rem">
+          <p style="color:var(--muted);font-size:.88rem;line-height:1.7">
+            <span class="en-only"><b style="color:var(--text)">About the Hunter License:</b> Passing the Hunter Exam grants a license that is more valuable than any treasure. It grants free access to all lands, the right to own weapons, access to secret databases, and the ability to conduct criminal investigations with full legal authority. The license itself cannot be transferred or sold — losing it requires re-taking the full exam.</span>
+            <span class="ar-only"><b style="color:var(--text)">عن رخصة الصياد:</b> اجتياز امتحان الصياد يمنح رخصة تساوي أكثر من أي كنز. تمنح الوصول المجاني لأي أرض، وحق امتلاك الأسلحة، والوصول لقواعد البيانات السرية، وتنفيذ التحقيقات الجنائية بسلطة قانونية كاملة. لا يمكن نقل الرخصة أو بيعها — فقدانها يستلزم إعادة الامتحان من البداية.</span>
+          </p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem" class="fade-in">
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.1rem">
+            <div style="font-family:Cinzel,serif;color:var(--aura);font-size:.85rem;margin-bottom:.5rem">📊 <span class="en-only">Exam Pass Rate</span><span class="ar-only">نسبة النجاح في الامتحان</span></div>
+            <div style="font-size:2.2rem;font-weight:700;color:var(--text);margin-bottom:.2rem">&lt; 1%</div>
+            <div style="font-size:.78rem;color:var(--muted)"><span class="en-only">Of all applicants per year pass the Hunter Exam. The majority fail in the first phase alone. It is designed to eliminate, not select.</span><span class="ar-only">من إجمالي المتقدمين سنوياً ينجحون في امتحان الصياد. الغالبية تفشل في المرحلة الأولى وحدها. الامتحان مصمم للإقصاء لا الاختيار.</span></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.1rem">
+            <div style="font-family:Cinzel,serif;color:var(--aura);font-size:.85rem;margin-bottom:.5rem">🌍 <span class="en-only">Global Membership</span><span class="ar-only">العضوية العالمية</span></div>
+            <div style="font-size:2.2rem;font-weight:700;color:var(--text);margin-bottom:.2rem">661+</div>
+            <div style="font-size:.78rem;color:var(--muted)"><span class="en-only">Licensed Hunters in the Known World — each a specialist in their own field, operating globally with near-unlimited privileges.</span><span class="ar-only">صياداً محترفاً مرخصاً في العالم المعروف — كل منهم متخصص في مجاله، يعمل عالمياً بامتيازات شبه غير محدودة.</span></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.1rem">
+            <div style="font-family:Cinzel,serif;color:var(--aura);font-size:.85rem;margin-bottom:.5rem">⚡ <span class="en-only">Nen Requirement</span><span class="ar-only">شرط النين</span></div>
+            <div style="font-size:2.2rem;font-weight:700;color:var(--text);margin-bottom:.2rem">~80%</div>
+            <div style="font-size:.78rem;color:var(--muted)"><span class="en-only">Of serious Hunters eventually learn Nen. Officially, the Association doesn't require it — but in practice, surviving the dangerous missions Hunters take requires Nen mastery.</span><span class="ar-only">من الصيادين الجادين يتعلمون النين في النهاية. رسمياً، الجمعية لا تشترطه — لكن عملياً، النجاة من المهام الخطيرة التي يتولاها الصيادون تتطلب إتقان النين.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- gp-hunters -->
+
+
 
   </div>
 </section>
@@ -3360,6 +3973,48 @@ setLang = function(lang) {
 
 // Init quiz
 renderQuiz();
+
+
+// ─── FILTER VOWS ───
+function filterVow(type, btn) {
+  document.querySelectorAll('.ctype-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  document.querySelectorAll('#vowsGrid .restriction-card').forEach(card => {
+    if(type === 'all' || card.getAttribute('data-vow') === type) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+
+// ─── HUNTER ASSOCIATION TABS ───
+function switchHunterTab(tabId, btn) {
+  // Hide all hunter tabs
+  document.querySelectorAll('.hunter-tab').forEach(function(t){ t.style.display='none'; t.classList.remove('active-tab'); });
+  // Remove active from all sub-btns in this context
+  if(btn) {
+    var parent = btn.closest('.group-panel');
+    if(parent) parent.querySelectorAll('.ctype-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+  }
+  var tab = document.getElementById(tabId);
+  if(tab){ tab.style.display='block'; tab.classList.add('active-tab'); }
+}
+
+function expandHunter(card) {
+  var exp = card.querySelector('.hunter-expand');
+  if(!exp) return;
+  var isOpen = exp.style.display !== 'none' && exp.style.display !== '';
+  // Close all others
+  document.querySelectorAll('.hunter-expand').forEach(function(e){ e.style.display='none'; });
+  document.querySelectorAll('.member-card[onclick]').forEach(function(c){ c.style.borderColor=''; });
+  if(!isOpen) {
+    exp.style.display = 'block';
+    card.style.borderColor = 'rgba(77,184,255,.4)';
+  }
+}
 
 // ─── GROUPS TABS ───
 function switchGroup(name, btn) {
